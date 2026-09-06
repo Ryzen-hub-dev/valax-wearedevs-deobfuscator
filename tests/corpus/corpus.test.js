@@ -22,7 +22,7 @@ function runCorpusTests() {
 
     for (const prog of manifest.programs) {
       totalTested++;
-      const fullPath = path.resolve(__dirname, '../..', prog.filePath);
+      const fullPath = path.resolve(__dirname, '../..', prog.filePath.replace(/\\/g, '/'));
       const code = fs.readFileSync(fullPath, 'utf8');
 
       // Test parsing
