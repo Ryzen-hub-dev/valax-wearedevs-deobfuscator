@@ -5,10 +5,6 @@ FROM node:20-alpine AS base
 # Install lua5.1 for semantic oracle validation if needed
 RUN apk add --no-cache lua5.1 lua5.1-libs
 
-# Create non-privileged user and group
-RUN addgroup -g 1000 valax && \
-    adduser -u 1000 -G valax -s /bin/sh -D valax
-
 # Setup application directory
 WORKDIR /app
 
@@ -20,13 +16,13 @@ COPY packages/sandbox ./packages/sandbox
 COPY packages/worker ./packages/worker
 COPY audit/core-baseline-hashes.json ./audit/core-baseline-hashes.json
 
-# Prepare isolated work directories with correct ownership
+# Prepare isolated work directories with correct ownership (node user is uid 1000, gid 1000)
 RUN mkdir -p /work /tmp && \
-    chown -R valax:valax /app /work /tmp && \
+    chown -R node:node /app /work /tmp && \
     chmod -R 555 /app
 
 # Drop root privileges permanently
-USER valax:valax
+USER node:node
 
 # Environment settings
 ENV NODE_ENV=production

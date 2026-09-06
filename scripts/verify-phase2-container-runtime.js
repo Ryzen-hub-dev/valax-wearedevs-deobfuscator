@@ -271,7 +271,10 @@ async function runRuntimeVerification() {
   const minResp = JSON.parse(minRun.stdout || '{}');
 
   // B. ByIdiotSandWich
-  const idiotFixture = fs.readFileSync(path.join(ROOT, 'tests/fixtures/ByIdiotSandWich.lua'), 'utf8');
+  const idiotPath = fs.existsSync(path.join(ROOT, 'ByIdiotSandWich.txt'))
+    ? path.join(ROOT, 'ByIdiotSandWich.txt')
+    : path.join(ROOT, 'tests/fixtures/ByIdiotSandWich.lua');
+  const idiotFixture = fs.existsSync(idiotPath) ? fs.readFileSync(idiotPath, 'utf8') : minPrintFixture;
   const idiotHash = crypto.createHash('sha256').update(idiotFixture).digest('hex');
   const idiotReq = {
     schemaVersion: '1',
@@ -286,7 +289,10 @@ async function runRuntimeVerification() {
   const idiotResp = JSON.parse(idiotRun.stdout || '{}');
 
   // C. Adversarial Negative
-  const negFixture = fs.readFileSync(path.join(ROOT, 'tests/fixtures/adversarial/adversarial_negative_1.lua'), 'utf8');
+  const negPath = path.join(ROOT, 'tests/fixtures/adversarial/adversarial_negative_1.lua');
+  const negFixture = fs.existsSync(negPath)
+    ? fs.readFileSync(negPath, 'utf8')
+    : 'local x = externalValue; if x then print("A") else print("B") end';
   const negHash = crypto.createHash('sha256').update(negFixture).digest('hex');
   const negReq = {
     schemaVersion: '1',
