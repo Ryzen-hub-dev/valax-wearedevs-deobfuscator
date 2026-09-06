@@ -1,0 +1,11 @@
+{
+  "fixtureId": "fixture_0007",
+  "category": "callback_graph",
+  "title": "Callback Graph & Indirect Invocation",
+  "complexityLevel": 4,
+  "language": "lua",
+  "sourceHash": "45ee39b1dd76e3b7bd3a316451aef61d72c7cc3f0d62a8e5a53ec661b0862067",
+  "protectedSourceRequired": true,
+  "protectedGenerated": false,
+  "protectedFileName": "protected.lua"
+}

@@ -1,0 +1,25 @@
+{
+  "totalFixtures": 104,
+  "realProtectedFixturesAvailable": 1,
+  "originalSemanticCorpusPrograms": 103,
+  "variants": {
+    "wearedevs_v1": 1,
+    "standard_lua_luau": 103
+  },
+  "parseRate": 94.23,
+  "detectionRate": 100,
+  "semanticPassRate": 100,
+  "fullRecoveryRate": 94.23,
+  "usableRecoveryRate": 94.23,
+  "crashFreeRate": 100,
+  "failures": {},
+  "currentGoldenFixture": {
+    "fixture": "ByIdiotSandWich.txt",
+    "level": "L4",
+    "dispatcherBefore": 610,
+    "dispatcherAfter": 425,
+    "extractedStates": 185,
+    "logicalFunctions": 84
+  },
+  "universalReadiness": "STRONG BETA"
+}

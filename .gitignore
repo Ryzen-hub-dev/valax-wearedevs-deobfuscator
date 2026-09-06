@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+
+# Environment and Secrets
+.env
+.env.*
+!.env.example
+
+# Temporary and Build Outputs
+dist/
+coverage/
+tmp/
+temp/
+scratch/
+tests/temp/
+
+# Logs and Archives
+*.log
+*.tgz
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS and Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Root local scratch and recovery outputs
+scratch_*
+*.recovered.lua
+*.roundtrip.lua
+*.second.lua
+*.report.json
+result.lua
+result.*.lua
+report.json
+inspect_minimal.js
+print_unknowns.js

@@ -1,0 +1,11 @@
+{
+  "fixtureId": "fixture_0005",
+  "category": "loops",
+  "title": "Loop Constructs & Break Semantics",
+  "complexityLevel": 3,
+  "language": "lua",
+  "sourceHash": "457d6b1d5bc6638082afcbcb6934263f0795fdaf3d408a1b0fa8d7352866f39a",
+  "protectedSourceRequired": true,
+  "protectedGenerated": false,
+  "protectedFileName": "protected.lua"
+}

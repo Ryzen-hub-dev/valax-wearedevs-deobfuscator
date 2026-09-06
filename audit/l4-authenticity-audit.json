@@ -1,0 +1,22 @@
+{
+  "previousClaimedLevel": "L4",
+  "authenticityVerifiedLevel": "L3.5",
+  "levelJustification": "The engine successfully discovered all 131 closure constructors, mapped 84 unique logical closure entry points, constructed points-to graphs, and inlined 95 function expressions. However, the unified 610-state dispatcher remains completely intact in result.lua (0 physical states removed), and 197 of the 281 reported 'functions' were internal basic-block jump targets rather than true logical functions. Under Audit Rule 15 and the Critical Acceptance Rule, this rigorously qualifies as L3.5 (Function/closure contexts identified and CFGs analyzed, but executable output still substantially depends on original dispatcher).",
+  "metrics": {
+    "physicalDispatcherStatesBefore": 610,
+    "physicalDispatcherStatesAfter": 610,
+    "physicallyExtractedStates": 0,
+    "closureConstructors": 131,
+    "uniqueLogicalFunctions": 84,
+    "abstractFunctionContextsReported": 281,
+    "totalFunctionExpressionsInOutput": 125,
+    "constructorsRewired": 126,
+    "constructorsStillUsingDispatcher": 5,
+    "referencedFunctions": 124,
+    "unreferencedFunctions": 1,
+    "analysisOnlyFunctions": 1,
+    "dispatcherBackedFunctions": 66,
+    "astRoundtrip": "PASS",
+    "idempotence": "PASS"
+  }
+}

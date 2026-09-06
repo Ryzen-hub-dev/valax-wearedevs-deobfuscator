@@ -1,0 +1,83 @@
+{
+  "totalAliasesFound": 13,
+  "aliases": [
+    {
+      "sourceSymbol": "W",
+      "resolvedBuiltin": "string.len",
+      "evidence": "Direct local statement assignment: local W = string.len",
+      "confidence": "PROVEN"
+    },
+    {
+      "sourceSymbol": "L",
+      "resolvedBuiltin": "math.floor",
+      "evidence": "Direct local statement assignment: local L = math.floor",
+      "confidence": "PROVEN"
+    },
+    {
+      "sourceSymbol": "u",
+      "resolvedBuiltin": "type",
+      "evidence": "Direct local statement assignment: local u = type",
+      "confidence": "PROVEN"
+    },
+    {
+      "sourceSymbol": "y",
+      "resolvedBuiltin": "string.char",
+      "evidence": "Direct local statement assignment: local y = string.char",
+      "confidence": "PROVEN"
+    },
+    {
+      "sourceSymbol": "s",
+      "resolvedBuiltin": "table.concat",
+      "evidence": "Direct local statement assignment: local s = table.concat",
+      "confidence": "PROVEN"
+    },
+    {
+      "sourceSymbol": "d",
+      "resolvedBuiltin": "table.insert",
+      "evidence": "Direct local statement assignment: local d = table.insert",
+      "confidence": "PROVEN"
+    },
+    {
+      "sourceSymbol": "j",
+      "resolvedBuiltin": "string.sub",
+      "evidence": "Direct local statement assignment: local j = string.sub",
+      "confidence": "PROVEN"
+    },
+    {
+      "sourceSymbol": "A",
+      "resolvedBuiltin": "_ENV",
+      "evidence": "IIFE argument passing at parameter index 0: param A receives environment binding",
+      "confidence": "PROVEN"
+    },
+    {
+      "sourceSymbol": "L",
+      "resolvedBuiltin": "_ENV",
+      "evidence": "IIFE argument passing at parameter index 1: param L receives environment binding",
+      "confidence": "PROVEN"
+    },
+    {
+      "sourceSymbol": "K",
+      "resolvedBuiltin": "newproxy",
+      "evidence": "IIFE argument passing at parameter index 2: param K receives arg newproxy",
+      "confidence": "PROVEN"
+    },
+    {
+      "sourceSymbol": "u",
+      "resolvedBuiltin": "setmetatable",
+      "evidence": "IIFE argument passing at parameter index 3: param u receives arg setmetatable",
+      "confidence": "PROVEN"
+    },
+    {
+      "sourceSymbol": "y",
+      "resolvedBuiltin": "getmetatable",
+      "evidence": "IIFE argument passing at parameter index 4: param y receives arg getmetatable",
+      "confidence": "PROVEN"
+    },
+    {
+      "sourceSymbol": "s",
+      "resolvedBuiltin": "select",
+      "evidence": "IIFE argument passing at parameter index 5: param s receives arg select",
+      "confidence": "PROVEN"
+    }
+  ]
+}

@@ -1,0 +1,259 @@
+{
+  "timestamp": "2026-09-05T19:01:14.694Z",
+  "totalSamples": 25,
+  "matchingLevelsCount": 25,
+  "filenameDependencyDetected": false,
+  "silentCorruptionCount": 0,
+  "samples": [
+    {
+      "sampleId": "blind_01_collatz",
+      "randomWorkerId": "9dadf78c1092abbc",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_02_factorial_recursive",
+      "randomWorkerId": "31a039707a4a68db",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_03_table_filter",
+      "randomWorkerId": "daa383f6b22eeda3",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_04_string_reverse",
+      "randomWorkerId": "8895eda160216f58",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_05_fibonacci_iterative",
+      "randomWorkerId": "f509af57d1aea338",
+      "previousLevel": "L4",
+      "randomizedLevel": "L4",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 61,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_06_matrix_diagonal",
+      "randomWorkerId": "cd1ba80d7339a3e7",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_07_accumulator_closure",
+      "randomWorkerId": "8636ce946a023c35",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_08_multi_branch_dispatch",
+      "randomWorkerId": "a4a348dcadabeee4",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_09_metatable_vector",
+      "randomWorkerId": "85db7ad0ffeb2d05",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_10_bubble_sort",
+      "randomWorkerId": "eb9c51b4a0619930",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_11_binary_search",
+      "randomWorkerId": "9cd7c2cf8bee6a27",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_12_higher_order_map",
+      "randomWorkerId": "ba69e386d96c1f09",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_13_curried_addition",
+      "randomWorkerId": "fe3965e6d5f7f6a7",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_14_bitwise_simulation",
+      "randomWorkerId": "0cae206f367da1c5",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_15_string_parser",
+      "randomWorkerId": "d330dd3759921c01",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_16_state_machine_enum",
+      "randomWorkerId": "e3b6047baf70ea38",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_17_vararg_sum",
+      "randomWorkerId": "f8fe68559a08e069",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_18_multi_return_split",
+      "randomWorkerId": "251d60c795dd350f",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_19_queue_fifo",
+      "randomWorkerId": "0a0f64e1a4787693",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_20_memoized_fib",
+      "randomWorkerId": "055d65042620a976",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_21_deeply_nested_scope",
+      "randomWorkerId": "f83aa12a2a551da4",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_22_repeat_until_converge",
+      "randomWorkerId": "b09df01e67bdefe6",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_23_compound_boolean",
+      "randomWorkerId": "b8d54d33bd3a251b",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_24_table_deep_copy",
+      "randomWorkerId": "6293a26813b14e2e",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    },
+    {
+      "sampleId": "blind_25_pipeline_processor",
+      "randomWorkerId": "f0005a82a293b1f2",
+      "previousLevel": "L5-W",
+      "randomizedLevel": "L5-W",
+      "levelMatches": true,
+      "silentCorruption": false,
+      "residualDispatcherStates": 0,
+      "exitCode": 0
+    }
+  ]
+}

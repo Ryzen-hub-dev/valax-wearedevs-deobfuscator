@@ -1,0 +1,11 @@
+{
+  "fixtureId": "fixture_0011",
+  "category": "mixed_stress_program",
+  "title": "Mixed Stress Program (All Constructs Combined)",
+  "complexityLevel": 5,
+  "language": "lua",
+  "sourceHash": "7ca50f10e3c226223c444963a43b6e184a73821841598b49876e460f4815ec6d",
+  "protectedSourceRequired": true,
+  "protectedGenerated": false,
+  "protectedFileName": "protected.lua"
+}

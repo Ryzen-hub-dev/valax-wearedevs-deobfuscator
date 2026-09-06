@@ -1,0 +1,9 @@
+{
+  "scannedFiles": 43,
+  "hardcodedFixtureReferences": [],
+  "hardcodedStateIds": [],
+  "hardcodedOffsets": [],
+  "hardcodedCounts": [],
+  "status": "PASS",
+  "summary": "All engine core modules are 100% free of hardcoded fixture constants and filenames across 43 files."
+}

@@ -1,0 +1,12 @@
+{
+  "totalUndefinedReferences": 1,
+  "uniqueUndefinedSymbols": 1,
+  "undefinedSymbols": {
+    "_ENV": 1
+  },
+  "sampleReferences": [
+    {
+      "name": "_ENV"
+    }
+  ]
+}

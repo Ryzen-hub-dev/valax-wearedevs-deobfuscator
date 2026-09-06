@@ -1,0 +1,11 @@
+{
+  "fixtureId": "fixture_0008",
+  "category": "recursion_mutual",
+  "title": "Direct & Mutual Recursion",
+  "complexityLevel": 4,
+  "language": "lua",
+  "sourceHash": "098bce7fbdc62845380fe8c6fd2cee58ee6ecce7acf07a77f22654d6dc51abf1",
+  "protectedSourceRequired": true,
+  "protectedGenerated": false,
+  "protectedFileName": "protected.lua"
+}

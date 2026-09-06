@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-09-04T12:51:30.000Z",
+  "fixture": "minimal_print",
+  "originalSource": "print(\"hi\")\n",
+  "protectedSha256": "b73a29b073dbe274bf0628bed415f494cbc0c757967c7fd51b85f10095835722",
+  "recoveryClassification": {
+    "traceRecovery": true,
+    "wholeProgramRecovery": true,
+    "verifiedLevel": "L5-W"
+  },
+  "staticProgramMetrics": {
+    "staticFunctions": 1,
+    "staticBlocks": 1,
+    "observedBlocks": 1,
+    "unobservedReachableBlocks": 0,
+    "provenDeadBlocks": 0,
+    "coverageRatio": 1.0
+  },
+  "completenessInvariants": {
+    "escapingClosures": 0,
+    "callbacks": 0,
+    "unknownInputs": 0,
+    "unknownBranches": 0,
+    "wholeProgramClosed": true,
+    "allReachableBehaviorCovered": true
+  },
+  "replacementProof": "PROVEN_CLOSED_DETERMINISTIC: 0 external unbound inputs, 0 escaping callbacks, 0 unobserved conditional branches, 0 deferred closures. Trace coverage equals 100% of reachable AST and CFG paths. Full whole-program synthesis to print(\"hi\") is formally proven valid.",
+  "astNodeProvenance": {
+    "Chunk": "STATIC_AND_DYNAMIC",
+    "CallStatement": "STATIC_AND_DYNAMIC",
+    "CallExpression": "STATIC_AND_DYNAMIC",
+    "Identifier(print)": "STATIC_AND_DYNAMIC",
+    "StringLiteral(\"hi\")": "STATIC_AND_DYNAMIC"
+  }
+}

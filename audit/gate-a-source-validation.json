@@ -1,0 +1,97 @@
+{
+  "totalSources": 10,
+  "passedCount": 10,
+  "failedCount": 0,
+  "results": [
+    {
+      "fixtureId": "fixture_0002",
+      "title": "Arithmetic + Branches",
+      "parse": "PASS",
+      "roundtrip": "PASS",
+      "deterministicExecution": "PASS",
+      "forbiddenDependencies": "CLEAN",
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_0003",
+      "title": "Nested Closures & Mutable Captures",
+      "parse": "PASS",
+      "roundtrip": "PASS",
+      "deterministicExecution": "PASS",
+      "forbiddenDependencies": "CLEAN",
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_0004",
+      "title": "Tables + Dynamic Keys",
+      "parse": "PASS",
+      "roundtrip": "PASS",
+      "deterministicExecution": "PASS",
+      "forbiddenDependencies": "CLEAN",
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_0005",
+      "title": "Loop Constructs & Break Semantics",
+      "parse": "PASS",
+      "roundtrip": "PASS",
+      "deterministicExecution": "PASS",
+      "forbiddenDependencies": "CLEAN",
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_0006",
+      "title": "Varargs & Multiple Return Truncation",
+      "parse": "PASS",
+      "roundtrip": "PASS",
+      "deterministicExecution": "PASS",
+      "forbiddenDependencies": "CLEAN",
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_0007",
+      "title": "Callback Graph & Indirect Invocation",
+      "parse": "PASS",
+      "roundtrip": "PASS",
+      "deterministicExecution": "PASS",
+      "forbiddenDependencies": "CLEAN",
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_0008",
+      "title": "Direct & Mutual Recursion",
+      "parse": "PASS",
+      "roundtrip": "PASS",
+      "deterministicExecution": "PASS",
+      "forbiddenDependencies": "CLEAN",
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_0009",
+      "title": "Complex Boolean Control Flow & Short-Circuit Counters",
+      "parse": "PASS",
+      "roundtrip": "PASS",
+      "deterministicExecution": "PASS",
+      "forbiddenDependencies": "CLEAN",
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_0010",
+      "title": "Shared Closure State across Multiple Handles",
+      "parse": "PASS",
+      "roundtrip": "PASS",
+      "deterministicExecution": "PASS",
+      "forbiddenDependencies": "CLEAN",
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_0011",
+      "title": "Mixed Stress Program (All Constructs Combined)",
+      "parse": "PASS",
+      "roundtrip": "PASS",
+      "deterministicExecution": "PASS",
+      "forbiddenDependencies": "CLEAN",
+      "status": "PASS"
+    }
+  ]
+}

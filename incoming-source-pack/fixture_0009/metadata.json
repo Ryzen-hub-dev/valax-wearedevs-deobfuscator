@@ -1,0 +1,11 @@
+{
+  "fixtureId": "fixture_0009",
+  "category": "boolean_control_flow",
+  "title": "Complex Boolean Control Flow & Short-Circuit Counters",
+  "complexityLevel": 4,
+  "language": "lua",
+  "sourceHash": "ebd292bb28b0fd31fd8cba7d1457d26d2b4a746a1e164f3d536b245bcce83622",
+  "protectedSourceRequired": true,
+  "protectedGenerated": false,
+  "protectedFileName": "protected.lua"
+}

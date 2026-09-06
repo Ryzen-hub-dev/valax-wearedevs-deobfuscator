@@ -1,0 +1,154 @@
+{
+  "timestamp": "2026-09-04T13:18:34.005Z",
+  "gate": "L5-W_CLOSED_PROGRAM_PRE_PROTECTION_VALIDATION",
+  "totalFixtures": 10,
+  "passedCount": 10,
+  "failedCount": 0,
+  "allPassed": true,
+  "results": [
+    {
+      "fixtureId": "fixture_01_local_constant",
+      "parseOk": true,
+      "parseError": null,
+      "roundtripOk": true,
+      "roundtripError": null,
+      "semanticOk": true,
+      "instructionsExecuted": null,
+      "printOutputs": [
+        "hi"
+      ],
+      "eventsCount": 1,
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_02_function_return",
+      "parseOk": true,
+      "parseError": null,
+      "roundtripOk": true,
+      "roundtripError": null,
+      "semanticOk": true,
+      "instructionsExecuted": null,
+      "printOutputs": [
+        "hi"
+      ],
+      "eventsCount": 1,
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_03_constant_branch",
+      "parseOk": true,
+      "parseError": null,
+      "roundtripOk": true,
+      "roundtripError": null,
+      "semanticOk": true,
+      "instructionsExecuted": null,
+      "printOutputs": [
+        "hi"
+      ],
+      "eventsCount": 1,
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_04_numeric_loop",
+      "parseOk": true,
+      "parseError": null,
+      "roundtripOk": true,
+      "roundtripError": null,
+      "semanticOk": true,
+      "instructionsExecuted": null,
+      "printOutputs": [
+        "1",
+        "2",
+        "3"
+      ],
+      "eventsCount": 3,
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_05_nested_function",
+      "parseOk": true,
+      "parseError": null,
+      "roundtripOk": true,
+      "roundtripError": null,
+      "semanticOk": true,
+      "instructionsExecuted": null,
+      "printOutputs": [
+        "hi"
+      ],
+      "eventsCount": 1,
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_06_table_access",
+      "parseOk": true,
+      "parseError": null,
+      "roundtripOk": true,
+      "roundtripError": null,
+      "semanticOk": true,
+      "instructionsExecuted": null,
+      "printOutputs": [
+        "hi"
+      ],
+      "eventsCount": 1,
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_07_multireturn",
+      "parseOk": true,
+      "parseError": null,
+      "roundtripOk": true,
+      "roundtripError": null,
+      "semanticOk": true,
+      "instructionsExecuted": null,
+      "printOutputs": [
+        "hi",
+        "42"
+      ],
+      "eventsCount": 2,
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_08_varargs",
+      "parseOk": true,
+      "parseError": null,
+      "roundtripOk": true,
+      "roundtripError": null,
+      "semanticOk": true,
+      "instructionsExecuted": null,
+      "printOutputs": [
+        "hi"
+      ],
+      "eventsCount": 1,
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_09_closure_capture",
+      "parseOk": true,
+      "parseError": null,
+      "roundtripOk": true,
+      "roundtripError": null,
+      "semanticOk": true,
+      "instructionsExecuted": null,
+      "printOutputs": [
+        "hi"
+      ],
+      "eventsCount": 1,
+      "status": "PASS"
+    },
+    {
+      "fixtureId": "fixture_10_mixed_closed",
+      "parseOk": true,
+      "parseError": null,
+      "roundtripOk": true,
+      "roundtripError": null,
+      "semanticOk": true,
+      "instructionsExecuted": null,
+      "printOutputs": [
+        "58",
+        "10"
+      ],
+      "eventsCount": 2,
+      "status": "PASS"
+    }
+  ]
+}

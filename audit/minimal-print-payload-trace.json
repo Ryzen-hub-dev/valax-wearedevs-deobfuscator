@@ -1,0 +1,60 @@
+{
+  "timestamp": "2026-09-04T07:25:48.769Z",
+  "fixture": "minimal_print",
+  "rootInvocation": {
+    "sourceLocation": "return (q(11518859 - (-591600), {}))(T(D))",
+    "foldedEntryState": 12110459,
+    "closureHelper": "q",
+    "argumentCount": 0,
+    "isVararg": true
+  },
+  "executionTrace": [
+    {
+      "step": 0,
+      "state": 12110459,
+      "type": "ANTI_TAMPER_CHECK",
+      "description": "pcall(W) anti-tamper integrity verification",
+      "nextState": 5302016
+    },
+    {
+      "step": 1,
+      "state": 5302016,
+      "type": "STATE_TRANSITION",
+      "description": "Intermediate transition",
+      "nextState": 11897742
+    },
+    {
+      "step": 2,
+      "state": 11897742,
+      "type": "ALIAS_INITIALIZATION",
+      "description": "Sets up math.floor, table.concat aliases, transitions through 1522977 -> 2908314 -> 7049333",
+      "nextState": 7049333
+    },
+    {
+      "step": 3,
+      "state": 7049333,
+      "type": "ANTI_TAMPER_LOOP",
+      "description": "Executes 256-iteration stack height verification loop (3873397 <-> 7618615)",
+      "nextState": 490473
+    },
+    {
+      "step": 4,
+      "state": 490473,
+      "type": "SBOX_INITIALIZATION",
+      "description": "Transitions through 5090860 -> 1524067 -> 15311753 -> 14025187 -> loop (15342153 <-> 1844449 S-box 256 permutation) -> 4477743 -> 12295450 -> 4665203 -> 10368266",
+      "nextState": 10387401
+    },
+    {
+      "step": 5,
+      "state": 10387401,
+      "type": "OBSERVABLE_PAYLOAD_EXECUTION",
+      "description": "Decodes string table lookup for \"prin\" -> global print, decrypts \"hi\", executes q = L(d) [print(\"hi\")]",
+      "observableCalls": [
+        "print(\"hi\")"
+      ],
+      "nextState": null,
+      "isTerminal": true
+    }
+  ],
+  "conclusion": "The script executes a deterministic straight-line path with local anti-tamper and S-box loops that have zero external observable side effects. The only escaping observable effect is print(\"hi\") in state 10387401."
+}

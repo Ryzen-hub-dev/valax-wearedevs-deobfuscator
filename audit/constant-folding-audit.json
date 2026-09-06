@@ -1,0 +1,196 @@
+{
+  "totalDeterministicTests": 31,
+  "passedDeterministic": 31,
+  "failedDeterministic": 0,
+  "randomizedStressTests": 100,
+  "randomizedPassed": 100,
+  "verdict": "PASS",
+  "testResults": [
+    {
+      "expr": "7 % 5",
+      "expected": 2,
+      "actual": 2,
+      "status": "PASS"
+    },
+    {
+      "expr": "-7 % 5",
+      "expected": 3,
+      "actual": 3,
+      "status": "PASS"
+    },
+    {
+      "expr": "7 % -5",
+      "expected": -3,
+      "actual": -3,
+      "status": "PASS"
+    },
+    {
+      "expr": "-7 % -5",
+      "expected": -2,
+      "actual": -2,
+      "status": "PASS"
+    },
+    {
+      "expr": "10 / 2",
+      "expected": 5,
+      "actual": 5,
+      "status": "PASS"
+    },
+    {
+      "expr": "10 / 0",
+      "expected": "UNFOLDED",
+      "actual": "<Unfolded BinaryExpression>",
+      "status": "PASS"
+    },
+    {
+      "expr": "0 / 0",
+      "expected": "UNFOLDED",
+      "actual": "<Unfolded BinaryExpression>",
+      "status": "PASS"
+    },
+    {
+      "expr": "2 ^ 3",
+      "expected": 8,
+      "actual": 8,
+      "status": "PASS"
+    },
+    {
+      "expr": "(-2) ^ 2",
+      "expected": 4,
+      "actual": 4,
+      "status": "PASS"
+    },
+    {
+      "expr": "(-2) ^ 0.5",
+      "expected": "UNFOLDED",
+      "actual": "<Unfolded BinaryExpression>",
+      "status": "PASS"
+    },
+    {
+      "expr": "514856 + -514855",
+      "expected": 1,
+      "actual": 1,
+      "status": "PASS"
+    },
+    {
+      "expr": "-559362 - (-559426)",
+      "expected": 64,
+      "actual": 64,
+      "status": "PASS"
+    },
+    {
+      "expr": "12816747 - (-731938)",
+      "expected": 13548685,
+      "actual": 13548685,
+      "status": "PASS"
+    },
+    {
+      "expr": "256722 - 202981",
+      "expected": 53741,
+      "actual": 53741,
+      "status": "PASS"
+    },
+    {
+      "expr": "106837 + -106836",
+      "expected": 1,
+      "actual": 1,
+      "status": "PASS"
+    },
+    {
+      "expr": "-292788 - (-293927)",
+      "expected": 1139,
+      "actual": 1139,
+      "status": "PASS"
+    },
+    {
+      "expr": "not 0",
+      "expected": false,
+      "actual": false,
+      "status": "PASS"
+    },
+    {
+      "expr": "not \"\"",
+      "expected": false,
+      "actual": false,
+      "status": "PASS"
+    },
+    {
+      "expr": "not false",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "expr": "not nil",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "expr": "0 and 42",
+      "expected": 42,
+      "actual": 42,
+      "status": "PASS"
+    },
+    {
+      "expr": "false and 42",
+      "expected": false,
+      "actual": false,
+      "status": "PASS"
+    },
+    {
+      "expr": "nil or 100",
+      "expected": 100,
+      "actual": 100,
+      "status": "PASS"
+    },
+    {
+      "expr": "0 or 100",
+      "expected": 0,
+      "actual": 0,
+      "status": "PASS"
+    },
+    {
+      "expr": "10 < 20",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "expr": "20 < 10",
+      "expected": false,
+      "actual": false,
+      "status": "PASS"
+    },
+    {
+      "expr": "10 == 10",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "expr": "10 ~= 20",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "expr": "10 == \"10\"",
+      "expected": false,
+      "actual": false,
+      "status": "PASS"
+    },
+    {
+      "expr": "10 ~= \"10\"",
+      "expected": true,
+      "actual": true,
+      "status": "PASS"
+    },
+    {
+      "expr": "\"hello \" .. \"world\"",
+      "expected": "hello world",
+      "actual": "hello world",
+      "status": "PASS"
+    }
+  ]
+}

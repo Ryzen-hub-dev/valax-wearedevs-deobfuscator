@@ -1,0 +1,16 @@
+{
+  "forwarded": {
+    "count": 3,
+    "second": 40
+  },
+  "parenthesized": 10,
+  "received": {
+    "first": 40,
+    "second": 100,
+    "third": 180
+  },
+  "truncated": {
+    "x": 10,
+    "y": 40
+  }
+}

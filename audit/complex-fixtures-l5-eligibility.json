@@ -1,0 +1,34 @@
+{
+  "timestamp": "2026-09-04T12:52:00.000Z",
+  "audit": "Complex Protected Fixtures L5 Eligibility Audit (Rule 17)",
+  "fixtures": {
+    "ByIdiotSandWich.txt": {
+      "format": "WeAreDevs v1.0.0",
+      "bytes": 238742,
+      "isL5WEligible": false,
+      "isL5TEligible": false,
+      "reasonsIneligible": [
+        "Unbound Roblox runtime globals: game, workspace, script, getgenv, shared, string.char",
+        "Registered uncalled event handlers: MouseButton1Click, InputBegan, Changed",
+        "Network remote hooks and metamethod indexing: __namecall, __index",
+        "Escaping callbacks: over 30 closure factories registered to UI and event listeners",
+        "427 residual dispatcher states serving multi-caller paths and deferred event callbacks"
+      ],
+      "assignedLevel": "L4",
+      "verdict": "RETAIN_L4_STATIC_REPRESENTATION: Whole-program replacement strictly prohibited. Preserves all 427 residual states and reconstructed functions without silent deletion."
+    },
+    "fixture_unpaired_0002_bymethion": {
+      "format": "WeAreDevs v1.0.0",
+      "bytes": 182390,
+      "isL5WEligible": false,
+      "isL5TEligible": false,
+      "reasonsIneligible": [
+        "Unbound environment dependencies requiring external execution context",
+        "Multiple escaping closure constructors and deferred event handlers",
+        "Unresolved branching depending on runtime parameters"
+      ],
+      "assignedLevel": "L4",
+      "verdict": "RETAIN_L4_STATIC_REPRESENTATION: Whole-program replacement strictly prohibited. Preserves structural CFG without dynamic-only deletion."
+    }
+  }
+}

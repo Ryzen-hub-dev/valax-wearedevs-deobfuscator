@@ -1,0 +1,20 @@
+{
+  "arrayLen": 3,
+  "arrayValues": [
+    10,
+    20,
+    30
+  ],
+  "calcResult": 120,
+  "dynamicKeys": {
+    "c2": 15,
+    "c4": 30,
+    "c6": 45,
+    "c8": 60
+  },
+  "nestedInner": "inside",
+  "stringKeys": {
+    "name": "DynamicTable",
+    "numKey": 100
+  }
+}

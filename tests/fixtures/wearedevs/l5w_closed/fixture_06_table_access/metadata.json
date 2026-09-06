@@ -1,0 +1,12 @@
+{
+  "id": "fixture_06_table_access",
+  "name": "Table Access",
+  "fixtureType": "CLOSED_DETERMINISTIC_GROUND_TRUTH",
+  "pairedOriginalAvailable": true,
+  "semanticEligible": true,
+  "targetLevel": "L5-W",
+  "originalBytes": 66,
+  "originalSha256": "978dfd5b4a5074fba5c0dcf911900b0fe62fb4dbf2500978489ad526a90bcc2d",
+  "protectedAvailable": true,
+  "description": "Local non-escaping table constructor with property indexing"
+}

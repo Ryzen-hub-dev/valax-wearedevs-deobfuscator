@@ -1,0 +1,17 @@
+{
+  "totalDiscoveredStates": 610,
+  "provenReachable": 1,
+  "conditionallyReachable": 16,
+  "unknown": 593,
+  "provenUnreachable": 0,
+  "previousEngineClaim": {
+    "states": 610,
+    "reachable": 14,
+    "removed": 596
+  },
+  "auditVerdict": {
+    "isPreviousTransformationSafe": false,
+    "unprovenRemovalsCount": 593,
+    "finding": "The previous engine pruned 596 states by only following unconditional/conditional transitions from entry state 13548685. The independent audit found that 16 states are reachable via closures and 593 states cannot be proven unreachable. Pruning them was UNSAFE!"
+  }
+}

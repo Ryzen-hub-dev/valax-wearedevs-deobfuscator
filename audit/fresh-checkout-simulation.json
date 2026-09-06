@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-09-06T16:23:00.121Z",
+  "stagingDir": "C:\\Users\\ksjz1\\AppData\\Local\\Temp\\valax-fresh-checkout-T75RwR",
+  "copiedDirectories": [
+    "bin",
+    "packages",
+    "scripts",
+    "tests",
+    "infra",
+    "docs",
+    "audit",
+    "corpus",
+    "protected-corpus",
+    "incoming-source-pack",
+    "api",
+    "public",
+    ".github"
+  ],
+  "copiedFiles": [
+    "package.json",
+    "README.md",
+    "COMPATIBILITY.md",
+    ".gitignore",
+    ".gitattributes",
+    ".dockerignore",
+    "ByIdiotSandWich.txt"
+  ],
+  "coreBaselineVerify": {
+    "verified": true,
+    "totalChecked": 51,
+    "mismatchesCount": 0
+  },
+  "masterTestSuite": {
+    "passed": 224,
+    "failed": 0,
+    "exitCode": 0
+  },
+  "status": "CLEAN_CHECKOUT_SIMULATION_PASS",
+  "durationMs": 9615
+}

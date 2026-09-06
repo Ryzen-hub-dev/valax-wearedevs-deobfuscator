@@ -1,0 +1,448 @@
+[
+  {
+    "state": 587948,
+    "owners": [],
+    "incomingEdges": [
+      12591223
+    ],
+    "outgoingEdges": [
+      12588142
+    ],
+    "unknownIncomingEdges": [],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "FINITE_BUT_UNRESOLVED_VALUE_SET",
+    "resolutionStrategy": "Internal chain between unresolved blocks"
+  },
+  {
+    "state": 734021,
+    "owners": [],
+    "incomingEdges": [],
+    "outgoingEdges": [],
+    "unknownIncomingEdges": [
+      "unknown_caller"
+    ],
+    "unknownOutgoingEdges": [
+      "dispatcher_exit"
+    ],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "EXTERNAL_RUNTIME_VALUE",
+    "resolutionStrategy": "Terminal exit block; Q = A[W(...)] sets Q to nil to exit dispatcher"
+  },
+  {
+    "state": 931984,
+    "owners": [],
+    "incomingEdges": [],
+    "outgoingEdges": [],
+    "unknownIncomingEdges": [
+      "unknown_caller"
+    ],
+    "unknownOutgoingEdges": [
+      "dispatcher_exit"
+    ],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "EXTERNAL_RUNTIME_VALUE",
+    "resolutionStrategy": "Terminal exit block; Q = A[W(...)] sets Q to nil to exit dispatcher"
+  },
+  {
+    "state": 1089197,
+    "owners": [],
+    "incomingEdges": [],
+    "outgoingEdges": [
+      12599231,
+      2848660
+    ],
+    "unknownIncomingEdges": [
+      "unknown_caller"
+    ],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "UNKNOWN_TABLE_KEY",
+    "resolutionStrategy": "Entry reached via indirect table lookup or upvalue index"
+  },
+  {
+    "state": 1711025,
+    "owners": [],
+    "incomingEdges": [],
+    "outgoingEdges": [
+      2679119
+    ],
+    "unknownIncomingEdges": [
+      "unknown_caller"
+    ],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "UNKNOWN_TABLE_KEY",
+    "resolutionStrategy": "Entry reached via indirect table lookup or upvalue index"
+  },
+  {
+    "state": 1900250,
+    "owners": [],
+    "incomingEdges": [
+      11372570
+    ],
+    "outgoingEdges": [
+      9419345
+    ],
+    "unknownIncomingEdges": [],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "FINITE_BUT_UNRESOLVED_VALUE_SET",
+    "resolutionStrategy": "Internal chain between unresolved blocks"
+  },
+  {
+    "state": 1930096,
+    "owners": [],
+    "incomingEdges": [],
+    "outgoingEdges": [
+      9136053
+    ],
+    "unknownIncomingEdges": [
+      "unknown_caller"
+    ],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "UNKNOWN_TABLE_KEY",
+    "resolutionStrategy": "Entry reached via indirect table lookup or upvalue index"
+  },
+  {
+    "state": 2848660,
+    "owners": [],
+    "incomingEdges": [
+      1089197
+    ],
+    "outgoingEdges": [
+      3600126,
+      5871042
+    ],
+    "unknownIncomingEdges": [],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "FINITE_BUT_UNRESOLVED_VALUE_SET",
+    "resolutionStrategy": "Internal chain between unresolved blocks"
+  },
+  {
+    "state": 2875011,
+    "owners": [],
+    "incomingEdges": [],
+    "outgoingEdges": [
+      10294511
+    ],
+    "unknownIncomingEdges": [
+      "unknown_caller"
+    ],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "UNKNOWN_TABLE_KEY",
+    "resolutionStrategy": "Entry reached via indirect table lookup or upvalue index"
+  },
+  {
+    "state": 3331027,
+    "owners": [],
+    "incomingEdges": [
+      12535874
+    ],
+    "outgoingEdges": [
+      7825531
+    ],
+    "unknownIncomingEdges": [],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "FINITE_BUT_UNRESOLVED_VALUE_SET",
+    "resolutionStrategy": "Internal chain between unresolved blocks"
+  },
+  {
+    "state": 3497425,
+    "owners": [],
+    "incomingEdges": [],
+    "outgoingEdges": [
+      4160801
+    ],
+    "unknownIncomingEdges": [
+      "unknown_caller"
+    ],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "UNKNOWN_TABLE_KEY",
+    "resolutionStrategy": "Entry reached via indirect table lookup or upvalue index"
+  },
+  {
+    "state": 3600126,
+    "owners": [],
+    "incomingEdges": [
+      2848660
+    ],
+    "outgoingEdges": [
+      5871042
+    ],
+    "unknownIncomingEdges": [],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "FINITE_BUT_UNRESOLVED_VALUE_SET",
+    "resolutionStrategy": "Internal chain between unresolved blocks"
+  },
+  {
+    "state": 4284750,
+    "owners": [],
+    "incomingEdges": [],
+    "outgoingEdges": [
+      15572662
+    ],
+    "unknownIncomingEdges": [
+      "unknown_caller"
+    ],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "UNKNOWN_TABLE_KEY",
+    "resolutionStrategy": "Entry reached via indirect table lookup or upvalue index"
+  },
+  {
+    "state": 6821103,
+    "owners": [],
+    "incomingEdges": [],
+    "outgoingEdges": [
+      6893051
+    ],
+    "unknownIncomingEdges": [
+      "unknown_caller"
+    ],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "UNKNOWN_TABLE_KEY",
+    "resolutionStrategy": "Entry reached via indirect table lookup or upvalue index"
+  },
+  {
+    "state": 7228497,
+    "owners": [],
+    "incomingEdges": [],
+    "outgoingEdges": [],
+    "unknownIncomingEdges": [
+      "unknown_caller"
+    ],
+    "unknownOutgoingEdges": [
+      "dispatcher_exit"
+    ],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "EXTERNAL_RUNTIME_VALUE",
+    "resolutionStrategy": "Terminal exit block; Q = A[W(...)] sets Q to nil to exit dispatcher"
+  },
+  {
+    "state": 8048133,
+    "owners": [],
+    "incomingEdges": [],
+    "outgoingEdges": [
+      15318283
+    ],
+    "unknownIncomingEdges": [
+      "unknown_caller"
+    ],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "UNKNOWN_TABLE_KEY",
+    "resolutionStrategy": "Entry reached via indirect table lookup or upvalue index"
+  },
+  {
+    "state": 8540704,
+    "owners": [],
+    "incomingEdges": [],
+    "outgoingEdges": [
+      8187088
+    ],
+    "unknownIncomingEdges": [
+      "unknown_caller"
+    ],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "UNKNOWN_TABLE_KEY",
+    "resolutionStrategy": "Entry reached via indirect table lookup or upvalue index"
+  },
+  {
+    "state": 10315881,
+    "owners": [],
+    "incomingEdges": [],
+    "outgoingEdges": [
+      14498498
+    ],
+    "unknownIncomingEdges": [
+      "unknown_caller"
+    ],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "UNKNOWN_TABLE_KEY",
+    "resolutionStrategy": "Entry reached via indirect table lookup or upvalue index"
+  },
+  {
+    "state": 11372570,
+    "owners": [],
+    "incomingEdges": [],
+    "outgoingEdges": [
+      1900250,
+      9419345
+    ],
+    "unknownIncomingEdges": [
+      "unknown_caller"
+    ],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "UNKNOWN_TABLE_KEY",
+    "resolutionStrategy": "Entry reached via indirect table lookup or upvalue index"
+  },
+  {
+    "state": 12535874,
+    "owners": [],
+    "incomingEdges": [
+      12599231
+    ],
+    "outgoingEdges": [
+      3331027,
+      7825531
+    ],
+    "unknownIncomingEdges": [],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "FINITE_BUT_UNRESOLVED_VALUE_SET",
+    "resolutionStrategy": "Internal chain between unresolved blocks"
+  },
+  {
+    "state": 12591223,
+    "owners": [],
+    "incomingEdges": [],
+    "outgoingEdges": [
+      587948,
+      2563070
+    ],
+    "unknownIncomingEdges": [
+      "unknown_caller"
+    ],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "UNKNOWN_TABLE_KEY",
+    "resolutionStrategy": "Entry reached via indirect table lookup or upvalue index"
+  },
+  {
+    "state": 12599231,
+    "owners": [],
+    "incomingEdges": [
+      1089197
+    ],
+    "outgoingEdges": [
+      12535874,
+      7147142
+    ],
+    "unknownIncomingEdges": [],
+    "unknownOutgoingEdges": [],
+    "requiredRuntimeValues": [
+      "Q",
+      "A"
+    ],
+    "dynamicTableReads": [],
+    "indirectCalls": [],
+    "reasonUnresolved": "FINITE_BUT_UNRESOLVED_VALUE_SET",
+    "resolutionStrategy": "Internal chain between unresolved blocks"
+  }
+]

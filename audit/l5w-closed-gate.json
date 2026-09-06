@@ -1,0 +1,27 @@
+{
+  "timestamp": "2026-09-05T18:53:17.641Z",
+  "gate": "L5-W_CLOSED_PROGRAM_EXPANSION_GATE",
+  "fixturesPrepared": 10,
+  "protectedFixturesPresent": 10,
+  "metrics": {
+    "L5WPass": 10,
+    "L5TPass": 0,
+    "L45Pass": 0,
+    "L4Pass": 0,
+    "semanticMismatch": 0,
+    "crashes": 0
+  },
+  "hardGateCompliance": {
+    "dispatcherFreeL5W": 10,
+    "decoderFreeL5W": 10,
+    "runtimeFreeL5W": 10
+  },
+  "hardcodingViolations": 0,
+  "complexFixtureRegressions": {
+    "minimalPrintRegression": false,
+    "byIdiotSandWichRegression": false,
+    "byMethionRegression": false
+  },
+  "status": "FULL_L5W_CORPUS_PASS",
+  "requiredProtectedFiles": []
+}

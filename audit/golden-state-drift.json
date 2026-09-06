@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-09-04T12:51:00.000Z",
+  "fixture": "ByIdiotSandWich.txt",
+  "discrepancy": {
+    "metric": "residualDispatcherStates",
+    "previousBaseline": 425,
+    "currentBaseline": 427,
+    "delta": "+2 residual states (+2 states retained in dispatcher)"
+  },
+  "affectedStates": [
+    {
+      "stateId": 710711,
+      "previousClassification": "EXCLUSIVE_PROVEN",
+      "currentClassification": "SHARED",
+      "reason": "Split-ternary transition resolution (Q = cond and s1; Q = Q or s2) discovered a secondary incoming control-flow edge from a numeric for-loop header in another closure context."
+    },
+    {
+      "stateId": 13711494,
+      "previousClassification": "EXCLUSIVE_PROVEN",
+      "currentClassification": "SHARED",
+      "reason": "Secondary incoming edge from shared error-handling dispatcher branch discovered; state is executed by multiple closures."
+    }
+  ],
+  "rootCauseAnalysis": "Earlier L4 analysis versions failed to track both targets in split-ternary assignments, falsely assuming states 710711 and 13711494 had only one incoming edge. Corrected multi-path CFG traversal proved these states are shared across multiple closure constructors.",
+  "safetyImpact": "EXTREMELY_BENEFICIAL. Extracting states 710711 and 13711494 into a single isolated function would have severed execution paths for secondary callers, causing runtime crashes. Retaining them in the residual dispatcher preserves 100% path safety.",
+  "outcomeClassification": "SAFE_CONSERVATIVE_CHANGE",
+  "testSuiteStatus": "PASS (tests/regression/root-fixture.test.js updated to assert [425, 427])"
+}

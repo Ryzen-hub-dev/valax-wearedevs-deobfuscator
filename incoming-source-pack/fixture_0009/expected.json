@@ -1,0 +1,13 @@
+{
+  "evaluations": {
+    "eval1": false,
+    "eval2": true,
+    "eval3": true
+  },
+  "sideEffectCounters": {
+    "a": 2,
+    "b": 1,
+    "c": 2,
+    "d": 1
+  }
+}

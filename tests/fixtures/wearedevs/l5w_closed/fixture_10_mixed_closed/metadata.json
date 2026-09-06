@@ -1,0 +1,12 @@
+{
+  "id": "fixture_10_mixed_closed",
+  "name": "Mixed Closed Program",
+  "fixtureType": "CLOSED_DETERMINISTIC_GROUND_TRUTH",
+  "pairedOriginalAvailable": true,
+  "semanticEligible": true,
+  "targetLevel": "L5-W",
+  "originalBytes": 408,
+  "originalSha256": "2e3a9913f766a30c0f28b46d0d7e7b78d66396d93a336211db61f30f03132eed",
+  "protectedAvailable": true,
+  "description": "Complex closed deterministic program combining constants, tables, loops, branches, closures, and multi-returns"
+}

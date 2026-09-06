@@ -1,0 +1,203 @@
+{
+  "analyzedFixturesCount": 2,
+  "gateAPairedFixturesAwaiting": 10,
+  "structuralFamiliesIdentified": [
+    "Variant_Family_A_WeAreDevs_BST_Alphabet",
+    "Variant_Family_A2_BST_Custom_Pool"
+  ],
+  "fixtures": [
+    {
+      "fixtureId": "golden_fixture_byidiotsandwich",
+      "file": "ByIdiotSandWich.txt",
+      "family": "Variant_Family_A_WeAreDevs_BST_Alphabet",
+      "fingerprint": {
+        "stringPoolShape": {
+          "size": 1139,
+          "isArray": true,
+          "rotationRangesCount": 3
+        },
+        "decoderShape": {
+          "parameterCount": 1,
+          "hasOffsetArithmetic": true,
+          "accessorOffset": 53741
+        },
+        "alphabetHash": "7a9f1af930143cab1ca4ad0efb6cf30577e889bb0683b56d550c46bbcc71cef4",
+        "dispatcherTopology": "binary_search_tree",
+        "dispatcherDepth": 11,
+        "closureFactorySignatures": [
+          {
+            "helper": "m",
+            "paramCount": 0,
+            "vararg": true,
+            "capturedCount": 0
+          },
+          {
+            "helper": "o",
+            "paramCount": 6,
+            "vararg": false,
+            "capturedCount": 0
+          },
+          {
+            "helper": "R",
+            "paramCount": 2,
+            "vararg": false,
+            "capturedCount": 4
+          },
+          {
+            "helper": "m",
+            "paramCount": 0,
+            "vararg": true,
+            "capturedCount": 0
+          },
+          {
+            "helper": "p",
+            "paramCount": 3,
+            "vararg": false,
+            "capturedCount": 12
+          },
+          {
+            "helper": "v",
+            "paramCount": 4,
+            "vararg": false,
+            "capturedCount": 7
+          },
+          {
+            "helper": "o",
+            "paramCount": 6,
+            "vararg": false,
+            "capturedCount": 3
+          },
+          {
+            "helper": "R",
+            "paramCount": 2,
+            "vararg": false,
+            "capturedCount": 3
+          },
+          {
+            "helper": "S",
+            "paramCount": 1,
+            "vararg": false,
+            "capturedCount": 3
+          },
+          {
+            "helper": "R",
+            "paramCount": 2,
+            "vararg": false,
+            "capturedCount": 3
+          }
+        ],
+        "totalClosureConstructors": 131,
+        "stateCount": 610,
+        "runtimeAliasShape": {
+          "count": 1
+        },
+        "entryMechanism": "direct_root_invocation",
+        "transitionPatterns": {
+          "unconditional": 0,
+          "conditional": 0,
+          "dynamic": 0,
+          "terminal": 16
+        }
+      }
+    },
+    {
+      "fixtureId": "real_sample_bymethion",
+      "file": "ByMethion.txt",
+      "family": "Variant_Family_A2_BST_Custom_Pool",
+      "fingerprint": {
+        "stringPoolShape": {
+          "size": 0,
+          "isArray": false
+        },
+        "decoderShape": {
+          "parameterCount": 0,
+          "hasOffsetArithmetic": false
+        },
+        "alphabetHash": null,
+        "dispatcherTopology": "binary_search_tree",
+        "dispatcherDepth": 8,
+        "closureFactorySignatures": [
+          {
+            "helper": "G",
+            "paramCount": 7,
+            "vararg": false,
+            "capturedCount": 0
+          },
+          {
+            "helper": "r",
+            "paramCount": 11,
+            "vararg": false,
+            "capturedCount": 0
+          },
+          {
+            "helper": "R",
+            "paramCount": 2,
+            "vararg": false,
+            "capturedCount": 0
+          },
+          {
+            "helper": "p",
+            "paramCount": 3,
+            "vararg": false,
+            "capturedCount": 0
+          },
+          {
+            "helper": "R",
+            "paramCount": 2,
+            "vararg": false,
+            "capturedCount": 0
+          },
+          {
+            "helper": "G",
+            "paramCount": 7,
+            "vararg": false,
+            "capturedCount": 3
+          },
+          {
+            "helper": "S",
+            "paramCount": 1,
+            "vararg": false,
+            "capturedCount": 0
+          }
+        ],
+        "totalClosureConstructors": 7,
+        "stateCount": 72,
+        "runtimeAliasShape": {
+          "count": 1
+        },
+        "entryMechanism": "direct_root_invocation",
+        "transitionPatterns": {
+          "unconditional": 0,
+          "conditional": 0,
+          "dynamic": 0,
+          "terminal": 1
+        }
+      }
+    }
+  ],
+  "runtimeObservations": {
+    "commonRuntimeFeatures": [
+      "Self-executing IIFE wrapper: (function(...) ... end)(...)",
+      "Binary Search Tree nested if-else conditional dispatcher topology",
+      "Environment unpacking / runtime alias unpacking via unpack/f()",
+      "Closure factory helper functions (m, o, R, p, etc.) taking state machine descriptors",
+      "State machine execution driven by while-loop over state variable (e or Q)"
+    ],
+    "variableRuntimeFeatures": [
+      "String pool decoding mechanism (Alphabet substitution table with offset arithmetic vs. direct string array)",
+      "Rotation ranges count (multi-range byte rotation vs. no rotation)",
+      "Binary Search Tree nesting depth (scales with state count, e.g. depth 8 for 72 states, depth 11 for 610 states)",
+      "Closure constructor density (proportional to source program function count)"
+    ],
+    "sourceDependentFeatures": [
+      "Physical state count directly depends on statement complexity and branch branching factors in original source",
+      "Number and arity of closure factory helpers directly map to functions in the original source program",
+      "Terminal state transition patterns (return count and indirect dispatch exits)"
+    ],
+    "possibleSeedDependentFeatures": [
+      "Initial state IDs and numeric constants generated during binary search branching",
+      "Alphabet permutation order and accessor function arithmetic offset (e.g. 53741)",
+      "Variable and argument renaming in closure factory helpers and dispatcher wrappers"
+    ]
+  }
+}

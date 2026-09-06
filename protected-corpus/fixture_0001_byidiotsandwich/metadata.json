@@ -1,0 +1,15 @@
+{
+  "fixtureId": "fixture_0001_byidiotsandwich",
+  "sourceCategory": "protected_production_sample",
+  "complexityLevel": 5,
+  "language": "lua",
+  "generator": "WeAreDevs",
+  "generatorVersion": "v1.0.0",
+  "seed": "seed_001",
+  "structuralFamily": "Variant_Family_A_WeAreDevs_BST_Alphabet",
+  "sourceHash": null,
+  "protectedHash": "893f6504361377482aa06ee4764719bab398707de69cb5c6708b9c8493440a0f",
+  "recoveredHash": "6b64fda9d696511cc03602b5ccb81e016cd4ca2bdc71b01a495ce92ec9720d9e",
+  "recoveryLevel": "L4",
+  "importedAt": "2026-09-03T18:57:50.497Z"
+}

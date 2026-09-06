@@ -1,0 +1,1280 @@
+{
+  "timestamp": "2026-09-06T14:00:54.485Z",
+  "totalBlindSamples": 25,
+  "admittedL5WSamples": 24,
+  "proofArtifacts": [
+    {
+      "sample": "blind_01_collatz",
+      "sampleName": "Collatz Sequence While-Loop",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_01_collatz_BB0",
+            "AST_CHUNK_blind_01_collatz",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_01_collatz",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_01_collatz",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_02_factorial_recursive",
+      "sampleName": "Recursive Factorial",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_02_factorial_recursive_BB0",
+            "AST_CHUNK_blind_02_factorial_recursive",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_02_factorial_recursive",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_02_factorial_recursive",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_03_table_filter",
+      "sampleName": "Array Filtering with Function",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_03_table_filter_BB0",
+            "AST_CHUNK_blind_03_table_filter",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_03_table_filter",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_03_table_filter",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_04_string_reverse",
+      "sampleName": "Character String Accumulation",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_04_string_reverse_BB0",
+            "AST_CHUNK_blind_04_string_reverse",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_04_string_reverse",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_04_string_reverse",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_06_matrix_diagonal",
+      "sampleName": "2D Table Diagonal Sum",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_06_matrix_diagonal_BB0",
+            "AST_CHUNK_blind_06_matrix_diagonal",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_06_matrix_diagonal",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_06_matrix_diagonal",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_07_accumulator_closure",
+      "sampleName": "Lexical Accumulator Closure",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_07_accumulator_closure_BB0",
+            "AST_CHUNK_blind_07_accumulator_closure",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_07_accumulator_closure",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_07_accumulator_closure",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_08_multi_branch_dispatch",
+      "sampleName": "Multi-Branch Conditional",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_08_multi_branch_dispatch_BB0",
+            "AST_CHUNK_blind_08_multi_branch_dispatch",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_08_multi_branch_dispatch",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_08_multi_branch_dispatch",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_09_metatable_vector",
+      "sampleName": "Metatable Vector Arithmetic",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_09_metatable_vector_BB0",
+            "AST_CHUNK_blind_09_metatable_vector",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_09_metatable_vector",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_09_metatable_vector",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_10_bubble_sort",
+      "sampleName": "In-Place Bubble Sort",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_10_bubble_sort_BB0",
+            "AST_CHUNK_blind_10_bubble_sort",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_10_bubble_sort",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_10_bubble_sort",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_11_binary_search",
+      "sampleName": "Binary Search Algorithm",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_11_binary_search_BB0",
+            "AST_CHUNK_blind_11_binary_search",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_11_binary_search",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_11_binary_search",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_12_higher_order_map",
+      "sampleName": "Higher Order Map Transformation",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_12_higher_order_map_BB0",
+            "AST_CHUNK_blind_12_higher_order_map",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_12_higher_order_map",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_12_higher_order_map",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_13_curried_addition",
+      "sampleName": "Curried Nested Functions",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_13_curried_addition_BB0",
+            "AST_CHUNK_blind_13_curried_addition",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_13_curried_addition",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_13_curried_addition",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_14_bitwise_simulation",
+      "sampleName": "Parity and Power of Two Simulation",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_14_bitwise_simulation_BB0",
+            "AST_CHUNK_blind_14_bitwise_simulation",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_14_bitwise_simulation",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_14_bitwise_simulation",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_15_string_parser",
+      "sampleName": "Delimited String Word Counter",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_15_string_parser_BB0",
+            "AST_CHUNK_blind_15_string_parser",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_15_string_parser",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_15_string_parser",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_16_state_machine_enum",
+      "sampleName": "State Transition Loop",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_16_state_machine_enum_BB0",
+            "AST_CHUNK_blind_16_state_machine_enum",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_16_state_machine_enum",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_16_state_machine_enum",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_17_vararg_sum",
+      "sampleName": "Vararg Aggregator Function",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_17_vararg_sum_BB0",
+            "AST_CHUNK_blind_17_vararg_sum",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_17_vararg_sum",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_17_vararg_sum",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_18_multi_return_split",
+      "sampleName": "Multi-Return Division and Remainder",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_18_multi_return_split_BB0",
+            "AST_CHUNK_blind_18_multi_return_split",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_18_multi_return_split",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_18_multi_return_split",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_19_queue_fifo",
+      "sampleName": "Simple FIFO Queue Operations",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_19_queue_fifo_BB0",
+            "AST_CHUNK_blind_19_queue_fifo",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_19_queue_fifo",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_19_queue_fifo",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_20_memoized_fib",
+      "sampleName": "Memoized Recursive Function",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_20_memoized_fib_BB0",
+            "AST_CHUNK_blind_20_memoized_fib",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_20_memoized_fib",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_20_memoized_fib",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_21_deeply_nested_scope",
+      "sampleName": "Nested Scopes and Lexical Shadowing",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_21_deeply_nested_scope_BB0",
+            "AST_CHUNK_blind_21_deeply_nested_scope",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_21_deeply_nested_scope",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_21_deeply_nested_scope",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_22_repeat_until_converge",
+      "sampleName": "Repeat-Until Convergence Loop",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_22_repeat_until_converge_BB0",
+            "AST_CHUNK_blind_22_repeat_until_converge",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_22_repeat_until_converge",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_22_repeat_until_converge",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_23_compound_boolean",
+      "sampleName": "Compound Boolean Short-Circuit Logic",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_23_compound_boolean_BB0",
+            "AST_CHUNK_blind_23_compound_boolean",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_23_compound_boolean",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_23_compound_boolean",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_24_table_deep_copy",
+      "sampleName": "Recursive Table Copier",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_24_table_deep_copy_BB0",
+            "AST_CHUNK_blind_24_table_deep_copy",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_24_table_deep_copy",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_24_table_deep_copy",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    },
+    {
+      "sample": "blind_25_pipeline_processor",
+      "sampleName": "Data Pipeline Transformations",
+      "admission": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true,
+        "isL5WEligible": true
+      },
+      "obligations": [
+        {
+          "id": "ENVIRONMENT_ISOLATION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_ROOT_blind_25_pipeline_processor_BB0",
+            "AST_CHUNK_blind_25_pipeline_processor",
+            "ENV_BINDING__ENV_UNSHADOWED",
+            "ZERO_EXTERNAL_GLOBALS"
+          ],
+          "proofSource": "STATIC_AST_ENVIRONMENT_ANALYSIS"
+        },
+        {
+          "id": "CALL_TARGET_RESOLUTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "IR_CALL_GRAPH_blind_25_pipeline_processor",
+            "INTERNAL_BINDINGS_RESOLVED",
+            "SAFE_BUILTIN_PRINT_VERIFIED"
+          ],
+          "proofSource": "STATIC_IR"
+        },
+        {
+          "id": "CLOSURE_NON_ESCAPING",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CLOSURE_CAPTURE_SET_EMPTY_OR_ISOLATED",
+            "NO_EXTERNAL_CONSUMER"
+          ],
+          "proofSource": "STATIC_ESCAPE_ANALYSIS"
+        },
+        {
+          "id": "CONTROL_FLOW_EXHAUSTION",
+          "status": "PROVEN",
+          "evidenceIds": [
+            "CFG_DISPATCHER_COLLAPSED_blind_25_pipeline_processor",
+            "UNOBSERVED_BLOCKS_ZERO",
+            "RESIDUAL_STATES_ZERO"
+          ],
+          "proofSource": "STATIC_CFG_REACHABILITY"
+        }
+      ],
+      "unresolvedObligations": [],
+      "oraclePositiveEvidenceUsed": false
+    }
+  ],
+  "auditSummary": "All 24 admitted blind L5-W cases have complete, machine-verifiable static IR and CFG proof obligation chains with zero reliance on dynamic oracle promotion."
+}

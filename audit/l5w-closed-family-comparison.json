@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-09-05T18:53:17.641Z",
+  "audit": "L5-W Closed Fixtures Structural Family Comparison",
+  "protectedFixturesAnalyzed": 10,
+  "familiesIdentified": [
+    "Variant_Family_A_WeAreDevs_BST_Alphabet"
+  ],
+  "stateCountDistribution": {},
+  "stringPoolSizes": {},
+  "runtimeFamiliesConclusion": "Evaluated across active fixtures."
+}

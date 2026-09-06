@@ -1,0 +1,11 @@
+{
+  "fixtureId": "fixture_0004",
+  "category": "tables_dynamic_keys",
+  "title": "Tables + Dynamic Keys",
+  "complexityLevel": 3,
+  "language": "lua",
+  "sourceHash": "44a0445cd65a655f7f9d43f3065b696cd27218eb7fdf59504cdd2354b13bcbf2",
+  "protectedSourceRequired": true,
+  "protectedGenerated": false,
+  "protectedFileName": "protected.lua"
+}

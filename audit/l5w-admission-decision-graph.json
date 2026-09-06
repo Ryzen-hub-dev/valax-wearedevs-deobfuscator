@@ -1,0 +1,97 @@
+{
+  "timestamp": "2026-09-06T14:00:54.472Z",
+  "audit": "Canonical L5-W Admission Decision Graph (P0-10)",
+  "formalPredicate": "staticClosed && staticComplete && allRequiredProofsPresent && proofIntegrityPass && proofCompletenessPass && safeWholeProgramReplacement && noUnresolvedObligations && vmDetached && runtimeDecoderRemaining == false && protectionRuntimeRemaining == false && encodedStringsRemaining == 0 && dispatcherStatesAfter == 0 && oracleDidNotVeto",
+  "canonicalStructure": {
+    "staticClosureGate": {
+      "description": "Static closure & reachability verification across whole program AST & CFG",
+      "wholeProgramClosed": true,
+      "wholeProgramComplete": true
+    },
+    "proofGate": {
+      "description": "Mandatory static proof obligations and integrity verification",
+      "requiredProofsPass": true,
+      "proofIntegrityPass": true,
+      "proofCompletenessPass": true,
+      "unresolvedObligations": []
+    },
+    "replacementGate": {
+      "description": "Verification that whole-program replacement preserves exact semantics without side-effect loss",
+      "safeWholeProgramReplacement": true
+    },
+    "cleanupGate": {
+      "description": "Post-synthesis cleanup verification guaranteeing complete VM detachment",
+      "vmDetached": true,
+      "dispatcherStatesAfter": 0,
+      "encodedStringsRemaining": 0,
+      "runtimeDecoderRemaining": false,
+      "protectionRuntimeRemaining": false
+    },
+    "oracleGate": {
+      "description": "Dynamic execution verification: veto-only semantics (cannot promote)",
+      "veto": false,
+      "positiveEvidenceUsed": false
+    },
+    "finalEligible": true
+  },
+  "sampleEvaluation": {
+    "fixtureMinimalPrint": {
+      "staticClosureGate": {
+        "wholeProgramClosed": true,
+        "wholeProgramComplete": true
+      },
+      "proofGate": {
+        "requiredProofsPass": true,
+        "proofIntegrityPass": true,
+        "proofCompletenessPass": true,
+        "unresolvedObligations": []
+      },
+      "replacementGate": {
+        "safeWholeProgramReplacement": true
+      },
+      "cleanupGate": {
+        "vmDetached": true,
+        "dispatcherStatesAfter": 0,
+        "encodedStringsRemaining": 0,
+        "runtimeDecoderRemaining": false,
+        "protectionRuntimeRemaining": false
+      },
+      "oracleGate": {
+        "veto": false,
+        "positiveEvidenceUsed": false
+      },
+      "finalEligible": true,
+      "verdict": "ADMITTED_L5W"
+    },
+    "fixtureByIdiotSandWich": {
+      "staticClosureGate": {
+        "wholeProgramClosed": false,
+        "wholeProgramComplete": false
+      },
+      "proofGate": {
+        "requiredProofsPass": false,
+        "proofIntegrityPass": true,
+        "proofCompletenessPass": false,
+        "unresolvedObligations": [
+          "RESIDUAL_STATES_PRESENT"
+        ]
+      },
+      "replacementGate": {
+        "safeWholeProgramReplacement": false
+      },
+      "cleanupGate": {
+        "vmDetached": false,
+        "dispatcherStatesAfter": 427,
+        "encodedStringsRemaining": 0,
+        "runtimeDecoderRemaining": false,
+        "protectionRuntimeRemaining": true
+      },
+      "oracleGate": {
+        "veto": false,
+        "positiveEvidenceUsed": false
+      },
+      "finalEligible": false,
+      "verdict": "DENIED_L5W_SAFE_L4_DOWNGRADE"
+    }
+  }
+}

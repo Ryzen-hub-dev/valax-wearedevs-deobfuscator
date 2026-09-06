@@ -1,0 +1,12 @@
+{
+  "id": "fixture_07_multireturn",
+  "name": "Multiple Returns",
+  "fixtureType": "CLOSED_DETERMINISTIC_GROUND_TRUTH",
+  "pairedOriginalAvailable": true,
+  "semanticEligible": true,
+  "targetLevel": "L5-W",
+  "originalBytes": 89,
+  "originalSha256": "e0bfd2df445b3b39af365262b988a468833556b8fa08174f3282b996fe5ea46e",
+  "protectedAvailable": true,
+  "description": "Function returning multiple values assigned into multiple local variables"
+}

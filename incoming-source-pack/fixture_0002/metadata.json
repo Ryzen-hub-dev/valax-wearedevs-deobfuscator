@@ -1,0 +1,11 @@
+{
+  "fixtureId": "fixture_0002",
+  "category": "arithmetic_branches",
+  "title": "Arithmetic + Branches",
+  "complexityLevel": 3,
+  "language": "lua",
+  "sourceHash": "0ea53ed030f6a90679de94108f28caf3e2ce7107babce94cd2bdcc96766ee3ce",
+  "protectedSourceRequired": true,
+  "protectedGenerated": false,
+  "protectedFileName": "protected.lua"
+}

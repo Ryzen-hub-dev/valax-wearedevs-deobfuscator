@@ -1,0 +1,11 @@
+{
+  "fixtureId": "fixture_0006",
+  "category": "varargs_multireturn",
+  "title": "Varargs & Multiple Return Truncation",
+  "complexityLevel": 4,
+  "language": "lua",
+  "sourceHash": "77f83dbc1a0ecc045768bfcc01593ed793a749c3676ddda7c452a153614c1c0a",
+  "protectedSourceRequired": true,
+  "protectedGenerated": false,
+  "protectedFileName": "protected.lua"
+}

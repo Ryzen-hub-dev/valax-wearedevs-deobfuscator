@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-09-04T13:08:12.262Z",
+  "fixture": "minimal_print",
+  "originalSha256": "0ca9091eb4e31fb1ab24c8c5de92a08e4e5f402919f82ea3ca784f38534f03f3",
+  "protectedSha256": "b73a29b073dbe274bf0628bed415f494cbc0c757967c7fd51b85f10095835722",
+  "groundTruthTarget": "print(\"hi\")",
+  "recoveredCode": "print(\"hi\")",
+  "verification": {
+    "exactMatchOriginal": true,
+    "recoveryLevel": "L5-W",
+    "inputBytes": 17299,
+    "outputBytes": 12,
+    "outputLines": 1,
+    "astPayloadNodeCount": 7,
+    "dispatcherStatesRemaining": 0,
+    "hasRuntimeDecoder": false,
+    "hasEncodedStringPool": false,
+    "hasAntiTamper": false,
+    "roundtripVerified": true,
+    "confidence": 1
+  },
+  "assessment": "PASSED_MINIMAL_GROUND_TRUTH_GATE: 1 line, exactly print(\"hi\"), 0 dispatcher states, 0 runtime decoders."
+}

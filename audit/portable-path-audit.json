@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-09-06T16:20:10.051Z",
+  "portable": true,
+  "totalScannedDirectories": [
+    "packages",
+    "tests",
+    "scripts",
+    "infra",
+    ".github"
+  ],
+  "findingsCount": 0,
+  "findings": []
+}

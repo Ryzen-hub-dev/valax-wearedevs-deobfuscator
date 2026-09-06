@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Engine Status - Valax Source Recovery</title>
+  <style>
+    body { background: #0f172a; color: #f8fafc; font-family: -apple-system, sans-serif; padding: 2rem; max-width: 900px; margin: 0 auto; line-height: 1.6; }
+    h1 { color: #38bdf8; margin-bottom: 1rem; }
+    pre { background: #090d16; padding: 1.5rem; border-radius: 8px; color: #10b981; border: 1px solid #334155; }
+    header { border-bottom: 1px solid #334155; padding-bottom: 1rem; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; }
+    a { color: #38bdf8; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Engine Status & Capabilities</h1>
+    <nav>
+      <a href="/">Workspace</a> •
+      <a href="/docs.html">Documentation</a> •
+      <a href="/status.html">Status</a>
+    </nav>
+  </header>
+
+  <p style="margin-bottom: 1rem;">Live status data from <code>/api/health</code>:</p>
+  <pre id="statusPre">Loading engine status...</pre>
+
+  <script>
+    fetch('/api/health')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('statusPre').textContent = JSON.stringify(data, null, 2);
+      })
+      .catch(err => {
+        document.getElementById('statusPre').textContent = 'Error connecting to /api/health: ' + err.message;
+      });
+  </script>
+</body>
+</html>

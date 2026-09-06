@@ -1,0 +1,16 @@
+# Enforce LF endings across all platforms to preserve cryptographic baseline hashes
+* text=auto eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.lua text eol=lf
+*.sh text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.txt text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.ico binary
+*.tgz binary

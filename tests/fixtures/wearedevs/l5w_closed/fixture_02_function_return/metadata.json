@@ -1,0 +1,12 @@
+{
+  "id": "fixture_02_function_return",
+  "name": "Function Return",
+  "fixtureType": "CLOSED_DETERMINISTIC_GROUND_TRUTH",
+  "pairedOriginalAvailable": true,
+  "semanticEligible": true,
+  "targetLevel": "L5-W",
+  "originalBytes": 51,
+  "originalSha256": "cb4365cab876db17ca76e7d4bd4d084528caacb52c8aee2e6a82a248642ead73",
+  "protectedAvailable": true,
+  "description": "Local non-escaping function returning constant string"
+}

@@ -1,0 +1,89 @@
+{
+  "stringPoolShape": {
+    "size": 1139,
+    "isArray": true,
+    "rotationRangesCount": 3
+  },
+  "decoderShape": {
+    "parameterCount": 1,
+    "hasOffsetArithmetic": true,
+    "accessorOffset": 53741
+  },
+  "alphabetHash": "7a9f1af930143cab1ca4ad0efb6cf30577e889bb0683b56d550c46bbcc71cef4",
+  "dispatcherTopology": "binary_search_tree",
+  "dispatcherDepth": 11,
+  "closureFactorySignatures": [
+    {
+      "helper": "m",
+      "paramCount": 0,
+      "vararg": true,
+      "capturedCount": 0
+    },
+    {
+      "helper": "o",
+      "paramCount": 6,
+      "vararg": false,
+      "capturedCount": 0
+    },
+    {
+      "helper": "R",
+      "paramCount": 2,
+      "vararg": false,
+      "capturedCount": 4
+    },
+    {
+      "helper": "m",
+      "paramCount": 0,
+      "vararg": true,
+      "capturedCount": 0
+    },
+    {
+      "helper": "p",
+      "paramCount": 3,
+      "vararg": false,
+      "capturedCount": 12
+    },
+    {
+      "helper": "v",
+      "paramCount": 4,
+      "vararg": false,
+      "capturedCount": 7
+    },
+    {
+      "helper": "o",
+      "paramCount": 6,
+      "vararg": false,
+      "capturedCount": 3
+    },
+    {
+      "helper": "R",
+      "paramCount": 2,
+      "vararg": false,
+      "capturedCount": 3
+    },
+    {
+      "helper": "S",
+      "paramCount": 1,
+      "vararg": false,
+      "capturedCount": 3
+    },
+    {
+      "helper": "R",
+      "paramCount": 2,
+      "vararg": false,
+      "capturedCount": 3
+    }
+  ],
+  "totalClosureConstructors": 131,
+  "stateCount": 610,
+  "runtimeAliasShape": {
+    "count": 1
+  },
+  "entryMechanism": "direct_root_invocation",
+  "transitionPatterns": {
+    "unconditional": 0,
+    "conditional": 0,
+    "dynamic": 0,
+    "terminal": 16
+  }
+}

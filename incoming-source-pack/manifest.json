@@ -1,0 +1,117 @@
+{
+  "packVersion": 1,
+  "description": "Gate A: 10 Deterministic Original Lua Programs for WeAreDevs Protection Validation",
+  "totalFixtures": 10,
+  "fixtures": [
+    {
+      "fixtureId": "fixture_0002",
+      "category": "arithmetic_branches",
+      "title": "Arithmetic + Branches",
+      "complexityLevel": 3,
+      "original": "fixture_0002/original.lua",
+      "expected": "fixture_0002/expected.json",
+      "metadata": "fixture_0002/metadata.json",
+      "protectedExpectedPath": "fixture_0002/protected.lua",
+      "protectedPresent": false
+    },
+    {
+      "fixtureId": "fixture_0003",
+      "category": "nested_closures",
+      "title": "Nested Closures & Mutable Captures",
+      "complexityLevel": 4,
+      "original": "fixture_0003/original.lua",
+      "expected": "fixture_0003/expected.json",
+      "metadata": "fixture_0003/metadata.json",
+      "protectedExpectedPath": "fixture_0003/protected.lua",
+      "protectedPresent": false
+    },
+    {
+      "fixtureId": "fixture_0004",
+      "category": "tables_dynamic_keys",
+      "title": "Tables + Dynamic Keys",
+      "complexityLevel": 3,
+      "original": "fixture_0004/original.lua",
+      "expected": "fixture_0004/expected.json",
+      "metadata": "fixture_0004/metadata.json",
+      "protectedExpectedPath": "fixture_0004/protected.lua",
+      "protectedPresent": false
+    },
+    {
+      "fixtureId": "fixture_0005",
+      "category": "loops",
+      "title": "Loop Constructs & Break Semantics",
+      "complexityLevel": 3,
+      "original": "fixture_0005/original.lua",
+      "expected": "fixture_0005/expected.json",
+      "metadata": "fixture_0005/metadata.json",
+      "protectedExpectedPath": "fixture_0005/protected.lua",
+      "protectedPresent": false
+    },
+    {
+      "fixtureId": "fixture_0006",
+      "category": "varargs_multireturn",
+      "title": "Varargs & Multiple Return Truncation",
+      "complexityLevel": 4,
+      "original": "fixture_0006/original.lua",
+      "expected": "fixture_0006/expected.json",
+      "metadata": "fixture_0006/metadata.json",
+      "protectedExpectedPath": "fixture_0006/protected.lua",
+      "protectedPresent": false
+    },
+    {
+      "fixtureId": "fixture_0007",
+      "category": "callback_graph",
+      "title": "Callback Graph & Indirect Invocation",
+      "complexityLevel": 4,
+      "original": "fixture_0007/original.lua",
+      "expected": "fixture_0007/expected.json",
+      "metadata": "fixture_0007/metadata.json",
+      "protectedExpectedPath": "fixture_0007/protected.lua",
+      "protectedPresent": false
+    },
+    {
+      "fixtureId": "fixture_0008",
+      "category": "recursion_mutual",
+      "title": "Direct & Mutual Recursion",
+      "complexityLevel": 4,
+      "original": "fixture_0008/original.lua",
+      "expected": "fixture_0008/expected.json",
+      "metadata": "fixture_0008/metadata.json",
+      "protectedExpectedPath": "fixture_0008/protected.lua",
+      "protectedPresent": false
+    },
+    {
+      "fixtureId": "fixture_0009",
+      "category": "boolean_control_flow",
+      "title": "Complex Boolean Control Flow & Short-Circuit Counters",
+      "complexityLevel": 4,
+      "original": "fixture_0009/original.lua",
+      "expected": "fixture_0009/expected.json",
+      "metadata": "fixture_0009/metadata.json",
+      "protectedExpectedPath": "fixture_0009/protected.lua",
+      "protectedPresent": false
+    },
+    {
+      "fixtureId": "fixture_0010",
+      "category": "shared_closure_state",
+      "title": "Shared Closure State across Multiple Handles",
+      "complexityLevel": 4,
+      "original": "fixture_0010/original.lua",
+      "expected": "fixture_0010/expected.json",
+      "metadata": "fixture_0010/metadata.json",
+      "protectedExpectedPath": "fixture_0010/protected.lua",
+      "protectedPresent": false
+    },
+    {
+      "fixtureId": "fixture_0011",
+      "category": "mixed_stress_program",
+      "title": "Mixed Stress Program (All Constructs Combined)",
+      "complexityLevel": 5,
+      "original": "fixture_0011/original.lua",
+      "expected": "fixture_0011/expected.json",
+      "metadata": "fixture_0011/metadata.json",
+      "protectedExpectedPath": "fixture_0011/protected.lua",
+      "protectedPresent": false
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "fixtureId": "fixture_unpaired_0002_bymethion",
+  "sourceCategory": "unpaired_protected_production_sample",
+  "complexityLevel": 4,
+  "language": "lua",
+  "generator": "WeAreDevs",
+  "generatorVersion": "v1.0.0",
+  "seed": "seed_002",
+  "structuralFamily": "Variant_Family_A2_BST_Alphabet_Compact",
+  "sourceHash": null,
+  "protectedHash": "643a9acdb1f93b5fbe2a8612ebd98b333f5c53ae8111146c18fc0b2b1e9d8c30",
+  "recoveredHash": "04b862a122636e4f4d9127e61aaacca236939a8d093e487c10be98218afed8fa",
+  "recoveryLevel": "L4",
+  "pairedOriginalAvailable": false,
+  "semanticEligible": false,
+  "fixtureType": "UNPAIRED_REAL_PROTECTED_FIXTURE",
+  "importedAt": "2026-09-04T05:28:31.616Z"
+}

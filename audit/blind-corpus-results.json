@@ -1,0 +1,227 @@
+[
+  {
+    "id": "blind_01_collatz",
+    "name": "Collatz Sequence While-Loop",
+    "protectedBytes": 17758,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_02_factorial_recursive",
+    "name": "Recursive Factorial",
+    "protectedBytes": 17782,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_03_table_filter",
+    "name": "Array Filtering with Function",
+    "protectedBytes": 18903,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_04_string_reverse",
+    "name": "Character String Accumulation",
+    "protectedBytes": 17745,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_05_fibonacci_iterative",
+    "name": "Iterative Fibonacci Sequence",
+    "protectedBytes": 17459,
+    "recoveryLevel": "L4",
+    "residualDispatcherStates": 34,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_06_matrix_diagonal",
+    "name": "2D Table Diagonal Sum",
+    "protectedBytes": 17935,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_07_accumulator_closure",
+    "name": "Lexical Accumulator Closure",
+    "protectedBytes": 17919,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_08_multi_branch_dispatch",
+    "name": "Multi-Branch Conditional",
+    "protectedBytes": 19380,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_09_metatable_vector",
+    "name": "Metatable Vector Arithmetic",
+    "protectedBytes": 19404,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_10_bubble_sort",
+    "name": "In-Place Bubble Sort",
+    "protectedBytes": 18428,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_11_binary_search",
+    "name": "Binary Search Algorithm",
+    "protectedBytes": 18628,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_12_higher_order_map",
+    "name": "Higher Order Map Transformation",
+    "protectedBytes": 18501,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_13_curried_addition",
+    "name": "Curried Nested Functions",
+    "protectedBytes": 17896,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_14_bitwise_simulation",
+    "name": "Parity and Power of Two Simulation",
+    "protectedBytes": 18362,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_15_string_parser",
+    "name": "Delimited String Word Counter",
+    "protectedBytes": 18004,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_16_state_machine_enum",
+    "name": "State Transition Loop",
+    "protectedBytes": 18514,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_17_vararg_sum",
+    "name": "Vararg Aggregator Function",
+    "protectedBytes": 18046,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_18_multi_return_split",
+    "name": "Multi-Return Division and Remainder",
+    "protectedBytes": 17943,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_19_queue_fifo",
+    "name": "Simple FIFO Queue Operations",
+    "protectedBytes": 20242,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_20_memoized_fib",
+    "name": "Memoized Recursive Function",
+    "protectedBytes": 18306,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_21_deeply_nested_scope",
+    "name": "Nested Scopes and Lexical Shadowing",
+    "protectedBytes": 17322,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_22_repeat_until_converge",
+    "name": "Repeat-Until Convergence Loop",
+    "protectedBytes": 17568,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_23_compound_boolean",
+    "name": "Compound Boolean Short-Circuit Logic",
+    "protectedBytes": 18294,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_24_table_deep_copy",
+    "name": "Recursive Table Copier",
+    "protectedBytes": 19101,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  },
+  {
+    "id": "blind_25_pipeline_processor",
+    "name": "Data Pipeline Transformations",
+    "protectedBytes": 17573,
+    "recoveryLevel": "L5-W",
+    "residualDispatcherStates": 0,
+    "silentCorruption": false,
+    "exitCode": 0
+  }
+]

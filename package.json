@@ -1,0 +1,48 @@
+{
+  "name": "valax-source-recovery",
+  "version": "0.1.0-beta.1",
+  "description": "Production-quality Lua/Luau structural analysis, deobfuscation, and normalization engine",
+  "main": "packages/core/src/index.js",
+  "type": "commonjs",
+  "workspaces": [
+    "packages/*"
+  ],
+  "bin": {
+    "valax-recover": "./bin/valax-recover.js",
+    "valax": "./bin/valax.js"
+  },
+  "files": [
+    "bin",
+    "packages",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node tests/run-all.js",
+    "test:unit": "node tests/unit/run.js",
+    "test:cli": "node tests/unit/cli.test.js",
+    "test:sandbox": "node tests/unit/sandbox.test.js",
+    "test:integration": "node tests/integration/run.js",
+    "test:regression": "node tests/regression/run.js",
+    "lint": "node scripts/lint.js",
+    "build": "node scripts/build.js",
+    "serve": "node scripts/serve.js",
+    "start": "node bin/valax-recover.js"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "keywords": [
+    "lua",
+    "luau",
+    "deobfuscator",
+    "ast",
+    "cfg",
+    "normalization",
+    "wearedevs",
+    "reverse-engineering"
+  ],
+  "author": "Valax Source Recovery Team",
+  "license": "MIT"
+}

@@ -1,0 +1,11 @@
+{
+  "fixtureId": "fixture_0003",
+  "category": "nested_closures",
+  "title": "Nested Closures & Mutable Captures",
+  "complexityLevel": 4,
+  "language": "lua",
+  "sourceHash": "006ce50dabb209dcb62d4a4c4ce80257d1d723c83ee451cf777254b0a7dafc82",
+  "protectedSourceRequired": true,
+  "protectedGenerated": false,
+  "protectedFileName": "protected.lua"
+}

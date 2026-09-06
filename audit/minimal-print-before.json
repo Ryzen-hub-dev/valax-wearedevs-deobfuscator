@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-09-04T07:25:48.768Z",
+  "fixture": "minimal_print",
+  "originalSha256": "0ca9091eb4e31fb1ab24c8c5de92a08e4e5f402919f82ea3ca784f38534f03f3",
+  "protectedSha256": "b73a29b073dbe274bf0628bed415f494cbc0c757967c7fd51b85f10095835722",
+  "baselineMetrics": {
+    "inputBytes": 17299,
+    "outputBytes": 33609,
+    "outputLines": 1191,
+    "recoveryLevel": "L3.5",
+    "stringsFound": 45,
+    "stringsRecovered": 45,
+    "constantsFolded": 910,
+    "dispatcherDetected": true,
+    "dispatcherStatesRemaining": 72,
+    "hasRuntimeDecoder": true,
+    "hasEncodedStringPool": true,
+    "hasAntiTamper": true
+  },
+  "assessment": "FAILED_GROUND_TRUTH_GATE_BEFORE: ~1190 lines, full dispatcher and runtime scaffolding remain."
+}

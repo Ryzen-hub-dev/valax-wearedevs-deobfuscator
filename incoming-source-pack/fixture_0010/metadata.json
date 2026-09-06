@@ -1,0 +1,11 @@
+{
+  "fixtureId": "fixture_0010",
+  "category": "shared_closure_state",
+  "title": "Shared Closure State across Multiple Handles",
+  "complexityLevel": 4,
+  "language": "lua",
+  "sourceHash": "e1f6ef072811dc1734efe838c04c18ed3fa5f64af1dda1e1a48b4fa6eb717a18",
+  "protectedSourceRequired": true,
+  "protectedGenerated": false,
+  "protectedFileName": "protected.lua"
+}

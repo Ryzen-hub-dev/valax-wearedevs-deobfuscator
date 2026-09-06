@@ -1,0 +1,1318 @@
+[
+  {
+    "state": 141364,
+    "exclusiveOwner": "func_64",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 462036,
+    "exclusiveOwner": "func_62",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 710711,
+    "exclusiveOwner": "func_113",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1008639,
+    "exclusiveOwner": "func_21",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1049457,
+    "exclusiveOwner": "func_58",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1072072,
+    "exclusiveOwner": "func_23",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1132818,
+    "exclusiveOwner": "func_64",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1266785,
+    "exclusiveOwner": "func_23",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1319172,
+    "exclusiveOwner": "func_36",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1332477,
+    "exclusiveOwner": "func_74",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1510067,
+    "exclusiveOwner": "func_80",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1523666,
+    "exclusiveOwner": "func_24",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1549031,
+    "exclusiveOwner": "func_54",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1564890,
+    "exclusiveOwner": "func_7",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1577176,
+    "exclusiveOwner": "func_28",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1590923,
+    "exclusiveOwner": "func_23",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1641385,
+    "exclusiveOwner": "func_3",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1680417,
+    "exclusiveOwner": "func_60",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1725195,
+    "exclusiveOwner": "func_62",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 1732956,
+    "exclusiveOwner": "func_60",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 2137684,
+    "exclusiveOwner": "func_40",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 2176603,
+    "exclusiveOwner": "func_78",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 2188350,
+    "exclusiveOwner": "func_42",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 2494717,
+    "exclusiveOwner": "func_11",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 2510801,
+    "exclusiveOwner": "func_32",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 2532263,
+    "exclusiveOwner": "func_72",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 2625215,
+    "exclusiveOwner": "func_8",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 2649513,
+    "exclusiveOwner": "func_14",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 2782855,
+    "exclusiveOwner": "func_39",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 2889205,
+    "exclusiveOwner": "func_38",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 2904227,
+    "exclusiveOwner": "func_29",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 3325000,
+    "exclusiveOwner": "func_26",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 3513539,
+    "exclusiveOwner": "func_27",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 3568417,
+    "exclusiveOwner": "func_33",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 3591501,
+    "exclusiveOwner": "func_75",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 3604705,
+    "exclusiveOwner": "func_42",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 3651958,
+    "exclusiveOwner": "func_82",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 3704400,
+    "exclusiveOwner": "func_67",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 3826863,
+    "exclusiveOwner": "func_69",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 4054596,
+    "exclusiveOwner": "func_41",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 4098216,
+    "exclusiveOwner": "func_48",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 4110973,
+    "exclusiveOwner": "func_29",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 4137312,
+    "exclusiveOwner": "func_63",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 4196872,
+    "exclusiveOwner": "func_50",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 4358923,
+    "exclusiveOwner": "func_50",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 4817865,
+    "exclusiveOwner": "func_45",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 4871789,
+    "exclusiveOwner": "func_33",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 4907405,
+    "exclusiveOwner": "func_15",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 5240938,
+    "exclusiveOwner": "func_13",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 5369689,
+    "exclusiveOwner": "func_31",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 5511886,
+    "exclusiveOwner": "func_30",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 5578606,
+    "exclusiveOwner": "func_59",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 5871042,
+    "exclusiveOwner": "func_139",
+    "status": "EXCLUSIVE_BUT_UNKNOWN_INCOMING",
+    "safeToExtract": false,
+    "proof": "Incoming transition from an unresolved block prevents physical extraction"
+  },
+  {
+    "state": 6093068,
+    "exclusiveOwner": "func_57",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 6210632,
+    "exclusiveOwner": "func_66",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 6363363,
+    "exclusiveOwner": "func_59",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 6399439,
+    "exclusiveOwner": "func_48",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 6464457,
+    "exclusiveOwner": "func_53",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 6513883,
+    "exclusiveOwner": "func_32",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 6647448,
+    "exclusiveOwner": "func_80",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 6843579,
+    "exclusiveOwner": "func_82",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 6857155,
+    "exclusiveOwner": "func_62",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 6947305,
+    "exclusiveOwner": "func_6",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 6976167,
+    "exclusiveOwner": "func_29",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 7000934,
+    "exclusiveOwner": "func_29",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 7109487,
+    "exclusiveOwner": "func_56",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 7125343,
+    "exclusiveOwner": "func_78",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 7219666,
+    "exclusiveOwner": "func_55",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 7317118,
+    "exclusiveOwner": "func_55",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 7544712,
+    "exclusiveOwner": "func_40",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 7556545,
+    "exclusiveOwner": "func_71",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 7575355,
+    "exclusiveOwner": "func_39",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 7700957,
+    "exclusiveOwner": "func_70",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 7825531,
+    "exclusiveOwner": "func_132",
+    "status": "EXCLUSIVE_BUT_UNKNOWN_INCOMING",
+    "safeToExtract": false,
+    "proof": "Incoming transition from an unresolved block prevents physical extraction"
+  },
+  {
+    "state": 7855239,
+    "exclusiveOwner": "func_69",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 7944721,
+    "exclusiveOwner": "func_39",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 8102067,
+    "exclusiveOwner": "func_19",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 8123569,
+    "exclusiveOwner": "func_30",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 8250396,
+    "exclusiveOwner": "func_63",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 8369836,
+    "exclusiveOwner": "func_32",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 8559914,
+    "exclusiveOwner": "func_68",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 8608980,
+    "exclusiveOwner": "func_83",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 8721866,
+    "exclusiveOwner": "func_27",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 8774089,
+    "exclusiveOwner": "func_66",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 8837898,
+    "exclusiveOwner": "func_65",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 8892194,
+    "exclusiveOwner": "func_62",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 9062059,
+    "exclusiveOwner": "func_76",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 9104882,
+    "exclusiveOwner": "func_54",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 9111744,
+    "exclusiveOwner": "func_36",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 9163780,
+    "exclusiveOwner": "func_59",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 9194390,
+    "exclusiveOwner": "func_44",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 9219941,
+    "exclusiveOwner": "func_53",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 9280150,
+    "exclusiveOwner": "func_84",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 9419345,
+    "exclusiveOwner": "func_113",
+    "status": "EXCLUSIVE_BUT_UNKNOWN_INCOMING",
+    "safeToExtract": false,
+    "proof": "Incoming transition from an unresolved block prevents physical extraction"
+  },
+  {
+    "state": 9498359,
+    "exclusiveOwner": "func_2",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 9534743,
+    "exclusiveOwner": "func_73",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 9715915,
+    "exclusiveOwner": "func_43",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 9742768,
+    "exclusiveOwner": "func_61",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 9758753,
+    "exclusiveOwner": "func_66",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 9825451,
+    "exclusiveOwner": "func_80",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 9861414,
+    "exclusiveOwner": "func_79",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 9894371,
+    "exclusiveOwner": "func_35",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 10262493,
+    "exclusiveOwner": "func_41",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 10301572,
+    "exclusiveOwner": "func_61",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 10392153,
+    "exclusiveOwner": "func_84",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 10420636,
+    "exclusiveOwner": "func_62",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 10448435,
+    "exclusiveOwner": "func_28",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 10712587,
+    "exclusiveOwner": "func_61",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 10818754,
+    "exclusiveOwner": "func_46",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 10894546,
+    "exclusiveOwner": "func_51",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 10932410,
+    "exclusiveOwner": "func_10",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11004607,
+    "exclusiveOwner": "func_55",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11132189,
+    "exclusiveOwner": "func_25",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11310282,
+    "exclusiveOwner": "func_57",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11328682,
+    "exclusiveOwner": "func_18",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11352624,
+    "exclusiveOwner": "func_5",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11437883,
+    "exclusiveOwner": "func_59",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11523228,
+    "exclusiveOwner": "func_20",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11589838,
+    "exclusiveOwner": "func_78",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11667048,
+    "exclusiveOwner": "func_30",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11695725,
+    "exclusiveOwner": "func_58",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11699403,
+    "exclusiveOwner": "func_1",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11750683,
+    "exclusiveOwner": "func_77",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11764235,
+    "exclusiveOwner": "func_4",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11883199,
+    "exclusiveOwner": "func_79",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11955168,
+    "exclusiveOwner": "func_34",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 11985812,
+    "exclusiveOwner": "func_33",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 12357677,
+    "exclusiveOwner": "func_33",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 12411477,
+    "exclusiveOwner": "func_70",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 12452815,
+    "exclusiveOwner": "func_31",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 12623510,
+    "exclusiveOwner": "func_62",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 12682967,
+    "exclusiveOwner": "func_63",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 12723363,
+    "exclusiveOwner": "func_37",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 12789297,
+    "exclusiveOwner": "func_23",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 12899467,
+    "exclusiveOwner": "func_59",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 12923849,
+    "exclusiveOwner": "func_55",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 13269108,
+    "exclusiveOwner": "func_63",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 13442984,
+    "exclusiveOwner": "func_52",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 13508165,
+    "exclusiveOwner": "func_56",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 13548901,
+    "exclusiveOwner": "func_1",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 13633887,
+    "exclusiveOwner": "func_84",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 13690131,
+    "exclusiveOwner": "func_84",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 13711494,
+    "exclusiveOwner": "func_113",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 13751485,
+    "exclusiveOwner": "func_81",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 14042605,
+    "exclusiveOwner": "func_47",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 14163725,
+    "exclusiveOwner": "func_62",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 14259044,
+    "exclusiveOwner": "func_62",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 14298213,
+    "exclusiveOwner": "func_37",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 14348445,
+    "exclusiveOwner": "func_32",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 14381619,
+    "exclusiveOwner": "func_12",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 14404177,
+    "exclusiveOwner": "func_81",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 14444070,
+    "exclusiveOwner": "func_30",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 14477999,
+    "exclusiveOwner": "func_67",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 14522800,
+    "exclusiveOwner": "func_64",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 14565798,
+    "exclusiveOwner": "func_57",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 14653172,
+    "exclusiveOwner": "func_22",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 14727343,
+    "exclusiveOwner": "func_16",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 14837769,
+    "exclusiveOwner": "func_58",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 14870270,
+    "exclusiveOwner": "func_20",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15012033,
+    "exclusiveOwner": "func_5",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15083605,
+    "exclusiveOwner": "func_62",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15094135,
+    "exclusiveOwner": "func_43",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15195177,
+    "exclusiveOwner": "func_31",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15239662,
+    "exclusiveOwner": "func_78",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15294281,
+    "exclusiveOwner": "func_47",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15399338,
+    "exclusiveOwner": "func_20",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15468028,
+    "exclusiveOwner": "func_17",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15544650,
+    "exclusiveOwner": "func_40",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15604318,
+    "exclusiveOwner": "func_40",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15614570,
+    "exclusiveOwner": "func_28",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15683760,
+    "exclusiveOwner": "func_23",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15731006,
+    "exclusiveOwner": "func_9",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15775570,
+    "exclusiveOwner": "func_25",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15848575,
+    "exclusiveOwner": "func_63",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15945308,
+    "exclusiveOwner": "func_64",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 15991557,
+    "exclusiveOwner": "func_62",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 16084342,
+    "exclusiveOwner": "func_31",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 16107291,
+    "exclusiveOwner": "func_39",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 16179591,
+    "exclusiveOwner": "func_49",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 16258502,
+    "exclusiveOwner": "func_49",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 16309054,
+    "exclusiveOwner": "func_80",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 16440806,
+    "exclusiveOwner": "func_81",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 16576813,
+    "exclusiveOwner": "func_66",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 16614877,
+    "exclusiveOwner": "func_4",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 16633430,
+    "exclusiveOwner": "func_5",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 16646901,
+    "exclusiveOwner": "func_54",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 16671957,
+    "exclusiveOwner": "func_50",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  },
+  {
+    "state": 16747342,
+    "exclusiveOwner": "func_63",
+    "status": "EXCLUSIVE_PROVEN",
+    "safeToExtract": true,
+    "proof": "Single proven logical owner with no incoming edges from shared or unresolved blocks"
+  }
+]

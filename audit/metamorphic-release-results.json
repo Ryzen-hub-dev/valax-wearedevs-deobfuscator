@@ -1,0 +1,52 @@
+[
+  {
+    "name": "metamorphic_A",
+    "description": "Different State Increment / Threshold (initial=10, step=2, threshold=12, 4 returns)",
+    "protectedSha256": "2e5276febffbd9b3dee32f571ee4620cf91ce04dfb13b2c1061348a836406ffa",
+    "protectedBytes": 18956,
+    "recoveryLevel": "L4",
+    "semanticMatch": false,
+    "residualStates": 68,
+    "silentCorruption": false
+  },
+  {
+    "name": "metamorphic_B",
+    "description": "Four Return Values (multi-return 4 values dynamically derived)",
+    "protectedSha256": "e4ecf56eb9bd95d6bd75f812342ebdd55b8e2e41f5de3076556d07b6c62bdd96",
+    "protectedBytes": 19419,
+    "recoveryLevel": "L4",
+    "semanticMatch": false,
+    "residualStates": 62,
+    "silentCorruption": false
+  },
+  {
+    "name": "metamorphic_C",
+    "description": "Three Invocations across same closure & environment",
+    "protectedSha256": "32393e952fbfb9f7833f378756330ab33e7d77eaf3738d7dd7dede03485caf1b",
+    "protectedBytes": 19367,
+    "recoveryLevel": "L4",
+    "semanticMatch": false,
+    "residualStates": 64,
+    "silentCorruption": false
+  },
+  {
+    "name": "metamorphic_D",
+    "description": "Two Independent Factory Instances Interleaved",
+    "protectedSha256": "ed3cdcb5172f9d0984221c50d1e79d3fd7b608b68d225f1cd98e940d90ec4533",
+    "protectedBytes": 19486,
+    "recoveryLevel": "L4",
+    "semanticMatch": false,
+    "residualStates": 69,
+    "silentCorruption": false
+  },
+  {
+    "name": "metamorphic_E",
+    "description": "Different Branch Shape (if / elseif / else)",
+    "protectedSha256": "e90b6fdb7c4cc0cde2143da8f0049ba56ee335c84dc28d73138a746bc23508bc",
+    "protectedBytes": 19520,
+    "recoveryLevel": "L4",
+    "semanticMatch": false,
+    "residualStates": 66,
+    "silentCorruption": false
+  }
+]

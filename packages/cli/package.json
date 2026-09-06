@@ -1,0 +1,14 @@
+{
+  "name": "@valax/cli",
+  "version": "0.1.0-beta.1",
+  "description": "Command-line interface for Valax Source Recovery",
+  "bin": {
+    "valax-recover": "./bin/valax-recover.js",
+    "valax": "./bin/valax-recover.js"
+  },
+  "main": "src/index.js",
+  "dependencies": {
+    "@valax/core": "^0.1.0-beta.1"
+  },
+  "license": "MIT"
+}

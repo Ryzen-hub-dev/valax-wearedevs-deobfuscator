@@ -1,0 +1,12 @@
+{
+  "id": "fixture_05_nested_function",
+  "name": "Nested Function",
+  "fixtureType": "CLOSED_DETERMINISTIC_GROUND_TRUTH",
+  "pairedOriginalAvailable": true,
+  "semanticEligible": true,
+  "targetLevel": "L5-W",
+  "originalBytes": 118,
+  "originalSha256": "f0761e179a5cad1dc2be7b6a48be7a18813382eecea4f6e6139433efa625ff26",
+  "protectedAvailable": true,
+  "description": "Nested closure execution returning constant string"
+}

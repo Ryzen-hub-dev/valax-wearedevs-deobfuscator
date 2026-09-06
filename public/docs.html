@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Documentation - Valax Source Recovery</title>
+  <style>
+    body { background: #0f172a; color: #f8fafc; font-family: -apple-system, sans-serif; padding: 2rem; max-width: 900px; margin: 0 auto; line-height: 1.6; }
+    h1, h2, h3 { color: #38bdf8; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+    code { background: #1e293b; color: #10b981; padding: 0.2rem 0.4rem; border-radius: 4px; }
+    pre { background: #090d16; padding: 1rem; border-radius: 6px; overflow-x: auto; color: #38bdf8; }
+    a { color: #38bdf8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header { border-bottom: 1px solid #334155; padding-bottom: 1rem; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Valax Documentation</h1>
+    <nav>
+      <a href="/">Workspace</a> •
+      <a href="/docs.html">Documentation</a> •
+      <a href="/status.html">Status</a>
+    </nav>
+  </header>
+
+  <h2>Recovery Levels</h2>
+  <ul>
+    <li><strong>L0 - Parsed:</strong> Lexical and syntax analysis complete, concrete AST generated.</li>
+    <li><strong>L1 - Constants Normalized:</strong> Constant arithmetic, logical, and unary operations folded into simple literals.</li>
+    <li><strong>L2 - Strings Recovered:</strong> Encoded string tables, custom alphabets, byte escapes, and index lookups resolved in-place.</li>
+    <li><strong>L3 - Runtime Simplified:</strong> Standard library builtin aliases and environment lookups normalized.</li>
+    <li><strong>L4 - Control Flow Recovered:</strong> Flattened state machine dispatchers converted into structured CFGs and control statements.</li>
+    <li><strong>L5 - High-Level Source Reconstructed:</strong> Dead branches removed, redundant assignments collapsed, idiomatic Lua code emitted.</li>
+  </ul>
+
+  <h2>CLI Usage</h2>
+  <pre>node ./bin/valax.js input.lua --output result.lua --report report.json --stage L5</pre>
+
+  <h2>Discord Slash Command Integration</h2>
+  <p>The <code>/valax-recover</code> slash command accepts Lua/Luau script attachments and returns a diagnostic embed with the recovered <code>.lua</code> file attached.</p>
+</body>
+</html>

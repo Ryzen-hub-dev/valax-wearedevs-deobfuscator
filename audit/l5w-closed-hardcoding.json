@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-09-05T18:53:17.640Z",
+  "targetDirectory": "packages/core/src",
+  "filesScannedCount": 63,
+  "forbiddenPatternsChecked": [
+    "fixture_01_local_constant",
+    "fixture_02_function_return",
+    "fixture_03_constant_branch",
+    "fixture_04_numeric_loop",
+    "fixture_05_nested_function",
+    "fixture_06_table_access",
+    "fixture_07_multireturn",
+    "fixture_08_varargs",
+    "fixture_09_closure_capture",
+    "fixture_10_mixed_closed",
+    "12110459",
+    "10387401",
+    "1788502618098",
+    "710711",
+    "13711494",
+    "callEvents.length === 6",
+    "['prefix', 'args', 'count']",
+    "multiReturnValueCount = 3"
+  ],
+  "violationsCount": 0,
+  "violations": [],
+  "status": "PASS"
+}

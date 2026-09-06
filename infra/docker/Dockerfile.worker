@@ -1,0 +1,37 @@
+# Production Hardened Recovery Worker Container
+# Minimal Alpine Linux base with Node.js and Lua
+FROM node:20-alpine AS base
+
+# Install lua5.1 for semantic oracle validation if needed
+RUN apk add --no-cache lua5.1 lua5.1-libs
+
+# Create non-privileged user and group
+RUN addgroup -g 1000 valax && \
+    adduser -u 1000 -G valax -s /bin/sh -D valax
+
+# Setup application directory
+WORKDIR /app
+
+# Copy dependency manifests and project files
+COPY package.json package-lock.json* ./
+COPY packages/core ./packages/core
+COPY packages/shared ./packages/shared
+COPY packages/sandbox ./packages/sandbox
+COPY packages/worker ./packages/worker
+COPY audit/core-baseline-hashes.json ./audit/core-baseline-hashes.json
+
+# Prepare isolated work directories with correct ownership
+RUN mkdir -p /work /tmp && \
+    chown -R valax:valax /app /work /tmp && \
+    chmod -R 555 /app
+
+# Drop root privileges permanently
+USER valax:valax
+
+# Environment settings
+ENV NODE_ENV=production
+ENV HOME=/tmp
+ENV TMPDIR=/tmp
+
+# Stdin/stdout IPC entrypoint
+ENTRYPOINT ["node", "/app/packages/worker/src/index.js"]

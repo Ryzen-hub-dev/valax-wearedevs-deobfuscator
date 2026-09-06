@@ -1,0 +1,12 @@
+{
+  "id": "fixture_08_varargs",
+  "name": "Varargs",
+  "fixtureType": "CLOSED_DETERMINISTIC_GROUND_TRUTH",
+  "pairedOriginalAvailable": true,
+  "semanticEligible": true,
+  "targetLevel": "L5-W",
+  "originalBytes": 91,
+  "originalSha256": "28bca7a5977400a4515bcf1032cb40360b728054e86e6e7d4792577f9afd7893",
+  "protectedAvailable": true,
+  "description": "Vararg function extracting leading argument"
+}

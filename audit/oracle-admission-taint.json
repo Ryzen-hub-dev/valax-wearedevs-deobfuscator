@@ -1,0 +1,63 @@
+{
+  "timestamp": "2026-09-06T14:00:54.483Z",
+  "audit": "SemanticOracle Hard Separation Re-Audit",
+  "principle": "Oracle can veto; Oracle cannot promote. (Oracle success never constitutes positive proof of completeness or closed-world nature).",
+  "positiveAdmissionTaintPaths": 0,
+  "dataFlowAudit": [
+    {
+      "field": "wholeProgramClosed",
+      "sourceInputs": [
+        "externalInputs (AST & EnvironmentAccessAnalyzer static traversal)",
+        "escapingClosures (ClosureCaptureAnalyzer static escape analysis)",
+        "uncalledCallbacks (AST function argument reference analysis)"
+      ],
+      "oracleTraceInfluence": "NONE",
+      "canOraclePromote": false,
+      "taintPathDetected": false
+    },
+    {
+      "field": "wholeProgramComplete",
+      "sourceInputs": [
+        "allReachableBehaviorCovered (CFG static reachability analysis)",
+        "dynamicUnobservedBlocks (BasicBlock unobserved list)"
+      ],
+      "oracleTraceInfluence": "NONE",
+      "canOraclePromote": false,
+      "taintPathDetected": false
+    },
+    {
+      "field": "isL5WEligible",
+      "sourceInputs": [
+        "FinalAdmissionGate.evaluate() (Static closure, proof, replacement, cleanup, and oracle gates)"
+      ],
+      "oracleTraceInfluence": "VETO_ONLY (If traceResult.success === false then oracleGate.veto = true, forcing finalEligible = false. Successful trace never promotes static gates).",
+      "canOraclePromote": false,
+      "taintPathDetected": false
+    },
+    {
+      "field": "requiredProof.pass",
+      "sourceInputs": [
+        "proofIntegrityValidator.validate() (Static AST & IR proof obligation chains)"
+      ],
+      "oracleTraceInfluence": "NONE (Rejects any proof citing trace observation as evidence for closure)",
+      "canOraclePromote": false,
+      "taintPathDetected": false
+    },
+    {
+      "field": "safeWholeProgramReplacement",
+      "sourceInputs": [
+        "mixedClosedAnalyzer.analyze() (Static upvalue capture, mutation graph, and parameter binding analysis)"
+      ],
+      "oracleTraceInfluence": "NONE",
+      "canOraclePromote": false,
+      "taintPathDetected": false
+    }
+  ],
+  "vetoMechanismsVerified": [
+    "traceResult.success === false -> immediate L5-W denial (L4 downgrade)",
+    "runtime stdout mismatch -> semantic validation failure",
+    "sandbox execution timeout -> termination without promotion"
+  ],
+  "status": "PASS",
+  "pass": true
+}

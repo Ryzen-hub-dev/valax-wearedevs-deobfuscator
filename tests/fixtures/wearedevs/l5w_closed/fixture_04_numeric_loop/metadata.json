@@ -1,0 +1,12 @@
+{
+  "id": "fixture_04_numeric_loop",
+  "name": "Numeric Loop",
+  "fixtureType": "CLOSED_DETERMINISTIC_GROUND_TRUTH",
+  "pairedOriginalAvailable": true,
+  "semanticEligible": true,
+  "targetLevel": "L5-W",
+  "originalBytes": 33,
+  "originalSha256": "e66ee7f94f9c3c11f5f49d4ec85ad1dfb2557a6ed1c5d5ce4af7d9251ef2b1ff",
+  "protectedAvailable": true,
+  "description": "Closed deterministic numeric for-loop structure preservation"
+}

@@ -1,0 +1,13 @@
+{
+  "fixtures": 10,
+  "detected": 10,
+  "parsed": 10,
+  "l5w": 10,
+  "l5t": 0,
+  "l45": 0,
+  "l4": 0,
+  "semanticPass": 10,
+  "semanticMismatch": 0,
+  "crashes": 0,
+  "silentSemanticCorruption": 0
+}

@@ -1,0 +1,7 @@
+{
+  "totalPhysicalStates": 610,
+  "statesRemainingInDispatcher": 610,
+  "physicallyExtractedStates": 0,
+  "provablyExtractablePhysicalStates": 0,
+  "note": "All 610 physical states are still present in the while Q dispatcher in result.lua because states were inlined into function expressions without removing them from the dispatcher."
+}

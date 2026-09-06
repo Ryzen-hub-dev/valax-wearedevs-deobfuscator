@@ -1,0 +1,64 @@
+{
+  "originalPath": "C:\\Users\\ksjz1\\Downloads\\deobfuscator\\ByIdiotSandWich.txt",
+  "resultPath": "C:\\Users\\ksjz1\\Downloads\\deobfuscator\\result.lua",
+  "metrics": {
+    "functions": {
+      "original": 1,
+      "result": 1,
+      "delta": 0,
+      "ratio": "1.000"
+    },
+    "anonymousFunctions": {
+      "original": 29,
+      "result": 29,
+      "delta": 0,
+      "ratio": "1.000"
+    },
+    "parameters": {
+      "original": 92,
+      "result": 92,
+      "delta": 0,
+      "ratio": "1.000"
+    },
+    "varargFunctions": {
+      "original": 2,
+      "result": 2,
+      "delta": 0,
+      "ratio": "1.000"
+    },
+    "returns": {
+      "original": 30,
+      "result": 30,
+      "delta": 0,
+      "ratio": "1.000"
+    },
+    "tableConstructors": {
+      "original": 496,
+      "result": 496,
+      "delta": 0,
+      "ratio": "1.000"
+    },
+    "callExpressions": {
+      "original": 2878,
+      "result": 1513,
+      "delta": -1365,
+      "ratio": "0.526"
+    },
+    "loops": {
+      "original": 7,
+      "result": 7,
+      "delta": 0,
+      "ratio": "1.000"
+    },
+    "branches": {
+      "original": 1227,
+      "result": 1227,
+      "delta": 0,
+      "ratio": "1.000"
+    }
+  },
+  "verdict": {
+    "status": "PASS_STRUCTURE_PRESERVED",
+    "explanation": "All 1227 branches, 496 table constructors, and 29 functions/closures are 100% preserved. The delta of -1365 in call expressions corresponds to the ~1,139 inlined string accessor calls (W(offset) -> string)."
+  }
+}

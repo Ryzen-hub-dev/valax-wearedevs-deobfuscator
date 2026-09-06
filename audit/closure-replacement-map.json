@@ -1,0 +1,919 @@
+[
+  {
+    "constructorId": "closure_1",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_2",
+    "helper": "o",
+    "entryState": 9502036,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_3",
+    "helper": "R",
+    "entryState": 1656471,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_4",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_5",
+    "helper": "p",
+    "entryState": 16610050,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_6",
+    "helper": "v",
+    "entryState": 11362798,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_7",
+    "helper": "o",
+    "entryState": 6939134,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_8",
+    "helper": "R",
+    "entryState": 1564523,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_9",
+    "helper": "S",
+    "entryState": 2645770,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_10",
+    "helper": "R",
+    "entryState": 15732546,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_11",
+    "helper": "v",
+    "entryState": 10948975,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_12",
+    "helper": "v",
+    "entryState": 2486692,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_13",
+    "helper": "o",
+    "entryState": 14374511,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_14",
+    "helper": "R",
+    "entryState": 5256488,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_15",
+    "helper": "R",
+    "entryState": 2648581,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_16",
+    "helper": "R",
+    "entryState": 4894558,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_17",
+    "helper": "o",
+    "entryState": 14724102,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_18",
+    "helper": "o",
+    "entryState": 15478514,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_19",
+    "helper": "o",
+    "entryState": 11327121,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_20",
+    "helper": "v",
+    "entryState": 8103091,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_21",
+    "helper": "R",
+    "entryState": 15376057,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_22",
+    "helper": "I",
+    "entryState": 1008770,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_23",
+    "helper": "x",
+    "entryState": 14642011,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_24",
+    "helper": "S",
+    "entryState": 1591432,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_25",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_26",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_27",
+    "helper": "I",
+    "entryState": 1521299,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_28",
+    "helper": "o",
+    "entryState": 15783450,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_29",
+    "helper": "x",
+    "entryState": 3327612,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_30",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_31",
+    "helper": "x",
+    "entryState": 3512069,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_32",
+    "helper": "I",
+    "entryState": 15619169,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_33",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_34",
+    "helper": "S",
+    "entryState": 2895560,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_35",
+    "helper": "R",
+    "entryState": 8116607,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_36",
+    "helper": "p",
+    "entryState": 16084510,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_37",
+    "helper": "o",
+    "entryState": 8361888,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_38",
+    "helper": "G",
+    "entryState": 3553390,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_39",
+    "helper": "I",
+    "entryState": 11949017,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_40",
+    "helper": "I",
+    "entryState": 9889148,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_41",
+    "helper": "R",
+    "entryState": 1315878,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_42",
+    "helper": "R",
+    "entryState": 14296801,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_43",
+    "helper": "I",
+    "entryState": 2887852,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_44",
+    "helper": "R",
+    "entryState": 16099368,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_45",
+    "helper": "v",
+    "entryState": 7542796,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_46",
+    "helper": "R",
+    "entryState": 10289933,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_47",
+    "helper": "I",
+    "entryState": 2189695,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_48",
+    "helper": "I",
+    "entryState": 15090977,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_49",
+    "helper": "R",
+    "entryState": 9197933,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_50",
+    "helper": "S",
+    "entryState": 4826388,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_51",
+    "helper": "o",
+    "entryState": 10818263,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_52",
+    "helper": "v",
+    "entryState": 14036834,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_53",
+    "helper": "p",
+    "entryState": 4097825,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_54",
+    "helper": "S",
+    "entryState": 16168052,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_55",
+    "helper": "S",
+    "entryState": 4192608,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_56",
+    "helper": "R",
+    "entryState": 10877868,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_57",
+    "helper": "p",
+    "entryState": 13466679,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_58",
+    "helper": "R",
+    "entryState": 9233592,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_59",
+    "helper": "S",
+    "entryState": 1564289,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_60",
+    "helper": "S",
+    "entryState": 7220700,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_61",
+    "helper": "R",
+    "entryState": 7115582,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_62",
+    "helper": "v",
+    "entryState": 6087944,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_63",
+    "helper": "o",
+    "entryState": 11695892,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_64",
+    "helper": "r",
+    "entryState": 11437544,
+    "replacementProven": false,
+    "status": "STILL_CALLS_DISPATCHER_HELPER"
+  },
+  {
+    "constructorId": "closure_65",
+    "helper": "I",
+    "entryState": 1735617,
+    "replacementProven": false,
+    "status": "STILL_CALLS_DISPATCHER_HELPER"
+  },
+  {
+    "constructorId": "closure_66",
+    "helper": "v",
+    "entryState": 10300779,
+    "replacementProven": false,
+    "status": "STILL_CALLS_DISPATCHER_HELPER"
+  },
+  {
+    "constructorId": "closure_67",
+    "helper": "I",
+    "entryState": 6850655,
+    "replacementProven": false,
+    "status": "STILL_CALLS_DISPATCHER_HELPER"
+  },
+  {
+    "constructorId": "closure_68",
+    "helper": "S",
+    "entryState": 8257873,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_69",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_70",
+    "helper": "p",
+    "entryState": 139799,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_71",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_72",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_73",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_74",
+    "helper": "S",
+    "entryState": 8846921,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_75",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_76",
+    "helper": "G",
+    "entryState": 9761511,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_77",
+    "helper": "p",
+    "entryState": 3717629,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_78",
+    "helper": "S",
+    "entryState": 8555122,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_79",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_80",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_81",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_82",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_83",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_84",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_85",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_86",
+    "helper": "I",
+    "entryState": 7872012,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_87",
+    "helper": "S",
+    "entryState": 7728924,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_88",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_89",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_90",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_91",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_92",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_93",
+    "helper": "I",
+    "entryState": 7563902,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_94",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_95",
+    "helper": "S",
+    "entryState": 2521046,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_96",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_97",
+    "helper": "R",
+    "entryState": 9557767,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_98",
+    "helper": "I",
+    "entryState": 1335933,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_99",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_100",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_101",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_102",
+    "helper": "S",
+    "entryState": 3592012,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_103",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_104",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_105",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_106",
+    "helper": "S",
+    "entryState": 9063177,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_107",
+    "helper": "v",
+    "entryState": 11750718,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_108",
+    "helper": "x",
+    "entryState": 7124615,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_109",
+    "helper": "S",
+    "entryState": 9864680,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_110",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_111",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_112",
+    "helper": "o",
+    "entryState": 9842898,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_113",
+    "helper": "S",
+    "entryState": 16431578,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_114",
+    "helper": "R",
+    "entryState": 6843469,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_115",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_116",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_117",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_118",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_119",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_120",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_121",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_122",
+    "helper": "v",
+    "entryState": 8623445,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_123",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_124",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_125",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_126",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_127",
+    "helper": "S",
+    "entryState": 9277707,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_128",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_129",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_130",
+    "helper": "m",
+    "entryState": null,
+    "replacementProven": true,
+    "status": "REPLACED_WITH_INLINED_FUNCTION"
+  },
+  {
+    "constructorId": "closure_131",
+    "helper": "m",
+    "entryState": 13548685,
+    "replacementProven": false,
+    "status": "STILL_CALLS_DISPATCHER_HELPER"
+  }
+]

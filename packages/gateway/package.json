@@ -1,0 +1,11 @@
+{
+  "name": "@valax/gateway",
+  "version": "0.1.0-beta.1",
+  "description": "Hosted API Gateway, rate limiting, and artifact store for Valax Recovery",
+  "main": "src/index.js",
+  "dependencies": {
+    "@valax/queue": "*",
+    "@valax/worker": "*",
+    "@valax/shared": "*"
+  }
+}

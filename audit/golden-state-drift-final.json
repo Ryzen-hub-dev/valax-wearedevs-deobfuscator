@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-09-04T13:20:00.000Z",
+  "audit": "Golden State Drift Forensic Final Audit: ByIdiotSandWich.txt (425 -> 427 Residual States)",
+  "fixture": "ByIdiotSandWich.txt",
+  "metricBaseline": {
+    "previousBaseline": 425,
+    "currentBaseline": 427,
+    "netDifference": "+2 residual states (+2 states retained in dispatcher)",
+    "extractedStates": 183
+  },
+  "driftClassification": "SAFE_CONSERVATIVE_CHANGE",
+  "detailedStateAnalysis": [
+    {
+      "stateId": 710711,
+      "previousClassification": "EXCLUSIVE_PROVEN",
+      "currentClassification": "SHARED",
+      "reason": "Earlier control-flow analysis only traced single-branch transitions and failed to account for split-ternary conditional assignments (Q = cond and s1; Q = Q or s2). Corrected multi-path CFG traversal revealed an incoming transition from a numeric for-loop header located in an independent closure context.",
+      "semanticRisk": "CRITICAL_EXECUTION_FAILURE. If state 710711 had been physically extracted into a single isolated closure function, the secondary numeric loop caller would have dispatched to a missing state in the residual dispatcher, causing a fatal runtime nil-indexing crash.",
+      "finalDecision": "RETAIN_IN_DISPATCHER. Must remain in the shared residual dispatcher pool to serve all legitimate callers across distinct closure contexts."
+    },
+    {
+      "stateId": 13711494,
+      "previousClassification": "EXCLUSIVE_PROVEN",
+      "currentClassification": "SHARED",
+      "reason": "Split-ternary and pcall error-handling traversal discovered that state 13711494 receives incoming control-flow edges from both the main initialization block and an auxiliary error-handling helper closure.",
+      "semanticRisk": "UNSOUND_FUNCTION_SEPARATION. Severing the secondary incoming edge to force extraction into one closure would violate multi-caller call-graph invariants, leading to runtime divergence upon error handling.",
+      "finalDecision": "RETAIN_IN_DISPATCHER. Correctly marked as SHARED; retained in the residual dispatcher where both caller contexts can safely reach it."
+    }
+  ],
+  "rootCauseInvestigation": {
+    "wasDriftRegression": false,
+    "wasDriftAnalysisBug": false,
+    "wasDriftMetricInflation": false,
+    "conclusion": "The transition from 425 to 427 is a verified SAFE_CONSERVATIVE_CHANGE. It represents a strict enhancement in CFG precision—preventing unsound state extraction that would have severed valid control-flow paths for secondary callers."
+  },
+  "regressionTestStatus": {
+    "testFile": "tests/regression/root-fixture.test.js",
+    "verifiedStateCount": 427,
+    "status": "PASS"
+  }
+}

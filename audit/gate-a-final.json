@@ -1,0 +1,46 @@
+{
+  "gateAPairedFixtures": 0,
+  "gateAPairedFixturesRequired": 10,
+  "goldenProtectedFixtures": 1,
+  "detected": 0,
+  "parsed": 0,
+  "semanticEligible": 0,
+  "semanticPass": 0,
+  "semanticMismatch": 0,
+  "fullRecovery": 0,
+  "highRecovery": 0,
+  "partialRecovery": 0,
+  "failed": 0,
+  "crashes": 0,
+  "silentSemanticCorruptions": 0,
+  "structuralFamiliesDiscovered": 2,
+  "p0DefectsFound": 0,
+  "p0DefectsFixed": 0,
+  "p1DefectsFound": 0,
+  "p1DefectsFixed": 0,
+  "goldenFixtureRegression": "PASS",
+  "gateAStatus": "WAITING_FOR_PROTECTED_OUTPUTS",
+  "readiness": "CORE_ALPHA",
+  "details": {
+    "goldenFixture": {
+      "name": "ByIdiotSandWich.txt",
+      "level": "L4",
+      "statesBefore": 610,
+      "statesAfter": 425,
+      "extractedStates": 185,
+      "logicalFunctions": 84
+    },
+    "awaitingFixtures": [
+      "incoming-source-pack/fixture_0002/protected.lua",
+      "incoming-source-pack/fixture_0003/protected.lua",
+      "incoming-source-pack/fixture_0004/protected.lua",
+      "incoming-source-pack/fixture_0005/protected.lua",
+      "incoming-source-pack/fixture_0006/protected.lua",
+      "incoming-source-pack/fixture_0007/protected.lua",
+      "incoming-source-pack/fixture_0008/protected.lua",
+      "incoming-source-pack/fixture_0009/protected.lua",
+      "incoming-source-pack/fixture_0010/protected.lua",
+      "incoming-source-pack/fixture_0011/protected.lua"
+    ]
+  }
+}

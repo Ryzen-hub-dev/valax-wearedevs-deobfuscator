@@ -1,0 +1,13 @@
+{
+  "total": 25,
+  "crashes": 0,
+  "silentCorruption": 0,
+  "levels": {
+    "L3": 0,
+    "L4": 1,
+    "L4.5": 0,
+    "L5-W": 24
+  },
+  "parseFailures": 0,
+  "unsupported": 0
+}

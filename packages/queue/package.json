@@ -1,0 +1,9 @@
+{
+  "name": "@valax/queue",
+  "version": "0.1.0-beta.1",
+  "description": "Job queue and leasing scheduler for Valax hosted worker isolation",
+  "main": "src/index.js",
+  "dependencies": {
+    "@valax/shared": "*"
+  }
+}

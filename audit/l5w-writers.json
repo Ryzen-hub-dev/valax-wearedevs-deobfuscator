@@ -1,0 +1,80 @@
+{
+  "timestamp": "2026-09-06T14:00:54.471Z",
+  "audit": "L5-W Admission Gate Composition: Writer Context Disclosure (P0-1 & P0-11)",
+  "canonicalAdmissionGate": "packages/core/src/analysis/final-admission-gate.js",
+  "architectureDesign": "Zero duplicate admission writers. Individual analyzers collect and provide evidence; only FinalAdmissionGate computes the canonical finalEligible decision. Pipeline Stage L5 verifies post-synthesis cleanup before assigning currentLevel = 'L5-W'.",
+  "writers": [
+    {
+      "file": "packages/core/src/analysis/closure-capture-analyzer.js",
+      "line": 57,
+      "expression": "isL5WEligible: options.isL5WEligible || false,",
+      "context": "Options normalization: passes preliminary flag to sub-analysis; does not decide or promote L5-W."
+    },
+    {
+      "file": "packages/core/src/analysis/closure-capture-analyzer.js",
+      "line": 76,
+      "expression": "isL5WEligible = false,",
+      "context": "Default parameter value for buildReport(); does not decide or promote L5-W."
+    },
+    {
+      "file": "packages/core/src/analysis/completeness-verifier.js",
+      "line": 379,
+      "expression": "const isL5WEligible = wholeProgramClosed && allReachableBehaviorCovered && !oracleVeto;",
+      "context": "Preliminary static closure flag passed as input context to sub-analyzers; overridden by effectiveL5WEligible."
+    },
+    {
+      "file": "packages/core/src/analysis/completeness-verifier.js",
+      "line": 384,
+      "expression": "recommendedLevel = 'L5-W';",
+      "context": "Preliminary level suggestion, adjusted downward if effectiveL5WEligible evaluates to false."
+    },
+    {
+      "file": "packages/core/src/analysis/completeness-verifier.js",
+      "line": 558,
+      "expression": "let effectiveL5WEligible = admissionDecision.finalEligible;",
+      "context": "Canonical decision assignment: directly delegates to FinalAdmissionGate.evaluate()."
+    },
+    {
+      "file": "packages/core/src/analysis/completeness-verifier.js",
+      "line": 574,
+      "expression": "isL5WEligible: effectiveL5WEligible,",
+      "context": "Exposes canonical FinalAdmissionGate result in completeness report object."
+    },
+    {
+      "file": "packages/core/src/analysis/mixed-closed-analyzer.js",
+      "line": 47,
+      "expression": "isL5WEligible: options.isL5WEligible || false,",
+      "context": "Options forwarding: forwards context to buildReport(); does not decide L5-W."
+    },
+    {
+      "file": "packages/core/src/analysis/mixed-closed-analyzer.js",
+      "line": 65,
+      "expression": "isL5WEligible = false,",
+      "context": "Default parameter value in buildReport(); does not decide L5-W."
+    },
+    {
+      "file": "packages/core/src/analysis/vararg-analyzer.js",
+      "line": 30,
+      "expression": "isL5WEligible = false,",
+      "context": "Default parameter value in buildReport(); does not decide L5-W."
+    },
+    {
+      "file": "packages/core/src/transforms/pipeline.js",
+      "line": 231,
+      "expression": "if (completeness.isL5WEligible && this.targetStage !== 'L5-T') {",
+      "context": "Pipeline gate entry: only attempts Stage L5 synthesis if completeness.isL5WEligible is true."
+    },
+    {
+      "file": "packages/core/src/transforms/pipeline.js",
+      "line": 320,
+      "expression": "currentLevel = 'L5-W';",
+      "context": "Pipeline promotion: guarded by postCleanupDecision.finalEligible via FinalAdmissionGate.evaluate(). Vetoes if cleanup fails."
+    },
+    {
+      "file": "packages/core/src/service/recovery-service.js",
+      "line": 338,
+      "expression": "isL5WEligible: actualLevel === 'L5-W',",
+      "context": "Output reporting schema mapping: reflects actualLevel determined by pipeline."
+    }
+  ]
+}

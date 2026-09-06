@@ -1,0 +1,385 @@
+{
+  "fileBytes": 521553,
+  "totalLines": 13765,
+  "parseDirectly": true,
+  "parseError": null,
+  "nodeCounts": {
+    "Chunk": 1,
+    "LocalStatement": 45,
+    "AssignmentStatement": 9853,
+    "LocalFunctionStatement": 1,
+    "FunctionDeclaration": 0,
+    "CallStatement": 3,
+    "IfStatement": 616,
+    "WhileStatement": 4,
+    "RepeatStatement": 0,
+    "NumericForStatement": 2,
+    "GenericForStatement": 1,
+    "DoStatement": 1,
+    "ReturnStatement": 30,
+    "BreakStatement": 1,
+    "ContinueStatement": 0,
+    "EmptyStatement": 0,
+    "Identifier": 25165,
+    "NumericLiteral": 3989,
+    "StringLiteral": 2412,
+    "BooleanLiteral": 129,
+    "NilLiteral": 240,
+    "VarargLiteral": 3,
+    "UnaryExpression": 57,
+    "BinaryExpression": 845,
+    "LogicalExpression": 527,
+    "CallExpression": 1513,
+    "MethodCallExpression": 0,
+    "MemberExpression": 76,
+    "IndexExpression": 4942,
+    "FunctionExpression": 29,
+    "TableConstructor": 496,
+    "TableKey": 382,
+    "TableKeyString": 52,
+    "TableValue": 1827
+  },
+  "closureConstructorsFound": [
+    {
+      "helper": "o",
+      "targetState": 9502036
+    },
+    {
+      "helper": "R",
+      "targetState": 1656471
+    },
+    {
+      "helper": "p",
+      "targetState": 16610050
+    },
+    {
+      "helper": "v",
+      "targetState": 11362798
+    },
+    {
+      "helper": "o",
+      "targetState": 6939134
+    },
+    {
+      "helper": "R",
+      "targetState": 1564523
+    },
+    {
+      "helper": "S",
+      "targetState": 2645770
+    },
+    {
+      "helper": "R",
+      "targetState": 15732546
+    },
+    {
+      "helper": "v",
+      "targetState": 10948975
+    },
+    {
+      "helper": "v",
+      "targetState": 2486692
+    },
+    {
+      "helper": "o",
+      "targetState": 14374511
+    },
+    {
+      "helper": "R",
+      "targetState": 5256488
+    },
+    {
+      "helper": "R",
+      "targetState": 2648581
+    },
+    {
+      "helper": "R",
+      "targetState": 4894558
+    },
+    {
+      "helper": "o",
+      "targetState": 14724102
+    },
+    {
+      "helper": "o",
+      "targetState": 15478514
+    },
+    {
+      "helper": "o",
+      "targetState": 11327121
+    },
+    {
+      "helper": "v",
+      "targetState": 8103091
+    },
+    {
+      "helper": "R",
+      "targetState": 15376057
+    },
+    {
+      "helper": "I",
+      "targetState": 1008770
+    },
+    {
+      "helper": "x",
+      "targetState": 14642011
+    },
+    {
+      "helper": "S",
+      "targetState": 1591432
+    },
+    {
+      "helper": "I",
+      "targetState": 1521299
+    },
+    {
+      "helper": "o",
+      "targetState": 15783450
+    },
+    {
+      "helper": "x",
+      "targetState": 3327612
+    },
+    {
+      "helper": "x",
+      "targetState": 3512069
+    },
+    {
+      "helper": "I",
+      "targetState": 15619169
+    },
+    {
+      "helper": "S",
+      "targetState": 2895560
+    },
+    {
+      "helper": "R",
+      "targetState": 8116607
+    },
+    {
+      "helper": "p",
+      "targetState": 16084510
+    },
+    {
+      "helper": "o",
+      "targetState": 8361888
+    },
+    {
+      "helper": "G",
+      "targetState": 3553390
+    },
+    {
+      "helper": "I",
+      "targetState": 11949017
+    },
+    {
+      "helper": "I",
+      "targetState": 9889148
+    },
+    {
+      "helper": "R",
+      "targetState": 1315878
+    },
+    {
+      "helper": "R",
+      "targetState": 14296801
+    },
+    {
+      "helper": "I",
+      "targetState": 2887852
+    },
+    {
+      "helper": "R",
+      "targetState": 16099368
+    },
+    {
+      "helper": "v",
+      "targetState": 7542796
+    },
+    {
+      "helper": "R",
+      "targetState": 10289933
+    },
+    {
+      "helper": "I",
+      "targetState": 2189695
+    },
+    {
+      "helper": "I",
+      "targetState": 15090977
+    },
+    {
+      "helper": "R",
+      "targetState": 9197933
+    },
+    {
+      "helper": "S",
+      "targetState": 4826388
+    },
+    {
+      "helper": "o",
+      "targetState": 10818263
+    },
+    {
+      "helper": "v",
+      "targetState": 14036834
+    },
+    {
+      "helper": "p",
+      "targetState": 4097825
+    },
+    {
+      "helper": "S",
+      "targetState": 16168052
+    },
+    {
+      "helper": "S",
+      "targetState": 4192608
+    },
+    {
+      "helper": "R",
+      "targetState": 10877868
+    },
+    {
+      "helper": "p",
+      "targetState": 13466679
+    },
+    {
+      "helper": "R",
+      "targetState": 9233592
+    },
+    {
+      "helper": "S",
+      "targetState": 1564289
+    },
+    {
+      "helper": "S",
+      "targetState": 7220700
+    },
+    {
+      "helper": "R",
+      "targetState": 7115582
+    },
+    {
+      "helper": "v",
+      "targetState": 6087944
+    },
+    {
+      "helper": "o",
+      "targetState": 11695892
+    },
+    {
+      "helper": "r",
+      "targetState": 11437544
+    },
+    {
+      "helper": "I",
+      "targetState": 1735617
+    },
+    {
+      "helper": "v",
+      "targetState": 10300779
+    },
+    {
+      "helper": "I",
+      "targetState": 6850655
+    },
+    {
+      "helper": "S",
+      "targetState": 8257873
+    },
+    {
+      "helper": "p",
+      "targetState": 139799
+    },
+    {
+      "helper": "S",
+      "targetState": 8846921
+    },
+    {
+      "helper": "G",
+      "targetState": 9761511
+    },
+    {
+      "helper": "p",
+      "targetState": 3717629
+    },
+    {
+      "helper": "S",
+      "targetState": 8555122
+    },
+    {
+      "helper": "I",
+      "targetState": 7872012
+    },
+    {
+      "helper": "S",
+      "targetState": 7728924
+    },
+    {
+      "helper": "I",
+      "targetState": 7563902
+    },
+    {
+      "helper": "S",
+      "targetState": 2521046
+    },
+    {
+      "helper": "R",
+      "targetState": 9557767
+    },
+    {
+      "helper": "I",
+      "targetState": 1335933
+    },
+    {
+      "helper": "S",
+      "targetState": 3592012
+    },
+    {
+      "helper": "S",
+      "targetState": 9063177
+    },
+    {
+      "helper": "v",
+      "targetState": 11750718
+    },
+    {
+      "helper": "x",
+      "targetState": 7124615
+    },
+    {
+      "helper": "S",
+      "targetState": 9864680
+    },
+    {
+      "helper": "o",
+      "targetState": 9842898
+    },
+    {
+      "helper": "S",
+      "targetState": 16431578
+    },
+    {
+      "helper": "R",
+      "targetState": 6843469
+    },
+    {
+      "helper": "v",
+      "targetState": 8623445
+    },
+    {
+      "helper": "S",
+      "targetState": 9277707
+    },
+    {
+      "helper": "m",
+      "targetState": 13548685
+    }
+  ],
+  "dispatcherRemaining": true,
+  "prunedPayloadDetected": true,
+  "findings": [
+    "CRITICAL (P0): Found 84 closure constructor calls in the entry path (targeting states: 9502036, 1656471, 16610050, 11362798, 6939134, 1564523, 2645770, 15732546, 10948975, 2486692, 14374511, 5256488, 2648581, 4894558, 14724102, 15478514, 11327121, 8103091, 15376057, 1008770, 14642011, 1591432, 1521299, 15783450, 3327612, 3512069, 15619169, 2895560, 8116607, 16084510, 8361888, 3553390, 11949017, 9889148, 1315878, 14296801, 2887852, 16099368, 7542796, 10289933, 2189695, 15090977, 9197933, 4826388, 10818263, 14036834, 4097825, 16168052, 4192608, 10877868, 13466679, 9233592, 1564289, 7220700, 7115582, 6087944, 11695892, 11437544, 1735617, 10300779, 6850655, 8257873, 139799, 8846921, 9761511, 3717629, 8555122, 7872012, 7728924, 7563902, 2521046, 9557767, 1335933, 3592012, 9063177, 11750718, 7124615, 9864680, 9842898, 16431578, 6843469, 8623445, 9277707, 13548685). In the current engine, reachability was only calculated from entry state 13548685, causing all inner closure function bodies (596 states) to be falsely categorized as unreachable and stripped!"
+  ]
+}

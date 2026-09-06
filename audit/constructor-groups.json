@@ -1,0 +1,813 @@
+[
+  {
+    "entryState": null,
+    "logicalFunctionId": "logical_function_1",
+    "constructors": [
+      "closure_1",
+      "closure_4",
+      "closure_25",
+      "closure_26",
+      "closure_30",
+      "closure_33",
+      "closure_69",
+      "closure_71",
+      "closure_72",
+      "closure_73",
+      "closure_75",
+      "closure_79",
+      "closure_80",
+      "closure_81",
+      "closure_82",
+      "closure_83",
+      "closure_84",
+      "closure_85",
+      "closure_88",
+      "closure_89",
+      "closure_90",
+      "closure_91",
+      "closure_92",
+      "closure_94",
+      "closure_96",
+      "closure_99",
+      "closure_100",
+      "closure_101",
+      "closure_103",
+      "closure_104",
+      "closure_105",
+      "closure_110",
+      "closure_111",
+      "closure_115",
+      "closure_116",
+      "closure_117",
+      "closure_118",
+      "closure_119",
+      "closure_120",
+      "closure_121",
+      "closure_123",
+      "closure_124",
+      "closure_125",
+      "closure_126",
+      "closure_128",
+      "closure_129",
+      "closure_130"
+    ],
+    "constructorCount": 47,
+    "relation": "SAME_LOGICAL_FUNCTION"
+  },
+  {
+    "entryState": 9502036,
+    "logicalFunctionId": "logical_function_2",
+    "constructors": [
+      "closure_2"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 1656471,
+    "logicalFunctionId": "logical_function_3",
+    "constructors": [
+      "closure_3"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 16610050,
+    "logicalFunctionId": "logical_function_4",
+    "constructors": [
+      "closure_5"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 11362798,
+    "logicalFunctionId": "logical_function_5",
+    "constructors": [
+      "closure_6"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 6939134,
+    "logicalFunctionId": "logical_function_6",
+    "constructors": [
+      "closure_7"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 1564523,
+    "logicalFunctionId": "logical_function_7",
+    "constructors": [
+      "closure_8"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 2645770,
+    "logicalFunctionId": "logical_function_8",
+    "constructors": [
+      "closure_9"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 15732546,
+    "logicalFunctionId": "logical_function_9",
+    "constructors": [
+      "closure_10"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 10948975,
+    "logicalFunctionId": "logical_function_10",
+    "constructors": [
+      "closure_11"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 2486692,
+    "logicalFunctionId": "logical_function_11",
+    "constructors": [
+      "closure_12"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 14374511,
+    "logicalFunctionId": "logical_function_12",
+    "constructors": [
+      "closure_13"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 5256488,
+    "logicalFunctionId": "logical_function_13",
+    "constructors": [
+      "closure_14"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 2648581,
+    "logicalFunctionId": "logical_function_14",
+    "constructors": [
+      "closure_15"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 4894558,
+    "logicalFunctionId": "logical_function_15",
+    "constructors": [
+      "closure_16"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 14724102,
+    "logicalFunctionId": "logical_function_16",
+    "constructors": [
+      "closure_17"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 15478514,
+    "logicalFunctionId": "logical_function_17",
+    "constructors": [
+      "closure_18"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 11327121,
+    "logicalFunctionId": "logical_function_18",
+    "constructors": [
+      "closure_19"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 8103091,
+    "logicalFunctionId": "logical_function_19",
+    "constructors": [
+      "closure_20"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 15376057,
+    "logicalFunctionId": "logical_function_20",
+    "constructors": [
+      "closure_21"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 1008770,
+    "logicalFunctionId": "logical_function_21",
+    "constructors": [
+      "closure_22"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 14642011,
+    "logicalFunctionId": "logical_function_22",
+    "constructors": [
+      "closure_23"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 1591432,
+    "logicalFunctionId": "logical_function_23",
+    "constructors": [
+      "closure_24"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 1521299,
+    "logicalFunctionId": "logical_function_24",
+    "constructors": [
+      "closure_27"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 15783450,
+    "logicalFunctionId": "logical_function_25",
+    "constructors": [
+      "closure_28"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 3327612,
+    "logicalFunctionId": "logical_function_26",
+    "constructors": [
+      "closure_29"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 3512069,
+    "logicalFunctionId": "logical_function_27",
+    "constructors": [
+      "closure_31"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 15619169,
+    "logicalFunctionId": "logical_function_28",
+    "constructors": [
+      "closure_32"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 2895560,
+    "logicalFunctionId": "logical_function_29",
+    "constructors": [
+      "closure_34"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 8116607,
+    "logicalFunctionId": "logical_function_30",
+    "constructors": [
+      "closure_35"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 16084510,
+    "logicalFunctionId": "logical_function_31",
+    "constructors": [
+      "closure_36"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 8361888,
+    "logicalFunctionId": "logical_function_32",
+    "constructors": [
+      "closure_37"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 3553390,
+    "logicalFunctionId": "logical_function_33",
+    "constructors": [
+      "closure_38"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 11949017,
+    "logicalFunctionId": "logical_function_34",
+    "constructors": [
+      "closure_39"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 9889148,
+    "logicalFunctionId": "logical_function_35",
+    "constructors": [
+      "closure_40"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 1315878,
+    "logicalFunctionId": "logical_function_36",
+    "constructors": [
+      "closure_41"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 14296801,
+    "logicalFunctionId": "logical_function_37",
+    "constructors": [
+      "closure_42"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 2887852,
+    "logicalFunctionId": "logical_function_38",
+    "constructors": [
+      "closure_43"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 16099368,
+    "logicalFunctionId": "logical_function_39",
+    "constructors": [
+      "closure_44"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 7542796,
+    "logicalFunctionId": "logical_function_40",
+    "constructors": [
+      "closure_45"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 10289933,
+    "logicalFunctionId": "logical_function_41",
+    "constructors": [
+      "closure_46"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 2189695,
+    "logicalFunctionId": "logical_function_42",
+    "constructors": [
+      "closure_47"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 15090977,
+    "logicalFunctionId": "logical_function_43",
+    "constructors": [
+      "closure_48"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 9197933,
+    "logicalFunctionId": "logical_function_44",
+    "constructors": [
+      "closure_49"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 4826388,
+    "logicalFunctionId": "logical_function_45",
+    "constructors": [
+      "closure_50"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 10818263,
+    "logicalFunctionId": "logical_function_46",
+    "constructors": [
+      "closure_51"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 14036834,
+    "logicalFunctionId": "logical_function_47",
+    "constructors": [
+      "closure_52"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 4097825,
+    "logicalFunctionId": "logical_function_48",
+    "constructors": [
+      "closure_53"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 16168052,
+    "logicalFunctionId": "logical_function_49",
+    "constructors": [
+      "closure_54"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 4192608,
+    "logicalFunctionId": "logical_function_50",
+    "constructors": [
+      "closure_55"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 10877868,
+    "logicalFunctionId": "logical_function_51",
+    "constructors": [
+      "closure_56"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 13466679,
+    "logicalFunctionId": "logical_function_52",
+    "constructors": [
+      "closure_57"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 9233592,
+    "logicalFunctionId": "logical_function_53",
+    "constructors": [
+      "closure_58"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 1564289,
+    "logicalFunctionId": "logical_function_54",
+    "constructors": [
+      "closure_59"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 7220700,
+    "logicalFunctionId": "logical_function_55",
+    "constructors": [
+      "closure_60"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 7115582,
+    "logicalFunctionId": "logical_function_56",
+    "constructors": [
+      "closure_61"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 6087944,
+    "logicalFunctionId": "logical_function_57",
+    "constructors": [
+      "closure_62"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 11695892,
+    "logicalFunctionId": "logical_function_58",
+    "constructors": [
+      "closure_63"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 11437544,
+    "logicalFunctionId": "logical_function_59",
+    "constructors": [
+      "closure_64"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 1735617,
+    "logicalFunctionId": "logical_function_60",
+    "constructors": [
+      "closure_65"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 10300779,
+    "logicalFunctionId": "logical_function_61",
+    "constructors": [
+      "closure_66"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 6850655,
+    "logicalFunctionId": "logical_function_62",
+    "constructors": [
+      "closure_67"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 8257873,
+    "logicalFunctionId": "logical_function_63",
+    "constructors": [
+      "closure_68"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 139799,
+    "logicalFunctionId": "logical_function_64",
+    "constructors": [
+      "closure_70"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 8846921,
+    "logicalFunctionId": "logical_function_65",
+    "constructors": [
+      "closure_74"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 9761511,
+    "logicalFunctionId": "logical_function_66",
+    "constructors": [
+      "closure_76"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 3717629,
+    "logicalFunctionId": "logical_function_67",
+    "constructors": [
+      "closure_77"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 8555122,
+    "logicalFunctionId": "logical_function_68",
+    "constructors": [
+      "closure_78"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 7872012,
+    "logicalFunctionId": "logical_function_69",
+    "constructors": [
+      "closure_86"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 7728924,
+    "logicalFunctionId": "logical_function_70",
+    "constructors": [
+      "closure_87"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 7563902,
+    "logicalFunctionId": "logical_function_71",
+    "constructors": [
+      "closure_93"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 2521046,
+    "logicalFunctionId": "logical_function_72",
+    "constructors": [
+      "closure_95"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 9557767,
+    "logicalFunctionId": "logical_function_73",
+    "constructors": [
+      "closure_97"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 1335933,
+    "logicalFunctionId": "logical_function_74",
+    "constructors": [
+      "closure_98"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 3592012,
+    "logicalFunctionId": "logical_function_75",
+    "constructors": [
+      "closure_102"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 9063177,
+    "logicalFunctionId": "logical_function_76",
+    "constructors": [
+      "closure_106"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 11750718,
+    "logicalFunctionId": "logical_function_77",
+    "constructors": [
+      "closure_107"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 7124615,
+    "logicalFunctionId": "logical_function_78",
+    "constructors": [
+      "closure_108"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 9864680,
+    "logicalFunctionId": "logical_function_79",
+    "constructors": [
+      "closure_109"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 9842898,
+    "logicalFunctionId": "logical_function_80",
+    "constructors": [
+      "closure_112"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 16431578,
+    "logicalFunctionId": "logical_function_81",
+    "constructors": [
+      "closure_113"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 6843469,
+    "logicalFunctionId": "logical_function_82",
+    "constructors": [
+      "closure_114"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 8623445,
+    "logicalFunctionId": "logical_function_83",
+    "constructors": [
+      "closure_122"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 9277707,
+    "logicalFunctionId": "logical_function_84",
+    "constructors": [
+      "closure_127"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  },
+  {
+    "entryState": 13548685,
+    "logicalFunctionId": "logical_function_85",
+    "constructors": [
+      "closure_131"
+    ],
+    "constructorCount": 1,
+    "relation": "UNIQUE_CONSTRUCTOR"
+  }
+]

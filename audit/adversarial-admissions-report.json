@@ -1,0 +1,167 @@
+{
+  "timestamp": "2026-09-06T13:54:47.222Z",
+  "adversarialNegatives": {
+    "total": 12,
+    "denied": 12,
+    "results": [
+      {
+        "id": "neg_01_free_foo",
+        "denied": true,
+        "finalLevel": "L4",
+        "externalInputs": [
+          "foo"
+        ]
+      },
+      {
+        "id": "neg_02_free_a",
+        "denied": true,
+        "finalLevel": "L4",
+        "externalInputs": [
+          "a"
+        ]
+      },
+      {
+        "id": "neg_03_free_x9AbC",
+        "denied": true,
+        "finalLevel": "L4",
+        "externalInputs": [
+          "x9AbC"
+        ]
+      },
+      {
+        "id": "neg_04_external_fn_q",
+        "denied": true,
+        "finalLevel": "L4",
+        "externalInputs": []
+      },
+      {
+        "id": "neg_05_external_consumer_k",
+        "denied": true,
+        "finalLevel": "L4",
+        "externalInputs": []
+      },
+      {
+        "id": "neg_06_dynamic_G_key",
+        "denied": true,
+        "finalLevel": "L4",
+        "externalInputs": []
+      },
+      {
+        "id": "neg_07_env_shadow_builtin",
+        "denied": true,
+        "finalLevel": "L4",
+        "externalInputs": []
+      },
+      {
+        "id": "neg_08_global_shadow_builtin",
+        "denied": true,
+        "finalLevel": "L4",
+        "externalInputs": []
+      },
+      {
+        "id": "neg_09_getfenv_dynamic",
+        "denied": true,
+        "finalLevel": "L4",
+        "externalInputs": [
+          "DYNAMIC_ENVIRONMENT_ACCESS"
+        ]
+      },
+      {
+        "id": "neg_10_setfenv_replace",
+        "denied": true,
+        "finalLevel": "L4",
+        "externalInputs": [
+          "ipairs",
+          "string",
+          "type",
+          "table",
+          "math",
+          "unpack",
+          "error",
+          "pcall",
+          "tonumber",
+          "tostring",
+          "setmetatable",
+          "print",
+          "newproxy",
+          "getmetatable",
+          "select",
+          "DYNAMIC_ENVIRONMENT_ACCESS",
+          "ENVIRONMENT_REPLACED_SETFENV"
+        ]
+      },
+      {
+        "id": "neg_11_unknown_callback_hook",
+        "denied": true,
+        "finalLevel": "L4",
+        "externalInputs": []
+      },
+      {
+        "id": "neg_12_env_alias_lookup",
+        "denied": true,
+        "finalLevel": "L4",
+        "externalInputs": [
+          "_ENV",
+          "l1"
+        ]
+      }
+    ]
+  },
+  "positiveClosed": {
+    "total": 10,
+    "admitted": 10,
+    "results": [
+      {
+        "id": "pos_01_local_externalValue",
+        "admitted": true,
+        "finalLevel": "L5-W"
+      },
+      {
+        "id": "pos_02_local_externalFunction",
+        "admitted": true,
+        "finalLevel": "L5-W"
+      },
+      {
+        "id": "pos_03_local_externalInput",
+        "admitted": true,
+        "finalLevel": "L5-W"
+      },
+      {
+        "id": "pos_04_local_playerData",
+        "admitted": true,
+        "finalLevel": "L5-W"
+      },
+      {
+        "id": "pos_05_local_foo",
+        "admitted": true,
+        "finalLevel": "L5-W"
+      },
+      {
+        "id": "pos_06_local_x9AbC",
+        "admitted": true,
+        "finalLevel": "L5-W"
+      },
+      {
+        "id": "pos_07_local_q_fn",
+        "admitted": true,
+        "finalLevel": "L5-W"
+      },
+      {
+        "id": "pos_08_local_nested_external",
+        "admitted": true,
+        "finalLevel": "L5-W"
+      },
+      {
+        "id": "pos_09_local_multi_external",
+        "admitted": true,
+        "finalLevel": "L5-W"
+      },
+      {
+        "id": "pos_10_local_metatable_external",
+        "admitted": true,
+        "finalLevel": "L5-W"
+      }
+    ]
+  },
+  "identifierInvariance": "PASS"
+}

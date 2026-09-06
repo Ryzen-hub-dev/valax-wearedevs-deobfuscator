@@ -1,0 +1,815 @@
+[
+  {
+    "state": 233108,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 241796,
+    "semanticOps": [
+      "CompareEq",
+      "Branch"
+    ],
+    "opCount": 2,
+    "classification": "STATEFUL_BRANCH_EVALUATION",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_BRANCH",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 348783,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 458993,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 493920,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 718808,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 967451,
+    "semanticOps": [
+      "CompareEq",
+      "Branch",
+      "UpvalueGet"
+    ],
+    "opCount": 3,
+    "classification": "STATEFUL_BRANCH_EVALUATION",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_BRANCH",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 1264733,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 1982719,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 2455872,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 2486110,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 2515041,
+    "semanticOps": [
+      "MultiReturn",
+      "ClosureNew",
+      "ClosureNew",
+      "ClosureNew",
+      "UpvalueGet",
+      "Call"
+    ],
+    "opCount": 6,
+    "classification": "ROOT_ENTRY_DISPATCH_AND_INVOCATIONS",
+    "finalDisposition": "LIFTED_TO_HIGH_LEVEL_INVOCATIONS",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 2586417,
+    "semanticOps": [
+      "MultiReturn",
+      "UpvalueGet",
+      "UpvalueGet",
+      "UpvalueGet"
+    ],
+    "opCount": 4,
+    "classification": "MULTI_RETURN_PACKING",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_MULTI_RETURN",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 2785858,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 3036044,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 3168585,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 3228549,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 3290762,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 3715024,
+    "semanticOps": [
+      "CompareEq",
+      "Branch",
+      "UpvalueGet"
+    ],
+    "opCount": 3,
+    "classification": "STATEFUL_BRANCH_EVALUATION",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_BRANCH",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 4180226,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 4339925,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 4559288,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 4727722,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 4795994,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 4930847,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 5470479,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 6186089,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 6550019,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 6669564,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 6784074,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 6890137,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 6981980,
+    "semanticOps": [
+      "MultiReturn",
+      "UpvalueGet",
+      "UpvalueGet"
+    ],
+    "opCount": 3,
+    "classification": "MULTI_RETURN_PACKING",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_MULTI_RETURN",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 7142700,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 7306109,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 7499336,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 7785548,
+    "semanticOps": [
+      "ClosureNew",
+      "ClosureNew"
+    ],
+    "opCount": 2,
+    "classification": "CLOSURE_INSTANTIATION_WRAPPER",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_CLOSURE_NEW",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 8406892,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 8963694,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 9185115,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 9380348,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 9578895,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 9765866,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 10116063,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 10582855,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 10796777,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 10886060,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 10957058,
+    "semanticOps": [
+      "CompareEq",
+      "Branch"
+    ],
+    "opCount": 2,
+    "classification": "STATEFUL_BRANCH_EVALUATION",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_BRANCH",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 11103114,
+    "semanticOps": [
+      "ClosureNew",
+      "UpvalueGet",
+      "UpvalueGet"
+    ],
+    "opCount": 3,
+    "classification": "CLOSURE_INSTANTIATION_WRAPPER",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_CLOSURE_NEW",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 11258761,
+    "semanticOps": [
+      "UpvalueGet",
+      "BinaryAdd",
+      "UpvalueSet",
+      "CompareEq",
+      "Branch",
+      "UpvalueGet",
+      "UpvalueGet"
+    ],
+    "opCount": 7,
+    "classification": "MUTABLE_UPVALUE_MUTATION_AND_BRANCH",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_UPVALUE_MUTATION",
+    "isFunctionEntry": false,
+    "isMutationBlock": true
+  },
+  {
+    "state": 11312743,
+    "semanticOps": [
+      "VarargPack",
+      "ClosureNew"
+    ],
+    "opCount": 2,
+    "classification": "VARARG_PACK_AND_FACTORY_ENTRY",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_VARARG_PACK",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 11386852,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 11472783,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 11782064,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 12141931,
+    "semanticOps": [
+      "CompareEq",
+      "Branch",
+      "UpvalueGet"
+    ],
+    "opCount": 3,
+    "classification": "STATEFUL_BRANCH_EVALUATION",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_BRANCH",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 12355493,
+    "semanticOps": [
+      "CompareEq",
+      "Branch",
+      "UpvalueGet"
+    ],
+    "opCount": 3,
+    "classification": "STATEFUL_BRANCH_EVALUATION",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_BRANCH",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 12531836,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 12645249,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 12807361,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 12913900,
+    "semanticOps": [
+      "ClosureNew"
+    ],
+    "opCount": 1,
+    "classification": "CLOSURE_INSTANTIATION_WRAPPER",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_CLOSURE_NEW",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 13002485,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 13156742,
+    "semanticOps": [
+      "MultiReturn",
+      "UpvalueGet",
+      "UpvalueGet"
+    ],
+    "opCount": 3,
+    "classification": "MULTI_RETURN_PACKING",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_MULTI_RETURN",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 13319368,
+    "semanticOps": [
+      "CompareEq",
+      "Branch",
+      "ClosureNew",
+      "UpvalueGet",
+      "UpvalueGet",
+      "UpvalueGet",
+      "UpvalueGet",
+      "UpvalueGet",
+      "UpvalueGet"
+    ],
+    "opCount": 9,
+    "classification": "STATEFUL_BRANCH_EVALUATION",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_BRANCH",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 13417988,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 13467923,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 13544840,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 13710658,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 13861112,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 14167421,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 14702572,
+    "semanticOps": [
+      "UpvalueGet",
+      "UpvalueGet"
+    ],
+    "opCount": 2,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 15280763,
+    "semanticOps": [
+      "UpvalueGet",
+      "UpvalueGet"
+    ],
+    "opCount": 2,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 15668922,
+    "semanticOps": [
+      "UpvalueGet",
+      "UpvalueGet",
+      "UpvalueGet",
+      "UpvalueGet",
+      "UpvalueGet",
+      "UpvalueGet"
+    ],
+    "opCount": 6,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 15761987,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 15975976,
+    "semanticOps": [
+      "UpvalueGet",
+      "UpvalueGet"
+    ],
+    "opCount": 2,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 16226016,
+    "semanticOps": [
+      "ClosureNew",
+      "UpvalueGet",
+      "UpvalueGet",
+      "UpvalueGet"
+    ],
+    "opCount": 4,
+    "classification": "CLOSURE_INSTANTIATION_WRAPPER",
+    "finalDisposition": "LIFTED_TO_SEMANTIC_OP_CLOSURE_NEW",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 16365253,
+    "semanticOps": [],
+    "opCount": 0,
+    "classification": "VM_DISPATCHER_LOOP",
+    "finalDisposition": "ELIMINATED_VIA_DETACHMENT",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  },
+  {
+    "state": 16450079,
+    "semanticOps": [
+      "UpvalueGet"
+    ],
+    "opCount": 1,
+    "classification": "REGISTER_OR_UPVALUE_CELL_ACCESS",
+    "finalDisposition": "PRUNED_VIA_LEXICAL_BINDING",
+    "isFunctionEntry": false,
+    "isMutationBlock": false
+  }
+]

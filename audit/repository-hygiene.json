@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-09-06T16:20:09.945Z",
+  "secretScan": {
+    "pass": true,
+    "findings": []
+  },
+  "largeFiles": [
+    {
+      "path": "result.roundtrip.lua",
+      "sizeBytes": 521552,
+      "sizeFormatted": "0.50 MB"
+    },
+    {
+      "path": "result.second.lua",
+      "sizeBytes": 521552,
+      "sizeFormatted": "0.50 MB"
+    }
+  ],
+  "excludedGeneratedPaths": [
+    "ByIdiotSandWich.recovered.lua",
+    "result.roundtrip.lua",
+    "result.second.lua",
+    "scratch/random_input_8472.lua",
+    "scratch/rec_A.lua",
+    "scratch/release-blind/input.lua",
+    "scratch/release-blind/output.lua",
+    "scratch/test-wearedevs-api.js",
+    "scratch_76_states.json",
+    "scratch_76_states_dump.txt",
+    "scratch_all_states_lines.txt",
+    "scratch_audited_states.json",
+    "scratch_residual_audit.json",
+    "scratch_rigorous_categories.json"
+  ],
+  "absolutePathFindings": {
+    "pass": true,
+    "findings": []
+  }
+}

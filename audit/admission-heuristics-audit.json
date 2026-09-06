@@ -1,0 +1,98 @@
+{
+  "timestamp": "2026-09-06T14:00:54.482Z",
+  "auditType": "ZERO_LEXICAL_HEURISTICS_ADMISSION_AUDIT",
+  "bannedHeuristicsChecked": [
+    "startsWith('external')",
+    "contains('external')",
+    "identifier length heuristics",
+    "mixed uppercase/lowercase/digit pattern matching",
+    "looksLikeHash() / isObfuscatorHash()",
+    "sample-specific naming heuristics"
+  ],
+  "productionFilesAudited": [
+    {
+      "file": "packages/core/src/analysis/completeness-verifier.js",
+      "sha256": "f56c24b2e3e5871027544e3701169ee96f669208c573b000c8dd74ce03145e22",
+      "structuralAnalysisVerified": true,
+      "lexicalHeuristicsFound": 0,
+      "violations": [],
+      "resolutionBasis": "AST Node Structure & Lexical Scope Environment Graph"
+    },
+    {
+      "file": "packages/core/src/analysis/environment-access-analyzer.js",
+      "sha256": "e523d9aa2379fea9c1c917547a8c764cd6f760fbc5af654706bc8bb714b43a5a",
+      "structuralAnalysisVerified": true,
+      "lexicalHeuristicsFound": 0,
+      "violations": [],
+      "resolutionBasis": "AST Node Structure & Lexical Scope Environment Graph"
+    },
+    {
+      "file": "packages/core/src/analysis/final-admission-gate.js",
+      "sha256": "6b9b1a0b37e709dcc8a1dfa5ac86cb92fe92016a5482d54d70cf70ffe610bbf5",
+      "structuralAnalysisVerified": true,
+      "lexicalHeuristicsFound": 0,
+      "violations": [],
+      "resolutionBasis": "AST Node Structure & Lexical Scope Environment Graph"
+    },
+    {
+      "file": "packages/core/src/analysis/closure-capture-analyzer.js",
+      "sha256": "49eab3d696133d1f4e4d0383c6f4b42bd6724f673a84769d563cc3e3bc2cc2b7",
+      "structuralAnalysisVerified": true,
+      "lexicalHeuristicsFound": 0,
+      "violations": [],
+      "resolutionBasis": "AST Node Structure & Lexical Scope Environment Graph"
+    },
+    {
+      "file": "packages/core/src/analysis/mixed-closed-analyzer.js",
+      "sha256": "96e3ba248d451a975bbf9b02c39f542ad2a24e0d9b7777a9ed60a451b261380f",
+      "structuralAnalysisVerified": true,
+      "lexicalHeuristicsFound": 0,
+      "violations": [],
+      "resolutionBasis": "AST Node Structure & Lexical Scope Environment Graph"
+    },
+    {
+      "file": "packages/core/src/analysis/multireturn-analyzer.js",
+      "sha256": "142538a8c7f59b56a3b6844c51296ba7f4466a5987595f99b270a89e9a24bdb1",
+      "structuralAnalysisVerified": true,
+      "lexicalHeuristicsFound": 0,
+      "violations": [],
+      "resolutionBasis": "AST Node Structure & Lexical Scope Environment Graph"
+    },
+    {
+      "file": "packages/core/src/analysis/vararg-analyzer.js",
+      "sha256": "4760212c03434dd287a7fcd9e6504a71b0729ab2a6abccd9d7dff2e36dc1af52",
+      "structuralAnalysisVerified": true,
+      "lexicalHeuristicsFound": 0,
+      "violations": [],
+      "resolutionBasis": "AST Node Structure & Lexical Scope Environment Graph"
+    },
+    {
+      "file": "packages/core/src/analysis/proof-integrity-validator.js",
+      "sha256": "118a5837c73020155cb1686cabe6a921bb0a13909ca688898a16e8cbe4fca788",
+      "structuralAnalysisVerified": true,
+      "lexicalHeuristicsFound": 0,
+      "violations": [],
+      "resolutionBasis": "AST Node Structure & Lexical Scope Environment Graph"
+    },
+    {
+      "file": "packages/core/src/analysis/required-proof-validator.js",
+      "sha256": "aed22eeb56c50b015f5a22a91c64ca19de2966028d1ad604a8361ae7bbc9e265",
+      "structuralAnalysisVerified": true,
+      "lexicalHeuristicsFound": 0,
+      "violations": [],
+      "resolutionBasis": "AST Node Structure & Lexical Scope Environment Graph"
+    },
+    {
+      "file": "packages/core/src/service/recovery-service.js",
+      "sha256": "d4346b8df8a54ef2b6ec3be979472a7af2849749c33441aec4f4dcedeb1ee75e",
+      "structuralAnalysisVerified": true,
+      "lexicalHeuristicsFound": 0,
+      "violations": [],
+      "resolutionBasis": "AST Node Structure & Lexical Scope Environment Graph"
+    }
+  ],
+  "totalViolationsDetected": 0,
+  "admissibilityGuarantee": "All environment and global variable classifications are performed strictly via AST node semantics, lexical scope resolution, and environment table mutation data-flow. Zero name-based heuristics exist in admission logic.",
+  "status": "PASS",
+  "pass": true
+}

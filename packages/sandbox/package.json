@@ -1,0 +1,7 @@
+{
+  "name": "@valax/sandbox",
+  "version": "0.1.0-beta.1",
+  "description": "Isolated and resource-bounded execution sandbox for Lua/Luau dynamic validation",
+  "main": "src/index.js",
+  "license": "MIT"
+}

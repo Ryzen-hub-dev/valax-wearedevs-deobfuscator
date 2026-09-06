@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-09-05T18:57:09.345Z",
+  "totalNegativeSamples": 5,
+  "falseL5WCount": 0,
+  "deniedCount": 5,
+  "allDenied": true,
+  "samples": [
+    {
+      "id": "negative_01_external_global",
+      "name": "External Global Variable",
+      "sourceBytes": 26,
+      "protectedBytes": 17370,
+      "recoveryLevel": "L4",
+      "admittedToL5W": false,
+      "isCorrectlyDenied": true,
+      "exitCode": 0,
+      "residualDispatcherStates": 63
+    },
+    {
+      "id": "negative_02_external_function_call",
+      "name": "External Function Invocation",
+      "sourceBytes": 44,
+      "protectedBytes": 17364,
+      "recoveryLevel": "L4",
+      "admittedToL5W": false,
+      "isCorrectlyDenied": true,
+      "exitCode": 0,
+      "residualDispatcherStates": 63
+    },
+    {
+      "id": "negative_03_escaping_table_mutation",
+      "name": "Escaping Table Consumer Mutation",
+      "sourceBytes": 51,
+      "protectedBytes": 17553,
+      "recoveryLevel": "L4",
+      "admittedToL5W": false,
+      "isCorrectlyDenied": true,
+      "exitCode": 0,
+      "residualDispatcherStates": 58
+    },
+    {
+      "id": "negative_04_dynamic_call_target",
+      "name": "Dynamic Computed Call Target",
+      "sourceBytes": 79,
+      "protectedBytes": 17730,
+      "recoveryLevel": "L4",
+      "admittedToL5W": false,
+      "isCorrectlyDenied": true,
+      "exitCode": 0,
+      "residualDispatcherStates": 60
+    },
+    {
+      "id": "negative_05_dynamic_vararg_call",
+      "name": "Dynamic External Vararg Pass",
+      "sourceBytes": 87,
+      "protectedBytes": 17633,
+      "recoveryLevel": "L4",
+      "admittedToL5W": false,
+      "isCorrectlyDenied": true,
+      "exitCode": 0,
+      "residualDispatcherStates": 63
+    }
+  ]
+}

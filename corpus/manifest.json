@@ -1,0 +1,1053 @@
+{
+  "totalPrograms": 103,
+  "categories": {
+    "arithmetic": 6,
+    "strings": 6,
+    "tables": 7,
+    "branches": 6,
+    "loops": 6,
+    "functions": 7,
+    "closures": 8,
+    "callbacks": 6,
+    "recursion": 6,
+    "varargs": 6,
+    "multireturn": 6,
+    "metatables": 6,
+    "iterators": 6,
+    "environments": 6,
+    "mixed": 8,
+    "luau": 7
+  },
+  "programs": [
+    {
+      "fixtureId": "arithmetic_l1_simple_add",
+      "sourceCategory": "arithmetic",
+      "complexityLevel": 1,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "59effa556c532c36e0059e2ee58832abe5a8df21b237b5ffd5cfde15e4a955df",
+      "protectedHash": null,
+      "filePath": "corpus\\arithmetic\\l1_simple_add.lua"
+    },
+    {
+      "fixtureId": "arithmetic_l2_precedence",
+      "sourceCategory": "arithmetic",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "3819c7516d981a598c76fc557495445244aa08523ed35c13d0a16f7d2214455b",
+      "protectedHash": null,
+      "filePath": "corpus\\arithmetic\\l2_precedence.lua"
+    },
+    {
+      "fixtureId": "arithmetic_l3_nested_floats",
+      "sourceCategory": "arithmetic",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "3336b0d7a56da4e328e42dc3fb2bb5e32915d3a764276be4e7ce80f6c1ee750b",
+      "protectedHash": null,
+      "filePath": "corpus\\arithmetic\\l3_nested_floats.lua"
+    },
+    {
+      "fixtureId": "arithmetic_l4_bitwise_ops",
+      "sourceCategory": "arithmetic",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "9852939bf0a26b5c8c52ddec4c67bd91d751cc51f60c0567ec170637bf4ffcca",
+      "protectedHash": null,
+      "filePath": "corpus\\arithmetic\\l4_bitwise_ops.lua"
+    },
+    {
+      "fixtureId": "arithmetic_l5_adversarial_expr",
+      "sourceCategory": "arithmetic",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "2e6d66a7efe804dd4090b77e868b379b17af212bfbf81d9037368632e3cecc6d",
+      "protectedHash": null,
+      "filePath": "corpus\\arithmetic\\l5_adversarial_expr.lua"
+    },
+    {
+      "fixtureId": "arithmetic_l2_parallel_assign",
+      "sourceCategory": "arithmetic",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "940025549ad0061b3e20a993860298bc5d614d27fc571439e05a5b9e81101830",
+      "protectedHash": null,
+      "filePath": "corpus\\arithmetic\\l2_parallel_assign.lua"
+    },
+    {
+      "fixtureId": "strings_l1_concat",
+      "sourceCategory": "strings",
+      "complexityLevel": 1,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "37b14c04b79c0e3e6f5ecc5dfea913c215da82a24aa3fe3c602f522992cd5621",
+      "protectedHash": null,
+      "filePath": "corpus\\strings\\l1_concat.lua"
+    },
+    {
+      "fixtureId": "strings_l2_escapes",
+      "sourceCategory": "strings",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "6053054bec7128f96e05333ad86d46a98e7e7d01b94ae4c02ea7e51b89e83aa9",
+      "protectedHash": null,
+      "filePath": "corpus\\strings\\l2_escapes.lua"
+    },
+    {
+      "fixtureId": "strings_l3_byte_escapes",
+      "sourceCategory": "strings",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "62fa63fbdb7724d78a71dfd612d249ce3acd49c25063cb38e7f6cc0afe377693",
+      "protectedHash": null,
+      "filePath": "corpus\\strings\\l3_byte_escapes.lua"
+    },
+    {
+      "fixtureId": "strings_l4_string_sub_format",
+      "sourceCategory": "strings",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "f9a56f419046d373bc41f0fc299dba32b5237f8f0e5dddbe67c6b023520e0707",
+      "protectedHash": null,
+      "filePath": "corpus\\strings\\l4_string_sub_format.lua"
+    },
+    {
+      "fixtureId": "strings_l5_adversarial_concat",
+      "sourceCategory": "strings",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "eaad2911bf549107bd556f56981d00b4de4dbcb20356f3857f141529d629ac01",
+      "protectedHash": null,
+      "filePath": "corpus\\strings\\l5_adversarial_concat.lua"
+    },
+    {
+      "fixtureId": "strings_l2_multiline_string",
+      "sourceCategory": "strings",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "b297ce265d4352c9b91c9b693030c8f3105115974c0e7a8f66b1e450e8276915",
+      "protectedHash": null,
+      "filePath": "corpus\\strings\\l2_multiline_string.lua"
+    },
+    {
+      "fixtureId": "tables_l1_array",
+      "sourceCategory": "tables",
+      "complexityLevel": 1,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "b6bed7f1223cc86d1474d0c10d796b5434f8ac2e1d90350ab0cdc3e067aa1523",
+      "protectedHash": null,
+      "filePath": "corpus\\tables\\l1_array.lua"
+    },
+    {
+      "fixtureId": "tables_l2_dict",
+      "sourceCategory": "tables",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "598c75ff1aa191098da86b417fffba795c61ee71908c79e26fb7aa4d0aa0e271",
+      "protectedHash": null,
+      "filePath": "corpus\\tables\\l2_dict.lua"
+    },
+    {
+      "fixtureId": "tables_l3_nested",
+      "sourceCategory": "tables",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "371f685ff4f589f7ace37e24289125cdc87fdb5c3381fc246e3349ea0808f6b5",
+      "protectedHash": null,
+      "filePath": "corpus\\tables\\l3_nested.lua"
+    },
+    {
+      "fixtureId": "tables_l4_dynamic_keys",
+      "sourceCategory": "tables",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "de85745ecf763c4a9fb77f27d446ac5ebab558587511008dd1864c031a033b97",
+      "protectedHash": null,
+      "filePath": "corpus\\tables\\l4_dynamic_keys.lua"
+    },
+    {
+      "fixtureId": "tables_l5_table_remove_insert",
+      "sourceCategory": "tables",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "a5bc8fb29da20349ac1e17645d44dbc80fa42e59d5d78e07e0baa180bb802291",
+      "protectedHash": null,
+      "filePath": "corpus\\tables\\l5_table_remove_insert.lua"
+    },
+    {
+      "fixtureId": "tables_l2_mixed_separators",
+      "sourceCategory": "tables",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "6b663e773046eee01cedf77a515b33d5c65605e62e4fca1318cf62f094aeb9fd",
+      "protectedHash": null,
+      "filePath": "corpus\\tables\\l2_mixed_separators.lua"
+    },
+    {
+      "fixtureId": "tables_l4_sparse_array",
+      "sourceCategory": "tables",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "9c1ee893bb1f0e1846c73af2ea2c544055bc696c3c450b7026c194bc9a723a48",
+      "protectedHash": null,
+      "filePath": "corpus\\tables\\l4_sparse_array.lua"
+    },
+    {
+      "fixtureId": "branches_l1_simple_if",
+      "sourceCategory": "branches",
+      "complexityLevel": 1,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "78f4f57c953ccc495f5ea6364b818833723ff82fbb365c82768800d1692a1573",
+      "protectedHash": null,
+      "filePath": "corpus\\branches\\l1_simple_if.lua"
+    },
+    {
+      "fixtureId": "branches_l2_elseif_ladder",
+      "sourceCategory": "branches",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "1c865aa3f01c1eb9fc8ba8074fbb1cbeb3c1106aaf2fd0f8af2a74aa846bf28a",
+      "protectedHash": null,
+      "filePath": "corpus\\branches\\l2_elseif_ladder.lua"
+    },
+    {
+      "fixtureId": "branches_l3_nested_branches",
+      "sourceCategory": "branches",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "4bf232ec0a8616126503dd395b23e1c48f7c151e2cdb6998163b32b560f3fbf4",
+      "protectedHash": null,
+      "filePath": "corpus\\branches\\l3_nested_branches.lua"
+    },
+    {
+      "fixtureId": "branches_l4_short_circuit",
+      "sourceCategory": "branches",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "b2e35775113cbfc5e1b590f83412aab72ba855801f7e541a207555002d5aa0f4",
+      "protectedHash": null,
+      "filePath": "corpus\\branches\\l4_short_circuit.lua"
+    },
+    {
+      "fixtureId": "branches_l5_adversarial_ternary",
+      "sourceCategory": "branches",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "19041632929ef71e7378a2a6dbc5c01bdb14d385e69b1f236b37d7840c8cd985",
+      "protectedHash": null,
+      "filePath": "corpus\\branches\\l5_adversarial_ternary.lua"
+    },
+    {
+      "fixtureId": "branches_l2_truthiness",
+      "sourceCategory": "branches",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "229e976e2e246610b52d688d3a2215ef89ad3c06e72eb9735a43ef91b1b98239",
+      "protectedHash": null,
+      "filePath": "corpus\\branches\\l2_truthiness.lua"
+    },
+    {
+      "fixtureId": "loops_l1_while",
+      "sourceCategory": "loops",
+      "complexityLevel": 1,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "43cdcc04735a0e6c3221c905ffad7102caeb4882299bced6a02c831f507bd763",
+      "protectedHash": null,
+      "filePath": "corpus\\loops\\l1_while.lua"
+    },
+    {
+      "fixtureId": "loops_l2_repeat_until",
+      "sourceCategory": "loops",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "b53858c8bfd3e96dd0b1769e5e44ee2b29394225ba65c1ba1bf4466fcd96cbc4",
+      "protectedHash": null,
+      "filePath": "corpus\\loops\\l2_repeat_until.lua"
+    },
+    {
+      "fixtureId": "loops_l3_numeric_for",
+      "sourceCategory": "loops",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "9663f9a817075576996ce117f09c0cf3bad59fe1e0d29d043d3b2e0ae3622838",
+      "protectedHash": null,
+      "filePath": "corpus\\loops\\l3_numeric_for.lua"
+    },
+    {
+      "fixtureId": "loops_l4_loop_break",
+      "sourceCategory": "loops",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "33871a8a474c1ce3e364c2489eed28e53eb63842daa91ca42c9bfec0e60714c4",
+      "protectedHash": null,
+      "filePath": "corpus\\loops\\l4_loop_break.lua"
+    },
+    {
+      "fixtureId": "loops_l5_nested_break",
+      "sourceCategory": "loops",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "ac44a3a08238acb7b5be878fdfae5fbbeab5cc40d652c01eab696f47d79fc595",
+      "protectedHash": null,
+      "filePath": "corpus\\loops\\l5_nested_break.lua"
+    },
+    {
+      "fixtureId": "loops_l3_negative_step_for",
+      "sourceCategory": "loops",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "e270a23775a7b22f9f0d88341218fdfd40fed3f9c61d6d118bf0464c5b2b54fe",
+      "protectedHash": null,
+      "filePath": "corpus\\loops\\l3_negative_step_for.lua"
+    },
+    {
+      "fixtureId": "functions_l1_simple_call",
+      "sourceCategory": "functions",
+      "complexityLevel": 1,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "c92db9f32ec0f61bcc3896f8d5ab02df17a4877f61b51475832b86ccc7f12b99",
+      "protectedHash": null,
+      "filePath": "corpus\\functions\\l1_simple_call.lua"
+    },
+    {
+      "fixtureId": "functions_l2_named_anonymous",
+      "sourceCategory": "functions",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "c8d90cbfb11b402ff97f07772cd0bfd83d025b21f6a8001d42ccdf028564e800",
+      "protectedHash": null,
+      "filePath": "corpus\\functions\\l2_named_anonymous.lua"
+    },
+    {
+      "fixtureId": "functions_l3_nested_funcs",
+      "sourceCategory": "functions",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "b396ee5e49dc9bf8f4621062936e8bc9da77a8fdc2971325948a8e6175aafb34",
+      "protectedHash": null,
+      "filePath": "corpus\\functions\\l3_nested_funcs.lua"
+    },
+    {
+      "fixtureId": "functions_l4_first_class",
+      "sourceCategory": "functions",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "30c89425bda2317f68f2b99f60c62ba7fa1320bcd3e089e9628c65bfe470c870",
+      "protectedHash": null,
+      "filePath": "corpus\\functions\\l4_first_class.lua"
+    },
+    {
+      "fixtureId": "functions_l5_function_table_dispatch",
+      "sourceCategory": "functions",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "6226a59369d6f97e20e9d519e9949a9c3a926000c8347e804d0adc0df396d160",
+      "protectedHash": null,
+      "filePath": "corpus\\functions\\l5_function_table_dispatch.lua"
+    },
+    {
+      "fixtureId": "functions_l2_variadic_print",
+      "sourceCategory": "functions",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "b3e1a8bf6f1ee6ab49e3d997feba12d88768106878cd471e839f8ac40bd16843",
+      "protectedHash": null,
+      "filePath": "corpus\\functions\\l2_variadic_print.lua"
+    },
+    {
+      "fixtureId": "functions_l4_tail_call",
+      "sourceCategory": "functions",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "c87c4eb605ec55361d0e00605d341ae069c72e6bd62489392fa57173909d2ded",
+      "protectedHash": null,
+      "filePath": "corpus\\functions\\l4_tail_call.lua"
+    },
+    {
+      "fixtureId": "closures_l1_basic_closure",
+      "sourceCategory": "closures",
+      "complexityLevel": 1,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "961eb66789e44f8c0dab4eed0dbc80f8c8c2e6b63f99756bd81068a7d63a7394",
+      "protectedHash": null,
+      "filePath": "corpus\\closures\\l1_basic_closure.lua"
+    },
+    {
+      "fixtureId": "closures_l2_mutable_capture",
+      "sourceCategory": "closures",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "b8793085c76149870501d5d81ed2d8089d61cd91445debced22a403262792ae2",
+      "protectedHash": null,
+      "filePath": "corpus\\closures\\l2_mutable_capture.lua"
+    },
+    {
+      "fixtureId": "closures_l3_multiple_closures_same_upval",
+      "sourceCategory": "closures",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "a4c8794fbe3a962fe568e262d24228f350931b53edc7e433290140b3883278e0",
+      "protectedHash": null,
+      "filePath": "corpus\\closures\\l3_multiple_closures_same_upval.lua"
+    },
+    {
+      "fixtureId": "closures_l4_nested_closure_chain",
+      "sourceCategory": "closures",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "3123319b0b99159b7b7dcfb04b4298b623a4a24577aabbbd5bd0678c1498645b",
+      "protectedHash": null,
+      "filePath": "corpus\\closures\\l4_nested_closure_chain.lua"
+    },
+    {
+      "fixtureId": "closures_l5_closure_generator_table",
+      "sourceCategory": "closures",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "08b87e79e06334b596f73e7de786ad92c9ff19ab0bee25574756e218a1de5a62",
+      "protectedHash": null,
+      "filePath": "corpus\\closures\\l5_closure_generator_table.lua"
+    },
+    {
+      "fixtureId": "closures_l3_shadowed_upvalues",
+      "sourceCategory": "closures",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "465eae1703177e5cad6bcd3dc5524f109cd1ad381bac8f9e5e3be1929cf907b3",
+      "protectedHash": null,
+      "filePath": "corpus\\closures\\l3_shadowed_upvalues.lua"
+    },
+    {
+      "fixtureId": "closures_l4_shared_mutable_loops",
+      "sourceCategory": "closures",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "c383f14f0360cd81d022d0e4fcb397a2042088e89a5ace540291c99aefedc474",
+      "protectedHash": null,
+      "filePath": "corpus\\closures\\l4_shared_mutable_loops.lua"
+    },
+    {
+      "fixtureId": "closures_l5_cross_closure_recursion",
+      "sourceCategory": "closures",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "795a27d75bd87cd7ef6d271fcff0d9ceac5c4385d874b1fa6910d582139a3c56",
+      "protectedHash": null,
+      "filePath": "corpus\\closures\\l5_cross_closure_recursion.lua"
+    },
+    {
+      "fixtureId": "callbacks_l1_simple_callback",
+      "sourceCategory": "callbacks",
+      "complexityLevel": 1,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "c20d61a81b0b4231677249f78546666f41e7e335677afac8bdbd04d32fe673a4",
+      "protectedHash": null,
+      "filePath": "corpus\\callbacks\\l1_simple_callback.lua"
+    },
+    {
+      "fixtureId": "callbacks_l2_map_array",
+      "sourceCategory": "callbacks",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "5e32404e2e091ab336aa35ab299edd2e8f896062c983f48738ebb66418db1df0",
+      "protectedHash": null,
+      "filePath": "corpus\\callbacks\\l2_map_array.lua"
+    },
+    {
+      "fixtureId": "callbacks_l3_filter_reduce",
+      "sourceCategory": "callbacks",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "91463cdd72a2f34d76a5a682614d155a00fff4ce64d49eae3e69c922b0ce9399",
+      "protectedHash": null,
+      "filePath": "corpus\\callbacks\\l3_filter_reduce.lua"
+    },
+    {
+      "fixtureId": "callbacks_l4_event_emitter",
+      "sourceCategory": "callbacks",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "e8bb8138ad6333fa77af33da13a2f75a6fb9778c0a61d8095a3151733c3ce925",
+      "protectedHash": null,
+      "filePath": "corpus\\callbacks\\l4_event_emitter.lua"
+    },
+    {
+      "fixtureId": "callbacks_l5_async_cps",
+      "sourceCategory": "callbacks",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "0f694bf08f0706891b28c4b27fd55db1869b6f11cf5758fda3c5fee42aa61be4",
+      "protectedHash": null,
+      "filePath": "corpus\\callbacks\\l5_async_cps.lua"
+    },
+    {
+      "fixtureId": "callbacks_l3_comparator_callback",
+      "sourceCategory": "callbacks",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "ffa9a481a03eb69676b3eacbbd864615611dd542f0d24c887e3cf3c2f0bbb71c",
+      "protectedHash": null,
+      "filePath": "corpus\\callbacks\\l3_comparator_callback.lua"
+    },
+    {
+      "fixtureId": "recursion_l1_factorial",
+      "sourceCategory": "recursion",
+      "complexityLevel": 1,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "20aa7955ec7850bb5b64792011c02f2bad3df736f305d6c051766b6ae7e36716",
+      "protectedHash": null,
+      "filePath": "corpus\\recursion\\l1_factorial.lua"
+    },
+    {
+      "fixtureId": "recursion_l2_fibonacci",
+      "sourceCategory": "recursion",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "ed9d2ee367165f01fdce9ce14f9c2eb89ed8ab87d53b027c7b736a34cf7d9500",
+      "protectedHash": null,
+      "filePath": "corpus\\recursion\\l2_fibonacci.lua"
+    },
+    {
+      "fixtureId": "recursion_l3_ackermann_small",
+      "sourceCategory": "recursion",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "f6c73a564c9e161030b5a119179e30fb3aa0aaea817bf752569e53ee2ae4f1e7",
+      "protectedHash": null,
+      "filePath": "corpus\\recursion\\l3_ackermann_small.lua"
+    },
+    {
+      "fixtureId": "recursion_l4_tree_sum",
+      "sourceCategory": "recursion",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "e228e9e84d4eb014cd9f77a3bbafc3367042285c3c5b0e958350d9f8c0674aba",
+      "protectedHash": null,
+      "filePath": "corpus\\recursion\\l4_tree_sum.lua"
+    },
+    {
+      "fixtureId": "recursion_l5_mutual_even_odd",
+      "sourceCategory": "recursion",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "24b7c25a7f2577dc8e0df30db8ebea70a0b5d9a7f9a0d55387e0a7ce3f17a9e1",
+      "protectedHash": null,
+      "filePath": "corpus\\recursion\\l5_mutual_even_odd.lua"
+    },
+    {
+      "fixtureId": "recursion_l2_gcd",
+      "sourceCategory": "recursion",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "cc12d8c474ca05a71eabe82dae066069741f901344dfbecfe7c98f9a75f00b4b",
+      "protectedHash": null,
+      "filePath": "corpus\\recursion\\l2_gcd.lua"
+    },
+    {
+      "fixtureId": "varargs_l1_pack_varargs",
+      "sourceCategory": "varargs",
+      "complexityLevel": 1,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "6f9ff75b9685be925cba0f6f4d62d134c3d21ddb993584d368b4fc311b833c70",
+      "protectedHash": null,
+      "filePath": "corpus\\varargs\\l1_pack_varargs.lua"
+    },
+    {
+      "fixtureId": "varargs_l2_select_count",
+      "sourceCategory": "varargs",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "4a5d08b46437c6e44a367cbd563b5cd7b5d7a97ca60ac3044643e515b69249cf",
+      "protectedHash": null,
+      "filePath": "corpus\\varargs\\l2_select_count.lua"
+    },
+    {
+      "fixtureId": "varargs_l3_select_index",
+      "sourceCategory": "varargs",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "af5fff4791d4188828a7a66d0e1cb3b5e9dc5a9b3368c21084df51eecda192ac",
+      "protectedHash": null,
+      "filePath": "corpus\\varargs\\l3_select_index.lua"
+    },
+    {
+      "fixtureId": "varargs_l4_pass_varargs",
+      "sourceCategory": "varargs",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "ff427f15f9b3905a2c3b28fda0b806c361d1aa3de6413884313b62d1003ba98f",
+      "protectedHash": null,
+      "filePath": "corpus\\varargs\\l4_pass_varargs.lua"
+    },
+    {
+      "fixtureId": "varargs_l5_mixed_params_varargs",
+      "sourceCategory": "varargs",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "e4ee63f9ba45dc72af51a828e21e00bc3641d2dce2cc418f7b6cc4f241d31ea6",
+      "protectedHash": null,
+      "filePath": "corpus\\varargs\\l5_mixed_params_varargs.lua"
+    },
+    {
+      "fixtureId": "varargs_l3_varargs_in_nested_closure",
+      "sourceCategory": "varargs",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "bd13f6c91d9360ff2eeb2dd25e814ffd8ea060aeec3764d64ef310f7cfba393c",
+      "protectedHash": null,
+      "filePath": "corpus\\varargs\\l3_varargs_in_nested_closure.lua"
+    },
+    {
+      "fixtureId": "multireturn_l1_two_values",
+      "sourceCategory": "multireturn",
+      "complexityLevel": 1,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "fd19f7a1896f15d03c49d0ff18f4f3e22063c0fca2f14ffe9b809c77828b12f9",
+      "protectedHash": null,
+      "filePath": "corpus\\multireturn\\l1_two_values.lua"
+    },
+    {
+      "fixtureId": "multireturn_l2_unpack_table",
+      "sourceCategory": "multireturn",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "29938905c7114ba714abf661e686d07fe93bcf8c3f53caa06a8b727bf40fad4a",
+      "protectedHash": null,
+      "filePath": "corpus\\multireturn\\l2_unpack_table.lua"
+    },
+    {
+      "fixtureId": "multireturn_l3_discard_values",
+      "sourceCategory": "multireturn",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "c6a4b39822ec041ace99a57abac63435d36d799735a426899eea2cc6e169d58b",
+      "protectedHash": null,
+      "filePath": "corpus\\multireturn\\l3_discard_values.lua"
+    },
+    {
+      "fixtureId": "multireturn_l4_chained_multireturn",
+      "sourceCategory": "multireturn",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "d80181045dec5fbe84220af41ab1a3461b14a3ca0c541289185919be7aea15ae",
+      "protectedHash": null,
+      "filePath": "corpus\\multireturn\\l4_chained_multireturn.lua"
+    },
+    {
+      "fixtureId": "multireturn_l5_table_ctor_multireturn",
+      "sourceCategory": "multireturn",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "23a14a4735c2b318a95c387258f94a8636a98cc809a542a57c030d2a3746a88c",
+      "protectedHash": null,
+      "filePath": "corpus\\multireturn\\l5_table_ctor_multireturn.lua"
+    },
+    {
+      "fixtureId": "multireturn_l2_return_expr_tuple",
+      "sourceCategory": "multireturn",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "1c663778883edee457a2ee8b44fa4165e620f7d79c7d302160d595ff8c453862",
+      "protectedHash": null,
+      "filePath": "corpus\\multireturn\\l2_return_expr_tuple.lua"
+    },
+    {
+      "fixtureId": "metatables_l1_index_fallback",
+      "sourceCategory": "metatables",
+      "complexityLevel": 1,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "554a03409ac8a8607b2866528b965bc6f2b012f721b5919d3e3d40d92b1bb768",
+      "protectedHash": null,
+      "filePath": "corpus\\metatables\\l1_index_fallback.lua"
+    },
+    {
+      "fixtureId": "metatables_l2_index_function",
+      "sourceCategory": "metatables",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "c5c1a6cbb06bdbed3d2594fc97f9432aa1e45fbd6a94b7fcda0d428a7537758f",
+      "protectedHash": null,
+      "filePath": "corpus\\metatables\\l2_index_function.lua"
+    },
+    {
+      "fixtureId": "metatables_l3_add_operator",
+      "sourceCategory": "metatables",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "f0b2f84d324ef6d6e55f7dd0126a1bc9b2472f0ba7c38dc0c1f07cf87f4bc578",
+      "protectedHash": null,
+      "filePath": "corpus\\metatables\\l3_add_operator.lua"
+    },
+    {
+      "fixtureId": "metatables_l4_call_metamethod",
+      "sourceCategory": "metatables",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "141440dc3606cc42a7fc78264677bfece77b1bf9bdb0316eee24e7a49476ad6d",
+      "protectedHash": null,
+      "filePath": "corpus\\metatables\\l4_call_metamethod.lua"
+    },
+    {
+      "fixtureId": "metatables_l5_tostring_concat",
+      "sourceCategory": "metatables",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "b3e058d7d588546e4e1fe2511bfac95e75c13e12c15e91c4141d999db6e9d4a9",
+      "protectedHash": null,
+      "filePath": "corpus\\metatables\\l5_tostring_concat.lua"
+    },
+    {
+      "fixtureId": "metatables_l2_newindex_guard",
+      "sourceCategory": "metatables",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "7f6217fb94508c6981410602357e5992c8054ebbd9d48727ab870175be8c31ec",
+      "protectedHash": null,
+      "filePath": "corpus\\metatables\\l2_newindex_guard.lua"
+    },
+    {
+      "fixtureId": "iterators_l1_ipairs",
+      "sourceCategory": "iterators",
+      "complexityLevel": 1,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "29ee012904b372f8443730191b2e198541b0702449de8a2dd056eb41e0a5e55f",
+      "protectedHash": null,
+      "filePath": "corpus\\iterators\\l1_ipairs.lua"
+    },
+    {
+      "fixtureId": "iterators_l2_pairs",
+      "sourceCategory": "iterators",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "f81d1dc6fa5e8a5a466e88da874b120566416cc1c1305495e141442ad8229de7",
+      "protectedHash": null,
+      "filePath": "corpus\\iterators\\l2_pairs.lua"
+    },
+    {
+      "fixtureId": "iterators_l3_custom_stateless",
+      "sourceCategory": "iterators",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "fdca2429600b07b87af6beb9e9578fc0b060ce3b41ba1a46e2d7249a93cdba38",
+      "protectedHash": null,
+      "filePath": "corpus\\iterators\\l3_custom_stateless.lua"
+    },
+    {
+      "fixtureId": "iterators_l4_stateful_closure_iter",
+      "sourceCategory": "iterators",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "c6e7d66ea2b0b137244741379334b64b00102c9e1cb8ba35de2b7de61e54b6e3",
+      "protectedHash": null,
+      "filePath": "corpus\\iterators\\l4_stateful_closure_iter.lua"
+    },
+    {
+      "fixtureId": "iterators_l5_chain_iterators",
+      "sourceCategory": "iterators",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "009f9975406b4ebe0536ec5c4064c5041ca52e5d9dfbd47b9a44169d86674000",
+      "protectedHash": null,
+      "filePath": "corpus\\iterators\\l5_chain_iterators.lua"
+    },
+    {
+      "fixtureId": "iterators_l2_string_gmatch",
+      "sourceCategory": "iterators",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "73891497f88cef910acbf77b803f1c8b88842d1c225a896cbed9c3053cc05e5b",
+      "protectedHash": null,
+      "filePath": "corpus\\iterators\\l2_string_gmatch.lua"
+    },
+    {
+      "fixtureId": "environments_l1_global_get",
+      "sourceCategory": "environments",
+      "complexityLevel": 1,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "0e75dea0f44e2d844e7d14138ec41c57aa732373d52acdb31bf52d81f068552d",
+      "protectedHash": null,
+      "filePath": "corpus\\environments\\l1_global_get.lua"
+    },
+    {
+      "fixtureId": "environments_l2_env_override",
+      "sourceCategory": "environments",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "ecb82faaa22e848a58e6131cad237800c77da80bac3e70142355982d2cdee974",
+      "protectedHash": null,
+      "filePath": "corpus\\environments\\l2_env_override.lua"
+    },
+    {
+      "fixtureId": "environments_l3_sandbox_eval",
+      "sourceCategory": "environments",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "c2684cd65a6dda6f7d90c7634c50613c0a3015ae3376362c91c3b4359883b10d",
+      "protectedHash": null,
+      "filePath": "corpus\\environments\\l3_sandbox_eval.lua"
+    },
+    {
+      "fixtureId": "environments_l4_global_inheritance",
+      "sourceCategory": "environments",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "7782bf0e07164a0e4b0c05660d6e9cef52f5c422a20a0d5903eef0db881834d3",
+      "protectedHash": null,
+      "filePath": "corpus\\environments\\l4_global_inheritance.lua"
+    },
+    {
+      "fixtureId": "environments_l5_shadow_builtin",
+      "sourceCategory": "environments",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "8ce0faedd020d24fe3cbe232f5fbe408acb378f571eef9641c8b2d1bd578119a",
+      "protectedHash": null,
+      "filePath": "corpus\\environments\\l5_shadow_builtin.lua"
+    },
+    {
+      "fixtureId": "environments_l2_pcall_isolation",
+      "sourceCategory": "environments",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "1564a3c36a15ec2104a5622333ebc128cb1ea44e67f6e1c73f2fc11df0861daa",
+      "protectedHash": null,
+      "filePath": "corpus\\environments\\l2_pcall_isolation.lua"
+    },
+    {
+      "fixtureId": "mixed_l1_func_table_loop",
+      "sourceCategory": "mixed",
+      "complexityLevel": 1,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "77ca5285e30b2847e1ead943f86349b58a864ff11c8f823bddc3ef881d348ca5",
+      "protectedHash": null,
+      "filePath": "corpus\\mixed\\l1_func_table_loop.lua"
+    },
+    {
+      "fixtureId": "mixed_l2_closure_table_metamethod",
+      "sourceCategory": "mixed",
+      "complexityLevel": 2,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "bb64f4d6bc475e843e36ff60e35af4bab643feec4d29f88a1153f7d64094199b",
+      "protectedHash": null,
+      "filePath": "corpus\\mixed\\l2_closure_table_metamethod.lua"
+    },
+    {
+      "fixtureId": "mixed_l3_deep_structure",
+      "sourceCategory": "mixed",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "a58e69ade41e62460fd696f0bb3976ed18163890fdc290e960100e999d4a1f28",
+      "protectedHash": null,
+      "filePath": "corpus\\mixed\\l3_deep_structure.lua"
+    },
+    {
+      "fixtureId": "mixed_l4_event_driven_fsm",
+      "sourceCategory": "mixed",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "b71a3267fc8f83f2dd050b4943a993823547141e5d811a5dfae4088858d8511a",
+      "protectedHash": null,
+      "filePath": "corpus\\mixed\\l4_event_driven_fsm.lua"
+    },
+    {
+      "fixtureId": "mixed_l5_stack_machine",
+      "sourceCategory": "mixed",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "ec76aa7aea4eaf1488e1dbe087f6509963a0ee06254e072b6e2112084f01e232",
+      "protectedHash": null,
+      "filePath": "corpus\\mixed\\l5_stack_machine.lua"
+    },
+    {
+      "fixtureId": "mixed_l3_memoized_recursive",
+      "sourceCategory": "mixed",
+      "complexityLevel": 3,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "f02e29b43a1d4886c18709525478cdc71d3fcd430ddf24b44a4843bd082451eb",
+      "protectedHash": null,
+      "filePath": "corpus\\mixed\\l3_memoized_recursive.lua"
+    },
+    {
+      "fixtureId": "mixed_l4_pipeline_transformers",
+      "sourceCategory": "mixed",
+      "complexityLevel": 4,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "856c3cbdbf9306b1c5b3d0144cb79f73120de0fd16d3980c2eeaa1d2f3903b41",
+      "protectedHash": null,
+      "filePath": "corpus\\mixed\\l4_pipeline_transformers.lua"
+    },
+    {
+      "fixtureId": "mixed_l5_complex_coroutine_sim",
+      "sourceCategory": "mixed",
+      "complexityLevel": 5,
+      "language": "lua",
+      "protectionVariant": "original",
+      "sourceHash": "76e6b2b92a1b8b3256bdd2beaecc9e74bb9d7a558f2dbf528626495821325872",
+      "protectedHash": null,
+      "filePath": "corpus\\mixed\\l5_complex_coroutine_sim.lua"
+    },
+    {
+      "fixtureId": "luau_l1_type_annotations_comment",
+      "sourceCategory": "luau",
+      "complexityLevel": 1,
+      "language": "luau",
+      "protectionVariant": "original",
+      "sourceHash": "6248a685890ed1c806412457d1abce00e22eae7fc8af9560cb15c07e93b35e86",
+      "protectedHash": null,
+      "filePath": "corpus\\luau\\l1_type_annotations_comment.lua"
+    },
+    {
+      "fixtureId": "luau_l2_compound_assignment",
+      "sourceCategory": "luau",
+      "complexityLevel": 2,
+      "language": "luau",
+      "protectionVariant": "original",
+      "sourceHash": "e5c5d3ec22a56e4245701a54de5ee42d28835f9942f2a6bc358cad4e657f6cda",
+      "protectedHash": null,
+      "filePath": "corpus\\luau\\l2_compound_assignment.lua"
+    },
+    {
+      "fixtureId": "luau_l3_if_expression",
+      "sourceCategory": "luau",
+      "complexityLevel": 3,
+      "language": "luau",
+      "protectionVariant": "original",
+      "sourceHash": "a71a2e8a24ff630192a7427c7add94d4214b13f154dd6ecbc14eda1a340c917d",
+      "protectedHash": null,
+      "filePath": "corpus\\luau\\l3_if_expression.lua"
+    },
+    {
+      "fixtureId": "luau_l4_string_interpolation",
+      "sourceCategory": "luau",
+      "complexityLevel": 4,
+      "language": "luau",
+      "protectionVariant": "original",
+      "sourceHash": "7cb6faf8a5ad3d94dde80da1c867a93e75c8157117c51b563cf67b49a683fb86",
+      "protectedHash": null,
+      "filePath": "corpus\\luau\\l4_string_interpolation.lua"
+    },
+    {
+      "fixtureId": "luau_l5_typed_table_construction",
+      "sourceCategory": "luau",
+      "complexityLevel": 5,
+      "language": "luau",
+      "protectionVariant": "original",
+      "sourceHash": "135ab1f84bc383da50a3fd0872ff177362ac16961961c54880acc95d53c838d1",
+      "protectedHash": null,
+      "filePath": "corpus\\luau\\l5_typed_table_construction.lua"
+    },
+    {
+      "fixtureId": "luau_l2_continue_statement",
+      "sourceCategory": "luau",
+      "complexityLevel": 2,
+      "language": "luau",
+      "protectionVariant": "original",
+      "sourceHash": "37450cecdd6eb83176fb96f1d3f22e657b239011d3244f16fa6b4c83cba324f8",
+      "protectedHash": null,
+      "filePath": "corpus\\luau\\l2_continue_statement.lua"
+    },
+    {
+      "fixtureId": "luau_l4_nested_if_expr",
+      "sourceCategory": "luau",
+      "complexityLevel": 4,
+      "language": "luau",
+      "protectionVariant": "original",
+      "sourceHash": "da40a023b55a5c89503eb450d1092bbce7877276e86d4994a4962a30eb7903fa",
+      "protectedHash": null,
+      "filePath": "corpus\\luau\\l4_nested_if_expr.lua"
+    }
+  ]
+}

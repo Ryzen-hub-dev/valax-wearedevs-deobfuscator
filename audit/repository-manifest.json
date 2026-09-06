@@ -1,0 +1,17 @@
+{
+  "releaseVersion": "0.1.0-beta.1",
+  "coreBaseline": "CORE_BASELINE_0.1.0-beta.1",
+  "filesToCommit": 248,
+  "ignoredFiles": 24,
+  "workflow": ".github/workflows/ci.yml",
+  "runtimeGateJob": "phase2-container-runtime-gate",
+  "cleanCheckoutSimulation": true,
+  "secretScanPass": true,
+  "portablePathsPass": true,
+  "coreBaselinePass": true,
+  "git": {
+    "remoteUrl": "https://github.com/Ryzen-hub-dev/valax-wearedevs-deobfuscator",
+    "targetBranch": "main"
+  },
+  "generatedAt": "2026-09-06T16:29:00.000Z"
+}

@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-09-06T16:20:10.435Z",
+  "dockerignorePresent": true,
+  "totalRules": 29,
+  "rules": [
+    ".git",
+    "node_modules",
+    "tests/temp",
+    "scratch",
+    "audit/*.log",
+    "audit/phase2-runtime-raw.log",
+    "audit/redis-integration.log",
+    "audit/container-e2e.log",
+    ".env",
+    ".env.*",
+    "coverage",
+    "dist",
+    "tmp",
+    "temp",
+    "*.log",
+    "*.tgz",
+    ".DS_Store",
+    "Thumbs.db",
+    ".vscode",
+    ".idea",
+    "scratch_*",
+    "*.recovered.lua",
+    "*.roundtrip.lua",
+    "*.second.lua",
+    "*.report.json",
+    "result.*.lua",
+    "report.json",
+    "inspect_minimal.js",
+    "print_unknowns.js"
+  ],
+  "criticalExclusionsVerified": {
+    "git": true,
+    "node_modules": true,
+    "env": true,
+    "scratch": true,
+    "logs": true
+  },
+  "requiredInclusionsPresent": {
+    "packageJson": true,
+    "packagesCore": true,
+    "packagesWorker": true,
+    "coreHashes": true
+  }
+}

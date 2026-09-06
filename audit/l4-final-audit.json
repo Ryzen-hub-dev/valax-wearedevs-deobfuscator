@@ -1,0 +1,22 @@
+{
+  "previousLevel": "L3",
+  "verifiedNewLevel": "L4",
+  "closureConstructors": 131,
+  "functionContexts": 281,
+  "knownEntryStates": 281,
+  "exclusiveStates": 188,
+  "sharedStates": 400,
+  "unresolvedStates": 22,
+  "directCalls": 705,
+  "indirectCalls": 0,
+  "unknownCalls": 1247,
+  "structuredFunctions": 231,
+  "partiallyStructuredFunctions": 0,
+  "unresolvedFunctions": 49,
+  "statesConvertedOutOfDispatcher": 1408,
+  "statesRemainingInDispatcher": 610,
+  "blocksRemoved": 0,
+  "astRoundtrip": "PASS",
+  "idempotence": "PASS",
+  "acceptanceCriteriaSatisfied": true
+}

@@ -1,0 +1,44 @@
+{
+  "sourceCorpusPrograms": 103,
+  "totalRealProtectedFixtures": 2,
+  "pairedRealProtectedFixtures": 0,
+  "unpairedRealProtectedFixtures": 2,
+  "protectedSeeds": 2,
+  "structuralFamilies": 2,
+  "structuralFamilyBreakdown": {
+    "Variant_Family_A_WeAreDevs_BST_Alphabet": 1,
+    "Variant_Family_A2_BST_Alphabet_Compact": 1
+  },
+  "protectedParseRate": 100,
+  "protectedDetectionRate": 100,
+  "protectedSemanticPassRate": null,
+  "protectedFullRecoveryRate": 0,
+  "protectedHighRecoveryRate": 100,
+  "protectedPartialRecoveryRate": 0,
+  "protectedFailureRate": 0,
+  "protectedCrashFreeRate": 100,
+  "silentSemanticCorruptions": 0,
+  "unpairedFixtures": [
+    {
+      "fixtureId": "fixture_0001_byidiotsandwich",
+      "file": "ByIdiotSandWich.txt",
+      "level": "L4",
+      "family": "Variant_Family_A_WeAreDevs_BST_Alphabet",
+      "physicalStatesBefore": 610,
+      "physicalStatesAfter": 425,
+      "extractedStates": 185,
+      "logicalFunctions": 84
+    },
+    {
+      "fixtureId": "fixture_unpaired_0002_bymethion",
+      "file": "ByMethion.txt",
+      "level": "L4",
+      "family": "Variant_Family_A2_BST_Alphabet_Compact",
+      "physicalStatesBefore": 72,
+      "physicalStatesAfter": 67,
+      "extractedStates": 5,
+      "logicalFunctions": 5
+    }
+  ],
+  "readiness": "CORE_ALPHA"
+}

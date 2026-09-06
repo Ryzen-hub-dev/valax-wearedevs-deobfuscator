@@ -1,0 +1,11 @@
+{
+  "b1": 150,
+  "b2": 120,
+  "b3": 120,
+  "finalStats": {
+    "balance": 120,
+    "transactions": 2
+  },
+  "ok1": true,
+  "ok2": false
+}

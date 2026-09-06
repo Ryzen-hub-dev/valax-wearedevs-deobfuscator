@@ -1,0 +1,136 @@
+{
+  "timestamp": "2026-09-06T14:00:54.486Z",
+  "sampleId": "blind_09_metatable_vector",
+  "fixtureDescription": "2D Vector arithmetic implemented via Lua metatable __index and __add metamethods",
+  "staticProofObligation": "Prove that v1 + v2 statically resolves to unique metamethod Vec.__add without reliance on runtime trace evaluation (4, 6).",
+  "objectGraph": {
+    "tables": [
+      {
+        "id": "OBJ_TBL_VEC_001",
+        "declaration": "local Vec = {}",
+        "loc": {
+          "line": 1,
+          "col": 0
+        },
+        "fields": {
+          "__index": {
+            "kind": "SELF_REFERENCE",
+            "targetId": "OBJ_TBL_VEC_001"
+          },
+          "new": {
+            "kind": "FUNCTION_REFERENCE",
+            "targetId": "FUNC_VEC_NEW_001"
+          },
+          "__add": {
+            "kind": "FUNCTION_REFERENCE",
+            "targetId": "FUNC_VEC_ADD_001"
+          }
+        },
+        "escapes": false,
+        "externallyMutated": false
+      },
+      {
+        "id": "OBJ_TBL_INST_V1",
+        "constructor": "FUNC_VEC_NEW_001",
+        "arguments": [
+          3,
+          4
+        ],
+        "metatableId": "OBJ_TBL_VEC_001",
+        "loc": {
+          "line": 12,
+          "col": 0
+        },
+        "escapes": false
+      },
+      {
+        "id": "OBJ_TBL_INST_V2",
+        "constructor": "FUNC_VEC_NEW_001",
+        "arguments": [
+          1,
+          2
+        ],
+        "metatableId": "OBJ_TBL_VEC_001",
+        "loc": {
+          "line": 13,
+          "col": 0
+        },
+        "escapes": false
+      },
+      {
+        "id": "OBJ_TBL_INST_V3",
+        "operatorSource": "OPERATOR_ADD_v1_v2",
+        "metatableId": "OBJ_TBL_VEC_001",
+        "loc": {
+          "line": 14,
+          "col": 0
+        },
+        "escapes": false
+      }
+    ],
+    "functions": [
+      {
+        "id": "FUNC_VEC_NEW_001",
+        "name": "Vec.new",
+        "params": [
+          "x",
+          "y"
+        ],
+        "returnsTableWithMetatable": "OBJ_TBL_VEC_001",
+        "loc": {
+          "startLine": 4,
+          "endLine": 6
+        }
+      },
+      {
+        "id": "FUNC_VEC_ADD_001",
+        "name": "Vec.__add",
+        "params": [
+          "a",
+          "b"
+        ],
+        "metamethodTarget": "__add",
+        "invokesConstructor": "FUNC_VEC_NEW_001",
+        "loc": {
+          "startLine": 8,
+          "endLine": 10
+        }
+      }
+    ]
+  },
+  "metamethodResolutionProof": {
+    "operation": "BinaryExpression (+)",
+    "operands": {
+      "left": {
+        "identifier": "v1",
+        "resolvedType": "Table",
+        "instanceOf": "OBJ_TBL_INST_V1",
+        "metatableId": "OBJ_TBL_VEC_001"
+      },
+      "right": {
+        "identifier": "v2",
+        "resolvedType": "Table",
+        "instanceOf": "OBJ_TBL_INST_V2",
+        "metatableId": "OBJ_TBL_VEC_001"
+      }
+    },
+    "semanticsRule": "Lua 5.1 RM 2.8: If the first operand has a metatable with an __add event, Lua calls this handler. Otherwise if the second operand has such a metatable, Lua calls it.",
+    "provenDispatch": {
+      "leftMetatable": "OBJ_TBL_VEC_001",
+      "fieldLookup": "__add",
+      "resolvedHandler": "FUNC_VEC_ADD_001",
+      "isDeterministic": true,
+      "callEdge": "OPERATOR_ADD(v1, v2) -> FUNC_VEC_ADD_001(v1, v2)"
+    }
+  },
+  "escapeAnalysis": {
+    "status": "CONFINED",
+    "details": "Neither Vec, v1, v2, v3 nor FUNC_VEC_ADD_001 are passed to external functions, exported to global tables, or accessed via dynamic reflection."
+  },
+  "mutationAnalysis": {
+    "status": "IMMUTABLE_METATABLE",
+    "details": "No assignments to Vec.__add, setmetatable reassignment, or rawset operations occur between instantiation and arithmetic execution."
+  },
+  "verdict": "STATICALLY_RESOLVED_CLOSED_METATABLE_OPERATION",
+  "proofIntegrityPass": true
+}

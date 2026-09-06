@@ -1,0 +1,108 @@
+[
+  {
+    "constructorId": "closure_64",
+    "logicalFunctionId": "logical_function_59",
+    "entryState": 11437544,
+    "capturedValues": {},
+    "parameters": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j",
+      "k"
+    ],
+    "paramCount": 11,
+    "vararg": false,
+    "reasonNotRewired": "State sequence exceeds size threshold (> 30 blocks); complex nested dispatch",
+    "blockingStates": [
+      11437544
+    ],
+    "blockingValues": [],
+    "unknownTransitions": []
+  },
+  {
+    "constructorId": "closure_65",
+    "logicalFunctionId": "logical_function_60",
+    "entryState": 1735617,
+    "capturedValues": {},
+    "parameters": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e"
+    ],
+    "paramCount": 5,
+    "vararg": false,
+    "reasonNotRewired": "Interdependent state transition graph shared with error handling handlers",
+    "blockingStates": [
+      1735617
+    ],
+    "blockingValues": [],
+    "unknownTransitions": []
+  },
+  {
+    "constructorId": "closure_66",
+    "logicalFunctionId": "logical_function_61",
+    "entryState": 10300779,
+    "capturedValues": {},
+    "parameters": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "paramCount": 4,
+    "vararg": false,
+    "reasonNotRewired": "Contains dynamic exit via Q = A[W(...)] and shared multi-owner states",
+    "blockingStates": [
+      10300779
+    ],
+    "blockingValues": [],
+    "unknownTransitions": []
+  },
+  {
+    "constructorId": "closure_67",
+    "logicalFunctionId": "logical_function_62",
+    "entryState": 6850655,
+    "capturedValues": {},
+    "parameters": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e"
+    ],
+    "paramCount": 5,
+    "vararg": false,
+    "reasonNotRewired": "Contains indirect table accesses and closure nesting dependencies",
+    "blockingStates": [
+      6850655
+    ],
+    "blockingValues": [],
+    "unknownTransitions": []
+  },
+  {
+    "constructorId": "closure_131",
+    "logicalFunctionId": "logical_function_85",
+    "entryState": 13548685,
+    "capturedValues": {},
+    "parameters": [
+      "..."
+    ],
+    "paramCount": 0,
+    "vararg": true,
+    "reasonNotRewired": "Root entry script function; outer wrapper coordinating global execution",
+    "blockingStates": [
+      13548685
+    ],
+    "blockingValues": [],
+    "unknownTransitions": []
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "closureConstructors": 131,
+  "uniqueLogicalFunctionsFromConstructors": 84,
+  "internalStateTransitionsMistakenAsEntries": 197,
+  "totalAbstractFunctionContextsReported": 281,
+  "explanation": "Of the 281 reported entry states, only 84 are genuine closure entry points from constructors. The remaining 197 are internal dispatcher state transitions (Q = <const>) which represent basic block jumps rather than independent functions."
+}

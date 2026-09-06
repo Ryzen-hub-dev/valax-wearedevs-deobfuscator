@@ -1,0 +1,8 @@
+{
+  "closureResults": [
+    90,
+    75,
+    75
+  ],
+  "description": "nested closures with mutable captures"
+}

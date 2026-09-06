@@ -1,0 +1,12 @@
+{
+  "id": "fixture_09_closure_capture",
+  "name": "Closure Capture",
+  "fixtureType": "CLOSED_DETERMINISTIC_GROUND_TRUTH",
+  "pairedOriginalAvailable": true,
+  "semanticEligible": true,
+  "targetLevel": "L5-W",
+  "originalBytes": 76,
+  "originalSha256": "d9e8cd43fafd7135d4ec68677b628550447247ce877f4b8cdd9d148fd2c83d16",
+  "protectedAvailable": true,
+  "description": "Lexical closure capturing local upvalue from parent scope"
+}

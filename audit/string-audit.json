@@ -1,0 +1,174 @@
+{
+  "totalEntries": 1139,
+  "successfullyDecoded": 1139,
+  "ambiguousEntries": 0,
+  "binaryEntries": 889,
+  "invalidEntries": 0,
+  "alphabetSize": 64,
+  "rotationRanges": [
+    [
+      1,
+      1139
+    ],
+    [
+      1,
+      274
+    ],
+    [
+      275,
+      1139
+    ]
+  ],
+  "sampleDecoded": [
+    {
+      "index": 1,
+      "rawPreview": "3XtaYM==",
+      "decodedPreview": "\"\\223\\169\\164\\028\"",
+      "isBinary": true
+    },
+    {
+      "index": 2,
+      "rawPreview": "YQ6ExvEsXVXl",
+      "decodedPreview": "\"\\031\\247\\006\\142\\193\\152\\232\\",
+      "isBinary": true
+    },
+    {
+      "index": 3,
+      "rawPreview": "qQ/lqfS=",
+      "decodedPreview": "\"C\\254\\225@\"",
+      "isBinary": true
+    },
+    {
+      "index": 4,
+      "rawPreview": "XT==",
+      "decodedPreview": "\"\\235\"",
+      "isBinary": true
+    },
+    {
+      "index": 5,
+      "rawPreview": "2mQIXM==",
+      "decodedPreview": "\"U\\175\\205\\232\"",
+      "isBinary": true
+    },
+    {
+      "index": 6,
+      "rawPreview": "v2NC3g==",
+      "decodedPreview": "\"\\177P\\235\\222\"",
+      "isBinary": true
+    },
+    {
+      "index": 7,
+      "rawPreview": "KEkyKYV70t6=",
+      "decodedPreview": "\"tostrin\"",
+      "isBinary": false
+    },
+    {
+      "index": 8,
+      "rawPreview": "Pw3F+I1BrrvY/8S=",
+      "decodedPreview": "\"D\\029\\194\\136\\2099\\215[\\a\\238",
+      "isBinary": true
+    },
+    {
+      "index": 9,
+      "rawPreview": "Yn5L7g==",
+      "decodedPreview": "\"\\029E\\168\\166\"",
+      "isBinary": true
+    },
+    {
+      "index": 10,
+      "rawPreview": "fP7MODRTzCmGlNZ=",
+      "decodedPreview": "\"-\\026@#g\\240\\190\\182\\153\\132\"",
+      "isBinary": true
+    },
+    {
+      "index": 11,
+      "rawPreview": "/sfrbyRt6hW/Tseg",
+      "decodedPreview": "\"\\237\\130\\245{7\\230r\\127;\\193\\",
+      "isBinary": true
+    },
+    {
+      "index": 12,
+      "rawPreview": "Gkd+7P1=",
+      "decodedPreview": "\"g\\219b\\165\"",
+      "isBinary": true
+    },
+    {
+      "index": 13,
+      "rawPreview": "oxmst+Nh",
+      "decodedPreview": "\"*6\\152\\154 \\231\"",
+      "isBinary": true
+    },
+    {
+      "index": 14,
+      "rawPreview": "PaVH2hGa01VNptUAGM==",
+      "decodedPreview": "\"FBnVvdlBCJaOd\"",
+      "isBinary": false
+    },
+    {
+      "index": 15,
+      "rawPreview": "Fm7/HzJ/",
+      "decodedPreview": "\"\\t\\170{\\186\\249{\"",
+      "isBinary": true
+    },
+    {
+      "index": 16,
+      "rawPreview": "NfbuUoTilOZ=",
+      "decodedPreview": "\"\\f\\183\\180\\020\\172>\\132\"",
+      "isBinary": true
+    },
+    {
+      "index": 17,
+      "rawPreview": "JDQP",
+      "decodedPreview": "\"\\151o\\209\"",
+      "isBinary": true
+    },
+    {
+      "index": 18,
+      "rawPreview": "p7gbq6ChDfNx",
+      "decodedPreview": "\"J\\152\\030A\\202\\231\\216\\176\\22",
+      "isBinary": true
+    },
+    {
+      "index": 19,
+      "rawPreview": "sQbO",
+      "decodedPreview": "\"c\\247\\136\"",
+      "isBinary": true
+    },
+    {
+      "index": 20,
+      "rawPreview": "bNnrP3ltna9CIulsKM==",
+      "decodedPreview": "\"x55GxfRLk7HXt\"",
+      "isBinary": false
+    },
+    {
+      "index": 21,
+      "rawPreview": "I5PHmNSypYsBIY7wnM==",
+      "decodedPreview": "\"5dnh33Hv94zAP\"",
+      "isBinary": false
+    },
+    {
+      "index": 22,
+      "rawPreview": "SDD4cYmhCeFMGaGlSNvZ",
+      "decodedPreview": "\"3m\\178Lv\\167\\172\\224\\128fFa0;",
+      "isBinary": true
+    },
+    {
+      "index": 23,
+      "rawPreview": "VP9/SUgDk/gz2dvI",
+      "decodedPreview": "\"%\\028{0X6\\247\\184/V\\219\\r\"",
+      "isBinary": true
+    },
+    {
+      "index": 24,
+      "rawPreview": "0U1rIyK22D1y0UJ8Irg=",
+      "decodedPreview": "\"lQ577UWa3lYj7\"",
+      "isBinary": false
+    },
+    {
+      "index": 25,
+      "rawPreview": "COebVFO=",
+      "decodedPreview": "\"\\172\\131\\158$\"",
+      "isBinary": true
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "timestamp": "2026-09-05T19:02:35.321Z",
+  "totalSamples": 25,
+  "obfuscatorBackend": "WeAreDevs (https://wearedevs.net/api/obfuscate)",
+  "samples": [
+    {
+      "sampleId": "blind_01_collatz",
+      "name": "blind_01_collatz",
+      "sourceBytes": 162,
+      "sourceSha256": "2961a4a1405aebdb26e12c8f3a04d5bedf092a1f4283288724e9180c65eb518b",
+      "protectedBytes": 17758,
+      "protectedSha256": "e07992acd46cf512071feae6a8592d9e06a77d52c240348d4453e3b59340e029",
+      "generationTimestamp": "2026-09-05T15:54:08.029Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_02_factorial_recursive",
+      "name": "blind_02_factorial_recursive",
+      "sourceBytes": 100,
+      "sourceSha256": "841c68ae16af865cf5e7afd58a189ac0ceb2711e1900f4913499d6fc935ceee7",
+      "protectedBytes": 17782,
+      "protectedSha256": "b4d8bc276dbefd801646e43904637c61aa3f96cb4f8fa67879ec0e0349d4abcd",
+      "generationTimestamp": "2026-09-05T15:54:09.571Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_03_table_filter",
+      "name": "blind_03_table_filter",
+      "sourceBytes": 323,
+      "sourceSha256": "6974bbf8575f26732d225f117c17baa7ade30daf2aa7dda32b6b348371959910",
+      "protectedBytes": 18903,
+      "protectedSha256": "e192705f0b9c72d51b72399008ebbeb082b250a4474e0ddfb903ca87221f8b07",
+      "generationTimestamp": "2026-09-05T15:54:10.951Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_04_string_reverse",
+      "name": "blind_04_string_reverse",
+      "sourceBytes": 117,
+      "sourceSha256": "8cf4d21f6f3bfb80e0078315ee8bbe813624c055e7f6ecb738245b960b7dfca6",
+      "protectedBytes": 17745,
+      "protectedSha256": "3803a1f4e42d78e968c6a167c184dd3007b1bd090a24a77e1885dd6be27d3b04",
+      "generationTimestamp": "2026-09-05T15:54:12.778Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_05_fibonacci_iterative",
+      "name": "blind_05_fibonacci_iterative",
+      "sourceBytes": 96,
+      "sourceSha256": "e6fe816d2cc7802b43035c0ff958cf55456afdbbda93a90ea63a086f77599f88",
+      "protectedBytes": 17459,
+      "protectedSha256": "24ea8ce8e7c5bd4c3307e5787fbfbfa423b18a651a1fda4f16573a1f35293a1e",
+      "generationTimestamp": "2026-09-05T15:54:14.187Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_06_matrix_diagonal",
+      "name": "blind_06_matrix_diagonal",
+      "sourceBytes": 130,
+      "sourceSha256": "5d50c27eb24df0b951d36e0aa52c45e8821354fe53b6ec2c73261855b16243db",
+      "protectedBytes": 17935,
+      "protectedSha256": "a09087a603c8e861a89a31eee0dfa21d732927c43a80494cf8ba209d9e290cd4",
+      "generationTimestamp": "2026-09-05T15:54:18.180Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_07_accumulator_closure",
+      "name": "blind_07_accumulator_closure",
+      "sourceBytes": 188,
+      "sourceSha256": "9de67d51daf82067b0cb9c8b8dd3487d1f6532e53ed4f89143117f2b984d53b6",
+      "protectedBytes": 17919,
+      "protectedSha256": "c50984c43882632efa001cd5364e97b4ca3bd7081726d51f3e4cfae55fb78c7a",
+      "generationTimestamp": "2026-09-05T15:54:19.622Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_08_multi_branch_dispatch",
+      "name": "blind_08_multi_branch_dispatch",
+      "sourceBytes": 294,
+      "sourceSha256": "79543637babb07a885ca7d3d8e06839ef1dfbdc73fa0147c617f9eb006b4dad8",
+      "protectedBytes": 19380,
+      "protectedSha256": "2e5f3ba46d45d5f6f723dc3154429b705df7805aad9b05256c0bfc42fdb8987a",
+      "generationTimestamp": "2026-09-05T15:54:21.008Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_09_metatable_vector",
+      "name": "blind_09_metatable_vector",
+      "sourceBytes": 270,
+      "sourceSha256": "be815df03a2b2eb2d8367b1ad00f99de02d2bc4cd45ab50942af174e361ef8af",
+      "protectedBytes": 19404,
+      "protectedSha256": "1b5c7ad7b1e1256e695f5117f841e2b700db3fd1970057a963d80100375ba5ec",
+      "generationTimestamp": "2026-09-05T15:54:22.328Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_10_bubble_sort",
+      "name": "blind_10_bubble_sort",
+      "sourceBytes": 241,
+      "sourceSha256": "24cc03a0d3804dc7339c5bbfd2696fa835724fb7d28e7a88646a3b8052ad67dd",
+      "protectedBytes": 18428,
+      "protectedSha256": "98b16aef02e772fba73ae96f591bbd1247104329f0c75078e950cac6153ceef5",
+      "generationTimestamp": "2026-09-05T15:54:23.722Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_11_binary_search",
+      "name": "blind_11_binary_search",
+      "sourceBytes": 437,
+      "sourceSha256": "b4fd9435047bab010415a746ab2374fa96c8af2827f984729abfb1d69c9fdadf",
+      "protectedBytes": 18628,
+      "protectedSha256": "7df5554655e30fcebe6bf9cd05717f9c9a2e6894888eb3d439da5e4af3d4d855",
+      "generationTimestamp": "2026-09-05T15:54:25.497Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_12_higher_order_map",
+      "name": "blind_12_higher_order_map",
+      "sourceBytes": 210,
+      "sourceSha256": "d7d3c85ececeaef24242dacb1ef52ddf8d67a3ac2be1a56f494e93152ece5eb4",
+      "protectedBytes": 18501,
+      "protectedSha256": "9662d2b41cca970b5e649620a60203f47ca8dfe15b2d4e08e0ae3f52cb567ea7",
+      "generationTimestamp": "2026-09-05T15:54:26.984Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_13_curried_addition",
+      "name": "blind_13_curried_addition",
+      "sourceBytes": 146,
+      "sourceSha256": "baed3ad93d265402b25ddd698f6c7338749f0531741c6a597051f1a0bf1ef888",
+      "protectedBytes": 17896,
+      "protectedSha256": "a38ff7feafcb841cf46567ab171902df9072f276d4a8ad88467f1d15c86f2664",
+      "generationTimestamp": "2026-09-05T15:54:28.233Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_14_bitwise_simulation",
+      "name": "blind_14_bitwise_simulation",
+      "sourceBytes": 205,
+      "sourceSha256": "737f3fc013abfcd67eaf4709ced23a35406f9af16fe0e0ed3f094144d1d73bae",
+      "protectedBytes": 18362,
+      "protectedSha256": "6006ee01aff6e59ff8f5af7fe74e391a7d18ebf014e99f494336a549838c362e",
+      "generationTimestamp": "2026-09-05T15:54:29.639Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_15_string_parser",
+      "name": "blind_15_string_parser",
+      "sourceBytes": 134,
+      "sourceSha256": "1e01963fe1e7afbe60528c837412776097aff0247cbac2bf3a2cda5427c74b9e",
+      "protectedBytes": 18004,
+      "protectedSha256": "8cf43c8aec0d44413a19cb0f61ba8d7a7c6545c8795b3375287dfd17acd36c1a",
+      "generationTimestamp": "2026-09-05T15:54:30.933Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_16_state_machine_enum",
+      "name": "blind_16_state_machine_enum",
+      "sourceBytes": 247,
+      "sourceSha256": "585d5e26c4ff75a0e92db98b805dbddc3931c12fa8c96fbebef3bd03da5e4e28",
+      "protectedBytes": 18514,
+      "protectedSha256": "8d0601585a6132ec337bbe015f16924e50d46c8e116fab49c5260d9d40ac38ac",
+      "generationTimestamp": "2026-09-05T15:54:32.578Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_17_vararg_sum",
+      "name": "blind_17_vararg_sum",
+      "sourceBytes": 195,
+      "sourceSha256": "f68a2e1ce326b0492c726f6723d893b958d3d64c237dbeacd39b0dcce1939116",
+      "protectedBytes": 18046,
+      "protectedSha256": "11e6eb73ea306dc2a9fc2078136df4096217f918b64b5ed5a45f90571c7d545f",
+      "generationTimestamp": "2026-09-05T15:54:34.171Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_18_multi_return_split",
+      "name": "blind_18_multi_return_split",
+      "sourceBytes": 181,
+      "sourceSha256": "da3c392620a06139de88b9dbc77a4a56b8d891ccb508c7dfa349ed1f76ed1ff2",
+      "protectedBytes": 17943,
+      "protectedSha256": "3bcd7f78b11dff619e6bb11bb80d8c1cc09749313a17af320f87b6ef4b35ae1e",
+      "generationTimestamp": "2026-09-05T15:54:35.638Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_19_queue_fifo",
+      "name": "blind_19_queue_fifo",
+      "sourceBytes": 320,
+      "sourceSha256": "2e1ca422308a64773a3a3fb7f49054d263aa96646b39d3db0679de47609b4ec9",
+      "protectedBytes": 20242,
+      "protectedSha256": "67cb2411c22aed8f92ab6c997a5d12d2bfdca15f65790ebde1f8b6c6c126605c",
+      "generationTimestamp": "2026-09-05T15:54:37.090Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_20_memoized_fib",
+      "name": "blind_20_memoized_fib",
+      "sourceBytes": 200,
+      "sourceSha256": "0df5f36d170c2abb634049e5bea759f03a96da6e58b5224b91280eac9aa003c2",
+      "protectedBytes": 18306,
+      "protectedSha256": "c8cf9a7f8c9b6716fe178903334c6a0f97495482f9190c2236ff6a863fc49e87",
+      "generationTimestamp": "2026-09-05T15:54:38.492Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_21_deeply_nested_scope",
+      "name": "blind_21_deeply_nested_scope",
+      "sourceBytes": 111,
+      "sourceSha256": "afce0276cb3285749e253116ef503263f4a9836c1a5f76ee0b4d4a45ba0f4372",
+      "protectedBytes": 17322,
+      "protectedSha256": "49fd49f35ba05edc7998685c534fee50305009a2ca9181d0309152e8bceb8544",
+      "generationTimestamp": "2026-09-05T15:54:39.960Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_22_repeat_until_converge",
+      "name": "blind_22_repeat_until_converge",
+      "sourceBytes": 130,
+      "sourceSha256": "5104873f6e5bbe3dfe08c35936b713ac543fb95123085a016bde0ab69f4995ff",
+      "protectedBytes": 17568,
+      "protectedSha256": "8475c3e633084b42baca9378e2d97f272067a4c8c8c03195024b324f107b2d8b",
+      "generationTimestamp": "2026-09-05T15:54:41.389Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_23_compound_boolean",
+      "name": "blind_23_compound_boolean",
+      "sourceBytes": 187,
+      "sourceSha256": "2c13e87c5079f93be048075d82fae6251f0eeaffb8784e5f88e2f81339e0d8cd",
+      "protectedBytes": 18294,
+      "protectedSha256": "4fef6af954d860340639968ce18445de4f46d11cc709294483d3b19e1aacb996",
+      "generationTimestamp": "2026-09-05T15:54:42.820Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_24_table_deep_copy",
+      "name": "blind_24_table_deep_copy",
+      "sourceBytes": 285,
+      "sourceSha256": "52e7da2803aa9eea24746ad6e0f5b67d6ded71afcb341d0b9b10bb6b0ee6a032",
+      "protectedBytes": 19101,
+      "protectedSha256": "ff48bd9b0fcee16cec276b802287c600aed8c493b57179cc7befbd6aa345c66f",
+      "generationTimestamp": "2026-09-05T15:54:44.232Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    },
+    {
+      "sampleId": "blind_25_pipeline_processor",
+      "name": "blind_25_pipeline_processor",
+      "sourceBytes": 159,
+      "sourceSha256": "ad046bbdc4b3554391382ccc303ed2d0d078b16fa0e8d00f1c59bb4e4771a449",
+      "protectedBytes": 17573,
+      "protectedSha256": "32cc587d8a572e6db4ee3b6fb6637273c95bf3b3260e13484162b44c15d65084",
+      "generationTimestamp": "2026-09-05T15:54:45.619Z",
+      "protectionFingerprint": "WeAreDevs-v1.0.0-tagged-header",
+      "origin": "Live WeAreDevs API (https://wearedevs.net/api/obfuscate)"
+    }
+  ]
+}

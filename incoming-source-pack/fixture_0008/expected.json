@@ -1,0 +1,12 @@
+{
+  "evenOdd": {
+    "e4": true,
+    "e7": false,
+    "o4": false,
+    "o7": true
+  },
+  "gcd": {
+    "gcd1": 6,
+    "gcd2": 1
+  }
+}

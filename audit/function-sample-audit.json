@@ -1,0 +1,282 @@
+[
+  {
+    "functionId": "func_1",
+    "location": "unknown",
+    "parentContext": "CallExpression",
+    "paramCount": 0,
+    "isVararg": true
+  },
+  {
+    "functionId": "func_2",
+    "location": "unknown",
+    "parentContext": "FunctionExpression",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_3",
+    "location": "unknown",
+    "parentContext": "CallExpression",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_4",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_5",
+    "location": "unknown",
+    "parentContext": "LocalStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_6",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_7",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_8",
+    "location": "unknown",
+    "parentContext": "TableKey",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_9",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_10",
+    "location": "unknown",
+    "parentContext": "LocalStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_11",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_12",
+    "location": "unknown",
+    "parentContext": "LocalStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_13",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_14",
+    "location": "unknown",
+    "parentContext": "LocalStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_15",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_16",
+    "location": "unknown",
+    "parentContext": "LocalStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_17",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_18",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_19",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_20",
+    "location": "unknown",
+    "parentContext": "LocalStatement",
+    "paramCount": 0,
+    "isVararg": true
+  },
+  {
+    "functionId": "func_21",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_22",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_23",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_24",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_25",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_26",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_27",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_28",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_29",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_30",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_31",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_32",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_33",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_34",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_35",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_36",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_37",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_38",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_39",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  },
+  {
+    "functionId": "func_40",
+    "location": "unknown",
+    "parentContext": "AssignmentStatement",
+    "paramCount": 0,
+    "isVararg": false
+  }
+]

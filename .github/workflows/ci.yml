@@ -1,0 +1,138 @@
+name: Valax Source Recovery CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Syntax Linting
+      run: node scripts/lint.js
+
+    - name: Build Verification
+      run: node scripts/build.js
+
+    - name: Master Test Suite
+      run: node tests/run-all.js
+
+    - name: Closed Corpus L5-W Expansion Gate
+      run: node scripts/validate-l5w-closed.js
+
+    - name: Structural Anti-Hardcoding Audit
+      run: node scripts/audit-structural-hardcoding.js
+
+    - name: Sandbox Isolation & Resource Limit Tests
+      run: node tests/unit/sandbox.test.js
+
+    - name: CLI Production Tests
+      run: node tests/unit/cli.test.js
+
+    - name: Package Packaging Verification
+      run: npm pack --dry-run
+
+  windows-test:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js 22.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22.x
+
+    - name: Windows CLI Production Tests
+      run: node tests/unit/cli.test.js
+
+    - name: Windows Sandbox & Isolated Process Runner Tests
+      run: node tests/unit/sandbox.test.js
+
+    - name: Windows Master Regression Suite
+      run: node tests/run-all.js
+
+    - name: Windows Package Packing Verification
+      run: npm pack --dry-run
+
+  phase2-container-runtime-gate:
+    name: Phase 2 Linux Container Runtime Security & Redis Gate
+    runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+
+    - name: 1. Core Baseline Guard Integrity Audit
+      run: node -e "const { CoreBaselineGuard } = require('./packages/worker/src'); new CoreBaselineGuard().assertIntegrity(); console.log('Core baseline 100% frozen and intact');"
+
+    - name: 2. Docker & Compose Environment Verification
+      run: |
+        docker --version
+        docker compose version
+        docker info
+
+    - name: 3. Real Docker Image Build (P0-3)
+      run: |
+        docker build -f infra/docker/Dockerfile.worker -t valax-recovery-worker:phase2-test .
+        docker inspect valax-recovery-worker:phase2-test
+
+    - name: 4. Redis Multi-Process Queue & Restart Persistence Tests (P0-18, P0-19, P0-20)
+      run: |
+        mkdir -p audit
+        node tests/integration/redis-multi-process-queue.test.js 2>&1 | tee audit/redis-integration.log
+      env:
+        REDIS_URL: redis://127.0.0.1:6379
+
+    - name: 5. Live Linux Container Runtime Security Enforcement (P0-3 ~ P0-17)
+      run: |
+        mkdir -p audit
+        node scripts/verify-phase2-container-runtime.js 2>&1 | tee audit/phase2-runtime-raw.log
+
+    - name: 6. Real Container E2E Recovery Verification
+      run: |
+        mkdir -p audit
+        node tests/integration/phase2-security-e2e.test.js 2>&1 | tee audit/container-e2e.log
+
+    - name: 7. Master Test Suite
+      run: node tests/run-all.js
+
+    - name: 8. Upload Phase 2 Runtime Security Evidence Artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: phase2-runtime-security-evidence
+        path: |
+          audit/phase2-runtime-security.json
+          audit/phase2-runtime-raw.log
+          audit/redis-integration.log
+          audit/container-e2e.log
+

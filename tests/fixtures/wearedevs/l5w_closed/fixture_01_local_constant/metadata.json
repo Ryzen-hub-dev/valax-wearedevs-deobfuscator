@@ -1,0 +1,12 @@
+{
+  "id": "fixture_01_local_constant",
+  "name": "Local Constant",
+  "fixtureType": "CLOSED_DETERMINISTIC_GROUND_TRUTH",
+  "pairedOriginalAvailable": true,
+  "semanticEligible": true,
+  "targetLevel": "L5-W",
+  "originalBytes": 24,
+  "originalSha256": "8383f03c548454c2ca36ec5def0b3cbf261fac7a15c83cfa5045732f270d1651",
+  "protectedAvailable": true,
+  "description": "Deterministic local constant string printed to stdout"
+}

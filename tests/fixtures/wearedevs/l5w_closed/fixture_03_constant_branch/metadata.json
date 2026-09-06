@@ -1,0 +1,12 @@
+{
+  "id": "fixture_03_constant_branch",
+  "name": "Constant Branch",
+  "fixtureType": "CLOSED_DETERMINISTIC_GROUND_TRUTH",
+  "pairedOriginalAvailable": true,
+  "semanticEligible": true,
+  "targetLevel": "L5-W",
+  "originalBytes": 68,
+  "originalSha256": "6729c27ee7c8dba17d50e4a9cbd94b7995b2dc73af0d2e4b109fee0191259a57",
+  "protectedAvailable": true,
+  "description": "Statically proven constant branch condition folding dead alternate path"
+}

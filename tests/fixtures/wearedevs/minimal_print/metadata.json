@@ -1,0 +1,12 @@
+{
+  "id": "fixture_minimal_print",
+  "name": "minimal_print",
+  "pairedOriginalAvailable": true,
+  "semanticEligible": true,
+  "fixtureType": "PAIRED_GROUND_TRUTH",
+  "originalSha256": "0ca9091eb4e31fb1ab24c8c5de92a08e4e5f402919f82ea3ca784f38534f03f3",
+  "protectedSha256": "b73a29b073dbe274bf0628bed415f494cbc0c757967c7fd51b85f10095835722",
+  "targetLevel": "L5",
+  "originalBytes": 12,
+  "protectedBytes": 17299
+}

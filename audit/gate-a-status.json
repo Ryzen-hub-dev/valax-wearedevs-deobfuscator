@@ -1,0 +1,18 @@
+{
+  "goldenProtectedFixtures": 1,
+  "gateAPairedFixturesRequired": 10,
+  "gateAPairedFixturesPresent": 0,
+  "detected": 0,
+  "parsed": 0,
+  "semanticEligible": 0,
+  "semanticPass": 0,
+  "semanticMismatch": 0,
+  "fullRecovery": 0,
+  "highRecovery": 0,
+  "partialRecovery": 0,
+  "failed": 0,
+  "crashes": 0,
+  "silentSemanticCorruption": 0,
+  "gateStatus": "WAITING_FOR_PROTECTED_FIXTURES",
+  "readiness": "CORE_ALPHA"
+}
