@@ -128,6 +128,7 @@ jobs:
 
     - name: 4. Redis Multi-Process Queue & Restart Persistence Tests (P0-18, P0-19, P0-20)
       run: |
+        set -o pipefail
         mkdir -p audit
         node tests/integration/redis-multi-process-queue.test.js 2>&1 | tee audit/redis-integration.log
       env:
@@ -135,11 +136,13 @@ jobs:
 
     - name: 5. Live Linux Container Runtime Security Enforcement (P0-3 ~ P0-17)
       run: |
+        set -o pipefail
         mkdir -p audit
         node scripts/verify-phase2-container-runtime.js 2>&1 | tee audit/phase2-runtime-raw.log
 
     - name: 6. Real Container E2E Recovery Verification
       run: |
+        set -o pipefail
         mkdir -p audit
         node tests/integration/phase2-security-e2e.test.js 2>&1 | tee audit/container-e2e.log
 

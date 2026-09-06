@@ -187,7 +187,11 @@ async function runRuntimeVerification() {
 
   // 6. P0-8: CPU Limit
   console.log('[P0-8] Testing CPU quota limit...');
-  const cpuInspect = JSON.parse(exec(`docker run -d --name valax-cpu-test ${secFlags} --cpus 1.0 --entrypoint sleep ${IMAGE_TAG} 10 && docker inspect valax-cpu-test && docker rm -f valax-cpu-test`).stdout || '[]');
+  exec(`docker run -d --name valax-cpu-test ${secFlags} --cpus 1.0 --entrypoint sleep ${IMAGE_TAG} 10`);
+  const cpuInspectRes = exec('docker inspect valax-cpu-test');
+  exec('docker rm -f valax-cpu-test');
+  let cpuInspect = [];
+  try { cpuInspect = JSON.parse(cpuInspectRes.stdout || '[]'); } catch {}
   report.runtime.cpuLimit = {
     nanoCpus: cpuInspect[0]?.HostConfig?.NanoCpus || 1000000000,
     enforced: (cpuInspect[0]?.HostConfig?.NanoCpus || 0) > 0
