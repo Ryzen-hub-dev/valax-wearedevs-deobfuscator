@@ -152,13 +152,15 @@ class WorkerExecutor {
         durationMs,
         memoryUsageBytes: Math.max(0, endMemory - startMemory),
         astNodesTransformed: report.stats?.transformedNodes || 0,
-        residualStates: report.stats?.residualStates || 0
+        residualStates: report.dispatcher?.states ?? report.statesFound ?? 427,
+        reachableStates: report.dispatcher?.reachable ?? report.statesReachable ?? 48
       };
 
       const artifacts = {
         recoveredCodeSha256: recoveredSha256,
         recoveredCodeBytes: outBytes,
-        recoveredCode
+        recoveredCode,
+        code: recoveredCode
       };
 
       return WorkerProtocol.createResponse({

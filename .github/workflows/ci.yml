@@ -107,9 +107,9 @@ jobs:
       with:
         node-version: 20.x
 
-    - name: Install Lua 5.1 (Linux)
+    - name: Install Lua 5.1 & Redis Tools (Linux)
       run: |
-        sudo apt-get update && sudo apt-get install -y lua5.1
+        sudo apt-get update && sudo apt-get install -y lua5.1 redis-tools
         sudo ln -sf /usr/bin/lua5.1 /usr/bin/lua
 
     - name: 1. Core Baseline Guard Integrity Audit
@@ -162,4 +162,5 @@ jobs:
           audit/redis-integration.log
           audit/container-e2e.log
           audit/redis-multi-process.json
+          audit/phase2-final-acceptance-matrix.json
 
