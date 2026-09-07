@@ -251,30 +251,58 @@ async function runRuntimeVerification() {
   exec(`docker run -d --name ${timeoutContainerName} --label valax.worker=true ${secFlagsStr} --entrypoint sleep ${IMAGE_TAG} 60`);
   
   const configuredTimeoutMs = 3000;
-  let isProcessKilled = false;
   
   // Wait for configured timeout
-  const timeoutCheckInterval = 500;
   while (Date.now() - timeoutStart < configuredTimeoutMs) {
     execSync('sleep 0.5');
   }
   
   // Kill container on timeout expiration
+  const teardownStartedAt = new Date().toISOString();
   exec(`docker kill ${timeoutContainerName}`);
   exec(`docker rm -f ${timeoutContainerName}`);
+  const teardownCompletedAt = new Date().toISOString();
   const observedDurationMs = Date.now() - timeoutStart;
   
-  const timeoutRunningCheck = exec(`docker ps -q --filter name=${timeoutContainerName}`).stdout.trim();
+  // Bounded polling to ensure no race condition (up to 5s, 500ms interval)
+  let containerRunningAfterTimeout = true;
+  let containerExistsAfterTimeout = true;
+  for (let attempt = 0; attempt < 10; attempt++) {
+    const runningCheck = exec(`docker ps -q --filter name=${timeoutContainerName}`).stdout.trim();
+    const existsCheck = exec(`docker ps -a -q --filter name=${timeoutContainerName}`).stdout.trim();
+    containerRunningAfterTimeout = runningCheck.length > 0;
+    containerExistsAfterTimeout = existsCheck.length > 0;
+    if (!containerRunningAfterTimeout && !containerExistsAfterTimeout) {
+      break;
+    }
+    execSync('sleep 0.5');
+  }
+
+  const orphanAfterTimeout = containerExistsAfterTimeout;
+
   report.runtime.executionTimeout = {
     jobId: timeoutJobId,
     containerId: timeoutContainerName,
     configuredTimeoutMs,
     observedDurationMs,
+    teardownStartedAt,
+    teardownCompletedAt,
+    teardownDurationMs: new Date(teardownCompletedAt) - new Date(teardownStartedAt),
     processKilled: true,
-    containerRunningAfterTimeout: timeoutRunningCheck.length === 0,
+    containerRunningAfterTimeout,
+    containerExistsAfterTimeout,
+    orphanAfterTimeout,
     finalState: 'TIMED_OUT'
   };
-  console.log(`  ✔ Timeout enforced: duration=${observedDurationMs}ms, killed=true, runningAfter=${report.runtime.executionTimeout.containerRunningAfterTimeout}`);
+
+  // Explicit test assertions so test fails if container still runs or is orphaned
+  if (containerRunningAfterTimeout) {
+    throw new Error(`Execution timeout teardown failure: container ${timeoutContainerName} is still running after timeout!`);
+  }
+  if (orphanAfterTimeout) {
+    throw new Error(`Execution timeout teardown failure: container ${timeoutContainerName} exists as orphan after timeout!`);
+  }
+  console.log(`  ✔ Timeout enforced: duration=${observedDurationMs}ms, killed=true, runningAfter=${containerRunningAfterTimeout}, orphanAfter=${orphanAfterTimeout}`);
 
   // 11. P0-3: Real Container Running Cancellation Test
   console.log('[P0-3] Testing real container running cancellation...');
@@ -283,19 +311,44 @@ async function runRuntimeVerification() {
   exec(`docker run -d --name ${cancelContainerName} --label valax.worker=true ${secFlagsStr} --entrypoint sleep ${IMAGE_TAG} 60`);
   
   const beforeCancelRunning = exec(`docker inspect ${cancelContainerName} --format "{{.State.Running}}"`).stdout.trim() === 'true';
+  const cancelTeardownStartedAt = new Date().toISOString();
   exec(`docker kill ${cancelContainerName}`);
   exec(`docker rm -f ${cancelContainerName}`);
+  const cancelTeardownCompletedAt = new Date().toISOString();
   
-  const afterCancelCheck = exec(`docker ps -q --filter name=${cancelContainerName}`).stdout.trim();
+  // Bounded polling to ensure no race condition
+  let afterCancelRunning = true;
+  let afterCancelExists = true;
+  for (let attempt = 0; attempt < 10; attempt++) {
+    const runningCheck = exec(`docker ps -q --filter name=${cancelContainerName}`).stdout.trim();
+    const existsCheck = exec(`docker ps -a -q --filter name=${cancelContainerName}`).stdout.trim();
+    afterCancelRunning = runningCheck.length > 0;
+    afterCancelExists = existsCheck.length > 0;
+    if (!afterCancelRunning && !afterCancelExists) {
+      break;
+    }
+    execSync('sleep 0.5');
+  }
+
   report.runtime.runningCancellation = {
     jobId: cancelJobId,
     containerId: cancelContainerName,
     stateBeforeCancel: beforeCancelRunning ? 'RUNNING' : 'UNKNOWN',
     stateAfterCancel: 'CANCELLED',
-    containerRunningAfterCancel: afterCancelCheck.length > 0,
-    orphanAfterCancel: false
+    containerRunningAfterCancel: afterCancelRunning,
+    orphanAfterCancel: afterCancelExists,
+    teardownStartedAt: cancelTeardownStartedAt,
+    teardownCompletedAt: cancelTeardownCompletedAt,
+    teardownDurationMs: new Date(cancelTeardownCompletedAt) - new Date(cancelTeardownStartedAt)
   };
-  console.log(`  ✔ Running cancellation verified: before=${report.runtime.runningCancellation.stateBeforeCancel}, after=${report.runtime.runningCancellation.stateAfterCancel}`);
+
+  if (afterCancelRunning) {
+    throw new Error(`Cancellation assertion failure: container ${cancelContainerName} is still running after cancel!`);
+  }
+  if (afterCancelExists) {
+    throw new Error(`Cancellation assertion failure: orphan container ${cancelContainerName} exists after cancel!`);
+  }
+  console.log(`  ✔ Running cancellation verified: before=${report.runtime.runningCancellation.stateBeforeCancel}, after=${report.runtime.runningCancellation.stateAfterCancel}, runningAfter=${afterCancelRunning}, orphanAfter=${afterCancelExists}`);
 
   // 12. P0-2: Scoped 20-Job Batch Execution and Orphan Cleanup
   console.log('[P0-2] Testing 20-job batch execution and scoped orphan cleanup...');
@@ -464,8 +517,12 @@ async function runRuntimeVerification() {
     hostFsCanary: !!report.runtime?.hostFilesystemContained,
     hostEnvCanary: !!report.runtime?.hostEnvironmentContained,
 
-    executionTimeoutRuntime: report.runtime?.executionTimeout?.finalState === 'TIMED_OUT',
-    runningCancellationRuntime: report.runtime?.runningCancellation?.stateAfterCancel === 'CANCELLED',
+    executionTimeoutRuntime: report.runtime?.executionTimeout?.finalState === 'TIMED_OUT' &&
+                             report.runtime?.executionTimeout?.containerRunningAfterTimeout === false &&
+                             report.runtime?.executionTimeout?.orphanAfterTimeout === false,
+    runningCancellationRuntime: report.runtime?.runningCancellation?.stateAfterCancel === 'CANCELLED' &&
+                                report.runtime?.runningCancellation?.containerRunningAfterCancel === false &&
+                                report.runtime?.runningCancellation?.orphanAfterCancel === false,
     twentyJobCleanupRuntime: report.runtime?.cleanup?.clean === true && report.runtime?.cleanup?.orphanJobContainers === 0,
 
     redisRealRuntime: true,
