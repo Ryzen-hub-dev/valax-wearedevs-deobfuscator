@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-09-07T14:57:01.085Z",
+  "status": "BOUNDARY_VERIFICATION_PASS",
+  "totalFilesScanned": 15,
+  "scannedFiles": [
+    "apps/web/public/dashboard.html",
+    "apps/web/public/index.html",
+    "apps/web/public/job.html",
+    "apps/web/public/recover.html",
+    "apps/web/src/server.js",
+    "packages/api/src/auth.js",
+    "packages/api/src/errors.js",
+    "packages/api/src/index.js",
+    "packages/api/src/logger.js",
+    "packages/api/src/server.js",
+    "packages/api/src/state-machine.js",
+    "packages/discord/src/commands/valax-recover.js",
+    "packages/discord/src/gateway-adapter.js",
+    "packages/discord/src/interactions/verify.js",
+    "packages/discord/src/responses/messages.js"
+  ],
+  "violationCount": 0,
+  "violations": [],
+  "pass": true
+}

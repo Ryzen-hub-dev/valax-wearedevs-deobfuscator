@@ -1,0 +1,102 @@
+{
+  "testSuite": "API_SECURITY_AND_AUTHORIZATION",
+  "timestamp": "2026-09-07T14:53:52.268Z",
+  "tests": [
+    {
+      "name": "0. Setup Test Environment",
+      "status": "PASS",
+      "durationMs": 5
+    },
+    {
+      "name": "1. Health endpoints (/health/live, /health/ready)",
+      "status": "PASS",
+      "durationMs": 42
+    },
+    {
+      "name": "2. Unauthenticated request rejected with 401 UNAUTHORIZED",
+      "status": "PASS",
+      "durationMs": 5
+    },
+    {
+      "name": "3. DevelopmentAuthProvider strictly rejected in production NODE_ENV",
+      "status": "PASS",
+      "durationMs": 0
+    },
+    {
+      "name": "4. Dangerous filename traversal patterns rejected with 400 INVALID_FILE",
+      "status": "PASS",
+      "durationMs": 26
+    },
+    {
+      "name": "5. Source payload with NUL bytes rejected with 400 INVALID_FILE",
+      "status": "PASS",
+      "durationMs": 3
+    },
+    {
+      "name": "6. Valid recovery upload creates QUEUED job with stable schema (201 Created)",
+      "status": "PASS",
+      "durationMs": 3
+    },
+    {
+      "name": "7. Exact same idempotency key returns existing job without duplication",
+      "status": "PASS",
+      "durationMs": 3
+    },
+    {
+      "name": "8. Reused idempotency key with conflicting content rejected with 409 IDEMPOTENCY_CONFLICT",
+      "status": "PASS",
+      "durationMs": 2
+    },
+    {
+      "name": "9. Cross-user job access strictly denied with 403 FORBIDDEN",
+      "status": "PASS",
+      "durationMs": 8
+    },
+    {
+      "name": "10. Client cannot forge principal ID in body or query parameters",
+      "status": "PASS",
+      "durationMs": 8
+    },
+    {
+      "name": "11. Canonical Product FSM enforces terminal irreversibility",
+      "status": "PASS",
+      "durationMs": 0
+    },
+    {
+      "name": "12. Owner cancellation of active job succeeds",
+      "status": "PASS",
+      "durationMs": 5
+    },
+    {
+      "name": "13. Cancellation of terminal job rejected with 409 JOB_NOT_CANCELLABLE",
+      "status": "PASS",
+      "durationMs": 2
+    },
+    {
+      "name": "14. Guessed or non-existent artifact IDs return 404 ARTIFACT_NOT_FOUND",
+      "status": "PASS",
+      "durationMs": 2
+    },
+    {
+      "name": "15. [SECURITY] Source secret canary test confirms zero occurrences in captured logs",
+      "status": "PASS",
+      "durationMs": 3
+    }
+  ],
+  "securityInvariants": {
+    "devAuthRejectedInProduction": true,
+    "pathTraversalBlocked": true,
+    "nulByteInjectionBlocked": true,
+    "principalIsolationEnforced": true,
+    "sourceCanaryZeroLeakage": true,
+    "authHeaderZeroLeakage": true,
+    "idempotencyEnforced": true,
+    "canonicalFsmIrreversibility": true
+  },
+  "summary": {
+    "total": 16,
+    "passed": 16,
+    "failed": 0,
+    "verdict": "API_SECURITY_PASS"
+  }
+}

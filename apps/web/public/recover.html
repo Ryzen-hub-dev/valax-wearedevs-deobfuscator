@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Source — Valax Source Recovery</title>
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <div class="dev-banner">
+    <span>SYSTEM ARCHITECTURE: PRODUCT BOUNDARY ENFORCED</span>
+    <span id="dev-user-indicator">[DEV AUTH ACTIVE: dev-default]</span>
+  </div>
+
+  <header class="app-header">
+    <div class="brand">
+      <h1>Valax Source Recovery</h1>
+      <span class="badge-tag">Submission</span>
+    </div>
+    <nav class="nav-links">
+      <a href="/">Architecture</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/recover" class="active">Submit Recovery</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Submit Protected Source Payload</h2>
+      </div>
+
+      <div id="error-banner" style="display: none; background: #3b1111; border: 1px solid #7f1d1d; color: #fca5a5; padding: 12px; border-radius: 4px; margin-bottom: 16px; font-family: var(--font-mono); font-size: 12px;"></div>
+
+      <form id="recovery-form">
+        <div class="form-group">
+          <label>Payload File (.lua, .luau, .txt)</label>
+          <div class="dropzone" id="dropzone">
+            <p style="color: var(--text-primary); font-weight: 500; margin-bottom: 6px;">Drag & Drop protected Lua/Luau script here</p>
+            <p style="color: var(--text-muted); font-size: 12px;">or click to browse local files (max 5 MB)</p>
+            <input type="file" id="file-input" style="display: none;" accept=".lua,.luau,.txt">
+          </div>
+        </div>
+
+        <div id="file-info" style="display: none; margin-bottom: 16px; padding: 12px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 4px; font-family: var(--font-mono); font-size: 12px;">
+          <div>Selected File: <strong id="file-name" style="color: var(--accent-cyan);"></strong></div>
+          <div style="color: var(--text-secondary); margin-top: 4px;">Size: <span id="file-size"></span> bytes</div>
+        </div>
+
+        <div class="form-group">
+          <label for="stage-select">Requested Deobfuscation Stage</label>
+          <select id="stage-select">
+            <option value="auto">Auto (Full L5-W pipeline with fallback)</option>
+            <option value="L5">L5 — Full Control-Flow Flattening De-obfuscation</option>
+            <option value="L4">L4 — Partial CFG Reconstruction</option>
+            <option value="L3">L3 — String Decryption & Constant Folding Only</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-top: 24px;">
+          <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 10px;">
+            Dispatch to Worker Queue
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <span>Valax Source Recovery &bull; Phase 3 Product Boundary</span>
+    <span>Zero Host Mounts &bull; Hardened Isolated Execution</span>
+  </footer>
+
+  <script>
+    let selectedFileContent = null;
+    let selectedFileName = 'input.lua';
+
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('file-input');
+    const fileInfo = document.getElementById('file-info');
+    const fileNameSpan = document.getElementById('file-name');
+    const fileSizeSpan = document.getElementById('file-size');
+    const errorBanner = document.getElementById('error-banner');
+    const form = document.getElementById('recovery-form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    dropzone.addEventListener('click', () => fileInput.click());
+
+    dropzone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropzone.classList.add('dragover');
+    });
+
+    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+
+    dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropzone.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) {
+        handleFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length > 0) {
+        handleFile(fileInput.files[0]);
+      }
+    });
+
+    function handleFile(file) {
+      errorBanner.style.display = 'none';
+      selectedFileName = file.name;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        selectedFileContent = e.target.result;
+        fileNameSpan.textContent = file.name;
+        fileSizeSpan.textContent = file.size.toLocaleString();
+        fileInfo.style.display = 'block';
+      };
+      reader.readAsText(file);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorBanner.style.display = 'none';
+
+      if (!selectedFileContent) {
+        errorBanner.textContent = 'ERROR: Please select a Lua/Luau file before submitting.';
+        errorBanner.style.display = 'block';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Dispatching to Queue...';
+
+      try {
+        const response = await fetch('/api/v1/recoveries', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Development-Principal': 'dev-default'
+          },
+          body: JSON.stringify({
+            filename: selectedFileName,
+            source: selectedFileContent,
+            options: {
+              requestedStage: document.getElementById('stage-select').value
+            }
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error ? `[${data.error.code}] ${data.error.message}` : 'Submission failed');
+        }
+
+        // Save to local recent jobs
+        const recents = JSON.parse(localStorage.getItem('valax_recent_jobs') || '[]');
+        if (!recents.includes(data.jobId)) {
+          recents.unshift(data.jobId);
+          localStorage.setItem('valax_recent_jobs', JSON.stringify(recents.slice(0, 20)));
+        }
+
+        window.location.href = `/jobs/${data.jobId}`;
+      } catch (err) {
+        errorBanner.textContent = err.message;
+        errorBanner.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Dispatch to Worker Queue';
+      }
+    });
+  </script>
+</body>
+</html>

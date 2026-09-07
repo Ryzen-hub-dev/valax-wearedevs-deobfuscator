@@ -1,0 +1,48 @@
+{
+  "testSuite": "PRODUCT_CONTRACT_E2E",
+  "timestamp": "2026-09-07T14:51:53.985Z",
+  "label": "PRODUCT_CONTRACT_E2E (In-Process Mock Execution)",
+  "runs": [
+    {
+      "name": "0. Setup Contract Test Environment",
+      "status": "PASS",
+      "durationMs": 4
+    },
+    {
+      "name": "1. [PRODUCT_CONTRACT_E2E] POST /api/v1/recoveries enqueues job and returns 201 Created",
+      "status": "PASS",
+      "durationMs": 23
+    },
+    {
+      "name": "2. [PRODUCT_CONTRACT_E2E] GET /api/v1/recoveries/:jobId returns QUEUED progress",
+      "status": "PASS",
+      "durationMs": 5
+    },
+    {
+      "name": "3. [PRODUCT_CONTRACT_E2E] Gateway processes next job through worker execution",
+      "status": "PASS",
+      "durationMs": 51
+    },
+    {
+      "name": "4. [PRODUCT_CONTRACT_E2E] GET /api/v1/recoveries/:jobId transitions to SUCCEEDED with full schema",
+      "status": "PASS",
+      "durationMs": 6
+    },
+    {
+      "name": "5. [PRODUCT_CONTRACT_E2E] GET /api/v1/recoveries/:jobId/artifacts lists available downloads",
+      "status": "PASS",
+      "durationMs": 4
+    },
+    {
+      "name": "6. [PRODUCT_CONTRACT_E2E] GET /api/v1/recoveries/:jobId/artifacts/recoveredCode downloads recovered source",
+      "status": "PASS",
+      "durationMs": 6
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "verdict": "PRODUCT_CONTRACT_E2E_PASS"
+  }
+}

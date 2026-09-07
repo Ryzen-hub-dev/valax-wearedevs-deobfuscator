@@ -1,0 +1,11 @@
+{
+  "name": "@valax/api",
+  "version": "0.1.0-beta.1",
+  "description": "Product-facing HTTP API for Valax Source Recovery",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node ../../tests/unit/api-security.test.js"
+  },
+  "dependencies": {},
+  "private": true
+}

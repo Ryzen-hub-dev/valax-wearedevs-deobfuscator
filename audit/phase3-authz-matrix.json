@@ -1,0 +1,48 @@
+{
+  "providerIndependentPrincipalModel": true,
+  "timestamp": "2026-09-07T14:53:52.269Z",
+  "matrix": [
+    {
+      "scenario": "Anonymous Request",
+      "expectedStatus": 401,
+      "verified": true
+    },
+    {
+      "scenario": "Owner Request",
+      "expectedStatus": 200,
+      "verified": true
+    },
+    {
+      "scenario": "Cross-Principal Access (Job Status)",
+      "expectedStatus": 403,
+      "verified": true
+    },
+    {
+      "scenario": "Cross-Principal Access (Artifact Download)",
+      "expectedStatus": 403,
+      "verified": true
+    },
+    {
+      "scenario": "Cross-Principal Access (Job Cancellation)",
+      "expectedStatus": 403,
+      "verified": true
+    },
+    {
+      "scenario": "Owner Job Cancellation (Active)",
+      "expectedStatus": 200,
+      "verified": true
+    },
+    {
+      "scenario": "Owner Job Cancellation (Terminal)",
+      "expectedStatus": 409,
+      "verified": true
+    },
+    {
+      "scenario": "Client Body Principal Spoofing Override",
+      "expectedStatus": 201,
+      "principalOverridden": true,
+      "verified": true
+    }
+  ],
+  "verdict": "AUTHORIZATION_MATRIX_VERIFIED"
+}

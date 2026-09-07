@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valax Source Recovery — Structural Analysis Engine</title>
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <div class="dev-banner">
+    <span>SYSTEM ARCHITECTURE: PRODUCT BOUNDARY ENFORCED</span>
+    <span id="dev-user-indicator">[DEV AUTH ACTIVE: dev-default]</span>
+  </div>
+
+  <header class="app-header">
+    <div class="brand">
+      <h1>Valax Source Recovery</h1>
+      <span class="badge-tag">v0.1.0-beta.1</span>
+    </div>
+    <nav class="nav-links">
+      <a href="/" class="active">Architecture</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/recover">Submit Recovery</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Protected-Code Recovery & Structural Analysis</h2>
+      </div>
+      <p style="margin-bottom: 16px; color: var(--text-secondary);">
+        Valax Source Recovery is an automated reverse-engineering engine for protected Lua and Luau code.
+        It performs AST analysis, constant propagation, custom string pool decoding, and control-flow graph (CFG) flattening reversal to restore readable, structured source code.
+      </p>
+      <div style="display: flex; gap: 12px; margin-top: 20px;">
+        <a href="/recover" class="btn btn-primary">Start Recovery Analysis</a>
+        <a href="/dashboard" class="btn">View Monitored Jobs</a>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Recovery Tiers & Admission Criteria</h2>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Designation</th>
+            <th>Admission Criteria & Verification Scope</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="state-badge state-SUCCEEDED">L5-W</span></td>
+            <td><strong>Complete Structural Recovery</strong></td>
+            <td>Dispatcher fully eliminated (0 residual states), complete string pool resolution, syntax-valid Lua 5.1 roundtrip.</td>
+          </tr>
+          <tr>
+            <td><span class="state-badge state-RUNNING">L4</span></td>
+            <td><strong>Partial Control-Flow Recovery</strong></td>
+            <td>Core dispatch tree analyzed, high-volume residual states documented (e.g. 427 physical / 48 reachable states), source structured.</td>
+          </tr>
+          <tr>
+            <td><span class="state-badge state-LEASED">L3</span></td>
+            <td><strong>Static Normalization</strong></td>
+            <td>String extraction and arithmetic constant folding without full control flow de-flattening.</td>
+          </tr>
+          <tr>
+            <td><span class="state-badge state-QUEUED">L1-L2</span></td>
+            <td><strong>Lexical / Structural Baseline</strong></td>
+            <td>AST validation and syntactic formatting baseline.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Isolated Containerized Execution Model</h2>
+      </div>
+      <p style="color: var(--text-secondary); margin-bottom: 12px;">
+        Every deobfuscation job executes inside an ephemeral, hardened Linux container managed by the Product Gateway and Redis queue:
+      </p>
+      <ul style="list-style-type: square; margin-left: 20px; color: var(--text-secondary); font-size: 13px; line-height: 1.8;">
+        <li><strong>Network Isolation:</strong> Zero outbound/inbound network interfaces (<code style="font-family: var(--font-mono); color: var(--accent-cyan);">--network none</code>).</li>
+        <li><strong>Read-Only Filesystem:</strong> Root filesystem is strictly read-only with temporary RAM tmpfs mounts.</li>
+        <li><strong>Privilege Drop:</strong> Executes as non-root user (uid 1000) with all Linux capabilities dropped (<code style="font-family: var(--font-mono); color: var(--accent-cyan);">--cap-drop ALL</code>, <code style="font-family: var(--font-mono); color: var(--accent-cyan);">no-new-privileges:true</code>).</li>
+        <li><strong>Resource Constraints:</strong> Hard limits on CPU quota (1.0 CPU), memory bounds (512MB), and PID concurrency (128 PIDs).</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <span>Valax Source Recovery &bull; Phase 3 Product Boundary</span>
+    <span>Zero Host Mounts &bull; Conservative Semantic Verification</span>
+  </footer>
+</body>
+</html>

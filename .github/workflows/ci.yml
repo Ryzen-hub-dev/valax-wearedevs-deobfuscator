@@ -164,3 +164,73 @@ jobs:
           audit/redis-multi-process.json
           audit/phase2-final-acceptance-matrix.json
 
+  phase3-product-boundary-gate:
+    name: Phase 3 Product Boundary, Gateway API, & Web Skeleton Gate
+    runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+
+    - name: Install Lua 5.1 & Redis Tools (Linux)
+      run: |
+        sudo apt-get update && sudo apt-get install -y lua5.1 redis-tools
+        sudo ln -sf /usr/bin/lua5.1 /usr/bin/lua
+
+    - name: 1. Core Baseline Guard Integrity Audit
+      run: node -e "const { CoreBaselineGuard } = require('./packages/worker/src'); new CoreBaselineGuard().assertIntegrity(); console.log('Core baseline 100% frozen and intact');"
+
+    - name: 2. Architectural Boundary Import Enforcement Scan
+      run: |
+        set -o pipefail
+        mkdir -p audit
+        node scripts/verify-phase3-boundaries.js 2>&1 | tee audit/phase3-boundary-scan.log
+
+    - name: 3. Full Repository Secret & Token Hygiene Scan
+      run: |
+        set -o pipefail
+        mkdir -p audit
+        node scripts/audit-phase3-secrets.js 2>&1 | tee audit/phase3-secret-scan.log
+
+    - name: 4. Product API Security & Authorization Unit Tests
+      run: |
+        set -o pipefail
+        mkdir -p audit
+        node tests/unit/api-security.test.js 2>&1 | tee audit/phase3-api-security.log
+
+    - name: 5. Product Contract E2E Test Suite (Mock In-Process)
+      run: |
+        set -o pipefail
+        mkdir -p audit
+        node tests/integration/product-contract-e2e.test.js 2>&1 | tee audit/phase3-product-contract-e2e.log
+
+    - name: 6. Real Product Container E2E Recovery Pipeline
+      run: |
+        set -o pipefail
+        mkdir -p audit
+        node tests/integration/product-container-e2e.test.js 2>&1 | tee audit/phase3-product-real-e2e.log
+
+    - name: 7. Upload Phase 3 Round 1 Evidence Artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: phase3-round1-evidence
+        path: |
+          audit/phase3-*.json
+          audit/phase3-*.log
+
+

@@ -1,0 +1,11 @@
+{
+  "name": "@valax/web",
+  "version": "0.1.0-beta.1",
+  "description": "Product web interface for Valax Source Recovery",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {},
+  "private": true
+}
