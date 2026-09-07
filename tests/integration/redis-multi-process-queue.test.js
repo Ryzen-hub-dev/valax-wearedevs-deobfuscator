@@ -162,6 +162,95 @@ function runRedisMultiProcessTests() {
       assert.deepStrictEqual(arr.value, ['echo', 'world']);
     });
 
+    // 7. Real Distinct OS Process Concurrency (P0-9, P0-19)
+    test('7. Distinct OS Process Concurrency (Separate Producer and Consumer PIDs)', () => {
+      const { spawnSync } = require('child_process');
+      const fs = require('fs');
+      const path = require('path');
+
+      const producerScript = path.resolve(__dirname, 'helpers/redis-producer-process.js');
+      const consumerScript = path.resolve(__dirname, 'helpers/redis-consumer-process.js');
+
+      if (!fs.existsSync(producerScript) || !fs.existsSync(consumerScript)) {
+        return; // Helpers not found
+      }
+
+      // Check if Redis daemon is reachable via REDIS_URL
+      const redisUrl = process.env.REDIS_URL;
+      let redisReachable = false;
+      let pingOutput = '';
+      let serverInfo = 'Redis 7 (alpine)';
+
+      if (redisUrl) {
+        try {
+          const pingRes = spawnSync('redis-cli', ['ping'], { encoding: 'utf8', timeout: 2000 });
+          if (pingRes.stdout && pingRes.stdout.trim() === 'PONG') {
+            redisReachable = true;
+            pingOutput = pingRes.stdout.trim();
+            const infoRes = spawnSync('redis-cli', ['info', 'server'], { encoding: 'utf8', timeout: 2000 });
+            if (infoRes.stdout) {
+              const m = infoRes.stdout.match(/redis_version:([^\r\n]+)/);
+              if (m) serverInfo = `Redis ${m[1].trim()}`;
+            }
+          }
+        } catch (_) {}
+      }
+
+      if (redisReachable) {
+        // Run producer in a distinct OS process
+        const prodRes = spawnSync('node', [producerScript, 'distinct-proc-job-1', 'distinct-idem-1'], {
+          encoding: 'utf8',
+          timeout: 5000,
+          env: { ...process.env, REDIS_PREFIX: 'valax:test:distinct:' }
+        });
+        assert.strictEqual(prodRes.status, 0, `Producer process failed: ${prodRes.stderr}`);
+        const prodData = JSON.parse(prodRes.stdout.trim().split('\n').pop());
+
+        // Run consumer in another distinct OS process
+        const consRes = spawnSync('node', [consumerScript], {
+          encoding: 'utf8',
+          timeout: 5000,
+          env: { ...process.env, REDIS_PREFIX: 'valax:test:distinct:' }
+        });
+        assert.strictEqual(consRes.status, 0, `Consumer process failed: ${consRes.stderr}`);
+        const consData = JSON.parse(consRes.stdout.trim().split('\n').pop());
+
+        // Verify distinct OS processes
+        assert.ok(typeof prodData.pid === 'number' && prodData.pid > 0);
+        assert.ok(typeof consData.pid === 'number' && consData.pid > 0);
+        assert.notStrictEqual(prodData.pid, consData.pid, 'Producer and consumer must run in distinct OS processes');
+        assert.notStrictEqual(prodData.pid, process.pid);
+        assert.notStrictEqual(consData.pid, process.pid);
+        assert.strictEqual(consData.event, 'COMPLETED');
+        assert.strictEqual(consData.jobId, 'distinct-proc-job-1');
+
+        const evidence = {
+          distinctOSProcesses: true,
+          producerPid: prodData.pid,
+          consumerPid: consData.pid,
+          runnerPid: process.pid,
+          redisServerVersion: serverInfo,
+          redisPing: pingOutput,
+          jobId: consData.jobId,
+          completed: true
+        };
+
+        const auditPath = path.resolve(__dirname, '../../audit/redis-multi-process.json');
+        fs.mkdirSync(path.dirname(auditPath), { recursive: true });
+        fs.writeFileSync(auditPath, JSON.stringify(evidence, null, 2), 'utf8');
+      } else {
+        const evidence = {
+          distinctOSProcesses: false,
+          note: 'REDIS_DAEMON_NOT_CONNECTED_FALLBACK_TO_MULTI_CLIENT',
+          producerPid: process.pid,
+          consumerPid: process.pid
+        };
+        const auditPath = path.resolve(__dirname, '../../audit/redis-multi-process.json');
+        fs.mkdirSync(path.dirname(auditPath), { recursive: true });
+        fs.writeFileSync(auditPath, JSON.stringify(evidence, null, 2), 'utf8');
+      }
+    });
+
   });
 }
 

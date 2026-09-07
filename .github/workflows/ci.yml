@@ -139,6 +139,8 @@ jobs:
         set -o pipefail
         mkdir -p audit
         node scripts/verify-phase2-container-runtime.js 2>&1 | tee audit/phase2-runtime-raw.log
+      env:
+        REDIS_URL: redis://127.0.0.1:6379
 
     - name: 6. Real Container E2E Recovery Verification
       run: |
@@ -159,4 +161,5 @@ jobs:
           audit/phase2-runtime-raw.log
           audit/redis-integration.log
           audit/container-e2e.log
+          audit/redis-multi-process.json
 
