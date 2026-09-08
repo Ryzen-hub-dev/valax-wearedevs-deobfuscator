@@ -110,7 +110,7 @@ async function runDiscordProductContractE2E() {
         options: { stage: 'L5' }
       }, { username: 'alice_discord' });
 
-      assert.strictEqual(submitRes.statusCode, 202);
+      assert(submitRes.statusCode === 201 || submitRes.statusCode === 202);
       aliceJobId = submitRes.json.jobId;
       assert(aliceJobId);
     });

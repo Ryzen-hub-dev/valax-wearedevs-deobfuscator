@@ -463,14 +463,21 @@ class ProductApiServer {
           );
         }
         // Return existing job status
-        const job = await this.gateway.getJob(existing.jobId);
+        const job = await this.gateway.getJob(existing.jobId, principal.principalId);
         if (job) {
+          const productState = mapInternalToProductState(job.state || job.status);
           return this._sendJsonResponse(res, 200, {
             jobId: job.jobId,
-            status: mapInternalToProductState(job.status),
-            filename: job.filename,
+            state: productState,
+            status: productState,
+            filename: this.jobFilenames.get(job.jobId) || 'recovered.lua',
+            isDuplicate: true,
             idempotentReplay: true,
-            createdAt: job.createdAt
+            createdAt: job.createdAt,
+            links: {
+              self: `/api/v1/recoveries/${job.jobId}`,
+              artifacts: `/api/v1/recoveries/${job.jobId}/artifacts`
+            }
           });
         }
       }
@@ -502,7 +509,15 @@ class ProductApiServer {
         }
       });
     } catch (err) {
-      if (err.message && (err.message.includes('BACKPRESSURE') || err.message.includes('QUEUE_SATURATED') || err.message.includes('QUEUE_FULL'))) {
+      if (err.code === 'RATE_LIMIT_EXCEEDED') {
+        res.setHeader('Retry-After', String(Math.ceil((err.resetMs || 1000) / 1000)));
+        throw new ApiError(ApiErrorCode.RATE_LIMITED, err.message, 429);
+      }
+      if (err.code === 'PRINCIPAL_CONCURRENCY_EXCEEDED') {
+        throw new ApiError(ApiErrorCode.QUOTA_EXCEEDED, err.message, 429);
+      }
+      if (err.code === 'BACKPRESSURE_EXCEEDED' || err.code === 'QUEUE_FULL' || err.code === 'SATURATED' || err.code === 'QUEUE_SATURATED' ||
+          (err.message && (err.message.toLowerCase().includes('backpressure') || err.message.toLowerCase().includes('queue') || err.message.toLowerCase().includes('saturated')))) {
         res.setHeader('Retry-After', '5');
         throw new ApiError(ApiErrorCode.QUEUE_SATURATED, 'Recovery queue is at capacity. Retry later.', 503);
       }
@@ -529,12 +544,18 @@ class ProductApiServer {
       durationMs: Date.now() - startTime
     });
 
-    this._sendJsonResponse(res, 202, {
+    const productState = mapInternalToProductState(job.state || job.status || 'queued');
+    this._sendJsonResponse(res, 201, {
       jobId: job.jobId,
-      status: mapInternalToProductState(job.state || job.status || 'queued'),
+      state: productState,
+      status: productState,
       filename: sanitizedFilename,
       queuePosition: job.queuePosition || 1,
-      createdAt: job.createdAt
+      createdAt: job.createdAt || new Date().toISOString(),
+      links: {
+        self: `/api/v1/recoveries/${job.jobId}`,
+        artifacts: `/api/v1/recoveries/${job.jobId}/artifacts`
+      }
     });
   }
 
@@ -604,23 +625,46 @@ class ProductApiServer {
    * @private
    */
   async _handleCancelRecovery(res, principal, jobId, requestId) {
+    let job;
     try {
-      await this.gateway.cancelJob(jobId, principal.principalId, 'Cancelled by user');
+      job = await this.gateway.getJob(jobId, principal.principalId);
     } catch (err) {
-      if (err.code === 'NOT_FOUND') {
-        throw new ApiError(ApiErrorCode.JOB_NOT_FOUND, err.message, 404);
+      if (err.code === 'FORBIDDEN') {
+        throw new ApiError(ApiErrorCode.FORBIDDEN, `Access denied: You do not own job ${jobId}`, 403);
       }
+      throw new ApiError(ApiErrorCode.JOB_NOT_FOUND, `Job not found: ${jobId}`, 404);
+    }
+
+    const currentState = mapInternalToProductState(job.state || job.status);
+    if (!CANCELLABLE_PRODUCT_STATES.has(currentState)) {
+      throw new ApiError(
+        ApiErrorCode.JOB_NOT_CANCELLABLE,
+        `Cannot cancel job '${jobId}' in terminal state '${currentState}'`,
+        409
+      );
+    }
+
+    try {
+      await this.gateway.cancelJob(jobId, principal.principalId, 'User requested cancellation');
+    } catch (err) {
       if (err.code === 'FORBIDDEN') {
         throw new ApiError(ApiErrorCode.FORBIDDEN, err.message, 403);
       }
-      throw err;
+      throw new ApiError(ApiErrorCode.INTERNAL_ERROR, err.message, 500);
     }
 
-    this.logger.info('RECOVERY_JOB_CANCELLED', { requestId, jobId, principalId: principal.principalId });
-
-    this._sendJsonResponse(res, 200, {
+    this.logger.info('RECOVERY_CANCELLED', {
+      requestId,
       jobId,
-      status: 'CANCELLED',
+      principalId: principal.principalId,
+      state: ProductJobState.CANCELLED
+    });
+
+    return this._sendJsonResponse(res, 200, {
+      jobId,
+      state: ProductJobState.CANCELLED,
+      status: ProductJobState.CANCELLED,
+      message: 'Recovery job cancellation confirmed',
       cancelledAt: new Date().toISOString()
     });
   }
@@ -630,27 +674,42 @@ class ProductApiServer {
    * @private
    */
   async _handleListArtifacts(res, principal, jobId, requestId) {
-    const job = await this.gateway.getJob(jobId);
-    if (!job) {
-      throw new ApiError(ApiErrorCode.JOB_NOT_FOUND, `Recovery job ${jobId} not found`, 404);
+    let job;
+    try {
+      job = await this.gateway.getJob(jobId, principal.principalId);
+    } catch (err) {
+      if (err.code === 'FORBIDDEN') {
+        throw new ApiError(ApiErrorCode.FORBIDDEN, `Access denied: You do not own job ${jobId}`, 403);
+      }
+      throw new ApiError(ApiErrorCode.JOB_NOT_FOUND, `Job not found: ${jobId}`, 404);
     }
 
-    if (job.principalId !== principal.principalId && !principal.roles.includes('admin')) {
-      throw new ApiError(ApiErrorCode.FORBIDDEN, 'Access denied to this recovery job', 403);
+    const productState = mapInternalToProductState(job.state);
+    if (productState !== ProductJobState.SUCCEEDED) {
+      return this._sendJsonResponse(res, 200, {
+        jobId,
+        artifacts: []
+      });
     }
 
-    const artifacts = await this.gateway.listArtifacts(jobId);
-    this._sendJsonResponse(res, 200, {
+    const artifacts = [
+      {
+        artifactId: 'recoveredCode',
+        type: 'text/x-lua',
+        description: 'Normalized and recovered Lua source code',
+        href: `/api/v1/recoveries/${jobId}/artifacts/recoveredCode`
+      },
+      {
+        artifactId: 'report',
+        type: 'application/json',
+        description: 'Deobfuscation analysis and admission report',
+        href: `/api/v1/recoveries/${jobId}/artifacts/report`
+      }
+    ];
+
+    return this._sendJsonResponse(res, 200, {
       jobId,
-      artifacts: artifacts.map(a => ({
-        artifactId: a.artifactId,
-        name: a.name,
-        type: a.type,
-        sizeBytes: a.sizeBytes,
-        sha256: a.sha256,
-        createdAt: a.createdAt,
-        expiresAt: a.expiresAt
-      }))
+      artifacts
     });
   }
 
@@ -659,28 +718,38 @@ class ProductApiServer {
    * @private
    */
   async _handleDownloadArtifact(res, principal, jobId, artifactId, requestId) {
-    const job = await this.gateway.getJob(jobId);
-    if (!job) {
-      throw new ApiError(ApiErrorCode.JOB_NOT_FOUND, `Recovery job ${jobId} not found`, 404);
+    if (!['recoveredCode', 'report', 'logs'].includes(artifactId)) {
+      throw new ApiError(ApiErrorCode.ARTIFACT_NOT_FOUND, `Artifact '${artifactId}' does not exist`, 404);
     }
 
-    if (job.principalId !== principal.principalId && !principal.roles.includes('admin')) {
-      throw new ApiError(ApiErrorCode.FORBIDDEN, 'Access denied to this recovery job', 403);
+    let artifactContent;
+    try {
+      artifactContent = await this.gateway.getArtifact(jobId, artifactId, principal.principalId);
+    } catch (err) {
+      if (err.code === 'FORBIDDEN') {
+        throw new ApiError(ApiErrorCode.FORBIDDEN, `Access denied for artifact in job ${jobId}`, 403);
+      }
+      if (err.code === 'NOT_FOUND' || err.code === 'ARTIFACT_EXPIRED' || err.code === 'EXPIRED') {
+        const isExpired = (err.message && err.message.toLowerCase().includes('expired')) || err.code === 'ARTIFACT_EXPIRED' || err.code === 'EXPIRED';
+        const code = isExpired ? ApiErrorCode.ARTIFACT_EXPIRED : ApiErrorCode.ARTIFACT_NOT_FOUND;
+        const status = isExpired ? 410 : 404;
+        throw new ApiError(code, `Artifact not found or expired for job ${jobId}`, status);
+      }
+      throw new ApiError(ApiErrorCode.INTERNAL_ERROR, err.message, 500);
     }
 
-    const artifact = await this.gateway.getArtifact(jobId, artifactId);
-    if (!artifact) {
-      throw new ApiError(ApiErrorCode.ARTIFACT_NOT_FOUND, `Artifact ${artifactId} not found or expired`, 404);
+    if (!artifactContent) {
+      throw new ApiError(ApiErrorCode.ARTIFACT_NOT_FOUND, `Artifact '${artifactId}' is empty or unavailable`, 404);
     }
+
+    const contentType = artifactId === 'recoveredCode' ? 'text/x-lua; charset=utf-8' : 'application/json; charset=utf-8';
+    const payload = typeof artifactContent === 'string' ? artifactContent : JSON.stringify(artifactContent, null, 2);
 
     res.writeHead(200, {
-      'Content-Type': artifact.mimeType || 'application/octet-stream',
-      'Content-Length': artifact.sizeBytes,
-      'Content-Disposition': `attachment; filename="${artifact.name}"`,
-      'ETag': `"${artifact.sha256}"`,
-      'Cache-Control': 'private, no-cache'
+      'Content-Type': contentType,
+      'Content-Length': Buffer.byteLength(payload, 'utf8')
     });
-    res.end(artifact.content);
+    res.end(payload);
   }
 
   /**

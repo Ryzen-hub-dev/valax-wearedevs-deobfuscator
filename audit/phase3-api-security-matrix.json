@@ -1,219 +1,281 @@
 [
   {
+    "ruleId": "P0-6.1",
     "requirement": "oversized upload",
     "testName": "1. Oversized upload rejected with 413 FILE_TOO_LARGE",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 413 FILE_TOO_LARGE received for 1049600 bytes (limit 1048576)"
   },
   {
+    "ruleId": "P0-6.2",
     "requirement": "invalid UTF-8",
     "testName": "2. Invalid UTF-8 byte sequence rejected with 400 INVALID_ENCODING",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 400 INVALID_ENCODING returned on invalid UTF-8 byte sequence"
   },
   {
+    "ruleId": "P0-6.3",
     "requirement": "very long filename",
     "testName": "3. Very long filename (>255 chars) rejected with 400 INVALID_FILE",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 400 INVALID_FILE returned for filename length 260"
   },
   {
+    "ruleId": "P0-6.4",
     "requirement": "absolute Windows filename",
     "testName": "4. Absolute Windows filename rejected with 400 INVALID_FILE",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 400 INVALID_FILE returned for C:\\evil\\script.lua"
   },
   {
+    "ruleId": "P0-6.5",
     "requirement": "absolute POSIX filename",
     "testName": "5. Absolute POSIX filename rejected with 400 INVALID_FILE",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 400 INVALID_FILE returned for /etc/passwd"
   },
   {
+    "ruleId": "P0-6.6",
     "requirement": "file:// filename",
     "testName": "6. file:// filename rejected with 400 INVALID_FILE",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 400 INVALID_FILE returned for file:///home/user/script.lua"
   },
   {
+    "ruleId": "P0-6.7",
     "requirement": "NUL filename",
     "testName": "7. NUL byte in filename rejected with 400 INVALID_FILE",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 400 INVALID_FILE returned for evil\\0.lua"
   },
   {
+    "ruleId": "P0-6.8",
     "requirement": "NUL source",
     "testName": "8. NUL byte in source rejected with 400 INVALID_FILE",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 400 INVALID_FILE returned for NUL byte in source"
   },
   {
+    "ruleId": "P0-6.9",
     "requirement": "rate limit exceeded",
     "testName": "9. Exceeding request rate limit rejected with 429 RATE_LIMITED",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 429 RATE_LIMITED confirmed on rapid burst requests"
   },
   {
+    "ruleId": "P0-6.10",
     "requirement": "Retry-After",
     "testName": "10. 429 response contains valid numeric Retry-After header",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "Retry-After header verified: 1 seconds"
   },
   {
+    "ruleId": "P0-6.11",
     "requirement": "daily quota exceeded",
     "testName": "11. Exceeding daily quota rejected with 429 QUOTA_EXCEEDED",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 429 QUOTA_EXCEEDED returned when daily quota (2) was exceeded"
   },
   {
+    "ruleId": "P0-6.12",
     "requirement": "concurrent quota exceeded",
     "testName": "12. Exceeding concurrent jobs rejected with 429 QUOTA_EXCEEDED",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "Concurrency quota accurately rejected additional running job for principal"
   },
   {
+    "ruleId": "P0-6.13",
     "requirement": "queue saturation",
     "testName": "13. Saturated queue returns 503 QUEUE_SATURATED",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 503 QUEUE_SATURATED returned with Retry-After: 5"
   },
   {
+    "ruleId": "P0-6.14",
     "requirement": "503",
     "testName": "14. Queue saturation response returns exact HTTP status 503",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 503 status code confirmed on queue saturation"
   },
   {
+    "ruleId": "P0-6.15",
     "requirement": "no synchronous fallback",
     "testName": "15. Strictly zero synchronous fallback or Core invocation on queue saturation",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "Verified zero execution dispatch when queue is saturated; API terminates with 503"
   },
   {
+    "ruleId": "P0-6.16",
     "requirement": "cross-user job read",
     "testName": "16. Cross-user job read rejected with 403 FORBIDDEN",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 403 FORBIDDEN on unauthorized job read"
   },
   {
+    "ruleId": "P0-6.17",
     "requirement": "cross-user cancellation",
     "testName": "17. Cross-user cancellation rejected with 403 FORBIDDEN",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 403 FORBIDDEN on unauthorized cancellation"
   },
   {
+    "ruleId": "P0-6.18",
     "requirement": "cross-user artifact list",
     "testName": "18. Cross-user artifact list rejected with 403 FORBIDDEN",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 403 FORBIDDEN on unauthorized artifact list"
   },
   {
+    "ruleId": "P0-6.19",
     "requirement": "cross-user artifact download",
     "testName": "19. Cross-user artifact download rejected with 403 FORBIDDEN",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 403 FORBIDDEN on unauthorized artifact download"
   },
   {
+    "ruleId": "P0-6.20",
     "requirement": "expired artifact",
     "testName": "20. Expired artifact returns 404/410 ARTIFACT_EXPIRED",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 410 returned on expired artifact"
   },
   {
+    "ruleId": "P0-6.21",
     "requirement": "job/artifact mismatch",
     "testName": "21. Non-existent artifact type for job returns 404 ARTIFACT_NOT_FOUND",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 404 ARTIFACT_NOT_FOUND returned for mismatched artifact type"
   },
   {
+    "ruleId": "P0-6.22",
     "requirement": "guessed artifact",
     "testName": "22. Guessed or non-standard artifact ID returns 404 ARTIFACT_NOT_FOUND",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 404 ARTIFACT_NOT_FOUND returned for guessed artifact ID"
   },
   {
+    "ruleId": "P0-6.23",
     "requirement": "Idempotency-Key exact replay",
     "testName": "23. Exact same idempotency key and content returns duplicate job (200 OK)",
     "executed": true,
     "passed": true,
-    "evidence": "HTTP 200 returned with isDuplicate: true for existing job job-1c0dbbf1a7229697"
+    "pass": true,
+    "evidence": "HTTP 200 returned with isDuplicate: true for existing job job-e7be3cb9388719d4"
   },
   {
+    "ruleId": "P0-6.24",
     "requirement": "Idempotency-Key conflicting payload",
     "testName": "24. Reused idempotency key with conflicting content rejected with 409 IDEMPOTENCY_CONFLICT",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 409 IDEMPOTENCY_CONFLICT returned for modified source on same key"
   },
   {
+    "ruleId": "P0-6.25",
     "requirement": "forged ownerPrincipalId",
     "testName": "25. Forged ownerPrincipalId in request body overridden by server identity",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "Server identity strictly enforced; body ownerPrincipalId ignored"
   },
   {
+    "ruleId": "P0-6.26",
     "requirement": "forged principalId",
     "testName": "26. Forged principalId in URL query string ignored",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "Query string principalId override rejected; authenticated header prioritized"
   },
   {
+    "ruleId": "P0-6.27",
     "requirement": "terminal state transition rejection",
     "testName": "27. Canonical Product FSM enforces terminal irreversibility",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "Terminal states (SUCCEEDED, FAILED, TIMED_OUT, CANCELLED) confirmed irreversible"
   },
   {
+    "ruleId": "P0-6.28",
     "requirement": "terminal cancellation rejection",
     "testName": "28. Cancellation of terminal job rejected with 409 JOB_NOT_CANCELLABLE",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "HTTP 409 JOB_NOT_CANCELLABLE returned when cancelling terminal job"
   },
   {
+    "ruleId": "P0-6.29",
     "requirement": "source log canary",
     "testName": "29. Source secret canary test confirms zero occurrences in captured logs",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "Zero occurrences of source canary in server logs"
   },
   {
+    "ruleId": "P0-6.30",
     "requirement": "Authorization header log canary",
     "testName": "30. Authorization header canary test confirms zero occurrences in captured logs",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "Zero occurrences of Authorization token in server logs"
   },
   {
+    "ruleId": "P0-6.31",
     "requirement": "cookie log canary",
     "testName": "31. Cookie and API-key headers confirm zero occurrences in captured logs",
     "executed": true,
     "passed": true,
+    "pass": true,
     "evidence": "Zero occurrences of Cookie or API Key in server logs"
   }
 ]

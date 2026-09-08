@@ -1,66 +1,66 @@
 {
   "testSuite": "API_SECURITY_AND_AUTHORIZATION",
-  "timestamp": "2026-09-08T15:34:03.463Z",
+  "timestamp": "2026-09-08T17:42:40.856Z",
   "tests": [
     {
       "name": "0. Setup Test Environment",
       "status": "PASS",
-      "durationMs": 15
+      "durationMs": 14
     },
     {
       "name": "1. Oversized upload rejected with 413 FILE_TOO_LARGE",
       "status": "PASS",
-      "durationMs": 102
+      "durationMs": 88
     },
     {
       "name": "2. Invalid UTF-8 byte sequence rejected with 400 INVALID_ENCODING",
       "status": "PASS",
-      "durationMs": 20
+      "durationMs": 19
     },
     {
       "name": "3. Very long filename (>255 chars) rejected with 400 INVALID_FILE",
       "status": "PASS",
-      "durationMs": 17
+      "durationMs": 18
     },
     {
       "name": "4. Absolute Windows filename rejected with 400 INVALID_FILE",
       "status": "PASS",
-      "durationMs": 12
+      "durationMs": 15
     },
     {
       "name": "5. Absolute POSIX filename rejected with 400 INVALID_FILE",
       "status": "PASS",
-      "durationMs": 14
+      "durationMs": 15
     },
     {
       "name": "6. file:// filename rejected with 400 INVALID_FILE",
       "status": "PASS",
-      "durationMs": 13
+      "durationMs": 11
     },
     {
       "name": "7. NUL byte in filename rejected with 400 INVALID_FILE",
       "status": "PASS",
-      "durationMs": 14
+      "durationMs": 12
     },
     {
       "name": "8. NUL byte in source rejected with 400 INVALID_FILE",
       "status": "PASS",
-      "durationMs": 14
+      "durationMs": 12
     },
     {
       "name": "9. Exceeding request rate limit rejected with 429 RATE_LIMITED",
       "status": "PASS",
-      "durationMs": 82
+      "durationMs": 86
     },
     {
       "name": "10. 429 response contains valid numeric Retry-After header",
       "status": "PASS",
-      "durationMs": 0
+      "durationMs": 1
     },
     {
       "name": "11. Exceeding daily quota rejected with 429 QUOTA_EXCEEDED",
       "status": "PASS",
-      "durationMs": 287
+      "durationMs": 38
     },
     {
       "name": "12. Exceeding concurrent jobs rejected with 429 QUOTA_EXCEEDED",
@@ -70,12 +70,12 @@
     {
       "name": "13. Saturated queue returns 503 QUEUE_SATURATED",
       "status": "PASS",
-      "durationMs": 28
+      "durationMs": 1958
     },
     {
       "name": "14. Queue saturation response returns exact HTTP status 503",
       "status": "PASS",
-      "durationMs": 0
+      "durationMs": 1
     },
     {
       "name": "15. Strictly zero synchronous fallback or Core invocation on queue saturation",
@@ -85,37 +85,37 @@
     {
       "name": "Base. Valid submission creates QUEUED job (201 Created)",
       "status": "PASS",
-      "durationMs": 13
+      "durationMs": 11
     },
     {
       "name": "16. Cross-user job read rejected with 403 FORBIDDEN",
       "status": "PASS",
-      "durationMs": 16
+      "durationMs": 12
     },
     {
       "name": "17. Cross-user cancellation rejected with 403 FORBIDDEN",
       "status": "PASS",
-      "durationMs": 13
+      "durationMs": 10
     },
     {
       "name": "18. Cross-user artifact list rejected with 403 FORBIDDEN",
       "status": "PASS",
-      "durationMs": 14
+      "durationMs": 11
     },
     {
       "name": "19. Cross-user artifact download rejected with 403 FORBIDDEN",
       "status": "PASS",
-      "durationMs": 16
+      "durationMs": 12
     },
     {
       "name": "20. Expired artifact returns 404/410 ARTIFACT_EXPIRED",
       "status": "PASS",
-      "durationMs": 115
+      "durationMs": 100
     },
     {
       "name": "21. Non-existent artifact type for job returns 404 ARTIFACT_NOT_FOUND",
       "status": "PASS",
-      "durationMs": 10
+      "durationMs": 9
     },
     {
       "name": "22. Guessed or non-standard artifact ID returns 404 ARTIFACT_NOT_FOUND",
@@ -125,7 +125,7 @@
     {
       "name": "23. Exact same idempotency key and content returns duplicate job (200 OK)",
       "status": "PASS",
-      "durationMs": 11
+      "durationMs": 10
     },
     {
       "name": "24. Reused idempotency key with conflicting content rejected with 409 IDEMPOTENCY_CONFLICT",
@@ -135,37 +135,37 @@
     {
       "name": "25. Forged ownerPrincipalId in request body overridden by server identity",
       "status": "PASS",
-      "durationMs": 29
+      "durationMs": 28
     },
     {
       "name": "26. Forged principalId in URL query string ignored",
       "status": "PASS",
-      "durationMs": 20
+      "durationMs": 25
     },
     {
       "name": "27. Canonical Product FSM enforces terminal irreversibility",
       "status": "PASS",
-      "durationMs": 0
+      "durationMs": 1
     },
     {
       "name": "28. Cancellation of terminal job rejected with 409 JOB_NOT_CANCELLABLE",
       "status": "PASS",
-      "durationMs": 22
+      "durationMs": 23
     },
     {
       "name": "29. Source secret canary test confirms zero occurrences in captured logs",
       "status": "PASS",
-      "durationMs": 11
+      "durationMs": 12
     },
     {
       "name": "30. Authorization header canary test confirms zero occurrences in captured logs",
       "status": "PASS",
-      "durationMs": 12
+      "durationMs": 20
     },
     {
       "name": "31. Cookie and API-key headers confirm zero occurrences in captured logs",
       "status": "PASS",
-      "durationMs": 10
+      "durationMs": 11
     }
   ],
   "securityInvariants": {

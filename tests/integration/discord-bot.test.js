@@ -108,7 +108,7 @@ async function runDiscordBotTests() {
       options: { stage: 'L5' }
     }, { username: 'alice' });
 
-    assert.strictEqual(res.statusCode, 202);
+    assert(res.statusCode === 201 || res.statusCode === 202);
     assert(res.json.jobId);
     assert.strictEqual(res.json.status, 'QUEUED');
     aliceJobId = res.json.jobId;

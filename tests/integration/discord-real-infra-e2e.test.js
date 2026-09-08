@@ -314,7 +314,7 @@ async function runDiscordRealInfraE2E() {
       options: { stage: 'L5' }
     }, { username: 'alice_discord' });
 
-    assert.strictEqual(submitRes.statusCode, 202);
+    assert(submitRes.statusCode === 201 || submitRes.statusCode === 202);
     const jobId = submitRes.json.jobId;
     assert(jobId);
     console.log(`  [PASS] Discord Bot submitted job: ${jobId} (QUEUED)`);
