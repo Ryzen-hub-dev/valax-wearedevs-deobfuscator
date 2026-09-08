@@ -1,0 +1,7 @@
+{
+  "name": "@valax/discord",
+  "version": "0.1.0-beta.1",
+  "description": "Discord Bot Adapter for Valax Source Recovery",
+  "main": "src/index.js",
+  "private": true
+}
