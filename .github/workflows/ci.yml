@@ -165,7 +165,7 @@ jobs:
           audit/phase2-final-acceptance-matrix.json
 
   phase3-product-boundary-gate:
-    name: Phase 3 Product Boundary, Gateway API, & Web Skeleton Gate
+    name: Phase 3 Round 2 — Discord OAuth2, Session Security, Bot Adapter & MongoDB Gate
     runs-on: ubuntu-latest
     services:
       redis:
@@ -177,6 +177,10 @@ jobs:
           --health-interval 5s
           --health-timeout 3s
           --health-retries 5
+      mongodb:
+        image: mongo:6-jammy
+        ports:
+          - 27017:27017
 
     steps:
     - uses: actions/checkout@v4
@@ -194,17 +198,18 @@ jobs:
     - name: 1. Core Baseline Guard Integrity Audit
       run: node -e "const { CoreBaselineGuard } = require('./packages/worker/src'); new CoreBaselineGuard().assertIntegrity(); console.log('Core baseline 100% frozen and intact');"
 
-    - name: 2. Architectural Boundary Import Enforcement Scan
+    - name: 2. Architectural Boundary & Forbidden Import Scan
       run: |
         set -o pipefail
         mkdir -p audit
+        node scripts/verify-discord-boundaries.js 2>&1 | tee audit/phase3-discord-boundary-scan.log
         node scripts/verify-phase3-boundaries.js 2>&1 | tee audit/phase3-boundary-scan.log
 
     - name: 3. Full Repository Secret & Token Hygiene Scan
       run: |
         set -o pipefail
         mkdir -p audit
-        node scripts/audit-phase3-secrets.js 2>&1 | tee audit/phase3-secret-scan.log
+        node scripts/audit-round2-secrets.js 2>&1 | tee audit/phase3-secret-scan.log
 
     - name: 4. Product API Security & Authorization Unit Tests
       run: |
@@ -212,43 +217,74 @@ jobs:
         mkdir -p audit
         node tests/unit/api-security.test.js 2>&1 | tee audit/phase3-api-security.log
 
-    - name: 5. Product Contract E2E Test Suite (Mock In-Process)
+    - name: 5. OAuth2 & Production Session Security Unit Tests
+      run: |
+        set -o pipefail
+        mkdir -p audit
+        node tests/unit/oauth-session.test.js 2>&1 | tee audit/phase3-oauth-session-unit.log
+
+    - name: 6. Discord Bot Adapter Unit & Integration Tests
+      run: |
+        set -o pipefail
+        mkdir -p audit
+        node tests/integration/discord-bot.test.js 2>&1 | tee audit/phase3-discord-bot.log
+
+    - name: 7. Discord OAuth2 Protocol & Session Rotation E2E
+      run: |
+        set -o pipefail
+        mkdir -p audit
+        node tests/integration/oauth-protocol-e2e.test.js 2>&1 | tee audit/phase3-oauth-protocol-e2e.log
+
+    - name: 8. Discord Bot Product Contract E2E
+      run: |
+        set -o pipefail
+        mkdir -p audit
+        node tests/integration/discord-product-contract-e2e.test.js 2>&1 | tee audit/phase3-discord-contract-e2e.log
+
+    - name: 9. Product Contract E2E Test Suite (Round 1 Mock In-Process)
       run: |
         set -o pipefail
         mkdir -p audit
         node tests/integration/product-contract-e2e.test.js 2>&1 | tee audit/phase3-product-contract-e2e.log
 
-    - name: 6. Product Container Component Pipeline Tests (In-Process)
+    - name: 10. Product Container Component Pipeline Tests (In-Process)
       run: |
         set -o pipefail
         mkdir -p audit
         node tests/integration/product-container-e2e.test.js 2>&1 | tee audit/phase3-product-component-e2e.log
 
-    - name: 7. Real Multi-Process Product Container E2E Pipeline (API -> Redis -> Worker)
+    - name: 11. Discord Real Multi-Process Infrastructure E2E Pipeline (Bot -> API -> Redis -> Worker)
+      run: |
+        set -o pipefail
+        mkdir -p audit
+        node tests/integration/discord-real-infra-e2e.test.js 2>&1 | tee audit/phase3-discord-real-infra-e2e.log
+
+    - name: 12. Round 1 Real Multi-Process Container E2E Pipeline Regression
       run: |
         set -o pipefail
         mkdir -p audit
         node tests/integration/product-real-container-e2e.test.js 2>&1 | tee audit/phase3-product-real-e2e.log
 
-    - name: 8. Synchronous Recovery Bypass Integrity Audit
+    - name: 13. Synchronous Recovery Bypass Integrity Audit
       run: |
         set -o pipefail
         mkdir -p audit
         node scripts/audit-sync-bypass.js 2>&1 | tee audit/phase3-sync-bypass.log
 
-    - name: 9. Generate Master Acceptance Matrix Evidence
+    - name: 14. Generate Master Acceptance Matrix Evidence
       run: |
         set -o pipefail
         mkdir -p audit
-        node scripts/generate-phase3-acceptance.js 2>&1 | tee audit/phase3-acceptance.log
+        node scripts/generate-phase3-round2-acceptance.js 2>&1 | tee audit/phase3-acceptance.log
 
-    - name: 10. Upload Phase 3 Round 1 Evidence Artifacts
+    - name: 15. Upload Phase 3 Round 2 Evidence Artifacts
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: phase3-round1-evidence
+        name: phase3-round2-evidence
         path: |
           audit/phase3-*.json
           audit/phase3-*.log
+
 
 

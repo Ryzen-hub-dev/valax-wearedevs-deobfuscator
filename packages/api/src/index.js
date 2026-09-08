@@ -4,6 +4,9 @@
 
 const { ProductApiServer } = require('./server');
 const { Principal, DevelopmentAuthProvider } = require('./auth');
+const { MongoIdentityStore, MemoryMongoCollection } = require('./auth/identity-store');
+const { SessionStore, MemorySessionStore, MongoSessionStore } = require('./auth/session-store');
+const { DiscordOAuthController } = require('./auth/discord-oauth');
 const { ApiError, ApiErrorCode } = require('./errors');
 const { RedactingLogger } = require('./logger');
 const {
@@ -20,6 +23,12 @@ module.exports = {
   ProductApiServer,
   Principal,
   DevelopmentAuthProvider,
+  MongoIdentityStore,
+  MemoryMongoCollection,
+  SessionStore,
+  MemorySessionStore,
+  MongoSessionStore,
+  DiscordOAuthController,
   ApiError,
   ApiErrorCode,
   RedactingLogger,

@@ -43,6 +43,7 @@ print_unknowns.js
 audit/*.zip
 audit/ci-extracted*/
 audit/shared-artifacts-e2e/
+audit/shared-artifacts-discord-e2e/
 audit/last_user_prompt*.txt
 audit/latest-push.json
 audit/rebase-push-result.json

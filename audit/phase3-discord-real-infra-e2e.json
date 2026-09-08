@@ -1,0 +1,19 @@
+{
+  "testSuite": "DISCORD_ADAPTER_REAL_PRODUCT_INFRA_E2E",
+  "timestamp": "2026-09-08T17:15:13.736Z",
+  "apiPid": 24380,
+  "workerPid": 11724,
+  "distinctProcesses": true,
+  "redis": "PONG_DEDICATED_RESP_TCP",
+  "containerType": "STANDALONE_SECURE_CHILD",
+  "pass": true,
+  "fixtures": {
+    "minimal_print": {
+      "jobId": "job-262b92de5c915d36",
+      "status": "SUCCEEDED",
+      "durationMs": 994,
+      "crossUserDenialConfirmed": true
+    }
+  },
+  "redisPort": 55792
+}

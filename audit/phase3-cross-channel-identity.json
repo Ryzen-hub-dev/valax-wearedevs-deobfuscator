@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-09-08T17:02:44.006Z",
+  "channelBinding": {
+    "provider": "discord",
+    "discordUserId": "111111111111111111",
+    "webPrincipalId": "fb12d80d-3e4c-415b-89d7-742b7e53b299",
+    "botPrincipalId": "fb12d80d-3e4c-415b-89d7-742b7e53b299",
+    "match": true
+  },
+  "bobPrincipalId": "ebffc2e8-fc47-4752-8315-153a9cd1d39b",
+  "distinctPrincipals": true,
+  "status": "PASS"
+}

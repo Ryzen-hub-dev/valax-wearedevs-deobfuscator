@@ -14,6 +14,8 @@
       --primary: #38bdf8;
       --primary-hover: #0284c7;
       --accent: #10b981;
+      --discord: #5865F2;
+      --discord-hover: #4752c4;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -33,8 +35,37 @@
       padding-bottom: 1rem;
     }
     h1 { font-size: 1.8rem; color: var(--primary); }
-    nav a { color: var(--muted); text-decoration: none; margin-left: 1.5rem; font-weight: 500; }
+    nav { display: flex; align-items: center; gap: 1.25rem; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 500; }
     nav a:hover, nav a.active { color: var(--primary); }
+    .auth-box { display: flex; align-items: center; gap: 0.75rem; margin-left: 1rem; }
+    .auth-btn {
+      background: var(--discord);
+      color: #fff;
+      border: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .auth-btn:hover { background: var(--discord-hover); }
+    .user-info { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+    .avatar { width: 28px; height: 28px; border-radius: 50%; }
+    .logout-btn {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+    .logout-btn:hover { color: #ef4444; border-color: #ef4444; }
     .container { max-width: 1200px; margin: 0 auto; }
     .badge-bar {
       display: flex;
@@ -129,6 +160,11 @@
       <a href="/" class="active">Workspace</a>
       <a href="/docs.html">Documentation</a>
       <a href="/status.html">Engine Status</a>
+      <div id="authContainer" class="auth-box">
+        <a id="loginBtn" href="/auth/discord" class="auth-btn">
+          <span>Login with Discord</span>
+        </a>
+      </div>
     </nav>
   </header>
 
@@ -136,7 +172,7 @@
     <div class="badge-bar">
       <div class="badge">Target Format: <strong>WeAreDevs v1.0.0</strong></div>
       <div class="badge">Engine Capabilities: <strong>AST Analysis • String Recovery • CFG • Lua Gen</strong></div>
-      <div class="badge">Architecture: <strong>Production-Ready Node.js</strong></div>
+      <div class="badge">Security: <strong>Discord OAuth2 • Server-Side Sessions • CSRF Synchronizer</strong></div>
     </div>
 
     <div class="grid">
@@ -178,6 +214,46 @@
   </div>
 
   <script>
+    let activeCsrfToken = null;
+
+    async function initAuthStatus() {
+      try {
+        const meRes = await fetch('/api/v1/me');
+        if (meRes.ok) {
+          const me = await meRes.json();
+          const sessRes = await fetch('/auth/session');
+          if (sessRes.ok) {
+            const sess = await sessRes.json();
+            activeCsrfToken = sess.csrfToken;
+          }
+
+          const container = document.getElementById('authContainer');
+          const avatarImg = me.user?.avatarUrl 
+            ? `<img class="avatar" src="${me.user.avatarUrl}" alt="Avatar">`
+            : '';
+          const name = me.user?.displayName || 'User';
+
+          container.innerHTML = `
+            <div class="user-info">
+              ${avatarImg}
+              <span>${name}</span>
+              <button id="logoutBtn" class="logout-btn">Log out</button>
+            </div>
+          `;
+
+          document.getElementById('logoutBtn').addEventListener('click', async () => {
+            await fetch('/auth/logout', {
+              method: 'POST',
+              headers: {
+                'X-CSRF-Token': activeCsrfToken || ''
+              }
+            });
+            window.location.reload();
+          });
+        }
+      } catch (_) {}
+    }
+
     const sampleCode = `-- Sample Obfuscated Lua
 local A = { "\\072\\101\\108\\108\\111\\032\\087\\111\\114\\108\\100" }
 local s = string.sub
@@ -203,30 +279,70 @@ print(A[x], s("abcdef", 1, 3))`;
 
       const stage = document.getElementById('stageSelect').value;
       const btn = document.getElementById('recoverBtn');
-      btn.textContent = 'Analyzing...';
       btn.disabled = true;
+      btn.innerText = 'Analyzing & Recovering...';
 
       try {
-        const resp = await fetch('/api/recovery', {
+        const headers = { 'Content-Type': 'application/json' };
+        if (activeCsrfToken) {
+          headers['X-CSRF-Token'] = activeCsrfToken;
+        }
+
+        const res = await fetch('/api/v1/recoveries', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ source, stage })
+          headers,
+          body: JSON.stringify({
+            filename: 'input.lua',
+            source,
+            options: { stage }
+          })
         });
-        const data = await resp.json();
-        if (data.success) {
-          document.getElementById('sourceOutput').value = data.code;
-          document.getElementById('reportJson').textContent = JSON.stringify(data.report, null, 2);
+
+        if (!res.ok) {
+          if (res.status === 401) {
+            alert('Please login with Discord to submit recoveries.');
+            window.location.href = '/auth/discord';
+            return;
+          }
+          const err = await res.json();
+          throw new Error(err.error?.message || `HTTP ${res.status}`);
+        }
+
+        const submitData = await res.json();
+        const jobId = submitData.jobId;
+
+        // Poll for completion
+        let job = null;
+        for (let i = 0; i < 30; i++) {
+          await new Promise(r => setTimeout(r, 1000));
+          const pollRes = await fetch(`/api/v1/recoveries/${jobId}`);
+          if (pollRes.ok) {
+            job = await pollRes.json();
+            if (job.status === 'COMPLETED' || job.status === 'FAILED') break;
+          }
+        }
+
+        if (job && job.status === 'COMPLETED') {
+          // Download recovered code artifact
+          const artRes = await fetch(`/api/v1/recoveries/${jobId}/artifacts/recoveredCode`);
+          if (artRes.ok) {
+            const recoveredCode = await artRes.text();
+            document.getElementById('sourceOutput').value = recoveredCode;
+          }
           document.getElementById('reportBox').style.display = 'block';
+          document.getElementById('reportJson').innerText = JSON.stringify(job.result, null, 2);
         } else {
-          alert('Error: ' + (data.error || 'Failed to recover source'));
+          alert(`Recovery ended with status: ${job ? job.status : 'TIMEOUT'}`);
         }
       } catch (err) {
-        alert('Network or server error: ' + err.message);
+        alert(`Error: ${err.message}`);
       } finally {
-        btn.textContent = '⚡ Run Recovery Pipeline';
         btn.disabled = false;
+        btn.innerText = '⚡ Run Recovery Pipeline';
       }
     });
+
+    initAuthStatus();
   </script>
 </body>
 </html>

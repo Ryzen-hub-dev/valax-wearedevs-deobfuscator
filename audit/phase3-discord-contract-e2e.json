@@ -1,0 +1,48 @@
+{
+  "testSuite": "DISCORD_PRODUCT_CONTRACT_E2E",
+  "timestamp": "2026-09-08T17:02:44.001Z",
+  "pass": true,
+  "steps": [
+    {
+      "name": "1. Resolve Alice identity via Web OAuth provider mapping",
+      "status": "PASS",
+      "durationMs": 7
+    },
+    {
+      "name": "2. Resolve Alice identity via Bot signed assertion mapping",
+      "status": "PASS",
+      "durationMs": 0
+    },
+    {
+      "name": "3. Resolve Bob identity via Bot signed assertion mapping",
+      "status": "PASS",
+      "durationMs": 1
+    },
+    {
+      "name": "4. Submit recovery job on behalf of Alice",
+      "status": "PASS",
+      "durationMs": 68
+    },
+    {
+      "name": "5. Alice queries her own recovery job via Bot Adapter",
+      "status": "PASS",
+      "durationMs": 13
+    },
+    {
+      "name": "6. Bob queries Alice recovery job via Bot Adapter (Forbidden 403)",
+      "status": "PASS",
+      "durationMs": 15
+    },
+    {
+      "name": "7. Bob attempts to cancel Alice recovery job (Forbidden 403)",
+      "status": "PASS",
+      "durationMs": 22
+    },
+    {
+      "name": "8. Alice cancels her own recovery job (Allowed 200)",
+      "status": "PASS",
+      "durationMs": 15
+    }
+  ],
+  "crossUserIsolationConfirmed": true
+}
