@@ -1,7 +1,7 @@
 {
   "phase": "PHASE_3_ROUND_2",
-  "timestamp": "2026-09-08T18:30:33.274Z",
-  "verdict": "PHASE_3_ROUND_2_LOCAL_VERIFIED_READY_FOR_CI",
+  "timestamp": "2026-09-08T18:43:33.685Z",
+  "verdict": "PHASE_3_ROUND_2_ACCEPTED",
   "acceptanceMatrix": {
     "coreBaselineBefore51of51": true,
     "coreBaselineAfter51of51": true,
@@ -44,8 +44,8 @@
     "frontendSecretScanPass": true,
     "round1RegressionPass": true,
     "phase2RegressionPass": true,
-    "realGitHubCi": false,
-    "allCiJobsGreen": false
+    "realGitHubCi": true,
+    "allCiJobsGreen": true
   },
   "provenance": {
     "coreBefore": "audit/phase3-round2-core-before.json",
@@ -55,6 +55,54 @@
     "oauthProtocolE2E": "audit/phase3-oauth-protocol-e2e.json",
     "discordContractE2E": "audit/phase3-discord-contract-e2e.json",
     "discordRealInfraE2E": "audit/phase3-discord-real-infra-e2e.json",
-    "crossChannelIdentity": "audit/phase3-cross-channel-identity.json"
+    "crossChannelIdentity": "audit/phase3-cross-channel-identity.json",
+    "ciRun": "audit/phase3-round2-ci.json"
+  },
+  "ciRun": {
+    "runId": "34263629539",
+    "commit": "55abe87",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/Ryzen-hub-dev/valax-wearedevs-deobfuscator/actions/runs/34263629539",
+    "totalJobs": 6,
+    "passedJobs": 6,
+    "jobs": [
+      {
+        "name": "Phase 2 Linux Container Runtime Security & Redis Gate",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build-and-test (18.x)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build-and-test (22.x)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "windows-test",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build-and-test (20.x)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Phase 3 Round 2 — Discord OAuth2, Session Security, Bot Adapter & MongoDB Gate",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "evidenceArtifact": {
+      "name": "phase3-round2-evidence",
+      "id": 10070912973,
+      "sizeBytes": 28245,
+      "sha256": "58a2718ecf2a993cf552f61b2dbbae427807665738432407cd1480b9027fe50d"
+    }
   }
 }

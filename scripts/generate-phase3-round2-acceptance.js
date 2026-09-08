@@ -49,6 +49,10 @@ function generateAcceptanceReport() {
   const contractE2E = readJsonSafe(path.join(AUDIT_DIR, 'phase3-discord-contract-e2e.json'));
   const realInfraE2E = readJsonSafe(path.join(AUDIT_DIR, 'phase3-discord-real-infra-e2e.json'));
   const identityAudit = readJsonSafe(path.join(AUDIT_DIR, 'phase3-cross-channel-identity.json'));
+  const ciAudit = readJsonSafe(path.join(AUDIT_DIR, 'phase3-round2-ci.json'));
+
+  const realCiPassed = !!(ciAudit && ciAudit.conclusion === 'success');
+  const allJobsPassed = !!(ciAudit && ciAudit.jobs && ciAudit.jobs.length >= 6 && ciAudit.jobs.every(j => j.conclusion === 'success'));
 
   const matrix = {
     coreBaselineBefore51of51: !!(coreBefore && coreBefore.verified && coreBefore.totalChecked === 51 && coreBefore.mismatches.length === 0),
@@ -105,18 +109,23 @@ function generateAcceptanceReport() {
     round1RegressionPass: true,
     phase2RegressionPass: true,
 
-    realGitHubCi: false, // Set to true after real CI run is retrieved
-    allCiJobsGreen: false
+    realGitHubCi: realCiPassed,
+    allCiJobsGreen: allJobsPassed
   };
 
-  const allLocalPass = Object.entries(matrix)
-    .filter(([k]) => k !== 'realGitHubCi' && k !== 'allCiJobsGreen')
-    .every(([, v]) => v === true);
+  const allMatrixPass = Object.values(matrix).every(v => v === true);
+
+  let verdict = 'PHASE_3_ROUND_2_INCOMPLETE';
+  if (allMatrixPass) {
+    verdict = 'PHASE_3_ROUND_2_ACCEPTED';
+  } else if (Object.entries(matrix).filter(([k]) => k !== 'realGitHubCi' && k !== 'allCiJobsGreen').every(([, v]) => v === true)) {
+    verdict = 'PHASE_3_ROUND_2_LOCAL_VERIFIED_READY_FOR_CI';
+  }
 
   const report = {
     phase: 'PHASE_3_ROUND_2',
     timestamp: new Date().toISOString(),
-    verdict: allLocalPass ? 'PHASE_3_ROUND_2_LOCAL_VERIFIED_READY_FOR_CI' : 'PHASE_3_ROUND_2_INCOMPLETE',
+    verdict,
     acceptanceMatrix: matrix,
     provenance: {
       coreBefore: coreBefore ? 'audit/phase3-round2-core-before.json' : null,
@@ -126,8 +135,10 @@ function generateAcceptanceReport() {
       oauthProtocolE2E: oauthProto ? 'audit/phase3-oauth-protocol-e2e.json' : null,
       discordContractE2E: contractE2E ? 'audit/phase3-discord-contract-e2e.json' : null,
       discordRealInfraE2E: realInfraE2E ? 'audit/phase3-discord-real-infra-e2e.json' : null,
-      crossChannelIdentity: identityAudit ? 'audit/phase3-cross-channel-identity.json' : null
-    }
+      crossChannelIdentity: identityAudit ? 'audit/phase3-cross-channel-identity.json' : null,
+      ciRun: ciAudit ? 'audit/phase3-round2-ci.json' : null
+    },
+    ciRun: ciAudit || null
   };
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(report, null, 2) + '\n');
