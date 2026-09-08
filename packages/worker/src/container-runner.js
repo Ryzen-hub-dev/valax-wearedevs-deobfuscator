@@ -47,6 +47,7 @@ class ContainerRunner {
 
     try {
       execSync('docker info', { stdio: 'ignore', timeout: 2000 });
+      execSync(`docker image inspect ${this.imageName}`, { stdio: 'ignore', timeout: 2000 });
       this._dockerAvailable = true;
     } catch {
       this._dockerAvailable = false;

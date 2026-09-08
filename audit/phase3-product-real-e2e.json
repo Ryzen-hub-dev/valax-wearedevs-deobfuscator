@@ -1,18 +1,18 @@
 {
   "testSuite": "PRODUCT_REAL_CONTAINER_E2E",
-  "timestamp": "2026-09-08T15:31:03.528Z",
-  "apiPid": 15192,
-  "workerPid": 32772,
+  "timestamp": "2026-09-08T16:03:39.666Z",
+  "apiPid": 38496,
+  "workerPid": 14560,
   "distinctProcesses": true,
   "redis": "PONG",
   "redisHost": "127.0.0.1",
-  "redisPort": 55379,
+  "redisPort": 62988,
   "dockerAvailable": false,
   "environment": "HIGH_FIDELITY_FALLBACK_SANDBOX",
   "jobs": [
     {
       "name": "minimal_print",
-      "jobId": "job-d7e15c591a92e1d7",
+      "jobId": "job-d36e1736c42f6cdc",
       "state": "SUCCEEDED",
       "level": "L5-W",
       "containerExitCode": 0,
@@ -21,7 +21,7 @@
     },
     {
       "name": "ByIdiotSandWich",
-      "jobId": "job-150198272066274f",
+      "jobId": "job-14bf06b70e785945",
       "state": "SUCCEEDED",
       "level": "L4",
       "metrics": {
@@ -34,7 +34,7 @@
     },
     {
       "name": "external_global_negative",
-      "jobId": "job-e9aff48b3f49aa80",
+      "jobId": "job-fa0eca8e50d71743",
       "state": "SUCCEEDED",
       "level": "L4",
       "denied": true,

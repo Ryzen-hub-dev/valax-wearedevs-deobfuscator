@@ -82,6 +82,9 @@ async function main() {
 
       // Execute through container runner
       const workerResponse = await runner.runJob(job.payload);
+      if (workerResponse.error) {
+        console.error('[worker error detail]', workerResponse.error);
+      }
 
       // Save artifacts to shared disk
       if (workerResponse.artifacts?.recoveredCode) {

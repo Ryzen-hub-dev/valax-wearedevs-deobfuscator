@@ -1,6 +1,6 @@
 {
   "acceptanceGate": "PHASE_3_ROUND_1_MASTER_ACCEPTANCE_MATRIX",
-  "timestamp": "2026-09-08T15:37:01.877Z",
+  "timestamp": "2026-09-08T16:07:20.353Z",
   "coreBaseline": {
     "intact": true,
     "matchedFiles": 51,
@@ -48,8 +48,8 @@
       "passed": true,
       "provenance": {
         "source": "audit/phase3-product-real-e2e.json",
-        "apiPid": 15192,
-        "workerPid": 32772,
+        "apiPid": 38496,
+        "workerPid": 14560,
         "distinctProcesses": true
       }
     },
@@ -62,7 +62,7 @@
         "source": "audit/phase3-product-real-e2e.json",
         "redisResponse": "PONG",
         "redisHost": "127.0.0.1",
-        "redisPort": 55379
+        "redisPort": 62988
       }
     },
     {
