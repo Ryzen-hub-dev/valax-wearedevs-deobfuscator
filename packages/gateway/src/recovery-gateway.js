@@ -65,14 +65,16 @@ class RecoveryGateway {
       throw new Error('source must be a non-empty string');
     }
 
-    // 1. Rate limiting
-    const rateCheck = this.rateLimiter.checkLimit(principalId);
-    if (!rateCheck.allowed) {
-      this.metrics.inc('rate_limit_rejections_total');
-      const err = new Error(`Rate limit exceeded: ${rateCheck.reason}`);
-      err.code = 'RATE_LIMIT_EXCEEDED';
-      err.resetMs = rateCheck.resetMs;
-      throw err;
+    // 1. Rate limiting (if not already checked at API boundary)
+    if (!options.skipRateCheck) {
+      const rateCheck = this.rateLimiter.checkLimit(principalId, 'submit');
+      if (!rateCheck.allowed) {
+        this.metrics.inc('rate_limit_rejections_total');
+        const err = new Error(`Rate limit exceeded: ${rateCheck.reason}`);
+        err.code = 'RATE_LIMIT_EXCEEDED';
+        err.resetMs = rateCheck.resetMs;
+        throw err;
+      }
     }
 
     // 2. Hash source
@@ -103,12 +105,30 @@ class RecoveryGateway {
     };
 
     // 4. Enqueue in job queue
-    const { job, isDuplicate } = this.queue.enqueue({
+    const enqResult = this.queue.enqueue({
       jobId,
       idempotencyKey,
       principalId,
       payload
     });
+
+    if (enqResult && typeof enqResult.then === 'function') {
+      return enqResult.then(({ job, isDuplicate }) => {
+        if (!isDuplicate) {
+          this.metrics.inc('jobs_submitted_total');
+          this.artifactStore.initJobArtifacts(job.jobId, principalId, { sourceCode: source });
+        }
+        return {
+          jobId: job.jobId,
+          state: job.state,
+          idempotencyKey: job.idempotencyKey,
+          isDuplicate,
+          createdAt: job.createdAt
+        };
+      });
+    }
+
+    const { job, isDuplicate } = enqResult;
 
     if (!isDuplicate) {
       this.metrics.inc('jobs_submitted_total');
@@ -218,8 +238,7 @@ class RecoveryGateway {
    * @param {string} principalId
    * @returns {object}
    */
-  getJob(jobId, principalId) {
-    const job = this.queue.getJob(jobId);
+  _formatJob(job, jobId, principalId) {
     if (!job) {
       const err = new Error(`Job not found: ${jobId}`);
       err.code = 'NOT_FOUND';
@@ -251,6 +270,14 @@ class RecoveryGateway {
     };
   }
 
+  getJob(jobId, principalId) {
+    const res = this.queue.getJob(jobId);
+    if (res && typeof res.then === 'function') {
+      return res.then(job => this._formatJob(job, jobId, principalId));
+    }
+    return this._formatJob(res, jobId, principalId);
+  }
+
   /**
    * Retrieves an artifact.
    *
@@ -269,25 +296,41 @@ class RecoveryGateway {
    * @param {string} principalId
    */
   cancelJob(jobId, principalId, reason) {
-    const job = this.queue.getJob(jobId);
-    if (!job) {
-      const err = new Error(`Job not found: ${jobId}`);
-      err.code = 'NOT_FOUND';
-      throw err;
-    }
+    const handleJob = (job) => {
+      if (!job) {
+        const err = new Error(`Job not found: ${jobId}`);
+        err.code = 'NOT_FOUND';
+        throw err;
+      }
 
-    if (job.principalId !== principalId) {
-      const err = new Error(`Forbidden: Principal '${principalId}' does not own job '${jobId}'`);
-      err.code = 'FORBIDDEN';
-      throw err;
-    }
+      if (job.principalId !== principalId) {
+        const err = new Error(`Forbidden: Principal '${principalId}' does not own job '${jobId}'`);
+        err.code = 'FORBIDDEN';
+        throw err;
+      }
 
-    const cancelled = this.queue.cancelJob(jobId, reason);
-    if (cancelled) {
-      this.metrics.inc('jobs_cancelled_total');
-      this.artifactStore.purgeSourceCode(jobId);
+      const cancelledRes = this.queue.cancelJob(jobId, reason);
+      if (cancelledRes && typeof cancelledRes.then === 'function') {
+        return cancelledRes.then(cancelled => {
+          if (cancelled) {
+            this.metrics.inc('jobs_cancelled_total');
+            this.artifactStore.purgeSourceCode(jobId);
+          }
+          return cancelled;
+        });
+      }
+      if (cancelledRes) {
+        this.metrics.inc('jobs_cancelled_total');
+        this.artifactStore.purgeSourceCode(jobId);
+      }
+      return cancelledRes;
+    };
+
+    const res = this.queue.getJob(jobId);
+    if (res && typeof res.then === 'function') {
+      return res.then(handleJob);
     }
-    return cancelled;
+    return handleJob(res);
   }
 
   /**

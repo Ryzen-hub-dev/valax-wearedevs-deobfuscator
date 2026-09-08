@@ -1,0 +1,81 @@
+{
+  "runId": "34136096103",
+  "commitSha": "06c22ed1d165d9630886382624a831b61e91a66e",
+  "artifactName": "phase3-round1-evidence",
+  "artifactId": "10024044062",
+  "downloadedZipBytes": 9773,
+  "extractedFilesCount": 14,
+  "files": [
+    {
+      "filename": "phase3-api-security.json",
+      "sizeBytes": 2797,
+      "sha256": "c466d7113a47d0cd1b93d0fba966d3738494ad50f64f0214160ae391e9ace02f"
+    },
+    {
+      "filename": "phase3-api-security.log",
+      "sizeBytes": 5554,
+      "sha256": "86bc43e10261c26af6856293aec4e4a393bcfbf1e3e63c4b7db16140f3e8acd2"
+    },
+    {
+      "filename": "phase3-authz-matrix.json",
+      "sizeBytes": 1136,
+      "sha256": "ed506afd4385f6f07213152d18def947e92dd557f0553beb6c65d652769c31ab"
+    },
+    {
+      "filename": "phase3-boundary-import-scan.json",
+      "sizeBytes": 777,
+      "sha256": "3a98cddf0b02cfa0a049c957f44b41f0347b5e8ce1ba9f7d4d7b12768b2afc90"
+    },
+    {
+      "filename": "phase3-boundary-scan.log",
+      "sizeBytes": 296,
+      "sha256": "a578723c1ae9f0f0c38b6bc69e70e6f9301c7fa0e1e1afd3a8d029f888ef7a1a"
+    },
+    {
+      "filename": "phase3-core-baseline-after.json",
+      "sizeBytes": 277,
+      "sha256": "92d0ea7919b037c721a9aaea932815a0e5c45be2b0a308646da99e48ea0ed4e1"
+    },
+    {
+      "filename": "phase3-core-baseline-before.json",
+      "sizeBytes": 153,
+      "sha256": "848cde843a478d357079f0735f7afba278308066850b53edaf570672ac116daf"
+    },
+    {
+      "filename": "phase3-product-contract-e2e.json",
+      "sizeBytes": 1387,
+      "sha256": "8f85938e6b6db0bd066ff3d8b78c9db2281617956ef9d0a0161358ad0234cfc7"
+    },
+    {
+      "filename": "phase3-product-contract-e2e.log",
+      "sizeBytes": 1275,
+      "sha256": "983c00a6d871f48caca13b55a67cce44bb3b49e56116006115300f718e100677"
+    },
+    {
+      "filename": "phase3-product-real-e2e.json",
+      "sizeBytes": 892,
+      "sha256": "30ccd29bbe4d25e1d4fe2994fdc2f80269e2abf505df862d8d95346fddde4d38"
+    },
+    {
+      "filename": "phase3-product-real-e2e.log",
+      "sizeBytes": 1901,
+      "sha256": "a0592155a9fd1844496510e4f88fe8f2e89a8955afff6b65ac80b078f88b05ad"
+    },
+    {
+      "filename": "phase3-round1-acceptance.json",
+      "sizeBytes": 2485,
+      "sha256": "e9e5e8a88cdc5c7c6bb87c93672f32f8a4c63fed709adf43b1baad2f626bc320"
+    },
+    {
+      "filename": "phase3-secret-scan.json",
+      "sizeBytes": 159,
+      "sha256": "c1433dadc1f475d3a60cede3593b10f90dd7a9b3bbd6dbb74d4754d64bdfc188"
+    },
+    {
+      "filename": "phase3-secret-scan.log",
+      "sizeBytes": 270,
+      "sha256": "741cb5358068fd3dbbc21508f74bdc51161e2a406b6a8b5912fa2fa8c9fd8748"
+    }
+  ],
+  "timestamp": "2026-09-07T15:10:47.384Z"
+}

@@ -25,17 +25,20 @@ class RateLimiter {
 
   /**
    * Evaluates if a request from principalId is allowed under the rate limit.
+   * Supports specific action categorization (e.g. submit, status, artifact, request).
    *
    * @param {string} principalId
+   * @param {string} [action='request']
    * @returns {{ allowed: boolean, remaining: number, resetMs: number, reason?: string }}
    */
-  checkLimit(principalId) {
+  checkLimit(principalId, action = 'request') {
     const now = Date.now();
-    let timestamps = this.requestTimestamps.get(principalId) || [];
+    const key = `${principalId}:${action}`;
+    let timestamps = this.requestTimestamps.get(key) || [];
 
     // Filter out timestamps outside current sliding window
     timestamps = timestamps.filter(ts => now - ts < this.windowMs);
-    this.requestTimestamps.set(principalId, timestamps);
+    this.requestTimestamps.set(key, timestamps);
 
     // Burst check: check requests in the last 1 second
     const recentBurst = timestamps.filter(ts => now - ts < 1000).length;
@@ -114,6 +117,58 @@ class RateLimiter {
   }
 }
 
+/**
+ * Production Redis-Backed Distributed Rate Limiter.
+ * Uses atomic sliding window / counter operations in Redis.
+ */
+class RedisBackedRateLimiter extends RateLimiter {
+  constructor(options = {}) {
+    super(options);
+    this.redisClient = options.redisClient || null;
+    this.prefix = options.prefix || 'valax:ratelimit:';
+  }
+
+  checkLimitSync(principalId, action = 'request') {
+    return super.checkLimit(principalId, action);
+  }
+
+  async checkLimitAsync(principalId, action = 'request') {
+    if (!this.redisClient) {
+      return super.checkLimit(principalId, action);
+    }
+    const key = `${this.prefix}${principalId}:${action}`;
+    const now = Date.now();
+    try {
+      if (this.redisClient.sendCommand) {
+        // Increment key and set expiration if first request
+        const count = await this.redisClient.sendCommand(['INCR', key]);
+        if (count === 1) {
+          await this.redisClient.sendCommand(['PEXPIRE', key, String(this.windowMs)]);
+        }
+        if (count > this.maxRequests) {
+          const ttl = await this.redisClient.sendCommand(['PTTL', key]);
+          return {
+            allowed: false,
+            remaining: 0,
+            resetMs: Math.max(1000, Number(ttl) || this.windowMs),
+            reason: 'WINDOW_RATE_LIMIT_EXCEEDED'
+          };
+        }
+        return {
+          allowed: true,
+          remaining: this.maxRequests - count,
+          resetMs: this.windowMs
+        };
+      }
+    } catch {
+      // Fallback to local memory tracking if Redis command fails
+      return super.checkLimit(principalId, action);
+    }
+    return super.checkLimit(principalId, action);
+  }
+}
+
 module.exports = {
-  RateLimiter
+  RateLimiter,
+  RedisBackedRateLimiter
 };

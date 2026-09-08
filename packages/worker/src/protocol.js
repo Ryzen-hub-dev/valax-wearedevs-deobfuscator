@@ -112,8 +112,11 @@ class WorkerProtocol {
         durationMs: metrics.durationMs || 0,
         memoryUsageBytes: metrics.memoryUsageBytes || 0,
         astNodesTransformed: metrics.astNodesTransformed || 0,
-        residualStates: metrics.residualStates || 0,
-        reachableStates: metrics.reachableStates || 0
+        totalDispatcherStates: metrics.totalDispatcherStates ?? 0,
+        physicalResidualStates: metrics.physicalResidualStates ?? metrics.residualStates ?? 0,
+        residualStates: metrics.physicalResidualStates ?? metrics.residualStates ?? 0,
+        reachableResidualStates: metrics.reachableResidualStates ?? metrics.reachableStates ?? 0,
+        reachableStates: metrics.reachableResidualStates ?? metrics.reachableStates ?? 0
       } : null,
       artifacts: artifacts ? {
         recoveredCode: artifacts.recoveredCode || null,

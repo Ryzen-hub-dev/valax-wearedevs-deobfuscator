@@ -1,7 +1,8 @@
 /**
- * Phase 3 REAL_PRODUCT_CONTAINER_E2E:
- * End-to-end integration through real HTTP API -> Gateway -> ContainerRunner -> Docker/Worker -> ArtifactStore.
- * Accurately labeled: REAL_PRODUCT_CONTAINER_E2E.
+ * Phase 3 PRODUCT_CONTAINER_COMPONENT_E2E:
+ * In-process component integration through real HTTP API -> Gateway -> ContainerRunner -> ArtifactStore.
+ * Accurately labeled: PRODUCT_CONTAINER_COMPONENT_E2E.
+ * (For multi-process Redis queue E2E, see tests/integration/product-real-container-e2e.test.js).
  */
 
 const assert = require('assert');
@@ -77,18 +78,17 @@ async function runStep(name, fn) {
   }
 }
 
-async function runRealProductContainerE2E() {
-  console.log('\n=== Phase 3 Round 1 — [REAL_PRODUCT_CONTAINER_E2E] Full Product Infrastructure Pipeline ===');
+async function runProductContainerComponentE2E() {
+  console.log('\n=== Phase 3 Round 1 — [PRODUCT_CONTAINER_COMPONENT_E2E] Component Pipeline ===');
   let gateway;
   let apiServer;
-  const testPort = 39800 + Math.floor(Math.random() * 150);
-  const owner = 'e2e-real-owner';
+  const owner = 'e2e-component-owner';
   const unauthorized = 'e2e-eavesdropper';
   const runner = new ContainerRunner();
   const isDocker = runner.isDockerAvailable();
 
   const auditReport = {
-    testSuite: 'REAL_PRODUCT_CONTAINER_E2E',
+    testSuite: 'PRODUCT_CONTAINER_COMPONENT_E2E',
     timestamp: new Date().toISOString(),
     dockerAvailable: isDocker,
     environment: isDocker ? 'DOCKER_CONTAINER' : 'HIGH_FIDELITY_FALLBACK_SANDBOX',
@@ -96,15 +96,15 @@ async function runRealProductContainerE2E() {
   };
 
   try {
-    await runStep('0. Setup Real Product Pipeline Server', async () => {
+    await runStep('0. Setup Product Pipeline Server', async () => {
       gateway = new RecoveryGateway({ containerRunner: runner });
       apiServer = new ProductApiServer({ gateway });
-      await new Promise(resolve => apiServer.listen(testPort, resolve));
+      await new Promise(resolve => apiServer.listen(0, resolve));
       console.log(`  [INFO] Real Container Runner Environment: Docker available = ${isDocker}`);
     });
 
-    // 1. minimal_print Real Recovery E2E (Must achieve L5-W)
-    await runStep('1. [REAL_PRODUCT_CONTAINER_E2E] minimal_print admitted to L5-W with owner-authorized download', async () => {
+    // 1. minimal_print Real Recovery Component E2E (Must achieve L5-W)
+    await runStep('1. [PRODUCT_CONTAINER_COMPONENT_E2E] minimal_print admitted to L5-W with owner-authorized download', async () => {
       const fixturePath = path.resolve(__dirname, '../fixtures/wearedevs/minimal_print/protected.lua');
       assert.ok(fs.existsSync(fixturePath), 'minimal_print fixture must exist');
       const source = fs.readFileSync(fixturePath, 'utf8');
@@ -123,8 +123,8 @@ async function runRealProductContainerE2E() {
       const jobId = subRes.json.jobId;
       assert.ok(jobId);
 
-      // Worker executes job from queue
-      const workerRes = gateway.processNextJobSync('e2e-worker-node');
+      // Worker executes job from queue synchronously in component test
+      const workerRes = gateway.processNextJobSync('component-worker-node');
       assert.ok(workerRes !== null, 'Worker should process job');
 
       // Inspect status via HTTP API
@@ -164,8 +164,8 @@ async function runRealProductContainerE2E() {
       });
     });
 
-    // 2. ByIdiotSandWich Real Recovery E2E (Must be L4, NOT L5-W)
-    await runStep('2. [REAL_PRODUCT_CONTAINER_E2E] ByIdiotSandWich admitted to L4 (427/48 states, denied L5-W)', async () => {
+    // 2. ByIdiotSandWich Recovery Component E2E (Must be L4, NOT L5-W)
+    await runStep('2. [PRODUCT_CONTAINER_COMPONENT_E2E] ByIdiotSandWich admitted to L4 (427 physical / 48 reachable / 610 total, denied L5-W)', async () => {
       const idiotPath = fs.existsSync(path.resolve(__dirname, '../../ByIdiotSandWich.txt'))
         ? path.resolve(__dirname, '../../ByIdiotSandWich.txt')
         : path.resolve(__dirname, '../fixtures/ByIdiotSandWich.lua');
@@ -186,8 +186,8 @@ async function runRealProductContainerE2E() {
       assert.strictEqual(subRes.statusCode, 201);
       const jobId = subRes.json.jobId;
 
-      // Process through worker
-      gateway.processNextJobSync('e2e-worker-node');
+      // Process through worker in component test
+      gateway.processNextJobSync('component-worker-node');
 
       // Retrieve status via HTTP API
       const getRes = await request(apiServer, {
@@ -198,21 +198,23 @@ async function runRealProductContainerE2E() {
       assert.strictEqual(getRes.statusCode, 200);
       assert.strictEqual(getRes.json.state, ProductJobState.SUCCEEDED);
       assert.strictEqual(getRes.json.recovery.level, 'L4');
-      assert.ok([427, 610].includes(getRes.json.recovery.metrics.physicalResidualStates), `Expected physical residual states 427 or 610, got ${getRes.json.recovery.metrics.physicalResidualStates}`);
-      assert.strictEqual(getRes.json.recovery.metrics.reachableResidualStates, 48);
+      assert.strictEqual(getRes.json.recovery.metrics.physicalResidualStates, 427, 'physicalResidualStates must be 427');
+      assert.strictEqual(getRes.json.recovery.metrics.totalDispatcherStates, 610, 'totalDispatcherStates must be 610');
+      assert.strictEqual(getRes.json.recovery.metrics.reachableResidualStates, 48, 'reachableResidualStates must be 48');
 
       auditReport.runs.push({
         name: 'ByIdiotSandWich',
         jobId,
         level: getRes.json.recovery.level,
+        totalDispatcherStates: getRes.json.recovery.metrics.totalDispatcherStates,
         physicalResidualStates: getRes.json.recovery.metrics.physicalResidualStates,
         reachableResidualStates: getRes.json.recovery.metrics.reachableResidualStates,
         status: 'PASS'
       });
     });
 
-    // 3. External Negative Real Recovery E2E (Must NOT be L5-W)
-    await runStep('3. [REAL_PRODUCT_CONTAINER_E2E] External adversarial negative safely denied L5-W', async () => {
+    // 3. External Negative Recovery Component E2E (Must NOT be L5-W)
+    await runStep('3. [PRODUCT_CONTAINER_COMPONENT_E2E] External adversarial negative safely denied L5-W', async () => {
       const negPath = path.resolve(__dirname, '../fixtures/adversarial/external_global_negative.lua');
       const negSource = fs.existsSync(negPath)
         ? fs.readFileSync(negPath, 'utf8')
@@ -230,7 +232,7 @@ async function runRealProductContainerE2E() {
       assert.strictEqual(subRes.statusCode, 201);
       const jobId = subRes.json.jobId;
 
-      gateway.processNextJobSync('e2e-worker-node');
+      gateway.processNextJobSync('component-worker-node');
 
       const getRes = await request(apiServer, {
         path: `/api/v1/recoveries/${jobId}`,
@@ -239,14 +241,12 @@ async function runRealProductContainerE2E() {
 
       assert.strictEqual(getRes.statusCode, 200);
       assert.strictEqual(getRes.json.state, ProductJobState.SUCCEEDED);
-      assert.notStrictEqual(getRes.json.recovery.level, 'L5-W', 'External negative must NOT be admitted to L5-W');
-      assert.ok(['L4', 'L4.5'].includes(getRes.json.recovery.level));
+      assert.notStrictEqual(getRes.json.recovery.level, 'L5-W', 'External global negative MUST be denied L5-W');
 
       auditReport.runs.push({
         name: 'external_negative',
         jobId,
         level: getRes.json.recovery.level,
-        l5wDenied: true,
         status: 'PASS'
       });
     });
@@ -257,26 +257,26 @@ async function runRealProductContainerE2E() {
     }
   }
 
-  // Write audit artifact
+  // Write component audit artifact
   auditReport.summary = {
     total: passed + failed,
     passed,
     failed,
-    verdict: failed === 0 ? 'REAL_PRODUCT_CONTAINER_E2E_PASS' : 'REAL_PRODUCT_CONTAINER_E2E_FAIL'
+    verdict: failed === 0 ? 'PRODUCT_CONTAINER_COMPONENT_E2E_PASS' : 'PRODUCT_CONTAINER_COMPONENT_E2E_FAIL'
   };
 
   const auditDir = path.resolve(__dirname, '../../audit');
   if (!fs.existsSync(auditDir)) fs.mkdirSync(auditDir, { recursive: true });
   fs.writeFileSync(
-    path.join(auditDir, 'phase3-product-real-e2e.json'),
+    path.join(auditDir, 'phase3-product-component-e2e.json'),
     JSON.stringify(auditReport, null, 2),
     'utf8'
   );
 
   console.log('\n========================================');
-  console.log(`Real Product Container E2E Results: ${passed}/${passed + failed} Passed (${failed} Failed)`);
+  console.log(`Product Container Component E2E Results: ${passed}/${passed + failed} Passed (${failed} Failed)`);
   if (failed === 0) {
-    console.log('ALL REAL PRODUCT CONTAINER E2E TESTS PASSED [PASS]');
+    console.log('ALL PRODUCT CONTAINER COMPONENT E2E TESTS PASSED [PASS]');
   }
   console.log('========================================\n');
 
@@ -287,10 +287,10 @@ async function runRealProductContainerE2E() {
 }
 
 if (require.main === module) {
-  runRealProductContainerE2E().catch(err => {
-    console.error('Fatal real container test runner error:', err);
+  runProductContainerComponentE2E().catch(err => {
+    console.error('Fatal component E2E test runner error:', err);
     process.exit(1);
   });
 }
 
-module.exports = { runRealProductContainerE2E };
+module.exports = { runProductContainerComponentE2E };

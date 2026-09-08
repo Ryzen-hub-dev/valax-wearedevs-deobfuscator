@@ -1,0 +1,37 @@
+{
+  "ci-evidence-timeout-closure.zip": {
+    "path": "audit/ci-evidence-timeout-closure.zip",
+    "sizeBytes": 4752,
+    "sha256": "sha256:0b367cca4fc18db36dc65910da8a850c6bcfb402641286687c6d35fe2d792dd8"
+  },
+  "phase2-runtime-security.json": {
+    "path": "audit/ci-extracted-timeout-closure/phase2-runtime-security.json",
+    "sizeBytes": 4681,
+    "sha256": "sha256:67852f67c4bdf938d4b2552f9f637aaa07ca54d4b65c5f00e5e695c9d2f2d9c8"
+  },
+  "phase2-runtime-raw.log": {
+    "path": "audit/ci-extracted-timeout-closure/phase2-runtime-raw.log",
+    "sizeBytes": 2240,
+    "sha256": "sha256:391a505d9238ca97208138a10c3aaf9fc190d551549f79254f70f145d79bb98f"
+  },
+  "redis-integration.log": {
+    "path": "audit/ci-extracted-timeout-closure/redis-integration.log",
+    "sizeBytes": 752,
+    "sha256": "sha256:fba422984b8105bbb70feb1856991f7c3590d180e0d6c8437956e28f23aa29cd"
+  },
+  "container-e2e.log": {
+    "path": "audit/ci-extracted-timeout-closure/container-e2e.log",
+    "sizeBytes": 832,
+    "sha256": "sha256:4586232229b36c055b7b5fb95eb6b1767d759926e64ddb77a8a57351eb523925"
+  },
+  "redis-multi-process.json": {
+    "path": "audit/ci-extracted-timeout-closure/redis-multi-process.json",
+    "sizeBytes": 145,
+    "sha256": "sha256:fd5bff19684ca367c5227a6f23989e2fe9d27fe993c752dfa12b433043fdd45f"
+  },
+  "phase2-final-acceptance-matrix.json": {
+    "path": "audit/ci-extracted-timeout-closure/phase2-final-acceptance-matrix.json",
+    "sizeBytes": 781,
+    "sha256": "sha256:a1ab4758380032d1e01edb73b0dc5d5e3796e839b80ffff9bbec44058e8ca382"
+  }
+}

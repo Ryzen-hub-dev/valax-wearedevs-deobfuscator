@@ -63,16 +63,34 @@ class ProductApiServer {
   }
 
   /**
-   * Starts listening.
+   * Starts listening synchronously via callback.
    */
   listen(port, callback) {
     return this.server.listen(port, callback);
   }
 
   /**
-   * Closes server.
+   * Starts listening asynchronously and resolves to the bound port.
+   */
+  start(port = this.port) {
+    return new Promise((resolve, reject) => {
+      this.server.listen(port, (err) => {
+        if (err) return reject(err);
+        const addr = this.server.address();
+        this.port = typeof addr === 'object' && addr ? addr.port : port;
+        resolve(this.port);
+      });
+    });
+  }
+
+  /**
+   * Closes server safely.
    */
   close(callback) {
+    if (!this.server.listening) {
+      if (callback) callback();
+      return Promise.resolve();
+    }
     return this.server.close(callback);
   }
 
@@ -106,6 +124,22 @@ class ProductApiServer {
       // 3. Resolve Authenticated Principal
       const principal = this._resolvePrincipal(req);
 
+      // 3.5 API Request Rate Limiter (per-principal)
+      if (this.gateway?.rateLimiter) {
+        let action = 'request';
+        if (pathname === '/api/v1/recoveries' && method === 'POST') action = 'submit';
+        else if (pathname.includes('/artifacts/')) action = 'download';
+        else if (pathname.includes('/artifacts')) action = 'list';
+        else if (pathname.startsWith('/api/v1/recoveries/') && method === 'GET') action = 'status';
+
+        const rateCheck = this.gateway.rateLimiter.checkLimit(principal.principalId, action);
+        if (!rateCheck.allowed) {
+          const retryAfterSec = Math.max(1, Math.ceil((rateCheck.resetMs || 1000) / 1000));
+          res.setHeader('Retry-After', String(retryAfterSec));
+          throw new ApiError(ApiErrorCode.RATE_LIMITED, `Rate limit exceeded: ${rateCheck.reason}`, 429);
+        }
+      }
+
       // 4. Route Dispatch
       if (pathname === '/api/v1/recoveries') {
         if (method === 'POST') {
@@ -119,10 +153,10 @@ class ProductApiServer {
       if (jobMatch) {
         const jobId = jobMatch[1];
         if (method === 'GET') {
-          return this._handleGetRecovery(res, principal, jobId, requestId);
+          return await this._handleGetRecovery(res, principal, jobId, requestId);
         }
         if (method === 'DELETE') {
-          return this._handleCancelRecovery(res, principal, jobId, requestId);
+          return await this._handleCancelRecovery(res, principal, jobId, requestId);
         }
         throw new ApiError(ApiErrorCode.INTERNAL_ERROR, 'Method Not Allowed', 405);
       }
@@ -132,7 +166,7 @@ class ProductApiServer {
       if (artifactsMatch) {
         const jobId = artifactsMatch[1];
         if (method === 'GET') {
-          return this._handleListArtifacts(res, principal, jobId, requestId);
+          return await this._handleListArtifacts(res, principal, jobId, requestId);
         }
         throw new ApiError(ApiErrorCode.INTERNAL_ERROR, 'Method Not Allowed', 405);
       }
@@ -143,7 +177,7 @@ class ProductApiServer {
         const jobId = artifactDownloadMatch[1];
         const artifactId = artifactDownloadMatch[2];
         if (method === 'GET') {
-          return this._handleDownloadArtifact(res, principal, jobId, artifactId, requestId);
+          return await this._handleDownloadArtifact(res, principal, jobId, artifactId, requestId);
         }
         throw new ApiError(ApiErrorCode.INTERNAL_ERROR, 'Method Not Allowed', 405);
       }
@@ -221,7 +255,15 @@ class ProductApiServer {
     }
 
     // 2. Read Bounded Request Body
-    const bodyStr = await this._readBoundedBody(req, this.maxSourceBytes);
+    const bodyBuf = await this._readBoundedBody(req, this.maxSourceBytes);
+    let bodyStr;
+    try {
+      const decoder = new TextDecoder('utf-8', { fatal: true });
+      bodyStr = decoder.decode(bodyBuf);
+    } catch {
+      throw new ApiError(ApiErrorCode.INVALID_ENCODING, 'Malformed UTF-8 encoding in request payload', 400);
+    }
+
     let payload;
     try {
       payload = JSON.parse(bodyStr);
@@ -263,7 +305,7 @@ class ProductApiServer {
           );
         }
         // Return existing job representation without re-enqueueing
-        const existingJob = this.gateway.getJob(existing.jobId, principal.principalId);
+        const existingJob = await this.gateway.getJob(existing.jobId, principal.principalId);
         return this._sendJsonResponse(res, 200, {
           jobId: existingJob.jobId,
           state: mapInternalToProductState(existingJob.state),
@@ -279,20 +321,35 @@ class ProductApiServer {
     // 6. Submit Job through Gateway
     let submitResult;
     try {
-      submitResult = this.gateway.submitJobSync({
+      submitResult = await (this.gateway.submitJob ? this.gateway.submitJob({
         principalId: principal.principalId,
         source,
         filename: sanitizedFilename,
         idempotencyKey,
         options: {
           requestedStage: options.requestedStage || 'auto',
-          semanticValidation: options.semanticValidation !== false
+          semanticValidation: options.semanticValidation !== false,
+          skipRateCheck: true
         },
         limits: {
           timeoutMs: options.timeoutMs || 30000,
           maxInputBytes: this.maxSourceBytes
         }
-      });
+      }) : this.gateway.submitJobSync({
+        principalId: principal.principalId,
+        source,
+        filename: sanitizedFilename,
+        idempotencyKey,
+        options: {
+          requestedStage: options.requestedStage || 'auto',
+          semanticValidation: options.semanticValidation !== false,
+          skipRateCheck: true
+        },
+        limits: {
+          timeoutMs: options.timeoutMs || 30000,
+          maxInputBytes: this.maxSourceBytes
+        }
+      }));
     } catch (err) {
       if (err.code === 'RATE_LIMIT_EXCEEDED') {
         res.setHeader('Retry-After', Math.ceil((err.resetMs || 1000) / 1000));
@@ -301,17 +358,22 @@ class ProductApiServer {
       if (err.code === 'PRINCIPAL_CONCURRENCY_EXCEEDED') {
         throw new ApiError(ApiErrorCode.QUOTA_EXCEEDED, err.message, 429);
       }
-      if (err.code === 'QUEUE_FULL' || err.code === 'SATURATED') {
+      if (err.code === 'QUEUE_FULL' || err.code === 'SATURATED' || err.code === 'BACKPRESSURE_EXCEEDED' || err.code === 'QUEUE_SATURATED') {
         res.setHeader('Retry-After', '5');
         throw new ApiError(ApiErrorCode.QUEUE_SATURATED, 'Recovery queue is temporarily saturated. Please retry later.', 503);
       }
       throw new ApiError(ApiErrorCode.INTERNAL_ERROR, err.message, 500);
     }
 
+    const jobId = submitResult?.jobId || submitResult?.job?.jobId;
+    if (!jobId) {
+      throw new ApiError(ApiErrorCode.INTERNAL_ERROR, 'Failed to obtain job identifier from queue submission', 500);
+    }
+
     // 7. Register Idempotency and update daily quota
     if (idempotencyKey) {
       this.idempotencyRegistry.set(`${principal.principalId}:${idempotencyKey}`, {
-        jobId: submitResult.jobId,
+        jobId,
         contentSha256
       });
     }
@@ -320,7 +382,7 @@ class ProductApiServer {
     // 8. Safe Log Event (Zero Source Logging!)
     this.logger.info('RECOVERY_SUBMITTED', {
       requestId,
-      jobId: submitResult.jobId,
+      jobId,
       principalId: principal.principalId,
       contentSha256,
       byteCount: sourceBytes,
@@ -330,12 +392,12 @@ class ProductApiServer {
 
     // 9. Return Canonical Product POST Response
     const responsePayload = {
-      jobId: submitResult.jobId,
+      jobId,
       state: ProductJobState.QUEUED,
       createdAt: submitResult.createdAt || new Date().toISOString(),
       links: {
-        self: `/api/v1/recoveries/${submitResult.jobId}`,
-        artifacts: `/api/v1/recoveries/${submitResult.jobId}/artifacts`
+        self: `/api/v1/recoveries/${jobId}`,
+        artifacts: `/api/v1/recoveries/${jobId}/artifacts`
       }
     };
 
@@ -346,10 +408,10 @@ class ProductApiServer {
    * Handler: GET /api/v1/recoveries/:jobId
    * @private
    */
-  _handleGetRecovery(res, principal, jobId, requestId) {
+  async _handleGetRecovery(res, principal, jobId, requestId) {
     let job;
     try {
-      job = this.gateway.getJob(jobId, principal.principalId);
+      job = await this.gateway.getJob(jobId, principal.principalId);
     } catch (err) {
       if (err.code === 'FORBIDDEN') {
         throw new ApiError(ApiErrorCode.FORBIDDEN, `Access denied: You do not own job ${jobId}`, 403);
@@ -374,8 +436,12 @@ class ProductApiServer {
         semanticStatus: 'CONSERVATIVE',
         warnings: job.result.admission?.diagnostics?.reasons || [],
         metrics: {
-          physicalResidualStates: job.result.metrics?.residualStates ?? 0,
-          reachableResidualStates: job.result.metrics?.reachableStates ?? 0,
+          totalDispatcherStates: job.result.metrics?.totalDispatcherStates ?? 0,
+          dispatcherStatesBefore: job.result.metrics?.totalDispatcherStates ?? 0,
+          physicalResidualStates: job.result.metrics?.physicalResidualStates ?? job.result.metrics?.residualStates ?? 0,
+          reachableResidualStates: job.result.metrics?.reachableResidualStates ?? job.result.metrics?.reachableStates ?? 0,
+          residualStates: job.result.metrics?.physicalResidualStates ?? job.result.metrics?.residualStates ?? 0,
+          reachableStates: job.result.metrics?.reachableResidualStates ?? job.result.metrics?.reachableStates ?? 0,
           dispatcherStatesAfter: job.result.metrics?.astNodesTransformed ?? 0,
           durationMs: job.result.metrics?.durationMs ?? 0
         }
@@ -398,10 +464,10 @@ class ProductApiServer {
    * Cancellation request.
    * @private
    */
-  _handleCancelRecovery(res, principal, jobId, requestId) {
+  async _handleCancelRecovery(res, principal, jobId, requestId) {
     let job;
     try {
-      job = this.gateway.getJob(jobId, principal.principalId);
+      job = await this.gateway.getJob(jobId, principal.principalId);
     } catch (err) {
       if (err.code === 'FORBIDDEN') {
         throw new ApiError(ApiErrorCode.FORBIDDEN, `Access denied: You do not own job ${jobId}`, 403);
@@ -419,7 +485,7 @@ class ProductApiServer {
     }
 
     try {
-      this.gateway.cancelJob(jobId, principal.principalId, 'User requested cancellation');
+      await this.gateway.cancelJob(jobId, principal.principalId, 'User requested cancellation');
     } catch (err) {
       if (err.code === 'FORBIDDEN') {
         throw new ApiError(ApiErrorCode.FORBIDDEN, err.message, 403);
@@ -445,10 +511,10 @@ class ProductApiServer {
    * Handler: GET /api/v1/recoveries/:jobId/artifacts
    * @private
    */
-  _handleListArtifacts(res, principal, jobId, requestId) {
+  async _handleListArtifacts(res, principal, jobId, requestId) {
     let job;
     try {
-      job = this.gateway.getJob(jobId, principal.principalId);
+      job = await this.gateway.getJob(jobId, principal.principalId);
     } catch (err) {
       if (err.code === 'FORBIDDEN') {
         throw new ApiError(ApiErrorCode.FORBIDDEN, `Access denied for job ${jobId}`, 403);
@@ -489,20 +555,23 @@ class ProductApiServer {
    * Handler: GET /api/v1/recoveries/:jobId/artifacts/:artifactId
    * @private
    */
-  _handleDownloadArtifact(res, principal, jobId, artifactId, requestId) {
+  async _handleDownloadArtifact(res, principal, jobId, artifactId, requestId) {
     if (!['recoveredCode', 'report', 'logs'].includes(artifactId)) {
       throw new ApiError(ApiErrorCode.ARTIFACT_NOT_FOUND, `Artifact '${artifactId}' does not exist`, 404);
     }
 
     let artifactContent;
     try {
-      artifactContent = this.gateway.getArtifact(jobId, artifactId, principal.principalId);
+      artifactContent = await this.gateway.getArtifact(jobId, artifactId, principal.principalId);
     } catch (err) {
       if (err.code === 'FORBIDDEN') {
         throw new ApiError(ApiErrorCode.FORBIDDEN, `Access denied for artifact in job ${jobId}`, 403);
       }
-      if (err.code === 'NOT_FOUND') {
-        throw new ApiError(ApiErrorCode.ARTIFACT_NOT_FOUND, `Artifact not found or expired for job ${jobId}`, 404);
+      if (err.code === 'NOT_FOUND' || err.code === 'ARTIFACT_EXPIRED' || err.code === 'EXPIRED') {
+        const isExpired = (err.message && err.message.toLowerCase().includes('expired')) || err.code === 'ARTIFACT_EXPIRED' || err.code === 'EXPIRED';
+        const code = isExpired ? ApiErrorCode.ARTIFACT_EXPIRED : ApiErrorCode.ARTIFACT_NOT_FOUND;
+        const status = isExpired ? 410 : 404;
+        throw new ApiError(code, `Artifact not found or expired for job ${jobId}`, status);
       }
       throw new ApiError(ApiErrorCode.INTERNAL_ERROR, err.message, 500);
     }
@@ -528,6 +597,10 @@ class ProductApiServer {
   _sanitizeFilename(rawFilename) {
     if (!rawFilename || typeof rawFilename !== 'string') {
       return 'input.lua';
+    }
+
+    if (rawFilename.length > 255) {
+      throw new ApiError(ApiErrorCode.INVALID_FILE, 'Filename exceeds maximum length of 255 characters', 400);
     }
 
     if (rawFilename.includes('\0')) {
@@ -576,11 +649,15 @@ class ProductApiServer {
     return new Promise((resolve, reject) => {
       let received = 0;
       const chunks = [];
+      let aborted = false;
 
       req.on('data', chunk => {
+        if (aborted) return;
         received += chunk.length;
         if (received > limitBytes) {
+          aborted = true;
           req.pause();
+          req.resume(); // Drain stream without buffering to allow 413 response delivery
           reject(new ApiError(
             ApiErrorCode.FILE_TOO_LARGE,
             `Request body exceeds maximum size of ${limitBytes} bytes`,
@@ -592,10 +669,12 @@ class ProductApiServer {
       });
 
       req.on('end', () => {
-        resolve(Buffer.concat(chunks).toString('utf8'));
+        if (aborted) return;
+        resolve(Buffer.concat(chunks));
       });
 
       req.on('error', err => {
+        if (aborted) return;
         reject(new ApiError(ApiErrorCode.INTERNAL_ERROR, `Stream error: ${err.message}`, 500));
       });
     });
@@ -634,7 +713,8 @@ class ProductApiServer {
     if (!res.headersSent) {
       res.writeHead(statusCode, {
         'Content-Type': 'application/json; charset=utf-8',
-        'Content-Length': Buffer.byteLength(jsonStr, 'utf8')
+        'Content-Length': Buffer.byteLength(jsonStr, 'utf8'),
+        'Connection': 'close'
       });
     }
     res.end(jsonStr);

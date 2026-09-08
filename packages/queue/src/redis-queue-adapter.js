@@ -34,7 +34,10 @@ class MinimalRedisClient extends EventEmitter {
         reject(new Error(`Redis connection timeout to ${this.host}:${this.port}`));
       }, timeoutMs);
 
+      let connectionSettled = false;
       this.socket = net.createConnection({ host: this.host, port: this.port }, () => {
+        if (connectionSettled) return;
+        connectionSettled = true;
         clearTimeout(timer);
         this.connected = true;
         this.emit('connect');
@@ -51,11 +54,17 @@ class MinimalRedisClient extends EventEmitter {
       this.socket.on('error', (err) => {
         clearTimeout(timer);
         this.connected = false;
+        if (!connectionSettled) {
+          connectionSettled = true;
+          reject(err);
+        }
         if (this.pendingCallbacks.length > 0) {
           const cb = this.pendingCallbacks.shift();
           cb(err);
         }
-        this.emit('error', err);
+        if (this.listenerCount('error') > 0) {
+          this.emit('error', err);
+        }
       });
 
       this.socket.on('close', () => {
@@ -65,11 +74,15 @@ class MinimalRedisClient extends EventEmitter {
     });
   }
 
-  sendCommand(args) {
-    return new Promise((resolve, reject) => {
-      if (!this.connected || !this.socket) {
-        return reject(new Error('Redis client not connected'));
+  async sendCommand(args) {
+    if (!this.connected || !this.socket || this.socket.destroyed) {
+      try {
+        await this.connect();
+      } catch (err) {
+        throw new Error(`Redis client not connected: ${err.message}`);
       }
+    }
+    return new Promise((resolve, reject) => {
 
       let cmd = `*${args.length}\r\n`;
       for (const arg of args) {
@@ -239,16 +252,26 @@ class RedisQueueAdapter extends EventEmitter {
    * @param {number} [options.maxRetries=2]
    * @param {object} [options.client]
    */
-  constructor(options = {}) {
+  constructor(clientOrOptions = {}, maybeOptions = {}) {
     super();
+    let client = null;
+    let options = {};
+    if (clientOrOptions && (typeof clientOrOptions.sendCommand === 'function' || typeof clientOrOptions.execCommand === 'function')) {
+      client = clientOrOptions;
+      options = maybeOptions || {};
+    } else {
+      options = clientOrOptions || {};
+      client = options.client || null;
+    }
+
     this.host = options.host || '127.0.0.1';
     this.port = options.port || 6379;
-    this.prefix = options.prefix || 'valax:queue:';
+    this.prefix = options.prefix || options.keyPrefix || 'valax:queue:';
     this.maxQueueDepth = options.maxQueueDepth || 500;
     this.defaultLeaseDurationMs = options.defaultLeaseDurationMs || 30000;
     this.maxRetries = options.maxRetries ?? 2;
 
-    this.client = options.client || new MinimalRedisClient({ host: this.host, port: this.port });
+    this.client = client || options.client || new MinimalRedisClient({ host: this.host, port: this.port });
     this.isConnected = this.client instanceof SynchronousRedisClient;
   }
 

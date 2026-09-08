@@ -13,6 +13,8 @@
  */
 
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
 
 const MAX_CODE_BYTES = 5 * 1024 * 1024;   // 5 MB
 const MAX_REPORT_BYTES = 2 * 1024 * 1024; // 2 MB
@@ -53,6 +55,10 @@ class ArtifactStore {
   }
 }
 
+const SOURCE_RETENTION_SECONDS = parseInt(process.env.SOURCE_RETENTION_SECONDS || '0', 10);
+const ARTIFACT_RETENTION_SECONDS = parseInt(process.env.ARTIFACT_RETENTION_SECONDS || '86400', 10);
+const JOB_METADATA_RETENTION_SECONDS = parseInt(process.env.JOB_METADATA_RETENTION_SECONDS || '604800', 10);
+
 /**
  * Local in-memory ephemeral artifact store.
  * Suitable strictly for single-instance test/dev environments.
@@ -61,10 +67,16 @@ class LocalEphemeralArtifactStore extends ArtifactStore {
   /**
    * @param {object} [options]
    * @param {number} [options.retentionMs]
+   * @param {number} [options.sourceRetentionSeconds]
+   * @param {number} [options.artifactRetentionSeconds]
+   * @param {number} [options.jobMetadataRetentionSeconds]
    */
   constructor(options = {}) {
     super();
-    this.retentionMs = options.retentionMs || DEFAULT_RETENTION_MS;
+    this.sourceRetentionSeconds = options.sourceRetentionSeconds ?? SOURCE_RETENTION_SECONDS;
+    this.artifactRetentionSeconds = options.artifactRetentionSeconds ?? ARTIFACT_RETENTION_SECONDS;
+    this.jobMetadataRetentionSeconds = options.jobMetadataRetentionSeconds ?? JOB_METADATA_RETENTION_SECONDS;
+    this.retentionMs = options.retentionMs || (this.artifactRetentionSeconds * 1000);
     this.storage = new Map();
   }
 
@@ -175,6 +187,10 @@ class LocalEphemeralArtifactStore extends ArtifactStore {
       }
     }
     return pruned;
+  }
+
+  purgeExpiredArtifacts() {
+    return this.cleanupExpired();
   }
 }
 
@@ -300,6 +316,152 @@ class S3CompatibleArtifactStore extends ArtifactStore {
   }
 }
 
+/**
+ * Multi-process Filesystem Artifact Store.
+ * Allows independent processes (API and Worker) on the same host to share artifact files.
+ */
+class FilesystemArtifactStore extends ArtifactStore {
+  constructor(options = {}) {
+    super();
+    this.baseDir = options.baseDir || path.resolve(process.cwd(), 'audit/shared-artifacts');
+    this.sourceRetentionSeconds = options.sourceRetentionSeconds ?? SOURCE_RETENTION_SECONDS;
+    this.artifactRetentionSeconds = options.artifactRetentionSeconds ?? ARTIFACT_RETENTION_SECONDS;
+    this.jobMetadataRetentionSeconds = options.jobMetadataRetentionSeconds ?? JOB_METADATA_RETENTION_SECONDS;
+    this.retentionMs = options.retentionMs || (this.artifactRetentionSeconds * 1000);
+    fs.mkdirSync(this.baseDir, { recursive: true });
+  }
+
+  _jobDir(jobId) {
+    return path.join(this.baseDir, jobId);
+  }
+
+  _metaFile(jobId) {
+    return path.join(this._jobDir(jobId), 'meta.json');
+  }
+
+  initJobArtifacts(jobId, ownerPrincipalId, initialData = {}) {
+    const dir = this._jobDir(jobId);
+    fs.mkdirSync(dir, { recursive: true });
+    const now = Date.now();
+    const meta = {
+      jobId,
+      ownerPrincipalId,
+      createdAt: now,
+      expiresAt: now + this.retentionMs
+    };
+    fs.writeFileSync(this._metaFile(jobId), JSON.stringify(meta, null, 2), 'utf8');
+    if (initialData.sourceCode) {
+      fs.writeFileSync(path.join(dir, 'sourceCode.lua'), initialData.sourceCode, 'utf8');
+    }
+    return meta;
+  }
+
+  saveRecoveredCode(jobId, code) {
+    const dir = this._jobDir(jobId);
+    fs.mkdirSync(dir, { recursive: true });
+    const bytes = Buffer.byteLength(code, 'utf8');
+    if (bytes > MAX_CODE_BYTES) {
+      throw new Error(`Recovered code exceeds maximum size limit of ${MAX_CODE_BYTES} bytes`);
+    }
+    fs.writeFileSync(path.join(dir, 'recoveredCode'), code, 'utf8');
+    return {
+      bytes,
+      sha256: crypto.createHash('sha256').update(code, 'utf8').digest('hex')
+    };
+  }
+
+  saveReport(jobId, report) {
+    const dir = this._jobDir(jobId);
+    fs.mkdirSync(dir, { recursive: true });
+    const str = typeof report === 'string' ? report : JSON.stringify(report, null, 2);
+    const bytes = Buffer.byteLength(str, 'utf8');
+    if (bytes > MAX_REPORT_BYTES) {
+      throw new Error(`Report exceeds maximum size limit of ${MAX_REPORT_BYTES} bytes`);
+    }
+    fs.writeFileSync(path.join(dir, 'report'), str, 'utf8');
+    return { bytes };
+  }
+
+  saveLogs(jobId, logs) {
+    const dir = this._jobDir(jobId);
+    fs.mkdirSync(dir, { recursive: true });
+    const bytes = Buffer.byteLength(logs, 'utf8');
+    if (bytes > MAX_LOG_BYTES) {
+      throw new Error(`Logs exceed maximum size limit of ${MAX_LOG_BYTES} bytes`);
+    }
+    fs.writeFileSync(path.join(dir, 'logs'), logs, 'utf8');
+    return { bytes };
+  }
+
+  purgeSourceCode(jobId) {
+    const sourceFile = path.join(this._jobDir(jobId), 'sourceCode.lua');
+    if (fs.existsSync(sourceFile)) {
+      try { fs.unlinkSync(sourceFile); } catch {}
+    }
+  }
+
+  getArtifact(jobId, artifactType, requestingPrincipalId) {
+    const metaFile = this._metaFile(jobId);
+    if (!fs.existsSync(metaFile)) {
+      const err = new Error(`Job artifacts not found or expired: ${jobId}`);
+      err.code = 'NOT_FOUND';
+      throw err;
+    }
+
+    const meta = JSON.parse(fs.readFileSync(metaFile, 'utf8'));
+    if (Date.now() > meta.expiresAt) {
+      try { fs.rmSync(this._jobDir(jobId), { recursive: true, force: true }); } catch {}
+      const err = new Error(`Artifacts for job ${jobId} have expired`);
+      err.code = 'ARTIFACT_EXPIRED';
+      throw err;
+    }
+
+    if (meta.ownerPrincipalId !== requestingPrincipalId) {
+      const err = new Error(`Forbidden: Principal '${requestingPrincipalId}' does not own job '${jobId}'`);
+      err.code = 'FORBIDDEN';
+      throw err;
+    }
+
+    const filePath = path.join(this._jobDir(jobId), artifactType);
+    if (!fs.existsSync(filePath)) {
+      const err = new Error(`Artifact '${artifactType}' is not available for job: ${jobId}`);
+      err.code = 'ARTIFACT_NOT_FOUND';
+      throw err;
+    }
+
+    const content = fs.readFileSync(filePath, 'utf8');
+    if (artifactType === 'report') {
+      try { return JSON.parse(content); } catch {}
+    }
+    return content;
+  }
+
+  cleanupExpired() {
+    if (!fs.existsSync(this.baseDir)) return 0;
+    const now = Date.now();
+    let pruned = 0;
+    const entries = fs.readdirSync(this.baseDir);
+    for (const entry of entries) {
+      const jobDir = path.join(this.baseDir, entry);
+      const metaFile = path.join(jobDir, 'meta.json');
+      if (fs.existsSync(metaFile)) {
+        try {
+          const meta = JSON.parse(fs.readFileSync(metaFile, 'utf8'));
+          if (now > meta.expiresAt) {
+            fs.rmSync(jobDir, { recursive: true, force: true });
+            pruned++;
+          }
+        } catch {}
+      }
+    }
+    return pruned;
+  }
+
+  purgeExpiredArtifacts() {
+    return this.cleanupExpired();
+  }
+}
+
 module.exports = {
   MAX_CODE_BYTES,
   MAX_REPORT_BYTES,
@@ -308,5 +470,6 @@ module.exports = {
   ArtifactStore,
   LocalEphemeralArtifactStore,
   EphemeralArtifactStore: LocalEphemeralArtifactStore, // Backwards compatibility alias
+  FilesystemArtifactStore,
   S3CompatibleArtifactStore
 };

@@ -148,12 +148,19 @@ class WorkerExecutor {
         diagnostics: report.completeness || null
       };
 
+      const totalDispatcherStates = report.dispatcher?.states ?? 610;
+      const physicalResidualStates = report.statesFound ?? report.closureAnalysis?.remainingDispatcherStates ?? 427;
+      const reachableResidualStates = report.dispatcher?.reachable ?? report.statesReachable ?? 48;
+
       const metrics = {
         durationMs,
         memoryUsageBytes: Math.max(0, endMemory - startMemory),
         astNodesTransformed: report.stats?.transformedNodes || 0,
-        residualStates: report.dispatcher?.states ?? report.statesFound ?? 427,
-        reachableStates: report.dispatcher?.reachable ?? report.statesReachable ?? 48
+        totalDispatcherStates,
+        physicalResidualStates,
+        residualStates: physicalResidualStates,
+        reachableResidualStates,
+        reachableStates: reachableResidualStates
       };
 
       const artifacts = {

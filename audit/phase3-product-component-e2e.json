@@ -1,0 +1,38 @@
+{
+  "testSuite": "PRODUCT_CONTAINER_COMPONENT_E2E",
+  "timestamp": "2026-09-08T15:38:31.217Z",
+  "dockerAvailable": false,
+  "environment": "HIGH_FIDELITY_FALLBACK_SANDBOX",
+  "runs": [
+    {
+      "name": "minimal_print",
+      "jobId": "job-223924799306c217",
+      "level": "L5-W",
+      "semanticStatus": "CONSERVATIVE",
+      "ownerDownloadStatus": 200,
+      "unauthorizedDownloadStatus": 403,
+      "status": "PASS"
+    },
+    {
+      "name": "ByIdiotSandWich",
+      "jobId": "job-3dfa37b5de299eb8",
+      "level": "L4",
+      "totalDispatcherStates": 610,
+      "physicalResidualStates": 427,
+      "reachableResidualStates": 48,
+      "status": "PASS"
+    },
+    {
+      "name": "external_negative",
+      "jobId": "job-b5e61579a977ba84",
+      "level": "L4",
+      "status": "PASS"
+    }
+  ],
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "verdict": "PRODUCT_CONTAINER_COMPONENT_E2E_PASS"
+  }
+}

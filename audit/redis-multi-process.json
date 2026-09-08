@@ -1,0 +1,6 @@
+{
+  "distinctOSProcesses": false,
+  "note": "REDIS_DAEMON_NOT_CONNECTED_FALLBACK_TO_MULTI_CLIENT",
+  "producerPid": 11524,
+  "consumerPid": 11524
+}

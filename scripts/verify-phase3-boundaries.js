@@ -69,7 +69,7 @@ function getAllFiles(dirPath, arrayOfFiles = []) {
 }
 
 function runBoundaryScan() {
-  console.log('=== PHASE 3 ARCHITECTURE BOUNDARY SCANNER ===');
+  console.log('=== PHASE 3 STATIC IMPORT / REFERENCE BOUNDARY SCANNER ===');
   const violations = [];
   const scannedFiles = [];
 
@@ -111,14 +111,50 @@ function runBoundaryScan() {
     }
   }
 
-  const pass = violations.length === 0;
+  // Adversarial Self-Test Suite (verifies detection of evasion vectors)
+  console.log('\nRunning Adversarial Scanner Self-Tests...');
+  const selfTestVectors = [
+    { code: 'const core = require("../packages/core");', shouldCatch: true, rule: 'Direct core require' },
+    { code: 'const x = require("@valax/core");', shouldCatch: true, rule: 'Package core require' },
+    { code: 'const worker = require("../packages/worker/src/worker-executor");', shouldCatch: true, rule: 'Worker internal require' },
+    { code: 'const runner = new ContainerRunner();', shouldCatch: true, rule: 'ContainerRunner instantiation' },
+    { code: 'const clean = "clean code without forbidden imports";', shouldCatch: false, rule: 'Benign clean code' }
+  ];
+
+  const selfTestResults = selfTestVectors.map(vec => {
+    let caught = false;
+    for (const ruleGroup of FORBIDDEN_RULES) {
+      for (const rule of ruleGroup.forbiddenPatterns) {
+        if (rule.pattern.test(vec.code)) {
+          caught = true;
+          break;
+        }
+      }
+      if (caught) break;
+    }
+    const pass = caught === vec.shouldCatch;
+    return { rule: vec.rule, expectedCaught: vec.shouldCatch, actuallyCaught: caught, pass };
+  });
+
+  const allSelfTestsPassed = selfTestResults.every(t => t.pass);
+  console.log(`Adversarial Self-Tests: ${selfTestResults.filter(t => t.pass).length}/${selfTestResults.length} Passed`);
+
+  const pass = violations.length === 0 && allSelfTestsPassed;
   const result = {
+    scannerType: 'STATIC_IMPORT_AND_REFERENCE_BOUNDARY_SCANNER',
+    scannerScope: 'Static source analysis of apps/web, packages/api, packages/discord',
+    scannerLimitations: [
+      'Static regex scanning only inspects static imports and literal references',
+      'Obfuscated dynamic evasion (e.g. eval, runtime string concatenation) must be prohibited by code review and CI lint rules'
+    ],
     timestamp: new Date().toISOString(),
     status: pass ? 'BOUNDARY_VERIFICATION_PASS' : 'BOUNDARY_VIOLATIONS_DETECTED',
     totalFilesScanned: scannedFiles.length,
     scannedFiles,
     violationCount: violations.length,
     violations,
+    selfTestResults,
+    allSelfTestsPassed,
     pass
   };
 
@@ -130,7 +166,7 @@ function runBoundaryScan() {
   console.log(`Audit saved to ${AUDIT_OUT}`);
 
   if (!pass) {
-    console.error('\nFATAL: Architecture boundary violations detected!');
+    console.error('\nFATAL: Architecture boundary violations or self-test failure detected!');
     violations.forEach(v => {
       console.error(`  - ${v.file}:${v.line} -> ${v.matchedRule} ("${v.snippet}")`);
     });

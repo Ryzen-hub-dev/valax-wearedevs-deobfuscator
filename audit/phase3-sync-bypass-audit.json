@@ -1,0 +1,16 @@
+{
+  "auditName": "SYNC_RECOVERY_EXECUTION_BYPASS_AUDIT",
+  "timestamp": "2026-09-08T15:39:20.123Z",
+  "targetFile": "tests/integration/product-real-container-e2e.test.js",
+  "prohibitedPatternsChecked": {
+    "processNextJobSync": 0,
+    "submitJobSync": 0,
+    "direct RecoveryService": 0,
+    "inMemoryQueue / InMemoryJobQueue": 0,
+    "mockExecution": 0
+  },
+  "violationsCount": 0,
+  "violations": [],
+  "passed": true,
+  "verdict": "ZERO_SYNC_BYPASS_VERIFIED"
+}

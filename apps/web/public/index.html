@@ -81,7 +81,7 @@
         <h2>Isolated Containerized Execution Model</h2>
       </div>
       <p style="color: var(--text-secondary); margin-bottom: 12px;">
-        Every deobfuscation job executes inside an ephemeral, hardened Linux container managed by the Product Gateway and Redis queue:
+        Every deobfuscation job executes inside an ephemeral, hardened Linux Docker container profile (verified on Linux Docker CI, with isolated subprocess fallback when Docker is not present):
       </p>
       <ul style="list-style-type: square; margin-left: 20px; color: var(--text-secondary); font-size: 13px; line-height: 1.8;">
         <li><strong>Network Isolation:</strong> Zero outbound/inbound network interfaces (<code style="font-family: var(--font-mono); color: var(--accent-cyan);">--network none</code>).</li>

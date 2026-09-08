@@ -1,5 +1,11 @@
 {
-  "timestamp": "2026-09-07T14:57:01.085Z",
+  "scannerType": "STATIC_IMPORT_AND_REFERENCE_BOUNDARY_SCANNER",
+  "scannerScope": "Static source analysis of apps/web, packages/api, packages/discord",
+  "scannerLimitations": [
+    "Static regex scanning only inspects static imports and literal references",
+    "Obfuscated dynamic evasion (e.g. eval, runtime string concatenation) must be prohibited by code review and CI lint rules"
+  ],
+  "timestamp": "2026-09-08T15:40:14.087Z",
   "status": "BOUNDARY_VERIFICATION_PASS",
   "totalFilesScanned": 15,
   "scannedFiles": [
@@ -21,5 +27,38 @@
   ],
   "violationCount": 0,
   "violations": [],
+  "selfTestResults": [
+    {
+      "rule": "Direct core require",
+      "expectedCaught": true,
+      "actuallyCaught": true,
+      "pass": true
+    },
+    {
+      "rule": "Package core require",
+      "expectedCaught": true,
+      "actuallyCaught": true,
+      "pass": true
+    },
+    {
+      "rule": "Worker internal require",
+      "expectedCaught": true,
+      "actuallyCaught": true,
+      "pass": true
+    },
+    {
+      "rule": "ContainerRunner instantiation",
+      "expectedCaught": true,
+      "actuallyCaught": true,
+      "pass": true
+    },
+    {
+      "rule": "Benign clean code",
+      "expectedCaught": false,
+      "actuallyCaught": false,
+      "pass": true
+    }
+  ],
+  "allSelfTestsPassed": true,
   "pass": true
 }

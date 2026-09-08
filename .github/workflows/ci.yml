@@ -218,13 +218,31 @@ jobs:
         mkdir -p audit
         node tests/integration/product-contract-e2e.test.js 2>&1 | tee audit/phase3-product-contract-e2e.log
 
-    - name: 6. Real Product Container E2E Recovery Pipeline
+    - name: 6. Product Container Component Pipeline Tests (In-Process)
       run: |
         set -o pipefail
         mkdir -p audit
-        node tests/integration/product-container-e2e.test.js 2>&1 | tee audit/phase3-product-real-e2e.log
+        node tests/integration/product-container-e2e.test.js 2>&1 | tee audit/phase3-product-component-e2e.log
 
-    - name: 7. Upload Phase 3 Round 1 Evidence Artifacts
+    - name: 7. Real Multi-Process Product Container E2E Pipeline (API -> Redis -> Worker)
+      run: |
+        set -o pipefail
+        mkdir -p audit
+        node tests/integration/product-real-container-e2e.test.js 2>&1 | tee audit/phase3-product-real-e2e.log
+
+    - name: 8. Synchronous Recovery Bypass Integrity Audit
+      run: |
+        set -o pipefail
+        mkdir -p audit
+        node scripts/audit-sync-bypass.js 2>&1 | tee audit/phase3-sync-bypass.log
+
+    - name: 9. Generate Master Acceptance Matrix Evidence
+      run: |
+        set -o pipefail
+        mkdir -p audit
+        node scripts/generate-phase3-acceptance.js 2>&1 | tee audit/phase3-acceptance.log
+
+    - name: 10. Upload Phase 3 Round 1 Evidence Artifacts
       if: always()
       uses: actions/upload-artifact@v4
       with:

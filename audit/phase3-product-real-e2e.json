@@ -1,38 +1,44 @@
 {
-  "testSuite": "REAL_PRODUCT_CONTAINER_E2E",
-  "timestamp": "2026-09-07T14:48:27.226Z",
+  "testSuite": "PRODUCT_REAL_CONTAINER_E2E",
+  "timestamp": "2026-09-08T15:31:03.528Z",
+  "apiPid": 15192,
+  "workerPid": 32772,
+  "distinctProcesses": true,
+  "redis": "PONG",
+  "redisHost": "127.0.0.1",
+  "redisPort": 55379,
   "dockerAvailable": false,
   "environment": "HIGH_FIDELITY_FALLBACK_SANDBOX",
-  "runs": [
+  "jobs": [
     {
       "name": "minimal_print",
-      "jobId": "job-faf20eed6484e88d",
+      "jobId": "job-d7e15c591a92e1d7",
+      "state": "SUCCEEDED",
       "level": "L5-W",
-      "semanticStatus": "CONSERVATIVE",
-      "ownerDownloadStatus": 200,
-      "unauthorizedDownloadStatus": 403,
-      "status": "PASS"
+      "containerExitCode": 0,
+      "downloadedViaHttp": true,
+      "recoveredBytes": 12
     },
     {
       "name": "ByIdiotSandWich",
-      "jobId": "job-0b9a5e7eab87c468",
+      "jobId": "job-150198272066274f",
+      "state": "SUCCEEDED",
       "level": "L4",
-      "physicalResidualStates": 610,
-      "reachableResidualStates": 48,
-      "status": "PASS"
+      "metrics": {
+        "totalDispatcherStates": 610,
+        "physicalResidualStates": 427,
+        "reachableResidualStates": 48
+      },
+      "containerExitCode": 0,
+      "downloadedViaHttp": true
     },
     {
-      "name": "external_negative",
-      "jobId": "job-54eef1d2c4e1388a",
+      "name": "external_global_negative",
+      "jobId": "job-e9aff48b3f49aa80",
+      "state": "SUCCEEDED",
       "level": "L4",
-      "l5wDenied": true,
-      "status": "PASS"
+      "denied": true,
+      "containerExitCode": 0
     }
-  ],
-  "summary": {
-    "total": 4,
-    "passed": 4,
-    "failed": 0,
-    "verdict": "REAL_PRODUCT_CONTAINER_E2E_PASS"
-  }
+  ]
 }

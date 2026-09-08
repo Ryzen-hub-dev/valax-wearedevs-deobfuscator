@@ -38,3 +38,14 @@ result.*.lua
 report.json
 inspect_minimal.js
 print_unknowns.js
+
+# Audit transient archives and downloads
+audit/*.zip
+audit/ci-extracted*/
+audit/shared-artifacts-e2e/
+audit/last_user_prompt*.txt
+audit/latest-push.json
+audit/rebase-push-result.json
+audit/remote-history-analysis.json
+audit/github-*.json
+

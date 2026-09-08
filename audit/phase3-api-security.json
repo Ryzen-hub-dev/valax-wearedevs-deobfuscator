@@ -1,86 +1,171 @@
 {
   "testSuite": "API_SECURITY_AND_AUTHORIZATION",
-  "timestamp": "2026-09-07T14:53:52.268Z",
+  "timestamp": "2026-09-08T15:34:03.463Z",
   "tests": [
     {
       "name": "0. Setup Test Environment",
       "status": "PASS",
-      "durationMs": 5
+      "durationMs": 15
     },
     {
-      "name": "1. Health endpoints (/health/live, /health/ready)",
+      "name": "1. Oversized upload rejected with 413 FILE_TOO_LARGE",
       "status": "PASS",
-      "durationMs": 42
+      "durationMs": 102
     },
     {
-      "name": "2. Unauthenticated request rejected with 401 UNAUTHORIZED",
+      "name": "2. Invalid UTF-8 byte sequence rejected with 400 INVALID_ENCODING",
       "status": "PASS",
-      "durationMs": 5
+      "durationMs": 20
     },
     {
-      "name": "3. DevelopmentAuthProvider strictly rejected in production NODE_ENV",
+      "name": "3. Very long filename (>255 chars) rejected with 400 INVALID_FILE",
       "status": "PASS",
-      "durationMs": 0
+      "durationMs": 17
     },
     {
-      "name": "4. Dangerous filename traversal patterns rejected with 400 INVALID_FILE",
+      "name": "4. Absolute Windows filename rejected with 400 INVALID_FILE",
       "status": "PASS",
-      "durationMs": 26
+      "durationMs": 12
     },
     {
-      "name": "5. Source payload with NUL bytes rejected with 400 INVALID_FILE",
+      "name": "5. Absolute POSIX filename rejected with 400 INVALID_FILE",
       "status": "PASS",
-      "durationMs": 3
+      "durationMs": 14
     },
     {
-      "name": "6. Valid recovery upload creates QUEUED job with stable schema (201 Created)",
+      "name": "6. file:// filename rejected with 400 INVALID_FILE",
       "status": "PASS",
-      "durationMs": 3
+      "durationMs": 13
     },
     {
-      "name": "7. Exact same idempotency key returns existing job without duplication",
+      "name": "7. NUL byte in filename rejected with 400 INVALID_FILE",
       "status": "PASS",
-      "durationMs": 3
+      "durationMs": 14
     },
     {
-      "name": "8. Reused idempotency key with conflicting content rejected with 409 IDEMPOTENCY_CONFLICT",
+      "name": "8. NUL byte in source rejected with 400 INVALID_FILE",
       "status": "PASS",
-      "durationMs": 2
+      "durationMs": 14
     },
     {
-      "name": "9. Cross-user job access strictly denied with 403 FORBIDDEN",
+      "name": "9. Exceeding request rate limit rejected with 429 RATE_LIMITED",
       "status": "PASS",
-      "durationMs": 8
+      "durationMs": 82
     },
     {
-      "name": "10. Client cannot forge principal ID in body or query parameters",
-      "status": "PASS",
-      "durationMs": 8
-    },
-    {
-      "name": "11. Canonical Product FSM enforces terminal irreversibility",
+      "name": "10. 429 response contains valid numeric Retry-After header",
       "status": "PASS",
       "durationMs": 0
     },
     {
-      "name": "12. Owner cancellation of active job succeeds",
+      "name": "11. Exceeding daily quota rejected with 429 QUOTA_EXCEEDED",
       "status": "PASS",
-      "durationMs": 5
+      "durationMs": 287
     },
     {
-      "name": "13. Cancellation of terminal job rejected with 409 JOB_NOT_CANCELLABLE",
+      "name": "12. Exceeding concurrent jobs rejected with 429 QUOTA_EXCEEDED",
       "status": "PASS",
-      "durationMs": 2
+      "durationMs": 1
     },
     {
-      "name": "14. Guessed or non-existent artifact IDs return 404 ARTIFACT_NOT_FOUND",
+      "name": "13. Saturated queue returns 503 QUEUE_SATURATED",
       "status": "PASS",
-      "durationMs": 2
+      "durationMs": 28
     },
     {
-      "name": "15. [SECURITY] Source secret canary test confirms zero occurrences in captured logs",
+      "name": "14. Queue saturation response returns exact HTTP status 503",
       "status": "PASS",
-      "durationMs": 3
+      "durationMs": 0
+    },
+    {
+      "name": "15. Strictly zero synchronous fallback or Core invocation on queue saturation",
+      "status": "PASS",
+      "durationMs": 0
+    },
+    {
+      "name": "Base. Valid submission creates QUEUED job (201 Created)",
+      "status": "PASS",
+      "durationMs": 13
+    },
+    {
+      "name": "16. Cross-user job read rejected with 403 FORBIDDEN",
+      "status": "PASS",
+      "durationMs": 16
+    },
+    {
+      "name": "17. Cross-user cancellation rejected with 403 FORBIDDEN",
+      "status": "PASS",
+      "durationMs": 13
+    },
+    {
+      "name": "18. Cross-user artifact list rejected with 403 FORBIDDEN",
+      "status": "PASS",
+      "durationMs": 14
+    },
+    {
+      "name": "19. Cross-user artifact download rejected with 403 FORBIDDEN",
+      "status": "PASS",
+      "durationMs": 16
+    },
+    {
+      "name": "20. Expired artifact returns 404/410 ARTIFACT_EXPIRED",
+      "status": "PASS",
+      "durationMs": 115
+    },
+    {
+      "name": "21. Non-existent artifact type for job returns 404 ARTIFACT_NOT_FOUND",
+      "status": "PASS",
+      "durationMs": 10
+    },
+    {
+      "name": "22. Guessed or non-standard artifact ID returns 404 ARTIFACT_NOT_FOUND",
+      "status": "PASS",
+      "durationMs": 9
+    },
+    {
+      "name": "23. Exact same idempotency key and content returns duplicate job (200 OK)",
+      "status": "PASS",
+      "durationMs": 11
+    },
+    {
+      "name": "24. Reused idempotency key with conflicting content rejected with 409 IDEMPOTENCY_CONFLICT",
+      "status": "PASS",
+      "durationMs": 10
+    },
+    {
+      "name": "25. Forged ownerPrincipalId in request body overridden by server identity",
+      "status": "PASS",
+      "durationMs": 29
+    },
+    {
+      "name": "26. Forged principalId in URL query string ignored",
+      "status": "PASS",
+      "durationMs": 20
+    },
+    {
+      "name": "27. Canonical Product FSM enforces terminal irreversibility",
+      "status": "PASS",
+      "durationMs": 0
+    },
+    {
+      "name": "28. Cancellation of terminal job rejected with 409 JOB_NOT_CANCELLABLE",
+      "status": "PASS",
+      "durationMs": 22
+    },
+    {
+      "name": "29. Source secret canary test confirms zero occurrences in captured logs",
+      "status": "PASS",
+      "durationMs": 11
+    },
+    {
+      "name": "30. Authorization header canary test confirms zero occurrences in captured logs",
+      "status": "PASS",
+      "durationMs": 12
+    },
+    {
+      "name": "31. Cookie and API-key headers confirm zero occurrences in captured logs",
+      "status": "PASS",
+      "durationMs": 10
     }
   ],
   "securityInvariants": {
@@ -94,8 +179,8 @@
     "canonicalFsmIrreversibility": true
   },
   "summary": {
-    "total": 16,
-    "passed": 16,
+    "total": 33,
+    "passed": 33,
     "failed": 0,
     "verdict": "API_SECURITY_PASS"
   }
