@@ -1,47 +1,47 @@
 {
   "testSuite": "DISCORD_OAUTH_PROTOCOL_E2E",
-  "timestamp": "2026-09-08T18:07:59.740Z",
+  "timestamp": "2026-09-08T18:29:46.325Z",
   "pass": true,
   "steps": [
     {
       "name": "1. Initiate OAuth via GET /auth/discord",
       "status": "PASS",
-      "durationMs": 47
+      "durationMs": 58
     },
     {
       "name": "2. Mock Discord handles /oauth2/authorize and redirects with code",
       "status": "PASS",
-      "durationMs": 14
+      "durationMs": 18
     },
     {
       "name": "3. GET /auth/discord/callback exchanges code, resolves user, creates session",
       "status": "PASS",
-      "durationMs": 50
+      "durationMs": 61
     },
     {
       "name": "4. Authenticated GET /api/v1/me returns stable Principal (zero tokens exposed)",
       "status": "PASS",
-      "durationMs": 14
+      "durationMs": 16
     },
     {
       "name": "5. GET /auth/session retrieves session CSRF token",
       "status": "PASS",
-      "durationMs": 13
+      "durationMs": 17
     },
     {
       "name": "6. State-changing requests enforce CSRF synchronizer token",
       "status": "PASS",
-      "durationMs": 49
+      "durationMs": 54
     },
     {
       "name": "7. POST /auth/logout invalidates session and clears cookie",
       "status": "PASS",
-      "durationMs": 13
+      "durationMs": 15
     },
     {
       "name": "8. Revoked session token fails with 401 UNAUTHORIZED",
       "status": "PASS",
-      "durationMs": 10
+      "durationMs": 14
     }
   ],
   "verifiedProperties": {
@@ -51,7 +51,7 @@
     "sessionCookieSameSiteLax": true,
     "csrfProtectionEnforced": true,
     "tokensExcludedFromResponses": true,
-    "stablePrincipalId": "59c2844c-f16b-4be3-8e17-3e1ff21e0e38",
+    "stablePrincipalId": "af2fc2dd-8008-41b2-bcb8-7356c55a420b",
     "logoutRevocationConfirmed": true
   }
 }

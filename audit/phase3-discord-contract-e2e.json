@@ -1,6 +1,6 @@
 {
   "testSuite": "DISCORD_PRODUCT_CONTRACT_E2E",
-  "timestamp": "2026-09-08T18:09:32.710Z",
+  "timestamp": "2026-09-08T18:29:47.936Z",
   "pass": true,
   "steps": [
     {
@@ -21,27 +21,27 @@
     {
       "name": "4. Submit recovery job on behalf of Alice",
       "status": "PASS",
-      "durationMs": 67
+      "durationMs": 74
     },
     {
       "name": "5. Alice queries her own recovery job via Bot Adapter",
       "status": "PASS",
-      "durationMs": 15
+      "durationMs": 11
     },
     {
       "name": "6. Bob queries Alice recovery job via Bot Adapter (Forbidden 403)",
       "status": "PASS",
-      "durationMs": 16
+      "durationMs": 13
     },
     {
       "name": "7. Bob attempts to cancel Alice recovery job (Forbidden 403)",
       "status": "PASS",
-      "durationMs": 19
+      "durationMs": 23
     },
     {
       "name": "8. Alice cancels her own recovery job (Allowed 200)",
       "status": "PASS",
-      "durationMs": 20
+      "durationMs": 18
     }
   ],
   "crossUserIsolationConfirmed": true

@@ -585,25 +585,36 @@ class ProductApiServer {
     }
 
     const productState = mapInternalToProductState(job.state || job.status);
+    const isComplete = TERMINAL_PRODUCT_STATES.has(productState);
+
     const responseData = {
       jobId: job.jobId,
+      state: productState,
       status: productState,
       filename: job.filename || this.jobFilenames.get(jobId) || 'recovered.lua',
       createdAt: job.createdAt,
-      startedAt: job.startedAt || null,
-      completedAt: job.completedAt || null,
-      durationMs: job.durationMs || (job.result?.metrics?.durationMs) || null
-    };
-
-    if (job.error) {
-      responseData.error = {
-        code: job.error.code || ApiErrorCode.INTERNAL_ERROR,
-        message: job.error.message || 'Recovery failed'
-      };
-    }
-
-    if (job.result) {
-      responseData.result = {
+      startedAt: job.startedAt || job.createdAt,
+      completedAt: isComplete ? (job.updatedAt || job.completedAt || new Date().toISOString()) : null,
+      durationMs: job.durationMs || (job.result?.metrics?.durationMs) || null,
+      progress: {
+        stage: isComplete ? 'complete' : 'recovering'
+      },
+      recovery: job.result ? {
+        level: job.result.admission?.admittedTier || job.result.admission?.level || job.result.recoveryLevel || 'NONE',
+        semanticStatus: 'CONSERVATIVE',
+        warnings: job.result.admission?.diagnostics?.reasons || [],
+        metrics: {
+          totalDispatcherStates: job.result.metrics?.totalDispatcherStates ?? 0,
+          dispatcherStatesBefore: job.result.metrics?.totalDispatcherStates ?? 0,
+          physicalResidualStates: job.result.metrics?.physicalResidualStates ?? job.result.metrics?.residualStates ?? 0,
+          reachableResidualStates: job.result.metrics?.reachableResidualStates ?? job.result.metrics?.reachableStates ?? 0,
+          residualStates: job.result.metrics?.physicalResidualStates ?? job.result.metrics?.residualStates ?? 0,
+          reachableStates: job.result.metrics?.reachableResidualStates ?? job.result.metrics?.reachableStates ?? 0,
+          dispatcherStatesAfter: job.result.metrics?.astNodesTransformed ?? 0,
+          durationMs: job.result.metrics?.durationMs ?? 0
+        }
+      } : null,
+      result: job.result ? {
         detectedFormat: job.result.admission?.format || job.result.detectedFormat || 'WeAreDevs',
         recoveryLevel: job.result.admission?.level || job.result.recoveryLevel || 'L5',
         confidence: job.result.confidence !== undefined ? job.result.confidence : 1.0,
@@ -614,8 +625,16 @@ class ProductApiServer {
           durationMs: job.result.metrics?.durationMs || job.durationMs || 0
         },
         hasArtifacts: !!(job.result.artifacts)
-      };
-    }
+      } : null,
+      error: job.error ? {
+        code: job.error.code || ApiErrorCode.INTERNAL_ERROR,
+        message: job.error.message || 'Recovery failed'
+      } : null,
+      links: {
+        self: `/api/v1/recoveries/${job.jobId}`,
+        artifacts: `/api/v1/recoveries/${job.jobId}/artifacts`
+      }
+    };
 
     this._sendJsonResponse(res, 200, responseData);
   }
