@@ -1,13 +1,13 @@
 {
-  "timestamp": "2026-09-08T17:02:44.006Z",
+  "timestamp": "2026-09-08T18:09:32.714Z",
   "channelBinding": {
     "provider": "discord",
     "discordUserId": "111111111111111111",
-    "webPrincipalId": "fb12d80d-3e4c-415b-89d7-742b7e53b299",
-    "botPrincipalId": "fb12d80d-3e4c-415b-89d7-742b7e53b299",
+    "webPrincipalId": "08e4d929-cd28-4eb9-b250-300c25fdf57c",
+    "botPrincipalId": "08e4d929-cd28-4eb9-b250-300c25fdf57c",
     "match": true
   },
-  "bobPrincipalId": "ebffc2e8-fc47-4752-8315-153a9cd1d39b",
+  "bobPrincipalId": "af6972c0-c4f9-48be-92b0-789c1e9e8e0c",
   "distinctPrincipals": true,
   "status": "PASS"
 }

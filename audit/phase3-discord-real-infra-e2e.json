@@ -1,19 +1,19 @@
 {
   "testSuite": "DISCORD_ADAPTER_REAL_PRODUCT_INFRA_E2E",
-  "timestamp": "2026-09-08T17:15:13.736Z",
-  "apiPid": 24380,
-  "workerPid": 11724,
+  "timestamp": "2026-09-08T18:10:44.441Z",
+  "apiPid": 34724,
+  "workerPid": 1908,
   "distinctProcesses": true,
   "redis": "PONG_DEDICATED_RESP_TCP",
   "containerType": "STANDALONE_SECURE_CHILD",
   "pass": true,
   "fixtures": {
     "minimal_print": {
-      "jobId": "job-262b92de5c915d36",
+      "jobId": "job-1ab7b36c4550ee7b",
       "status": "SUCCEEDED",
-      "durationMs": 994,
+      "durationMs": 1087,
       "crossUserDenialConfirmed": true
     }
   },
-  "redisPort": 55792
+  "redisPort": 60204
 }

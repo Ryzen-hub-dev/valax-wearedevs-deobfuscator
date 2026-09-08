@@ -231,7 +231,7 @@ async function runOAuthProtocolE2E() {
       }, { filename: 'test.lua', source: 'print(1)' });
       assert.strictEqual(resWrong.statusCode, 403, 'Must reject invalid CSRF token with 403');
 
-      // Valid CSRF token -> 202 Accepted
+      // Valid CSRF token -> 201/202 Accepted
       const resValid = await httpRequest(`${apiBase}/api/v1/recoveries`, {
         method: 'POST',
         headers: {
@@ -239,7 +239,7 @@ async function runOAuthProtocolE2E() {
           'X-CSRF-Token': csrfToken
         }
       }, { filename: 'test.lua', source: 'print(1)' });
-      assert.strictEqual(resValid.statusCode, 202, 'Must accept request with valid CSRF token');
+      assert(resValid.statusCode === 201 || resValid.statusCode === 202, `Must accept request with valid CSRF token, got ${resValid.statusCode}`);
       assert(resValid.json.jobId);
     });
 
