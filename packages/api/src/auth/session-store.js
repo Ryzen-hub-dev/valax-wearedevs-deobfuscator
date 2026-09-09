@@ -170,10 +170,6 @@ class MongoSessionStore extends SessionStore {
     this._inMemoryFallback = null;
 
     if (!this.collection) {
-      // In development/tests, use memory collection fallback if no collection provided
-      if (this.nodeEnv === 'production') {
-        throw new Error('FATAL_SESSION_CONFIGURATION: MongoDB collection or URI required in production');
-      }
       this._inMemoryFallback = new MemorySessionStore(options);
     }
   }

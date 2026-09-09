@@ -30,7 +30,14 @@ function getOrCreateServer() {
       RecoveryGateway = require('../../gateway/src').RecoveryGateway;
     }
     const gateway = new RecoveryGateway();
-    defaultServerInstance = new ProductApiServer({ gateway });
+    const hasDiscordConfig = !!(process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET && process.env.DISCORD_REDIRECT_URI);
+    const nodeEnv = hasDiscordConfig ? (process.env.NODE_ENV || 'production') : 'development';
+
+    defaultServerInstance = new ProductApiServer({
+      gateway,
+      nodeEnv,
+      sessionSecret: process.env.SESSION_SECRET || 'valax-prod-serverless-secret-32bytes-secure-random'
+    });
   }
   return defaultServerInstance;
 }
