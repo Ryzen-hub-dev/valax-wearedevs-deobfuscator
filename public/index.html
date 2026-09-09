@@ -304,11 +304,23 @@ print(A[x], s("abcdef", 1, 3))`;
             window.location.href = '/auth/discord';
             return;
           }
-          const err = await res.json();
-          throw new Error(err.error?.message || `HTTP ${res.status}`);
+          let errMsg = `HTTP ${res.status}`;
+          try {
+            const err = await res.json();
+            errMsg = err.error?.message || JSON.stringify(err);
+          } catch (_) {
+            const text = await res.text();
+            if (text) errMsg = text;
+          }
+          throw new Error(errMsg);
         }
 
-        const submitData = await res.json();
+        let submitData;
+        try {
+          submitData = await res.json();
+        } catch (_) {
+          throw new Error('Server returned non-JSON response upon submission');
+        }
         const jobId = submitData.jobId;
 
         // Poll for completion
@@ -317,8 +329,10 @@ print(A[x], s("abcdef", 1, 3))`;
           await new Promise(r => setTimeout(r, 1000));
           const pollRes = await fetch(`/api/v1/recoveries/${jobId}`);
           if (pollRes.ok) {
-            job = await pollRes.json();
-            if (job.status === 'COMPLETED' || job.status === 'FAILED') break;
+            try {
+              job = await pollRes.json();
+              if (job.status === 'COMPLETED' || job.status === 'FAILED') break;
+            } catch (_) {}
           }
         }
 

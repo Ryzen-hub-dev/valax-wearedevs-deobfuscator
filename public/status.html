@@ -26,7 +26,12 @@
 
   <script>
     fetch('/api/health')
-      .then(res => res.json())
+      .then(async res => {
+        const ct = res.headers.get('content-type') || '';
+        if (ct.includes('application/json')) return res.json();
+        const text = await res.text();
+        return { status: res.status, message: text };
+      })
       .then(data => {
         document.getElementById('statusPre').textContent = JSON.stringify(data, null, 2);
       })
