@@ -1,42 +1,42 @@
 {
   "testSuite": "PRODUCT_CONTRACT_E2E",
-  "timestamp": "2026-09-08T18:29:48.787Z",
+  "timestamp": "2026-09-09T11:17:50.932Z",
   "label": "PRODUCT_CONTRACT_E2E (In-Process Mock Execution)",
   "runs": [
     {
       "name": "0. Setup Contract Test Environment",
       "status": "PASS",
-      "durationMs": 15
+      "durationMs": 16
     },
     {
       "name": "1. [PRODUCT_CONTRACT_E2E] POST /api/v1/recoveries enqueues job and returns 201 Created",
       "status": "PASS",
-      "durationMs": 65
+      "durationMs": 73
     },
     {
       "name": "2. [PRODUCT_CONTRACT_E2E] GET /api/v1/recoveries/:jobId returns QUEUED progress",
       "status": "PASS",
-      "durationMs": 20
+      "durationMs": 21
     },
     {
       "name": "3. [PRODUCT_CONTRACT_E2E] Gateway processes next job through worker execution",
       "status": "PASS",
-      "durationMs": 108
+      "durationMs": 675
     },
     {
       "name": "4. [PRODUCT_CONTRACT_E2E] GET /api/v1/recoveries/:jobId transitions to SUCCEEDED with full schema",
       "status": "PASS",
-      "durationMs": 16
+      "durationMs": 18
     },
     {
       "name": "5. [PRODUCT_CONTRACT_E2E] GET /api/v1/recoveries/:jobId/artifacts lists available downloads",
       "status": "PASS",
-      "durationMs": 11
+      "durationMs": 14
     },
     {
       "name": "6. [PRODUCT_CONTRACT_E2E] GET /api/v1/recoveries/:jobId/artifacts/recoveredCode downloads recovered source",
       "status": "PASS",
-      "durationMs": 13
+      "durationMs": 17
     }
   ],
   "summary": {

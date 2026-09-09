@@ -157,6 +157,17 @@ class ProductApiServer {
 
     try {
       // 2. Public Health Endpoints (No Auth Required)
+      if (pathname === '/favicon.ico' || pathname === '/favicon.png') {
+        res.writeHead(204);
+        return res.end();
+      }
+      if ((pathname === '/' || pathname === '' || pathname === '/health') && method === 'GET') {
+        return this._sendJsonResponse(res, 200, {
+          status: 'healthy',
+          service: 'Valax Product API Server',
+          version: '0.1.0-beta.1'
+        });
+      }
       if (pathname === '/health/live' && method === 'GET') {
         return this._handleHealthLive(res, requestId);
       }
