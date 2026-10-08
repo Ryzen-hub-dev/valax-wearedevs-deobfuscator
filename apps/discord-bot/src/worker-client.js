@@ -47,6 +47,10 @@ function classifyWorkerExit(code, stderr = '') {
   return error;
 }
 
+function hostedFallbackStages(errorCode) {
+  return errorCode === 'WORKER_UNAVAILABLE' ? ['L5', 'L3', 'L2'] : ['L3', 'L2'];
+}
+
 function recoverInWorker(input, config, requestedStage = 'L5') {
   const request = buildWorkerRequest(input, config, requestedStage);
 
@@ -137,4 +141,4 @@ function recoverInWorker(input, config, requestedStage = 'L5') {
   });
 }
 
-module.exports = { buildWorkerRequest, classifyWorkerExit, recoverInWorker };
+module.exports = { buildWorkerRequest, classifyWorkerExit, hostedFallbackStages, recoverInWorker };

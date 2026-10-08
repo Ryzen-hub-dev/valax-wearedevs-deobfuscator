@@ -11,7 +11,7 @@ const {
 const { loadConfig } = require('./config');
 const { CooldownStore, formatRemaining, hasSupportStatus } = require('./access');
 const { fetchSource } = require('./safe-fetch');
-const { recoverInWorker } = require('./worker-client');
+const { hostedFallbackStages, recoverInWorker } = require('./worker-client');
 
 const config = loadConfig();
 const cooldowns = new CooldownStore(config.cooldownMs);
@@ -74,15 +74,21 @@ async function resolveInput(interaction) {
 }
 
 async function recoverViaApi(input, stage = 'L5') {
-  const response = await fetch(`${config.apiUrl}/api/recovery`, {
-    method: 'POST',
-    signal: AbortSignal.timeout(300_000),
-    headers: {
-      'Authorization': `Bearer ${config.apiSecret}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ source: input.source, filename: input.filename, stage })
-  });
+  let response;
+  try {
+    response = await fetch(`${config.apiUrl}/api/recovery`, {
+      method: 'POST',
+      signal: AbortSignal.timeout(120_000),
+      headers: {
+        'Authorization': `Bearer ${config.apiSecret}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ source: input.source, filename: input.filename, stage })
+    });
+  } catch (error) {
+    if (error.name === 'TimeoutError') error.code = 'HOSTED_RESOURCE_LIMIT';
+    throw error;
+  }
 
   const rawBody = await response.text();
   let data = null;
@@ -97,7 +103,9 @@ async function recoverViaApi(input, stage = 'L5') {
     const fallbackMessage = response.status >= 500
       ? 'The hosted recovery process exhausted its time or memory budget.'
       : `Recovery API returned HTTP ${response.status}.`;
-    throw new Error(`${data?.error || fallbackMessage}${code}${requestSuffix}`);
+    const error = new Error(`${data?.error || fallbackMessage}${code}${requestSuffix}`);
+    error.code = response.status >= 500 ? 'HOSTED_RESOURCE_LIMIT' : (data?.code || 'RECOVERY_API_ERROR');
+    throw error;
   }
   return data;
 }
@@ -117,11 +125,22 @@ async function recoverSource(input) {
     ]);
     if (!fallbackCodes.has(error.code)) throw error;
 
-    const fallbackStage = error.code === 'WORKER_UNAVAILABLE' ? 'L5' : 'L4';
-    console.error(
-      `Local recovery failed (${error.code}); using hosted ${fallbackStage}: ${error.message}`
-    );
-    const result = await recoverViaApi(input, fallbackStage);
+    const stages = hostedFallbackStages(error.code);
+    console.error(`Local recovery failed (${error.code}): ${error.message}`);
+    let result;
+    let fallbackStage;
+    for (let index = 0; index < stages.length; index += 1) {
+      fallbackStage = stages[index];
+      try {
+        console.error(`Trying hosted ${fallbackStage} recovery.`);
+        result = await recoverViaApi(input, fallbackStage);
+        break;
+      } catch (hostedError) {
+        const canDowngrade = hostedError.code === 'HOSTED_RESOURCE_LIMIT' && index < stages.length - 1;
+        if (!canDowngrade) throw hostedError;
+        console.error(`Hosted ${fallbackStage} exceeded its resource budget; downgrading.`);
+      }
+    }
     const report = result.report && typeof result.report === 'object' ? result.report : {};
     const warnings = Array.isArray(report.warnings) ? report.warnings : [];
     return {

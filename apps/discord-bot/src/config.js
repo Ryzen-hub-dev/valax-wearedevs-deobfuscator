@@ -34,7 +34,7 @@ function loadConfig(env = process.env) {
     apiUrl: env.VALAX_API_URL.replace(/\/+$/, ''),
     apiSecret: env.INTERNAL_BOT_SERVICE_SECRET,
     localRecovery: readBoolean(env.LOCAL_RECOVERY_ENABLED, true),
-    workerTimeoutMs: readPositiveInt(env.WORKER_TIMEOUT_SECONDS, 90) * 1000,
+    workerTimeoutMs: readPositiveInt(env.WORKER_TIMEOUT_SECONDS, 30) * 1000,
     workerMemoryMb: readPositiveInt(env.WORKER_MEMORY_MB, 3072),
     cooldownMs: readPositiveInt(env.COOLDOWN_SECONDS, 1200) * 1000,
     maxSourceBytes: readPositiveInt(env.MAX_SOURCE_BYTES, 2_000_000)

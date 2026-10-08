@@ -1,7 +1,11 @@
 const assert = require('assert');
 const { CooldownStore, formatRemaining, hasSupportStatus } = require('../../apps/discord-bot/src/access');
 const { isPrivateIp } = require('../../apps/discord-bot/src/safe-fetch');
-const { buildWorkerRequest, classifyWorkerExit } = require('../../apps/discord-bot/src/worker-client');
+const {
+  buildWorkerRequest,
+  classifyWorkerExit,
+  hostedFallbackStages
+} = require('../../apps/discord-bot/src/worker-client');
 const { readBoolean } = require('../../apps/discord-bot/src/config');
 
 function run() {
@@ -50,6 +54,8 @@ function run() {
     'WORKER_RESOURCE_LIMIT'
   );
   assert.strictEqual(classifyWorkerExit(1, 'unexpected crash').code, 'WORKER_INVALID_RESPONSE');
+  assert.deepStrictEqual(hostedFallbackStages('WORKER_TIMEOUT'), ['L3', 'L2']);
+  assert.deepStrictEqual(hostedFallbackStages('WORKER_UNAVAILABLE'), ['L5', 'L3', 'L2']);
 
   console.log('Discord gateway access tests passed.');
 }
