@@ -1,3 +1,7 @@
+require('./env');
+
+const fs = require('fs');
+const path = require('path');
 const {
   ChannelType,
   Client,
@@ -14,6 +18,21 @@ if (!token || !guildId) {
 }
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+function saveLocalIds(values) {
+  const envPath = path.resolve(__dirname, '../../../.env.bot.local');
+  let content = fs.existsSync(envPath) ? fs.readFileSync(envPath, 'utf8') : '';
+
+  for (const [key, value] of Object.entries(values)) {
+    const line = `${key}="${value}"`;
+    const pattern = new RegExp(`^${key}=.*$`, 'm');
+    content = pattern.test(content)
+      ? content.replace(pattern, line)
+      : `${content.replace(/\s*$/, '')}\n${line}\n`;
+  }
+
+  fs.writeFileSync(envPath, content, { encoding: 'utf8', mode: 0o600 });
+}
 
 client.once(Events.ClientReady, async () => {
   try {
@@ -82,6 +101,11 @@ client.once(Events.ClientReady, async () => {
     console.log('Discord setup complete. Add these values to the bot environment:');
     console.log(`SUPPORT_ROLE_ID=${role.id}`);
     console.log(`DEOBFUSCATE_CHANNEL_ID=${channel.id}`);
+    saveLocalIds({
+      SUPPORT_ROLE_ID: role.id,
+      DEOBFUSCATE_CHANNEL_ID: channel.id
+    });
+    console.log('Saved the role and channel IDs to .env.bot.local.');
   } catch (error) {
     console.error(error);
     process.exitCode = 1;

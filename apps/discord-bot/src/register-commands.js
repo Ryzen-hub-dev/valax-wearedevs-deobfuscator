@@ -1,3 +1,5 @@
+require('./env');
+
 const { REST, Routes, SlashCommandBuilder } = require('discord.js');
 const { loadConfig } = require('./config');
 

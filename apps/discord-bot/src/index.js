@@ -1,3 +1,5 @@
+require('./env');
+
 const {
   AttachmentBuilder,
   Client,
