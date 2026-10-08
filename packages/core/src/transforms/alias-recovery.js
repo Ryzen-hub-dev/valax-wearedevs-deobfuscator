@@ -1,5 +1,5 @@
 const { ASTNodeType, identifier, memberExpression } = require('../ast/nodes');
-const { transform } = require('../ast/visitor');
+const { transform, traverse } = require('../ast/visitor');
 const { KnownBuiltin, STANDARD_BUILTINS } = require('../analysis/alias');
 const { ByteString } = require('../../../shared/src');
 
@@ -18,9 +18,7 @@ class AliasRecoveryTransform {
    * @param {object} astChunk
    */
   findAliases(astChunk) {
-    const visit = (node) => {
-      if (!node || typeof node !== 'object') return;
-
+    traverse(astChunk, { enter: node => {
       // local x = lib.func
       if (node.type === ASTNodeType.LocalStatement && node.variables.length === node.init.length) {
         for (let i = 0; i < node.variables.length; i++) {
@@ -40,18 +38,7 @@ class AliasRecoveryTransform {
         }
       }
 
-      for (const key of Object.keys(node)) {
-        if (key === 'loc' || key === 'type') continue;
-        const child = node[key];
-        if (Array.isArray(child)) {
-          child.forEach(visit);
-        } else if (child && typeof child === 'object') {
-          visit(child);
-        }
-      }
-    };
-
-    visit(astChunk);
+    } });
   }
 
   /**

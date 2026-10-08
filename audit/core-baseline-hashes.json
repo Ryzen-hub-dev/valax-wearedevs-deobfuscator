@@ -1,9 +1,9 @@
 {
-  "baselineTag": "CORE_BASELINE_0.1.0-beta.1",
-  "timestamp": "2026-09-06T14:00:54.514Z",
-  "toolVersion": "0.1.0-beta.1",
+  "baselineTag": "CORE_BASELINE_0.1.0-beta.2",
+  "timestamp": "2026-10-08T11:20:00.000Z",
+  "toolVersion": "0.1.0-beta.2",
   "totalCriticalFiles": 51,
-  "freezePolicy": "Core admission and recovery algorithms are strictly frozen. No further changes allowed in Phase 1 or Phase 2 without bumping to 0.1.0-beta.2 Core Fix Cycle.",
+  "freezePolicy": "Core admission and recovery algorithms are frozen at 0.1.0-beta.2 after the stack-safety fix cycle. Further core changes require a new version and baseline.",
   "hashes": {
     "packages/core/src/index.js": "d63473335ba5de3fdaeeb3e02632828497ee84736a6c832d4d7a0cbe359fda85",
     "packages/core/src/analysis/alias.js": "d51790b18f890774e832a5522486431080bd1473da515187e42c390072a8db3b",
@@ -12,7 +12,7 @@
     "packages/core/src/analysis/closure-capture-analyzer.js": "49eab3d696133d1f4e4d0383c6f4b42bd6724f673a84769d563cc3e3bc2cc2b7",
     "packages/core/src/analysis/completeness-verifier.js": "f56c24b2e3e5871027544e3701169ee96f669208c573b000c8dd74ce03145e22",
     "packages/core/src/analysis/dataflow.js": "abc0c1d6a4b4f07bbfacf9be3ff4420df83b8659d9b2e4cd753e530d0d3e9c0e",
-    "packages/core/src/analysis/dispatcher-entry-analyzer.js": "742b3ac479b34ade6e96636992e9282fc3e5c56daa02889c426289f48d5f2d88",
+    "packages/core/src/analysis/dispatcher-entry-analyzer.js": "db74e8dec40b4ad6ba3df6433d17557964cf63c46ae6ee23e64fbf057d854237",
     "packages/core/src/analysis/environment-access-analyzer.js": "e523d9aa2379fea9c1c917547a8c764cd6f760fbc5af654706bc8bb714b43a5a",
     "packages/core/src/analysis/environment-graph.js": "f0fd97058c77e245970d94e5ded755b5a56e2283b18ef631b21c435e33d922e1",
     "packages/core/src/analysis/evaluation-order-graph.js": "396962e1f25f2dfb1ed004ddf4a4da72b5dbb2ed17d012c3bda0932257a98974",
@@ -33,7 +33,7 @@
     "packages/core/src/analysis/vm-lifter.js": "01fcae0fec8a0ef47621d56148ec2e6a4423022e6134c425525b1dfe37059778",
     "packages/core/src/cfg/basic-block.js": "e8a996400569b8d6e9df3cb587a5f67d0db08299c4956d548b5110ef7aec5d3f",
     "packages/core/src/cfg/cfg.js": "0f04bc7712c01feed32b9e73664f449c52662d9ea4f75c9acb0983c75ffc831f",
-    "packages/core/src/cfg/dispatcher.js": "43598c77a0313609a36b14476524f3f3f29dcf6329d876d804da05d56cfb8f48",
+    "packages/core/src/cfg/dispatcher.js": "3a4c53ede8a4eecddaf2052483b0f29ed33919c22ec22d87d33b9a5eac7dcc18",
     "packages/core/src/cfg/edge.js": "d345968deb0cd4cb1b5bce71d8b821878c3438b9957774b15f152582a9db4120",
     "packages/core/src/cfg/index.js": "ff0b00bd4f460b3e22a9cf6b94674e715b7f71865273037a934bc60ea10c35e2",
     "packages/core/src/cfg/multi-entry-cfg.js": "236654a0bccac77fb11af0fccbb7628cc7e71d72c279dc3b0454d7b0df1b0927",
@@ -42,8 +42,8 @@
     "packages/core/src/ir/semantic-op.js": "9cc22cb77c3bf9ebbd123265a48422195e494c6df1383b8524996c94b3e811da",
     "packages/core/src/ast/index.js": "2f8504d826c190a2e75a445f70f52092a2844f3660fffec97ab7d969abc334a4",
     "packages/core/src/ast/nodes.js": "eb1116b1e47104fcc6f7280e9463653918c77f540b3b0e6730fe0be46258bf1d",
-    "packages/core/src/ast/visitor.js": "579db67cd27ee829b530ed5f4377921a3b7c481fc50d9f79286fadc033cd29ca",
-    "packages/core/src/transforms/alias-recovery.js": "dc1b5c56c53b8cbef133c0bd9cd6f1e4ab75ac54708bf8ae37586711602264f2",
+    "packages/core/src/ast/visitor.js": "ba086d30b19bdc3c244c9b6385185e92525b04be1c9ac194ecab13fea8f06e4a",
+    "packages/core/src/transforms/alias-recovery.js": "85fa23f6b547fd9118b2330658952c947e105ececf7fb876561aa2cd7a2db8ba",
     "packages/core/src/transforms/cleanup.js": "e430e5d5b76034e3a67eee4b4eae7b9e9d1a0f575b6b8c86e76fc2e8cf57fc87",
     "packages/core/src/transforms/closure-splitter.js": "8290e846d386fe6a1def2a6f4b8db534508e8a2b757be5eed80e58cefc509dd7",
     "packages/core/src/transforms/index.js": "5918a58cdabe6b0eb746dec8d23f650b8644b8310706d0fe2f87d95e0d978cc7",
@@ -53,8 +53,8 @@
     "packages/core/src/transforms/string-recovery.js": "fac0f963a1243911dff0d8ce2ab328ba055536346dc26810efac7aa7c5b87c37",
     "packages/core/src/detectors/format-detector.js": "23df110939df0aade70efba4635bf8063a5a4324ea88346d218fb99740cb9a44",
     "packages/core/src/detectors/index.js": "3afb202afa452475b0b3d9e6211d5847ce8a9ba598350e9a15b855ff14a78478",
-    "packages/core/src/detectors/string-pool-detector.js": "d5b5580805c577c1bd120d077dd2f8118a60b913bb0db47f2caf5ee30d9cb544",
+    "packages/core/src/detectors/string-pool-detector.js": "1c157b2990e344e298c24d9d3e02ed4e8b6ad6b015777712e9ca826f5fce3275",
     "packages/core/src/oracle/semantic-oracle.js": "781aef53def4a188fe22a1401f7a72de7db3de040b8780ea50a4bd85ac5c12f8",
-    "packages/core/src/service/recovery-service.js": "d4346b8df8a54ef2b6ec3be979472a7af2849749c33441aec4f4dcedeb1ee75e"
+    "packages/core/src/service/recovery-service.js": "5a87437849bae5db7efc6d55bb3826d29d243c2a454418dcf6309da37be3dcac"
   }
 }

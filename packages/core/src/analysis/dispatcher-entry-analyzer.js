@@ -1,6 +1,7 @@
 const { ASTNodeType } = require('../ast/nodes');
 const { ConstantEvaluator } = require('../evaluator/constant-evaluator');
 const { CLOSURE_HELPERS, detectClosureHelpers } = require('./closure-analyzer');
+const { traverse } = require('../ast/visitor');
 
 class DispatcherEntryAnalyzer {
   constructor() {
@@ -20,29 +21,21 @@ class DispatcherEntryAnalyzer {
     const detectedHelpers = detectClosureHelpers(astChunk);
 
     if (!stateVar) {
-      const findStateVar = (node) => {
-        if (!node || typeof node !== 'object') return;
+      traverse(astChunk, { enter: node => {
+        if (stateVar) return false;
         if (node.type === ASTNodeType.WhileStatement && node.condition && node.condition.type === ASTNodeType.Identifier) {
           if (node.body.length > 0 && node.body[0].type === ASTNodeType.IfStatement) {
             stateVar = node.condition.name;
-            return;
+            return false;
           }
         }
-        for (const k of Object.keys(node)) {
-          if (stateVar) return;
-          if (k === 'loc' || k === 'type') continue;
-          const c = node[k];
-          if (Array.isArray(c)) c.forEach(findStateVar);
-          else if (c && typeof c === 'object') findStateVar(c);
-        }
-      };
-      findStateVar(astChunk);
+        return undefined;
+      } });
     }
 
     // 1. Dynamic root call site discovery: look for root invocation helper(state, ...)
     let rootEntryState = null;
-    const findRootEntry = (node) => {
-      if (!node || typeof node !== 'object') return;
+    traverse(astChunk, { enter: node => {
       if (node.type === ASTNodeType.CallExpression) {
         if (node.base.type === ASTNodeType.Identifier && detectedHelpers.has(node.base.name)) {
           if (node.arguments.length > 0) {
@@ -53,14 +46,7 @@ class DispatcherEntryAnalyzer {
           }
         }
       }
-      for (const k of Object.keys(node)) {
-        if (k === 'loc' || k === 'type') continue;
-        const child = node[k];
-        if (Array.isArray(child)) child.forEach(findRootEntry);
-        else if (child && typeof child === 'object') findRootEntry(child);
-      }
-    };
-    findRootEntry(astChunk);
+    } });
 
     if (rootEntryState !== null) {
       const rootEntry = {
@@ -93,9 +79,7 @@ class DispatcherEntryAnalyzer {
     }
 
     // 3. Scan for any indirect or table-driven entry assignments (e.g. stateVar = <const>)
-    const visit = (node) => {
-      if (!node || typeof node !== 'object') return;
-
+    traverse(astChunk, { enter: node => {
       if (node.type === ASTNodeType.AssignmentStatement &&
           node.variables[0] &&
           node.variables[0].type === ASTNodeType.Identifier &&
@@ -115,16 +99,7 @@ class DispatcherEntryAnalyzer {
           }
         }
       }
-
-      for (const k of Object.keys(node)) {
-        if (k === 'loc' || k === 'type') continue;
-        const child = node[k];
-        if (Array.isArray(child)) child.forEach(visit);
-        else if (child && typeof child === 'object') visit(child);
-      }
-    };
-
-    visit(astChunk);
+    } });
     return entries;
   }
 }

@@ -78,7 +78,7 @@ function runWorkerProtocolTests() {
       const guard = new CoreBaselineGuard();
       const result = guard.verify(path.resolve(__dirname, '../../'));
       assert.strictEqual(result.verified, true, `Core baseline check failed: ${JSON.stringify(result.mismatches)}`);
-      assert.ok(result.baselineTag.includes('CORE_BASELINE_0.1.0-beta.1'));
+      assert.ok(result.baselineTag.includes('CORE_BASELINE_0.1.0-beta.2'));
       assert.strictEqual(result.totalChecked, 51);
       assert.strictEqual(result.mismatches.length, 0);
     });

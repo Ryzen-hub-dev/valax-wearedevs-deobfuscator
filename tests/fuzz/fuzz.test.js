@@ -2,6 +2,10 @@ const { describe, test, expect } = require('../test-framework');
 const { parse } = require('../../packages/core/src/parser');
 const { RecoveryPipeline } = require('../../packages/core/src/transforms/pipeline');
 const { classifyError } = require('../../packages/core/src/diagnostics/failure-taxonomy');
+const { traverse } = require('../../packages/core/src/ast/visitor');
+const { identifier, unaryExpression } = require('../../packages/core/src/ast/nodes');
+const { ConstantEvaluator } = require('../../packages/core/src/evaluator/constant-evaluator');
+const { recoverWithStackFallback } = require('../../api/recovery')._test;
 
 function runFuzzTests() {
   describe('Rule 14: Crash-Free Fuzzing Suite', () => {
@@ -67,6 +71,35 @@ function runFuzzTests() {
       const res = pipeline.run(code);
       expect(res.report.constantsFolded).toBeGreaterThan(0);
       expect(res.report.roundtripVerified).toBe(true);
+    });
+
+    test('6. AST traversal and constant folding are stack-safe at extreme structural depth', () => {
+      let deepAst = identifier('runtimeValue');
+      for (let i = 0; i < 20000; i++) {
+        deepAst = unaryExpression('-', deepAst);
+      }
+
+      let visited = 0;
+      traverse(deepAst, { enter: () => { visited++; } });
+      expect(visited).toBe(20001);
+
+      const folded = new ConstantEvaluator().fold(deepAst);
+      expect(folded.type).toBeTruthy();
+    });
+
+    test('7. API safely retries a lower recovery stage after a call-stack overflow', () => {
+      const attemptedStages = [];
+      const result = recoverWithStackFallback('print(1)', { stage: 'L5' }, (source, options) => {
+        attemptedStages.push(options.stage);
+        if (options.stage === 'L5' || options.stage === 'L4') {
+          throw new RangeError('Maximum call stack size exceeded');
+        }
+        return { code: source, report: { warnings: [] } };
+      });
+
+      expect(attemptedStages.join(',')).toBe('L5,L4,L3');
+      expect(result.report.executedStage).toBe('L3');
+      expect(result.report.warnings.length).toBe(1);
     });
   });
 }

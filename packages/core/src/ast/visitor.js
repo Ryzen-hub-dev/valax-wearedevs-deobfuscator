@@ -8,31 +8,44 @@ const { ASTNodeType } = require('./nodes');
  * @param {string} [key]
  */
 function traverse(node, visitor, parent = null, key = null) {
-  if (!node || typeof node !== 'object') return;
+  const stack = [{ kind: 'enter', value: node, parent, key }];
 
-  if (Array.isArray(node)) {
-    for (let i = 0; i < node.length; i++) {
-      traverse(node[i], visitor, parent, key);
+  while (stack.length > 0) {
+    const frame = stack.pop();
+
+    if (frame.kind === 'leave') {
+      visitor.leave(frame.value, frame.parent, frame.key);
+      continue;
     }
-    return;
-  }
 
-  if (node.type && visitor.enter) {
-    const res = visitor.enter(node, parent, key);
-    if (res === false) return;
-  }
+    const value = frame.value;
+    if (!value || typeof value !== 'object') continue;
 
-  // Visit child properties
-  for (const prop of Object.keys(node)) {
-    if (prop === 'loc' || prop === 'type' || prop === 'parent') continue;
-    const val = node[prop];
-    if (val && typeof val === 'object') {
-      traverse(val, visitor, node, prop);
+    if (Array.isArray(value)) {
+      for (let i = value.length - 1; i >= 0; i--) {
+        stack.push({ kind: 'enter', value: value[i], parent: frame.parent, key: frame.key });
+      }
+      continue;
     }
-  }
 
-  if (node.type && visitor.leave) {
-    visitor.leave(node, parent, key);
+    if (value.type && visitor.enter) {
+      const res = visitor.enter(value, frame.parent, frame.key);
+      if (res === false) continue;
+    }
+
+    if (value.type && visitor.leave) {
+      stack.push({ kind: 'leave', value, parent: frame.parent, key: frame.key });
+    }
+
+    const props = Object.keys(value);
+    for (let i = props.length - 1; i >= 0; i--) {
+      const prop = props[i];
+      if (prop === 'loc' || prop === 'type' || prop === 'parent') continue;
+      const child = value[prop];
+      if (child && typeof child === 'object') {
+        stack.push({ kind: 'enter', value: child, parent: value, key: prop });
+      }
+    }
   }
 }
 
@@ -46,38 +59,86 @@ function traverse(node, visitor, parent = null, key = null) {
  * @param {string} [key]
  */
 function transform(node, transformer, parent = null, key = null) {
-  if (!node || typeof node !== 'object') return node;
+  let result = node;
+  const stack = [{
+    kind: 'value',
+    value: node,
+    parent,
+    key,
+    assign: value => { result = value; }
+  }];
 
-  if (Array.isArray(node)) {
-    const newArr = [];
-    for (let i = 0; i < node.length; i++) {
-      const res = transform(node[i], transformer, parent, key);
-      if (res !== null && res !== undefined) {
-        if (Array.isArray(res)) {
-          newArr.push(...res);
-        } else {
-          newArr.push(res);
-        }
+  while (stack.length > 0) {
+    const frame = stack.pop();
+
+    if (frame.kind === 'finish-array') {
+      const output = [];
+      for (const item of frame.items) {
+        if (item === null || item === undefined) continue;
+        if (Array.isArray(item)) output.push(...item);
+        else output.push(item);
+      }
+      frame.assign(output);
+      continue;
+    }
+
+    if (frame.kind === 'finish-object') {
+      if (frame.value.type) {
+        const replacement = transformer(frame.value, frame.parent, frame.key);
+        frame.assign(replacement !== undefined ? replacement : frame.value);
+      } else {
+        frame.assign(frame.value);
+      }
+      continue;
+    }
+
+    const value = frame.value;
+    if (!value || typeof value !== 'object') {
+      frame.assign(value);
+      continue;
+    }
+
+    if (Array.isArray(value)) {
+      const items = new Array(value.length);
+      stack.push({ kind: 'finish-array', items, assign: frame.assign });
+      for (let i = value.length - 1; i >= 0; i--) {
+        stack.push({
+          kind: 'value',
+          value: value[i],
+          parent: frame.parent,
+          key: frame.key,
+          assign: transformed => { items[i] = transformed; }
+        });
+      }
+      continue;
+    }
+
+    stack.push({
+      kind: 'finish-object',
+      value,
+      parent: frame.parent,
+      key: frame.key,
+      assign: frame.assign
+    });
+
+    const props = Object.keys(value);
+    for (let i = props.length - 1; i >= 0; i--) {
+      const prop = props[i];
+      if (prop === 'loc' || prop === 'type' || prop === 'parent') continue;
+      const child = value[prop];
+      if (child && typeof child === 'object') {
+        stack.push({
+          kind: 'value',
+          value: child,
+          parent: value,
+          key: prop,
+          assign: transformed => { value[prop] = transformed; }
+        });
       }
     }
-    return newArr;
   }
 
-  // First transform child properties
-  for (const prop of Object.keys(node)) {
-    if (prop === 'loc' || prop === 'type' || prop === 'parent') continue;
-    const val = node[prop];
-    if (val && typeof val === 'object') {
-      node[prop] = transform(val, transformer, node, prop);
-    }
-  }
-
-  // Then apply transformer to this node if typed
-  if (node.type) {
-    const replacement = transformer(node, parent, key);
-    return replacement !== undefined ? replacement : node;
-  }
-  return node;
+  return result;
 }
 
 module.exports = {

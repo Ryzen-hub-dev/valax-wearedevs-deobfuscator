@@ -1,6 +1,6 @@
 {
   "name": "valax-source-recovery",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0-beta.2",
   "description": "Production-quality Lua/Luau structural analysis, deobfuscation, and normalization engine",
   "main": "packages/core/src/index.js",
   "type": "commonjs",

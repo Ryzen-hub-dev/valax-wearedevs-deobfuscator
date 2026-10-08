@@ -3,6 +3,7 @@ const { BasicBlock } = require('./basic-block');
 const { EdgeType } = require('./edge');
 const { ControlFlowGraph } = require('./cfg');
 const { ConstantEvaluator } = require('../evaluator/constant-evaluator');
+const { traverse } = require('../ast/visitor');
 
 class DispatcherAnalyzer {
   constructor() {
@@ -16,9 +17,7 @@ class DispatcherAnalyzer {
   findDispatchers(astChunk) {
     const dispatchers = [];
 
-    const visit = (node) => {
-      if (!node || typeof node !== 'object') return;
-
+    traverse(astChunk, { enter: node => {
       if (node.type === ASTNodeType.WhileStatement) {
         if (node.condition.type === ASTNodeType.Identifier) {
           const stateVar = node.condition.name;
@@ -33,18 +32,7 @@ class DispatcherAnalyzer {
         }
       }
 
-      for (const key of Object.keys(node)) {
-        if (key === 'loc' || key === 'type') continue;
-        const child = node[key];
-        if (Array.isArray(child)) {
-          child.forEach(visit);
-        } else if (child && typeof child === 'object') {
-          visit(child);
-        }
-      }
-    };
-
-    visit(astChunk);
+    } });
     return dispatchers;
   }
 
@@ -59,44 +47,6 @@ class DispatcherAnalyzer {
     let stateCounter = 0;
 
     // Collect all leaf blocks by traversing the binary search if tree
-    const traverseTree = (node, minVal, maxVal) => {
-      if (!node) return;
-
-      // Decision node: if stateVar < threshold
-      if (node.type === ASTNodeType.IfStatement &&
-          node.clauses.length === 1 &&
-          node.clauses[0].condition.type === ASTNodeType.BinaryExpression &&
-          node.clauses[0].condition.operator === '<' &&
-          node.clauses[0].condition.left.type === ASTNodeType.Identifier &&
-          node.clauses[0].condition.left.name === stateVar) {
-
-        const foldedThreshold = this.evaluator.fold(node.clauses[0].condition.right);
-        let threshold = null;
-        if (foldedThreshold.type === ASTNodeType.NumericLiteral) {
-          threshold = foldedThreshold.value;
-        }
-
-        const thenBody = node.clauses[0].body;
-        const elseBody = node.elseBody;
-
-        if (thenBody && thenBody.length === 1 && thenBody[0].type === ASTNodeType.IfStatement) {
-          traverseTree(thenBody[0], minVal, threshold !== null ? threshold : maxVal);
-        } else {
-          extractLeafBlock(thenBody, minVal, threshold !== null ? threshold : maxVal);
-        }
-
-        if (elseBody && elseBody.length === 1 && elseBody[0].type === ASTNodeType.IfStatement) {
-          traverseTree(elseBody[0], threshold !== null ? threshold : minVal, maxVal);
-        } else if (elseBody) {
-          extractLeafBlock(elseBody, threshold !== null ? threshold : minVal, maxVal);
-        }
-        return;
-      }
-
-      // If it's not a single < if statement, it's a leaf block
-      extractLeafBlock(Array.isArray(node) ? node : [node], minVal, maxVal);
-    };
-
     const extractLeafBlock = (statements, minVal, maxVal) => {
       stateCounter++;
       // Determine state ID: if minVal and maxVal are close, or use integer interval
@@ -217,6 +167,48 @@ class DispatcherAnalyzer {
       }
 
       cfg.addBlock(block);
+    };
+
+    const traverseTree = (rootNode, rootMin, rootMax) => {
+      const pending = [{ node: rootNode, minVal: rootMin, maxVal: rootMax }];
+
+      while (pending.length > 0) {
+        const { node, minVal, maxVal } = pending.pop();
+        if (!node) continue;
+
+        const isDecision = node.type === ASTNodeType.IfStatement &&
+          node.clauses.length === 1 &&
+          node.clauses[0].condition.type === ASTNodeType.BinaryExpression &&
+          node.clauses[0].condition.operator === '<' &&
+          node.clauses[0].condition.left.type === ASTNodeType.Identifier &&
+          node.clauses[0].condition.left.name === stateVar;
+
+        if (!isDecision) {
+          extractLeafBlock(Array.isArray(node) ? node : [node], minVal, maxVal);
+          continue;
+        }
+
+        const foldedThreshold = this.evaluator.fold(node.clauses[0].condition.right);
+        const threshold = foldedThreshold.type === ASTNodeType.NumericLiteral
+          ? foldedThreshold.value
+          : null;
+        const lowerMax = threshold !== null ? threshold : maxVal;
+        const upperMin = threshold !== null ? threshold : minVal;
+        const thenBody = node.clauses[0].body;
+        const elseBody = node.elseBody;
+
+        if (elseBody) {
+          const elseNode = elseBody.length === 1 && elseBody[0].type === ASTNodeType.IfStatement
+            ? elseBody[0]
+            : elseBody;
+          pending.push({ node: elseNode, minVal: upperMin, maxVal });
+        }
+
+        const thenNode = thenBody && thenBody.length === 1 && thenBody[0].type === ASTNodeType.IfStatement
+          ? thenBody[0]
+          : thenBody;
+        pending.push({ node: thenNode, minVal, maxVal: lowerMax });
+      }
     };
 
     traverseTree(rootIfNode, -Infinity, Infinity);

@@ -1,4 +1,5 @@
 const { ASTNodeType, numericLiteral, booleanLiteral, stringLiteral } = require('../ast/nodes');
+const { transform } = require('../ast/visitor');
 const { ByteString } = require('../../../shared/src');
 
 class ConstantEvaluator {
@@ -29,32 +30,18 @@ class ConstantEvaluator {
    * @returns {object}
    */
   fold(node) {
-    if (!node || typeof node !== 'object') return node;
+    return transform(node, current => {
+      if (!this.isFoldable(current)) return undefined;
 
-    // Fold children first (post-order traversal)
-    for (const key of Object.keys(node)) {
-      if (key === 'loc' || key === 'type') continue;
-      const child = node[key];
-      if (Array.isArray(child)) {
-        node[key] = child.map(c => this.fold(c));
-      } else if (child && typeof child === 'object') {
-        node[key] = this.fold(child);
-      }
-    }
-
-    // Try folding this expression
-    if (this.isFoldable(node)) {
       this.stats.expressionsInspected++;
-      const folded = this.tryEvaluate(node);
+      const folded = this.tryEvaluate(current);
       if (folded !== null) {
         this.stats.expressionsSimplified++;
         return folded;
-      } else {
-        this.stats.unsafeExpressionsSkipped++;
       }
-    }
-
-    return node;
+      this.stats.unsafeExpressionsSkipped++;
+      return undefined;
+    });
   }
 
   isFoldable(node) {
