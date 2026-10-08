@@ -5,6 +5,7 @@ const {
   Client,
   Events,
   GatewayIntentBits,
+  MessageFlags,
   PermissionFlagsBits
 } = require('discord.js');
 const { loadConfig } = require('./config');
@@ -117,13 +118,13 @@ client.on(Events.InteractionCreate, async interaction => {
   const admin = isAdministrator(interaction);
 
   if (interaction.guildId !== config.guildId || interaction.channelId !== config.channelId) {
-    return interaction.reply({ content: `Use this command only in <#${config.channelId}>.`, ephemeral: true });
+    return interaction.reply({ content: `Use this command only in <#${config.channelId}>.`, flags: MessageFlags.Ephemeral });
   }
 
   if (!admin && !interaction.member.roles.cache.has(config.supporterRoleId)) {
     return interaction.reply({
       content: `Set your custom status to \`${config.statusText}\`, then wait a few seconds for access.`,
-      ephemeral: true
+      flags: MessageFlags.Ephemeral
     });
   }
 
@@ -131,11 +132,11 @@ client.on(Events.InteractionCreate, async interaction => {
   if (remaining > 0) {
     return interaction.reply({
       content: `You can use /1 again in ${formatRemaining(remaining)}.`,
-      ephemeral: true
+      flags: MessageFlags.Ephemeral
     });
   }
 
-  await interaction.deferReply({ ephemeral: true });
+  await interaction.deferReply({ flags: MessageFlags.Ephemeral });
   if (!admin) cooldowns.start(interaction.user.id);
 
   try {
