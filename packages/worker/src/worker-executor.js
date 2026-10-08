@@ -188,7 +188,8 @@ class WorkerExecutor {
         recoveredCodeSha256: recoveredSha256,
         recoveredCodeBytes: outBytes,
         recoveredCode,
-        code: recoveredCode
+        code: recoveredCode,
+        report
       };
 
       return WorkerProtocol.createResponse({

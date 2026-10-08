@@ -122,7 +122,8 @@ class WorkerProtocol {
         recoveredCode: artifacts.recoveredCode || null,
         recoveredCodeSha256: artifacts.recoveredCodeSha256 || null,
         recoveredCodeBytes: artifacts.recoveredCodeBytes || 0,
-        reportSha256: artifacts.reportSha256 || null
+        reportSha256: artifacts.reportSha256 || null,
+        report: artifacts.report || null
       } : null,
       error: error ? {
         code: error.code || 'UNKNOWN_ERROR',

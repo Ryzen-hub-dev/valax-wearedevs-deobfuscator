@@ -1,6 +1,8 @@
 const assert = require('assert');
 const { CooldownStore, formatRemaining, hasSupportStatus } = require('../../apps/discord-bot/src/access');
 const { isPrivateIp } = require('../../apps/discord-bot/src/safe-fetch');
+const { buildWorkerRequest } = require('../../apps/discord-bot/src/worker-client');
+const { readBoolean } = require('../../apps/discord-bot/src/config');
 
 function run() {
   assert.strictEqual(hasSupportStatus({
@@ -26,6 +28,19 @@ function run() {
     assert.strictEqual(isPrivateIp(address), true, `${address} should be private`);
   }
   assert.strictEqual(isPrivateIp('8.8.8.8'), false);
+
+  assert.strictEqual(readBoolean(undefined, true), true);
+  assert.strictEqual(readBoolean('false', true), false);
+  assert.strictEqual(readBoolean('yes', false), true);
+
+  const workerRequest = buildWorkerRequest(
+    { source: 'print(1)', filename: 'test.lua' },
+    { workerTimeoutMs: 300_000, maxSourceBytes: 2_000_000 }
+  );
+  assert.strictEqual(workerRequest.schemaVersion, '1');
+  assert.strictEqual(workerRequest.input.bytes, 8);
+  assert.strictEqual(workerRequest.input.sha256.length, 64);
+  assert.strictEqual(workerRequest.limits.timeoutMs, 300_000);
 
   console.log('Discord gateway access tests passed.');
 }

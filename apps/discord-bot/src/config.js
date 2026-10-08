@@ -13,6 +13,11 @@ function readPositiveInt(value, fallback) {
   return Number.isSafeInteger(parsed) && parsed > 0 ? parsed : fallback;
 }
 
+function readBoolean(value, fallback) {
+  if (value === undefined || value === null || value === '') return fallback;
+  return !['0', 'false', 'no', 'off'].includes(String(value).trim().toLowerCase());
+}
+
 function loadConfig(env = process.env) {
   const missing = REQUIRED_KEYS.filter(key => !env[key]);
   if (missing.length > 0) {
@@ -28,9 +33,12 @@ function loadConfig(env = process.env) {
     statusText: (env.SUPPORT_STATUS_TEXT || 'support valaxscrub.shop').trim().toLowerCase(),
     apiUrl: env.VALAX_API_URL.replace(/\/+$/, ''),
     apiSecret: env.INTERNAL_BOT_SERVICE_SECRET,
+    localRecovery: readBoolean(env.LOCAL_RECOVERY_ENABLED, true),
+    workerTimeoutMs: readPositiveInt(env.WORKER_TIMEOUT_SECONDS, 300) * 1000,
+    workerMemoryMb: readPositiveInt(env.WORKER_MEMORY_MB, 3072),
     cooldownMs: readPositiveInt(env.COOLDOWN_SECONDS, 1200) * 1000,
     maxSourceBytes: readPositiveInt(env.MAX_SOURCE_BYTES, 2_000_000)
   };
 }
 
-module.exports = { loadConfig, readPositiveInt, REQUIRED_KEYS };
+module.exports = { loadConfig, readBoolean, readPositiveInt, REQUIRED_KEYS };

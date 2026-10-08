@@ -2,8 +2,10 @@
 
 ## 架构
 
-- Vercel 运行 `POST /api/recovery`，负责同步静态去混淆。
+- Vercel 运行 `POST /api/recovery`，作为轻量同步恢复和故障回退接口。
 - Discord Gateway bot 必须运行在常驻进程（Railway、Render、Fly.io 或 VPS），负责监听自定义状态、分配频道角色和处理 `/1`。
+- Bot 默认把恢复任务放进独立 Worker 子进程。单个任务超时或内存耗尽不会让 Bot 主进程掉线。
+- Worker 容器包含 C++20 原生预检引擎；它会按脚本体积、Token 数和嵌套深度选择安全恢复阶段。
 - Vercel Serverless Function 不能长期保持 Discord Gateway WebSocket，因此 bot 本身不能只部署在 Vercel。
 
 ## 1. Vercel 环境变量
@@ -73,6 +75,9 @@ VALAX_API_URL=https://<vercel-project>.vercel.app
 INTERNAL_BOT_SERVICE_SECRET=<与 Vercel 完全相同>
 COOLDOWN_SECONDS=1200
 MAX_SOURCE_BYTES=2000000
+LOCAL_RECOVERY_ENABLED=true
+WORKER_TIMEOUT_SECONDS=300
+WORKER_MEMORY_MB=3072
 ```
 
 ## 5. 注册命令并启动
@@ -98,4 +103,6 @@ npm run discord:start
 npm run discord:start
 ```
 
-将第 4 节的全部变量设置到托管平台。只运行一个 bot 实例；当前 20 分钟命令冷却保存在常驻进程内存中，多实例部署需要改用 Redis 等共享存储。
+将第 4 节的全部变量设置到托管平台。托管主机至少应提供 4 GB 内存；若内存不足，可降低 `WORKER_MEMORY_MB`，或把 `LOCAL_RECOVERY_ENABLED` 设为 `false` 使用 Vercel 回退接口。
+
+只运行一个 bot 实例；当前 20 分钟命令冷却保存在常驻进程内存中，多实例部署需要改用 Redis 等共享存储。

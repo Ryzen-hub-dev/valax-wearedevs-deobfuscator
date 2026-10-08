@@ -11,6 +11,7 @@ const {
 const { loadConfig } = require('./config');
 const { CooldownStore, formatRemaining, hasSupportStatus } = require('./access');
 const { fetchSource } = require('./safe-fetch');
+const { recoverInWorker } = require('./worker-client');
 
 const config = loadConfig();
 const cooldowns = new CooldownStore(config.cooldownMs);
@@ -72,7 +73,7 @@ async function resolveInput(interaction) {
   return { source: pasted, filename: 'pasted-script.lua' };
 }
 
-async function recoverSource(input) {
+async function recoverViaApi(input) {
   const response = await fetch(`${config.apiUrl}/api/recovery`, {
     method: 'POST',
     signal: AbortSignal.timeout(300_000),
@@ -99,6 +100,18 @@ async function recoverSource(input) {
     throw new Error(`${data?.error || fallbackMessage}${code}${requestSuffix}`);
   }
   return data;
+}
+
+async function recoverSource(input) {
+  if (!config.localRecovery) return recoverViaApi(input);
+
+  try {
+    return await recoverInWorker(input, config);
+  } catch (error) {
+    if (error.code !== 'WORKER_UNAVAILABLE') throw error;
+    console.error(`Local recovery worker unavailable, using hosted API: ${error.message}`);
+    return recoverViaApi(input);
+  }
 }
 
 client.once(Events.ClientReady, async readyClient => {
@@ -190,4 +203,4 @@ process.on('SIGINT', () => client.destroy());
 
 client.login(config.token);
 
-module.exports = { isAdministrator, recoverSource, resolveInput, sanitizeFilename, syncSupporterRole };
+module.exports = { isAdministrator, recoverSource, recoverViaApi, resolveInput, sanitizeFilename, syncSupporterRole };
