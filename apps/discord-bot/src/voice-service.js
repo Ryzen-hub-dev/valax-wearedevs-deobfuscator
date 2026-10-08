@@ -7,6 +7,7 @@ if (!process.env.FFMPEG_PATH && process.platform === 'win32') {
 const {
   AudioPlayerStatus,
   NoSubscriberBehavior,
+  StreamType,
   VoiceConnectionStatus,
   createAudioPlayer,
   createAudioResource,
@@ -15,6 +16,47 @@ const {
   joinVoiceChannel
 } = require('@discordjs/voice');
 const { ChannelType, OverwriteType, PermissionFlagsBits } = require('discord.js');
+
+const ONBOARDING_JOIN_SETTLE_MS = 1_500;
+const ONBOARDING_PLAY_TIMEOUT_MS = 600_000;
+const ONBOARDING_MIN_PLAYBACK_MS = 8_000;
+const ONBOARDING_POST_ROLL_MS = 750;
+
+function delay(milliseconds) {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
+function createOnboardingResource(audioPath) {
+  if (audioPath.toLowerCase().endsWith('.ogg')) {
+    return createAudioResource(fs.createReadStream(audioPath), { inputType: StreamType.OggOpus });
+  }
+  return createAudioResource(audioPath);
+}
+
+function waitForPlaybackEnd(player, timeoutMs = ONBOARDING_PLAY_TIMEOUT_MS) {
+  return new Promise((resolve, reject) => {
+    const cleanup = () => {
+      clearTimeout(timer);
+      player.off(AudioPlayerStatus.Idle, onIdle);
+      player.off('error', onError);
+    };
+    const onIdle = () => {
+      cleanup();
+      resolve();
+    };
+    const onError = error => {
+      cleanup();
+      reject(error);
+    };
+    const timer = setTimeout(() => {
+      cleanup();
+      reject(new Error('Onboarding audio exceeded 10 minutes.'));
+    }, timeoutMs);
+
+    player.once(AudioPlayerStatus.Idle, onIdle);
+    player.once('error', onError);
+  });
+}
 
 function shouldOnboard(member, verifiedRoleId) {
   return Boolean(
@@ -210,21 +252,29 @@ class VoiceService {
     });
 
     const player = createAudioPlayer({ behaviors: { noSubscriber: NoSubscriberBehavior.Stop } });
+    player.on('error', error => {
+      console.error(`Voice onboarding playback error for ${memberId}: ${error.message}`);
+    });
     let subscription;
     try {
       await entersState(connection, VoiceConnectionStatus.Ready, 20_000);
       subscription = connection.subscribe(player);
-      const resource = createAudioResource(this.config.onboardingAudioPath);
-      await new Promise((resolve, reject) => {
-        const timer = setTimeout(() => reject(new Error('Onboarding audio exceeded 10 minutes.')), 600_000);
-        const finish = callback => value => {
-          clearTimeout(timer);
-          callback(value);
-        };
-        player.once(AudioPlayerStatus.Idle, finish(resolve));
-        player.once('error', finish(reject));
-        player.play(resource);
-      });
+      await delay(ONBOARDING_JOIN_SETTLE_MS);
+      if (member.voice.channelId !== channel.id) {
+        throw new Error('Member left before onboarding playback started.');
+      }
+
+      const resource = createOnboardingResource(this.config.onboardingAudioPath);
+      player.play(resource);
+      await entersState(player, AudioPlayerStatus.Playing, 15_000);
+      const playbackStartedAt = Date.now();
+      console.log(`Voice onboarding audio started for ${member.id}.`);
+      await waitForPlaybackEnd(player);
+      const playbackMs = Date.now() - playbackStartedAt;
+      if (playbackMs < ONBOARDING_MIN_PLAYBACK_MS) {
+        throw new Error(`Onboarding audio ended too early after ${playbackMs}ms; member was not unlocked.`);
+      }
+      await delay(ONBOARDING_POST_ROLL_MS);
 
       await member.fetch();
       if (member.voice.channelId !== channel.id) {
@@ -234,7 +284,7 @@ class VoiceService {
       await member.voice.disconnect('Completed voice onboarding').catch(() => {});
       await channel.delete('Voice onboarding completed');
       this.privateChannels.delete(member.id);
-      console.log(`Voice onboarding completed for ${member.id}.`);
+      console.log(`Voice onboarding completed for ${member.id} after ${playbackMs}ms.`);
     } finally {
       subscription?.unsubscribe();
       player.stop(true);

@@ -40,7 +40,7 @@ function loadConfig(env = process.env) {
     verifiedRoleId: env.VERIFIED_ROLE_ID || '',
     onboardingCategoryId: env.ONBOARDING_CATEGORY_ID || '',
     afkVoiceChannelId: env.AFK_VOICE_CHANNEL_ID || '',
-    onboardingAudioPath: env.ONBOARDING_AUDIO_PATH || path.resolve(__dirname, '../assets/onboarding.mp3'),
+    onboardingAudioPath: env.ONBOARDING_AUDIO_PATH || path.resolve(__dirname, '../assets/onboarding.ogg'),
     radioStreamUrl: env.RADIO_STREAM_URL || 'http://streaming.exclusive.radio/er/billyeilish/icecast.audio',
     workerTimeoutMs: readPositiveInt(env.WORKER_TIMEOUT_SECONDS, 30) * 1000,
     workerMemoryMb: readPositiveInt(env.WORKER_MEMORY_MB, 3072),
