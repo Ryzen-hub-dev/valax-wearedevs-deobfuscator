@@ -5,7 +5,8 @@ const { classifyError } = require('../../packages/core/src/diagnostics/failure-t
 const { traverse } = require('../../packages/core/src/ast/visitor');
 const { identifier, unaryExpression } = require('../../packages/core/src/ast/nodes');
 const { ConstantEvaluator } = require('../../packages/core/src/evaluator/constant-evaluator');
-const { recoverWithStackFallback } = require('../../api/recovery')._test;
+const { capStage, profileSourceJs } = require('../../packages/core/src/native/preflight');
+const { recoverAdaptively, recoverWithStackFallback } = require('../../api/recovery')._test;
 
 function runFuzzTests() {
   describe('Rule 14: Crash-Free Fuzzing Suite', () => {
@@ -100,6 +101,38 @@ function runFuzzTests() {
       expect(attemptedStages.join(',')).toBe('L5,L4,L3');
       expect(result.report.executedStage).toBe('L3');
       expect(result.report.warnings.length).toBe(1);
+    });
+
+    test('8. Preflight profiles source complexity and caps unsafe hosted stages', () => {
+      const small = profileSourceJs('local value = 1\nprint(value)');
+      expect(small.recommendedStage).toBe('L5');
+      expect(small.tokens).toBeGreaterThan(0);
+
+      const large = profileSourceJs('identifier '.repeat(40000));
+      expect(large.recommendedStage).toBe('L4');
+      expect(capStage('L5', large.recommendedStage)).toBe('L4');
+      expect(capStage('L2', large.recommendedStage)).toBe('L2');
+    });
+
+    test('9. Adaptive API execution records requested and admitted stages', () => {
+      let executedStage = null;
+      const result = recoverAdaptively('print(1)', { stage: 'L5', filename: 'test.lua' }, {
+        profiler: () => ({
+          engine: 'test-native-engine',
+          bytes: 8,
+          tokens: 4,
+          maxDepth: 1,
+          recommendedStage: 'L3'
+        }),
+        recoveryFn: (source, options) => {
+          executedStage = options.stage;
+          return { code: source, report: { warnings: [] } };
+        }
+      });
+
+      expect(executedStage).toBe('L3');
+      expect(result.report.execution.requestedStage).toBe('L5');
+      expect(result.report.execution.admittedStage).toBe('L3');
     });
   });
 }

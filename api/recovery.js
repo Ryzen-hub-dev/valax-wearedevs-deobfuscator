@@ -1,4 +1,5 @@
 const { recover } = require('../packages/core/src');
+const { capStage, profileSource } = require('../packages/core/src/native/preflight');
 const crypto = require('crypto');
 
 const DEFAULT_MAX_SOURCE_BYTES = 2_000_000;
@@ -61,6 +62,48 @@ function recoverWithStackFallback(source, options, recoveryFn = recover) {
   throw lastError;
 }
 
+function recoverAdaptively(source, options, dependencies = {}) {
+  const profiler = dependencies.profiler || profileSource;
+  const recoveryFn = dependencies.recoveryFn || recover;
+  const profile = profiler(source, { preferNative: true });
+  const admittedStage = capStage(options.stage, profile.recommendedStage);
+
+  console.info('Recovery request admitted', {
+    filename: options.filename,
+    sourceBytes: profile.bytes,
+    tokens: profile.tokens,
+    maxDepth: profile.maxDepth,
+    requestedStage: options.stage,
+    admittedStage,
+    preflightEngine: profile.engine
+  });
+
+  const result = recoverWithStackFallback(
+    source,
+    { ...options, stage: admittedStage },
+    recoveryFn
+  );
+  result.report = result.report || {};
+  result.report.warnings = Array.isArray(result.report.warnings) ? result.report.warnings : [];
+
+  if (admittedStage !== options.stage) {
+    result.report.warnings.push(
+      `Recovery was automatically capped at ${admittedStage} for this script's size and structural complexity to prevent a hosted-engine memory failure.`
+    );
+  }
+
+  result.report.execution = {
+    requestedStage: options.stage,
+    admittedStage,
+    executedStage: result.report.executedStage || admittedStage,
+    preflightEngine: profile.engine,
+    sourceBytes: profile.bytes,
+    tokens: profile.tokens,
+    maxDepth: profile.maxDepth
+  };
+  return result;
+}
+
 /**
  * REST endpoint for source code deobfuscation.
  * Accepts POST with JSON: { source: string, stage?: string, format?: string }
@@ -98,7 +141,7 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ success: false, error: 'Invalid recovery stage.', code: 'INVALID_STAGE' });
     }
 
-    const result = recoverWithStackFallback(source, { stage, format, filename });
+    const result = recoverAdaptively(source, { stage, format, filename });
     const outputBytes = Buffer.byteLength(result.code || '', 'utf8');
     const maxOutputBytes = readPositiveInt(process.env.MAX_OUTPUT_BYTES, DEFAULT_MAX_OUTPUT_BYTES);
     if (outputBytes > maxOutputBytes) {
@@ -133,6 +176,7 @@ module.exports = async function handler(req, res) {
 module.exports._test = {
   isAuthorized,
   isCallStackError,
+  recoverAdaptively,
   recoverWithStackFallback,
   readPositiveInt,
   secureEqual

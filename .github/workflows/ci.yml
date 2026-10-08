@@ -7,6 +7,22 @@ on:
     branches: [ main, master ]
 
 jobs:
+  native-engine:
+    name: C++ Native Engine Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure C++20 engine
+      run: cmake -S native -B native/build -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build native engine
+      run: cmake --build native/build --config Release --parallel
+
+    - name: Test native engine
+      run: ctest --test-dir native/build --output-on-failure
+
   build-and-test:
     runs-on: ubuntu-latest
 
@@ -285,6 +301,5 @@ jobs:
         path: |
           audit/phase3-*.json
           audit/phase3-*.log
-
 
 

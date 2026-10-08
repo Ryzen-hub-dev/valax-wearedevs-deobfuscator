@@ -34,7 +34,7 @@ function runCliTests() {
 
       const verRes = execCli(['--version']);
       assert.strictEqual(verRes.exitCode, ExitCode.SUCCESS);
-      assert(verRes.stdout.includes('0.1.0-beta.2'));
+      assert(verRes.stdout.includes('0.1.0-beta.3'));
     });
 
     // 2. Missing input argument
@@ -110,7 +110,7 @@ function runCliTests() {
 
         const repJson = JSON.parse(fs.readFileSync(outReport, 'utf8'));
         assert.strictEqual(repJson.schemaVersion, '1');
-        assert.strictEqual(repJson.toolVersion, '0.1.0-beta.2');
+        assert.strictEqual(repJson.toolVersion, '0.1.0-beta.3');
         assert(['L5-W', 'L4'].includes(repJson.recovery.actualLevel), `Expected L5-W or L4, got ${repJson.recovery.actualLevel}`);
       } finally {
         try { fs.unlinkSync(outCode); } catch (_) {}
@@ -131,7 +131,7 @@ function runCliTests() {
         // stdout must be strictly valid JSON without preamble
         const parsed = JSON.parse(res.stdout);
         assert.strictEqual(parsed.schemaVersion, '1');
-        assert.strictEqual(parsed.toolVersion, '0.1.0-beta.2');
+        assert.strictEqual(parsed.toolVersion, '0.1.0-beta.3');
         assert.strictEqual(parsed.status, 'success');
         assert(['L5-W', 'L4'].includes(parsed.recovery.actualLevel), `Expected L5-W or L4, got ${parsed.recovery.actualLevel}`);
         assert.strictEqual(parsed.outputs.code, outCode);

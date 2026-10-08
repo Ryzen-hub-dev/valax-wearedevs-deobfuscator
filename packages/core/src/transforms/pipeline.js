@@ -44,7 +44,7 @@ class RecoveryPipeline {
     // STAGE L0: Parsing
     // ==========================================
     let currentAst = parse(source);
-    const initialAst = parse(source);
+    let initialAst = null;
     currentLevel = 'L0';
 
     // Format Detection
@@ -217,6 +217,7 @@ class RecoveryPipeline {
     const isL5Target = this.targetStage === 'L5' || this.targetStage === 'L5-W' || this.targetStage === 'L5-T';
     if (isL5Target && (dispatchers.length > 0 || detection.detected)) {
       try {
+        initialAst = parse(source);
         const traceRes = this.semanticOracle.trace(source);
         if (traceRes.success && traceRes.events && traceRes.events.length > 0) {
           const completeness = this.completenessVerifier.verify(

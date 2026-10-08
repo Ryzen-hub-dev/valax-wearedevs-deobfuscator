@@ -1,5 +1,14 @@
 # Production Hardened Recovery Worker Container
-# Minimal Alpine Linux base with Node.js and Lua
+# Build the C++ preflight engine separately so the runtime image contains no compiler.
+FROM alpine:3.20 AS native-build
+
+RUN apk add --no-cache cmake g++ make
+WORKDIR /src
+COPY native ./native
+RUN cmake -S native -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF && \
+    cmake --build build --config Release --parallel
+
+# Minimal Alpine Linux base with Node.js, Lua, and the native engine.
 FROM node:20-alpine AS base
 
 # Install lua5.1 for semantic oracle validation if needed
@@ -15,6 +24,7 @@ COPY packages/shared ./packages/shared
 COPY packages/sandbox ./packages/sandbox
 COPY packages/worker ./packages/worker
 COPY audit/core-baseline-hashes.json ./audit/core-baseline-hashes.json
+COPY --from=native-build /src/build/valax-native /usr/local/bin/valax-native
 
 # Prepare isolated work directories with correct ownership (node user is uid 1000, gid 1000)
 RUN mkdir -p /work /tmp && \
@@ -28,6 +38,7 @@ USER node:node
 ENV NODE_ENV=production
 ENV HOME=/tmp
 ENV TMPDIR=/tmp
+ENV VALAX_NATIVE_ENGINE_PATH=/usr/local/bin/valax-native
 
 # Stdin/stdout IPC entrypoint
 ENTRYPOINT ["node", "/app/packages/worker/src/index.js"]

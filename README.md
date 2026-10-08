@@ -82,6 +82,7 @@ node scripts/build-blind-corpus.js
 - [Security & Isolation Model](docs/security.md)
 - [Report Schema Specification](docs/report-schema.md)
 - [CLI Reference Guide](docs/cli.md)
+- [C++ Native Engine Architecture](docs/native-engine.md)
 - [Vercel + Discord 部署说明](docs/discord-vercel-setup.zh-CN.md)
 
 ## Discord `/1` Bot

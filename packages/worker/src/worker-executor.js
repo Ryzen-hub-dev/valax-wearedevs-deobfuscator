@@ -17,7 +17,7 @@ try {
 } catch {
   core = require('../../core/src');
 }
-const { recover } = core;
+const { recover, native } = core;
 
 class WorkerExecutor {
   /**
@@ -113,7 +113,9 @@ class WorkerExecutor {
 
     // 2. Execute pipeline
     try {
-      const stageOption = req.options.requestedStage === 'auto' ? 'L5' : req.options.requestedStage;
+      const requestedStage = req.options.requestedStage === 'auto' ? 'L5' : req.options.requestedStage;
+      const sourceProfile = native.profileSource(source, { preferNative: true });
+      const stageOption = native.capStage(requestedStage, sourceProfile.recommendedStage);
       const pipelineResult = recover(source, {
         stage: stageOption,
         filename: req.input.filename,
@@ -141,6 +143,21 @@ class WorkerExecutor {
 
       // Extract admission and metrics metadata
       const report = pipelineResult.report || {};
+      report.warnings = Array.isArray(report.warnings) ? report.warnings : [];
+      if (stageOption !== requestedStage) {
+        report.warnings.push(
+          `Worker capped recovery at ${stageOption} after ${sourceProfile.engine} preflight to stay within its resource budget.`
+        );
+      }
+      report.execution = {
+        requestedStage,
+        admittedStage: stageOption,
+        executedStage: stageOption,
+        preflightEngine: sourceProfile.engine,
+        sourceBytes: sourceProfile.bytes,
+        tokens: sourceProfile.tokens,
+        maxDepth: sourceProfile.maxDepth
+      };
       const admissionMeta = {
         admittedTier: report.recoveryLevel || 'NONE',
         isL5WEligible: !!report.completeness?.isL5WEligible,
@@ -160,7 +177,11 @@ class WorkerExecutor {
         physicalResidualStates,
         residualStates: physicalResidualStates,
         reachableResidualStates,
-        reachableStates: reachableResidualStates
+        reachableStates: reachableResidualStates,
+        preflightEngine: sourceProfile.engine,
+        admittedStage: stageOption,
+        sourceTokens: sourceProfile.tokens,
+        sourceMaxDepth: sourceProfile.maxDepth
       };
 
       const artifacts = {

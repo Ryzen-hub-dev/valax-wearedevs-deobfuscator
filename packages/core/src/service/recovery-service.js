@@ -15,7 +15,7 @@ function recover(source, options = {}) {
   return pipeline.run(source, options.filename || 'input.lua');
 }
 
-const TOOL_VERSION = '0.1.0-beta.2';
+const TOOL_VERSION = '0.1.0-beta.3';
 const SCHEMA_VERSION = '1';
 const DEFAULT_MAX_INPUT_BYTES = 5 * 1024 * 1024; // 5 MiB
 const ALLOWED_EXTENSIONS = new Set(['.lua', '.luau', '.txt']);

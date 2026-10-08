@@ -8,6 +8,7 @@ const detectors = require('./detectors');
 const adapters = require('./adapters');
 const generator = require('./generator');
 const analysis = require('./analysis');
+const native = require('./native/preflight');
 const { RecoveryService, ExitCode, TOOL_VERSION, SCHEMA_VERSION } = require('./service/recovery-service');
 
 function recover(source, options = {}) {
@@ -26,6 +27,7 @@ module.exports = {
   adapters,
   generator,
   analysis,
+  native,
   recover,
   RecoveryService,
   ExitCode,

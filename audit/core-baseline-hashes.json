@@ -1,11 +1,11 @@
 {
-  "baselineTag": "CORE_BASELINE_0.1.0-beta.2",
-  "timestamp": "2026-10-08T11:20:00.000Z",
-  "toolVersion": "0.1.0-beta.2",
+  "baselineTag": "CORE_BASELINE_0.1.0-beta.3",
+  "timestamp": "2026-10-08T11:40:00.000Z",
+  "toolVersion": "0.1.0-beta.3",
   "totalCriticalFiles": 51,
-  "freezePolicy": "Core admission and recovery algorithms are frozen at 0.1.0-beta.2 after the stack-safety fix cycle. Further core changes require a new version and baseline.",
+  "freezePolicy": "Core admission and recovery algorithms are frozen at 0.1.0-beta.3 after adaptive execution and native preflight integration. Further core changes require a new version and baseline.",
   "hashes": {
-    "packages/core/src/index.js": "d63473335ba5de3fdaeeb3e02632828497ee84736a6c832d4d7a0cbe359fda85",
+    "packages/core/src/index.js": "f4dbe9a8575c14748bd82bb943f8906fe10e8e92e76ff7692b591808e74a74d8",
     "packages/core/src/analysis/alias.js": "d51790b18f890774e832a5522486431080bd1473da515187e42c390072a8db3b",
     "packages/core/src/analysis/classifier.js": "426ee60ac74289b77a6fcd33054befaeec289184db8043fb50f24066498f163a",
     "packages/core/src/analysis/closure-analyzer.js": "0933cab65d738aaf681eda5ebb5d0db234de755df377b8c6fe16a254656f2897",
@@ -47,7 +47,7 @@
     "packages/core/src/transforms/cleanup.js": "e430e5d5b76034e3a67eee4b4eae7b9e9d1a0f575b6b8c86e76fc2e8cf57fc87",
     "packages/core/src/transforms/closure-splitter.js": "8290e846d386fe6a1def2a6f4b8db534508e8a2b757be5eed80e58cefc509dd7",
     "packages/core/src/transforms/index.js": "5918a58cdabe6b0eb746dec8d23f650b8644b8310706d0fe2f87d95e0d978cc7",
-    "packages/core/src/transforms/pipeline.js": "35ba62af3f0360753d404b0700dc091c35bc8148951f9d9d53b7a8736fa9db55",
+    "packages/core/src/transforms/pipeline.js": "003b5390c1e3f5d0a2d1f531930e259b3490b534e962a888e9ede057494a1cbc",
     "packages/core/src/transforms/residual-dispatcher.js": "2828874491658e74ddaf2d6aed4357df1ef8cb15684c8205f21c78b4b82b3f50",
     "packages/core/src/transforms/state-restructure.js": "028cabd061b4e98b9b4831dc944b7282c22a632d91527adf1f80e1798e8c678f",
     "packages/core/src/transforms/string-recovery.js": "fac0f963a1243911dff0d8ce2ab328ba055536346dc26810efac7aa7c5b87c37",
@@ -55,6 +55,6 @@
     "packages/core/src/detectors/index.js": "3afb202afa452475b0b3d9e6211d5847ce8a9ba598350e9a15b855ff14a78478",
     "packages/core/src/detectors/string-pool-detector.js": "1c157b2990e344e298c24d9d3e02ed4e8b6ad6b015777712e9ca826f5fce3275",
     "packages/core/src/oracle/semantic-oracle.js": "781aef53def4a188fe22a1401f7a72de7db3de040b8780ea50a4bd85ac5c12f8",
-    "packages/core/src/service/recovery-service.js": "5a87437849bae5db7efc6d55bb3826d29d243c2a454418dcf6309da37be3dcac"
+    "packages/core/src/service/recovery-service.js": "ae3801475ddee4594073b9bf5a042b2c55d85451a2114cec1fee25a97b08cfed"
   }
 }

@@ -83,9 +83,20 @@ async function recoverSource(input) {
     body: JSON.stringify({ source: input.source, filename: input.filename, stage: 'L5' })
   });
 
-  const data = await response.json().catch(() => null);
+  const rawBody = await response.text();
+  let data = null;
+  try {
+    data = JSON.parse(rawBody);
+  } catch {}
+
   if (!response.ok || !data?.success) {
-    throw new Error(data?.error || `Recovery API returned HTTP ${response.status}.`);
+    const code = data?.code ? ` [${data.code}]` : '';
+    const requestId = response.headers.get('x-vercel-id');
+    const requestSuffix = requestId ? ` Request: ${requestId}.` : '';
+    const fallbackMessage = response.status >= 500
+      ? 'The hosted recovery process exhausted its time or memory budget.'
+      : `Recovery API returned HTTP ${response.status}.`;
+    throw new Error(`${data?.error || fallbackMessage}${code}${requestSuffix}`);
   }
   return data;
 }
@@ -141,6 +152,11 @@ client.on(Events.InteractionCreate, async interaction => {
 
   try {
     const input = await resolveInput(interaction);
+    console.info('Discord recovery request', {
+      filename: input.filename,
+      sourceBytes: Buffer.byteLength(input.source, 'utf8'),
+      userId: interaction.user.id
+    });
     const result = await recoverSource(input);
     const outputName = `deobfuscated-${sanitizeFilename(input.filename)}`;
     const file = new AttachmentBuilder(Buffer.from(result.code, 'utf8'), { name: outputName });
