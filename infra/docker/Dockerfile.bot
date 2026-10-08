@@ -1,0 +1,24 @@
+FROM alpine:3.20 AS native-build
+
+RUN apk add --no-cache cmake g++ make
+WORKDIR /src
+COPY native ./native
+RUN cmake -S native -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF && \
+    cmake --build build --config Release --parallel
+
+FROM node:20-alpine
+
+RUN apk add --no-cache lua5.1 lua5.1-libs
+WORKDIR /app
+
+COPY . .
+COPY --from=native-build /src/build/valax-native /usr/local/bin/valax-native
+
+RUN npm ci --omit=dev && \
+    chown -R node:node /app
+
+ENV NODE_ENV=production
+ENV VALAX_NATIVE_ENGINE_PATH=/usr/local/bin/valax-native
+
+USER node:node
+CMD ["npm", "run", "discord:start"]

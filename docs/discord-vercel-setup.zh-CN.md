@@ -97,7 +97,9 @@ npm run discord:start
 
 ## 6. 常驻托管建议
 
-在 Railway 或 Render 上把仓库作为 Node 服务部署，启动命令使用：
+仓库已经包含 `railway.json` 与 `infra/docker/Dockerfile.bot`。在 Railway 中从 GitHub 仓库新建项目后，它会自动构建包含 C++ 原生引擎的 Bot 镜像。
+
+如果平台要求手动填写启动命令，使用：
 
 ```text
 npm run discord:start

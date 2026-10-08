@@ -142,6 +142,11 @@ jobs:
         docker build -f infra/docker/Dockerfile.worker -t valax-recovery-worker:phase2-test .
         docker inspect valax-recovery-worker:phase2-test
 
+    - name: 3b. Discord Bot + Native Worker Image Build
+      run: |
+        docker build -f infra/docker/Dockerfile.bot -t valax-discord-bot:phase2-test .
+        docker inspect valax-discord-bot:phase2-test
+
     - name: 4. Redis Multi-Process Queue & Restart Persistence Tests (P0-18, P0-19, P0-20)
       run: |
         set -o pipefail
@@ -301,5 +306,4 @@ jobs:
         path: |
           audit/phase3-*.json
           audit/phase3-*.log
-
 
