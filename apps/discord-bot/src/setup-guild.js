@@ -12,6 +12,7 @@ const {
 
 const token = process.env.DISCORD_BOT_TOKEN;
 const guildId = process.env.DISCORD_GUILD_ID;
+const configuredChannelId = process.env.DEOBFUSCATE_CHANNEL_ID;
 
 if (!token || !guildId) {
   throw new Error('DISCORD_BOT_TOKEN and DISCORD_GUILD_ID are required.');
@@ -36,7 +37,28 @@ function saveLocalIds(values) {
 
 client.once(Events.ClientReady, async () => {
   try {
-    const guild = await client.guilds.fetch(guildId);
+    const availableGuilds = await client.guilds.fetch();
+    const guildReference = availableGuilds.get(guildId);
+    if (!guildReference) {
+      const visibleGuilds = availableGuilds.size > 0
+        ? availableGuilds.map(item => `${item.name} (${item.id})`).join(', ')
+        : 'none';
+      throw new Error(`Configured guild ${guildId} is unavailable. Bot-accessible guilds: ${visibleGuilds}`);
+    }
+
+    const guild = await guildReference.fetch();
+    const botMember = await guild.members.fetchMe();
+    const requiredPermissions = [
+      [PermissionFlagsBits.ManageRoles, 'Manage Roles'],
+      [PermissionFlagsBits.ManageChannels, 'Manage Channels']
+    ];
+    const missingPermissions = requiredPermissions
+      .filter(([permission]) => !botMember.permissions.has(permission))
+      .map(([, name]) => name);
+    if (missingPermissions.length > 0) {
+      throw new Error(`Bot is missing server permissions: ${missingPermissions.join(', ')}`);
+    }
+
     await guild.roles.fetch();
     await guild.channels.fetch();
 
@@ -49,14 +71,29 @@ client.once(Events.ClientReady, async () => {
       });
     }
 
-    let channel = guild.channels.cache.find(item =>
-      item.type === ChannelType.GuildText && item.name === 'deobfuscate'
-    );
+    let channel = configuredChannelId
+      ? guild.channels.cache.get(configuredChannelId)
+      : guild.channels.cache.find(item =>
+        item.type === ChannelType.GuildText && item.name === 'deobfuscate'
+      );
+
+    if (configuredChannelId && !channel) {
+      throw new Error(`Configured channel ${configuredChannelId} was not found in guild ${guildId}.`);
+    }
+    if (channel && channel.type !== ChannelType.GuildText) {
+      throw new Error(`Configured channel ${channel.id} is not a guild text channel.`);
+    }
 
     const permissionOverwrites = [
       {
-        id: guild.roles.everyone.id,
-        deny: [PermissionFlagsBits.ViewChannel]
+        id: client.user.id,
+        allow: [
+          PermissionFlagsBits.ViewChannel,
+          PermissionFlagsBits.SendMessages,
+          PermissionFlagsBits.ReadMessageHistory,
+          PermissionFlagsBits.AttachFiles,
+          PermissionFlagsBits.ManageChannels
+        ]
       },
       {
         id: role.id,
@@ -69,14 +106,8 @@ client.once(Events.ClientReady, async () => {
         ]
       },
       {
-        id: client.user.id,
-        allow: [
-          PermissionFlagsBits.ViewChannel,
-          PermissionFlagsBits.SendMessages,
-          PermissionFlagsBits.ReadMessageHistory,
-          PermissionFlagsBits.AttachFiles,
-          PermissionFlagsBits.ManageChannels
-        ]
+        id: guild.roles.everyone.id,
+        deny: [PermissionFlagsBits.ViewChannel]
       }
     ];
 
@@ -90,10 +121,26 @@ client.once(Events.ClientReady, async () => {
         reason: 'Valax deobfuscation channel setup'
       });
     } else {
+      for (const overwrite of permissionOverwrites) {
+        await channel.permissionOverwrites.edit(overwrite.id, {
+          ViewChannel: overwrite.deny ? false : true,
+          ...(overwrite.id === role.id ? {
+            SendMessages: true,
+            ReadMessageHistory: true,
+            AttachFiles: true,
+            UseApplicationCommands: true
+          } : {}),
+          ...(overwrite.id === client.user.id ? {
+            SendMessages: true,
+            ReadMessageHistory: true,
+            AttachFiles: true,
+            ManageChannels: true
+          } : {})
+        }, { reason: 'Valax deobfuscation channel setup' });
+      }
       await channel.edit({
         topic: 'Set your custom status to “support valaxscrub.shop”, then use /1.',
         rateLimitPerUser: 1200,
-        permissionOverwrites,
         reason: 'Valax deobfuscation channel setup'
       });
     }
@@ -102,6 +149,8 @@ client.once(Events.ClientReady, async () => {
     console.log(`SUPPORT_ROLE_ID=${role.id}`);
     console.log(`DEOBFUSCATE_CHANNEL_ID=${channel.id}`);
     saveLocalIds({
+      DISCORD_CLIENT_ID: client.application.id,
+      DISCORD_GUILD_ID: guild.id,
       SUPPORT_ROLE_ID: role.id,
       DEOBFUSCATE_CHANNEL_ID: channel.id
     });
