@@ -160,14 +160,23 @@ client.on(Events.InteractionCreate, async interaction => {
     const result = await recoverSource(input);
     const outputName = `deobfuscated-${sanitizeFilename(input.filename)}`;
     const file = new AttachmentBuilder(Buffer.from(result.code, 'utf8'), { name: outputName });
+    const reportFile = new AttachmentBuilder(
+      Buffer.from(JSON.stringify(result.report || {}, null, 2), 'utf8'),
+      { name: 'recovery-report.json' }
+    );
     const level = result.report?.recoveryLevel || 'unknown';
+    const requestedStage = result.report?.execution?.requestedStage || 'L5';
+    const executedStage = result.report?.execution?.executedStage || requestedStage;
+    const stageNote = executedStage !== requestedStage
+      ? `, engine stage **${executedStage}** (automatically limited for stability)`
+      : `, engine stage **${executedStage}**`;
     const confidence = Number.isFinite(result.report?.confidence)
       ? `${Math.round(result.report.confidence * 100)}%`
       : 'unknown';
 
     await interaction.editReply({
-      content: `Recovery complete — level **${level}**, confidence **${confidence}**.`,
-      files: [file]
+      content: `Recovery complete — level **${level}**${stageNote}, confidence **${confidence}**.`,
+      files: [file, reportFile]
     });
   } catch (error) {
     if (!admin) cooldowns.clear(interaction.user.id);
