@@ -212,8 +212,8 @@
         <article class="card" data-code="REV-02"><div class="card-label">Applications waiting</div><div class="metric violet" id="applications">0</div><div class="detail"><span id="applications-reviewed">0</span> reviewed</div></article>
         <article class="card" data-code="LOA-03"><div class="card-label">Leave requests</div><div class="metric blue" id="leaves">0</div><div class="detail">Staff queue awaiting action</div></article>
         <article class="card wide" data-code="SYS-04"><div class="card-label">Gateway health</div><div class="health"><div class="health-ring"></div><div class="health-copy"><strong id="health-copy">Checking services</strong><span><span id="latency">0</span> ms · <span id="uptime">0m</span> uptime · <span id="memory">0</span> MB</span></div></div></article>
-        <article class="card" data-code="ECO-05"><div class="card-label">Economy members</div><div class="metric" id="economy">0</div><div class="detail"><span id="drops">0</span> drops claimed</div></article>
-        <article class="card" data-code="SRV-06"><div class="card-label">Community structure</div><div class="metric" id="channels">0</div><div class="detail">channels · <span id="roles">0</span> roles · <span id="boosts">0</span> boosts</div></article>
+        <article class="card" data-code="ECO-05"><div class="card-label">Economy members</div><div class="metric" id="economy">0</div><div class="detail"><span id="drops">0</span> drops · <span id="invites">0</span> credited invites</div></article>
+        <article class="card" data-code="SRV-06"><div class="card-label">Community structure</div><div class="metric" id="channels">0</div><div class="detail"><span id="roles">0</span> roles · <span id="boosts">0</span> boosts · counting <span id="counting">0</span></div></article>
         <article class="card wide" data-code="ERR-07"><div class="card-label">System exceptions</div><div class="metric" id="errors">0</div><div class="detail" id="error-copy">No unresolved worker exceptions recorded.</div></article>
       </div>
 
@@ -228,7 +228,7 @@
 
   <script>
     const query = new URLSearchParams(location.search);
-    const endpoint = query.get('api') || (location.port === '3080' ? '/api/community-status' : '');
+    const endpoint = query.get('api') || '/api/community-status';
     const $ = id => document.getElementById(id);
     const set = (id, value) => { $(id).textContent = value; };
     const duration = seconds => {
@@ -258,8 +258,10 @@
       set('memory', data.bot.memoryMb);
       set('economy', data.operations.economyUsers);
       set('drops', data.operations.dropsClaimed);
+      set('invites', data.operations.creditedInvites);
       set('channels', data.community.channels);
       set('roles', data.community.roles);
+      set('counting', data.operations.countingHighScore);
       set('boosts', data.community.boosts);
       set('errors', data.operations.systemErrors);
       set('error-copy', data.operations.systemErrors ? 'Review the bot runtime logs for recorded failures.' : 'No worker exceptions recorded.');
@@ -290,14 +292,6 @@
     }
 
     async function refresh() {
-      if (!endpoint) {
-        $('live').classList.remove('online');
-        $('live').classList.add('error');
-        set('live-label', 'Worker endpoint not connected');
-        set('health-copy', 'Dashboard ready for worker');
-        set('refreshed', 'Add ?api=https://your-bot-host to connect');
-        return;
-      }
       try {
         const response = await fetch(endpoint, { cache: 'no-store' });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);

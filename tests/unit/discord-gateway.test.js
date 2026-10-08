@@ -11,8 +11,8 @@ const {
 } = require('../../apps/discord-bot/src/worker-client');
 const { readBoolean } = require('../../apps/discord-bot/src/config');
 const { privateVoiceName, shouldOnboard } = require('../../apps/discord-bot/src/voice-service');
-const { CommunityStore } = require('../../apps/discord-bot/src/community-store');
-const { cleanChannelName, formatDuration } = require('../../apps/discord-bot/src/community-service');
+const { CommunityStore, levelForXp } = require('../../apps/discord-bot/src/community-store');
+const { INVITE_MILESTONES, cleanChannelName, formatDuration } = require('../../apps/discord-bot/src/community-service');
 
 function run() {
   assert.strictEqual(hasSupportStatus({
@@ -107,6 +107,29 @@ function run() {
     const reloaded = new CommunityStore(path.join(temporaryDirectory, 'community.json'));
     assert.strictEqual(reloaded.snapshot().dropsClaimed, 1);
     assert.strictEqual(reloaded.snapshot().tickets.closed, 1);
+
+    assert.strictEqual(communityStore.awardMessageXp('member-1', { amount: 100 }).leveledUp, true);
+    assert.strictEqual(communityStore.awardMessageXp('member-1', { amount: 100 }).awarded, false);
+    communityNow += 60_000;
+    assert.strictEqual(communityStore.awardMessageXp('member-1', { amount: 100 }).awarded, true);
+    assert.strictEqual(levelForXp(400), 3);
+
+    assert.strictEqual(communityStore.submitCount('member-1', 1).accepted, true);
+    assert.strictEqual(communityStore.submitCount('member-1', 2).accepted, false);
+    assert.strictEqual(communityStore.submitCount('member-2', 1).accepted, true);
+    assert.strictEqual(communityStore.snapshot().counting.highScore, 1);
+
+    assert.strictEqual(communityStore.recordInvite('member-1', 'new-member', { eligible: true }).eligible, true);
+    assert.strictEqual(communityStore.recordInvite('member-1', 'new-member', { eligible: true }).recorded, false);
+    communityStore.recordInvite('member-1', 'new-member-2', { eligible: true });
+    const rewards = communityStore.claimInviteRewards('member-1', INVITE_MILESTONES);
+    assert.strictEqual(rewards.claimed, true);
+    assert.strictEqual(rewards.amount, 250);
+    assert.strictEqual(communityStore.claimInviteRewards('member-1', INVITE_MILESTONES).claimed, false);
+
+    communityStore.addWarning('member-1', 'staff-1', 'Test warning');
+    assert.strictEqual(communityStore.warningsFor('member-1').length, 1);
+    assert.strictEqual(communityStore.clearWarnings('member-1'), 1);
   } finally {
     fs.rmSync(temporaryDirectory, { recursive: true, force: true });
   }

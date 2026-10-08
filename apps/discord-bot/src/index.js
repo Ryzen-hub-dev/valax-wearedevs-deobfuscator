@@ -20,14 +20,15 @@ const { CommunityDashboard } = require('./community-dashboard');
 const config = loadConfig();
 const cooldowns = new CooldownStore(config.cooldownMs);
 
-const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.GuildPresences,
-    GatewayIntentBits.GuildVoiceStates
-  ]
-});
+const intents = [
+  GatewayIntentBits.Guilds,
+  GatewayIntentBits.GuildMembers,
+  GatewayIntentBits.GuildPresences,
+  GatewayIntentBits.GuildVoiceStates,
+  GatewayIntentBits.GuildMessages
+];
+if (config.messageContentEnabled) intents.push(GatewayIntentBits.MessageContent);
+const client = new Client({ intents });
 const voiceService = new VoiceService(client, config);
 const communityStore = new CommunityStore(config.communityDataPath);
 const communityService = new CommunityService(client, config, communityStore);
@@ -209,10 +210,22 @@ client.on(Events.PresenceUpdate, async (_oldPresence, newPresence) => {
   if (member) await syncSupporterRole(member, newPresence);
 });
 
-client.on(Events.GuildMemberAdd, member => voiceService.handleMemberAdd(member));
+client.on(Events.GuildMemberAdd, member => {
+  voiceService.handleMemberAdd(member);
+  communityService.handleMemberAdd(member).catch(error => {
+    communityStore.recordSystemError();
+    console.error(`Invite attribution failed: ${error.message}`);
+  });
+});
 client.on(Events.GuildMemberRemove, member => voiceService.handleMemberRemove(member));
 client.on(Events.VoiceStateUpdate, (oldState, newState) => {
   voiceService.handleVoiceStateUpdate(oldState, newState);
+});
+client.on(Events.MessageCreate, message => {
+  communityService.handleMessage(message).catch(error => {
+    communityStore.recordSystemError();
+    console.error(`Community message handling failed: ${error.message}`);
+  });
 });
 
 client.on(Events.InteractionCreate, async interaction => {

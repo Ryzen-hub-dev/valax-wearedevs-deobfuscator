@@ -88,6 +88,8 @@ class VoiceService {
     this.stopped = false;
     this.radioRetryTimer = null;
     this.radioStartPromise = null;
+    this.cleanupTimer = null;
+    this.monitoredConnections = new WeakSet();
     this.radioPlayer = createAudioPlayer({
       behaviors: { noSubscriber: NoSubscriberBehavior.Play }
     });
@@ -130,6 +132,12 @@ class VoiceService {
 
     await this.reconcilePrivateChannels();
     await this.startRadio();
+    this.cleanupTimer = setInterval(() => {
+      this.reconcilePrivateChannels().catch(error => {
+        console.error(`Voice room reconciliation failed: ${error.message}`);
+      });
+    }, 10 * 60 * 1000);
+    this.cleanupTimer.unref?.();
   }
 
   async reconcilePrivateChannels() {
@@ -308,6 +316,7 @@ class VoiceService {
         selfDeaf: true,
         selfMute: false
       });
+      this.monitorConnection(connection);
       await entersState(connection, VoiceConnectionStatus.Ready, 20_000);
       connection.subscribe(this.radioPlayer);
       this.radioPlayer.play(createAudioResource(this.config.radioStreamUrl));
@@ -325,6 +334,21 @@ class VoiceService {
     }
   }
 
+  monitorConnection(connection) {
+    if (this.monitoredConnections.has(connection)) return;
+    this.monitoredConnections.add(connection);
+    connection.on('stateChange', (_oldState, newState) => {
+      if (newState.status === VoiceConnectionStatus.Disconnected && this.mode === 'radio') {
+        console.error('AFK radio voice connection disconnected; reconnecting.');
+        this.scheduleRadioRetry();
+      }
+      if (newState.status === VoiceConnectionStatus.Destroyed && !this.stopped && this.mode === 'radio') {
+        this.mode = 'idle';
+        this.scheduleRadioRetry();
+      }
+    });
+  }
+
   scheduleRadioRetry() {
     if (!this.enabled || this.stopped || this.mode === 'onboarding' || this.radioRetryTimer) return;
     clearTimeout(this.radioRetryTimer);
@@ -338,6 +362,8 @@ class VoiceService {
     this.stopped = true;
     clearTimeout(this.radioRetryTimer);
     this.radioRetryTimer = null;
+    if (this.cleanupTimer) clearInterval(this.cleanupTimer);
+    this.cleanupTimer = null;
     this.radioPlayer.stop(true);
     const connection = this.guild ? getVoiceConnection(this.guild.id) : null;
     if (connection) connection.destroy();

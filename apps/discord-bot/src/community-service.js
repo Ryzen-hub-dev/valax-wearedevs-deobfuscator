@@ -10,14 +10,24 @@ const {
   TextInputBuilder,
   TextInputStyle
 } = require('discord.js');
+const { xpForNextLevel } = require('./community-store');
 
 const COLORS = {
   primary: 0x7C3AED,
   success: 0x22C55E,
   warning: 0xF59E0B,
+  blue: 0x38BDF8,
   danger: 0xEF4444,
   neutral: 0x111827
 };
+
+const INVITE_MILESTONES = Object.freeze([
+  { invites: 2, coins: 250 },
+  { invites: 5, coins: 700 },
+  { invites: 8, coins: 1200 },
+  { invites: 10, coins: 1750 },
+  { invites: 14, coins: 2500 }
+]);
 
 function cleanChannelName(value) {
   const normalized = String(value || 'member')
@@ -49,11 +59,15 @@ class CommunityService {
     this.store = store;
     this.startedAt = Date.now();
     this.presenceTimer = null;
+    this.inviteUses = new Map();
+    this.inviteTrackingAvailable = false;
   }
 
   async start(guild) {
     if (!this.config.communityEnabled) return;
     this.guild = guild;
+    await this.reconcileClosedTickets();
+    await this.refreshInviteSnapshot();
     await this.updatePresence();
     this.presenceTimer = setInterval(() => {
       this.updatePresence().catch(error => console.error(`Community presence update failed: ${error.message}`));
@@ -65,6 +79,14 @@ class CommunityService {
   stop() {
     if (this.presenceTimer) clearInterval(this.presenceTimer);
     this.presenceTimer = null;
+  }
+
+  async reconcileClosedTickets() {
+    const closedTickets = Object.values(this.store.state.tickets).filter(ticket => ticket.status === 'closed');
+    for (const ticket of closedTickets) {
+      const channel = this.guild.channels.cache.get(ticket.channelId);
+      if (channel) await channel.delete('Removing closed Valax ticket after bot restart').catch(() => {});
+    }
   }
 
   async updatePresence() {
@@ -91,11 +113,19 @@ class CommunityService {
         balance: () => this.showBalance(interaction),
         daily: () => this.claimDaily(interaction),
         leaderboard: () => this.showLeaderboard(interaction),
+        level: () => this.showLevel(interaction),
+        'counting-status': () => this.showCountingStatus(interaction),
+        count: () => this.submitSlashCount(interaction),
+        invites: () => this.showInvites(interaction),
+        'invite-claim': () => this.claimInviteRewards(interaction),
         ticket: () => this.openTicket(interaction),
         apply: () => this.showApplicationModal(interaction),
         loa: () => this.showLeaveModal(interaction),
         drop: () => this.createDrop(interaction),
-        'community-status': () => this.showCommunityStatus(interaction)
+        'community-status': () => this.showCommunityStatus(interaction),
+        warn: () => this.warnMember(interaction),
+        warnings: () => this.showWarnings(interaction),
+        'clear-warnings': () => this.clearWarnings(interaction)
       };
       const handler = handlers[interaction.commandName];
       if (!handler) return false;
@@ -157,8 +187,9 @@ class CommunityService {
       .setAuthor({ name: `${target.username}'s Valax wallet`, iconURL: target.displayAvatarURL() })
       .addFields(
         { name: 'Coins', value: `🪙 **${balance.coins.toLocaleString()}**`, inline: true },
-        { name: 'XP', value: `✦ **${balance.xp.toLocaleString()}**`, inline: true },
-        { name: 'Rank', value: rank > 0 ? `#${rank}` : 'Unranked', inline: true }
+        { name: 'Level', value: `✦ **${balance.level}**`, inline: true },
+        { name: 'Rank', value: rank > 0 ? `#${rank}` : 'Unranked', inline: true },
+        { name: 'Activity', value: `**${balance.xp.toLocaleString()} XP** from ${balance.messages.toLocaleString()} rewarded messages` }
       );
     await interaction.reply({ embeds: [embed] });
   }
@@ -192,6 +223,174 @@ class CommunityService {
         .setTitle('Valax Economy Leaderboard')
         .setDescription(lines.join('\n'))
         .setFooter({ text: 'Ranked by coin balance' })]
+    });
+  }
+
+  async showLevel(interaction) {
+    const target = interaction.options.getUser('user') || interaction.user;
+    const balance = this.store.balance(target.id);
+    const nextLevelXp = xpForNextLevel(balance.level);
+    const previousLevelXp = xpForNextLevel(balance.level - 1);
+    const progress = Math.max(0, balance.xp - previousLevelXp);
+    const span = Math.max(1, nextLevelXp - previousLevelXp);
+    const filled = Math.min(10, Math.floor((progress / span) * 10));
+    const bar = `${'▰'.repeat(filled)}${'▱'.repeat(10 - filled)}`;
+    await interaction.reply({
+      embeds: [new EmbedBuilder()
+        .setColor(COLORS.primary)
+        .setAuthor({ name: `${target.username} • Level ${balance.level}`, iconURL: target.displayAvatarURL() })
+        .setDescription(`${bar}\n**${balance.xp.toLocaleString()} / ${nextLevelXp.toLocaleString()} XP**`)
+        .addFields(
+          { name: 'Rewarded messages', value: balance.messages.toLocaleString(), inline: true },
+          { name: 'Coins', value: balance.coins.toLocaleString(), inline: true }
+        )
+        .setFooter({ text: 'Activity XP is rate-limited to prevent spam.' })]
+    });
+  }
+
+  async showCountingStatus(interaction) {
+    const counting = this.store.snapshot().counting;
+    await interaction.reply({
+      embeds: [new EmbedBuilder()
+        .setColor(COLORS.blue)
+        .setTitle('Community counting')
+        .setDescription(`Current number: **${counting.current}**\nNext number: **${counting.current + 1}**\nAll-time record: **${counting.highScore}**`)
+        .setFooter({ text: counting.lastUserId ? 'A different member must post the next number.' : 'Anyone can start with 1.' })]
+    });
+  }
+
+  async submitSlashCount(interaction) {
+    if (this.config.countingChannelId && interaction.channelId !== this.config.countingChannelId) {
+      await interaction.reply({ content: `Use this command in <#${this.config.countingChannelId}>.`, flags: MessageFlags.Ephemeral });
+      return;
+    }
+    const value = interaction.options.getInteger('number', true);
+    const result = this.store.submitCount(interaction.user.id, value);
+    if (!result.accepted) {
+      await interaction.reply(`❌ Counting reset. Expected **${result.expected}**, and the same member cannot count twice in a row. Start again with **1**.`);
+      return;
+    }
+    let reward = '';
+    if (result.current % 25 === 0) {
+      const balance = this.store.addCoins(interaction.user.id, 50, `counting milestone ${result.current}`);
+      reward = ` Milestone reward: 🪙 **50 coins** (balance ${balance}).`;
+    }
+    await interaction.reply(`✅ **${result.current}**${reward}`);
+  }
+
+  async handleMessage(message) {
+    if (!this.config.communityEnabled || message.guildId !== this.config.guildId || message.author.bot) return;
+
+    if (this.config.messageContentEnabled && this.config.countingChannelId && message.channelId === this.config.countingChannelId) {
+      const content = message.content.trim();
+      const value = /^\d{1,9}$/.test(content) ? Number.parseInt(content, 10) : Number.NaN;
+      const result = this.store.submitCount(message.author.id, value);
+      if (result.accepted) {
+        await message.react('✅').catch(() => {});
+        if (result.current % 25 === 0) {
+          const newBalance = this.store.addCoins(message.author.id, 50, `counting milestone ${result.current}`);
+          await message.reply(`Milestone **${result.current}** reached — you earned 🪙 **50 coins**. Balance: **${newBalance}**.`);
+        }
+      } else {
+        await message.react('❌').catch(() => {});
+        await message.reply(`Counting reset. Expected **${result.expected}**, and the same member cannot count twice in a row. Start again with **1**.`);
+      }
+    }
+
+    const xp = this.store.awardMessageXp(message.author.id, { cooldownMs: this.config.xpCooldownMs });
+    if (xp.leveledUp) {
+      const hub = await this.resolveTextChannel(this.config.communityHubChannelId, null);
+      if (hub) await hub.send(`✦ <@${message.author.id}> reached **Valax level ${xp.level}**.`).catch(() => {});
+    }
+  }
+
+  async refreshInviteSnapshot() {
+    const canReadInvites = this.guild.members.me?.permissions.has(PermissionFlagsBits.ManageGuild);
+    if (!canReadInvites) {
+      this.inviteTrackingAvailable = false;
+      console.log('Invite rewards are waiting for the bot Manage Server permission.');
+      return;
+    }
+    try {
+      const invites = await this.guild.invites.fetch();
+      this.inviteUses = new Map(invites.map(invite => [invite.code, {
+        uses: invite.uses || 0,
+        inviterId: invite.inviterId || invite.inviter?.id || null
+      }]));
+      this.inviteTrackingAvailable = true;
+      console.log(`Invite rewards are tracking ${invites.size} active invites.`);
+    } catch (error) {
+      this.inviteTrackingAvailable = false;
+      console.error(`Invite tracking unavailable: ${error.message}`);
+    }
+  }
+
+  async handleMemberAdd(member) {
+    if (!this.config.communityEnabled || member.guild.id !== this.config.guildId || member.user.bot) return;
+    if (!this.inviteTrackingAvailable) return;
+    await new Promise(resolve => setTimeout(resolve, 1_000));
+    try {
+      const current = await this.guild.invites.fetch();
+      const usedInvite = current.find(invite => {
+        const previous = this.inviteUses.get(invite.code);
+        return (invite.uses || 0) > (previous?.uses || 0);
+      });
+      this.inviteUses = new Map(current.map(invite => [invite.code, {
+        uses: invite.uses || 0,
+        inviterId: invite.inviterId || invite.inviter?.id || null
+      }]));
+      const inviterId = usedInvite?.inviterId || usedInvite?.inviter?.id || null;
+      const accountAgeDays = (Date.now() - member.user.createdTimestamp) / 86_400_000;
+      const eligible = Boolean(inviterId && inviterId !== member.id && accountAgeDays >= 7);
+      const result = this.store.recordInvite(inviterId, member.id, { code: usedInvite?.code, eligible });
+      const logChannel = await this.resolveTextChannel(this.config.communityLogChannelId, null);
+      if (logChannel && result.recorded) {
+        const reason = !inviterId ? 'invite could not be attributed' : eligible ? 'credited' : 'not eligible (self/fresh account)';
+        await logChannel.send(`Invite join: <@${member.id}> • ${reason}${inviterId ? ` • inviter <@${inviterId}>` : ''}`).catch(() => {});
+      }
+    } catch (error) {
+      console.error(`Unable to attribute invite for ${member.id}: ${error.message}`);
+      await this.refreshInviteSnapshot();
+    }
+  }
+
+  async showInvites(interaction) {
+    const target = interaction.options.getUser('user') || interaction.user;
+    const stats = this.store.inviteStats(target.id);
+    const milestoneLines = INVITE_MILESTONES.map(item => {
+      const claimed = stats.claimedMilestones.includes(item.invites);
+      const reached = stats.credited >= item.invites;
+      return `${claimed ? '✅' : reached ? '🟡' : '▫️'} **${item.invites} invites** — 🪙 ${item.coins.toLocaleString()}`;
+    });
+    await interaction.reply({
+      embeds: [new EmbedBuilder()
+        .setColor(COLORS.primary)
+        .setAuthor({ name: `${target.username}'s invite rewards`, iconURL: target.displayAvatarURL() })
+        .setDescription(`Eligible invites: **${stats.credited}**\n\n${milestoneLines.join('\n')}`)
+        .setFooter({ text: this.inviteTrackingAvailable
+          ? 'Fresh accounts and self-invites are not eligible.'
+          : 'Tracking is paused until the bot receives Manage Server permission.' })]
+    });
+  }
+
+  async claimInviteRewards(interaction) {
+    if (!this.inviteTrackingAvailable) {
+      await interaction.reply({
+        content: 'Invite tracking is waiting for the bot **Manage Server** permission.',
+        flags: MessageFlags.Ephemeral
+      });
+      return;
+    }
+    const result = this.store.claimInviteRewards(interaction.user.id, INVITE_MILESTONES);
+    if (!result.claimed) {
+      await interaction.reply({ content: 'You have no unclaimed invite milestones yet.', flags: MessageFlags.Ephemeral });
+      return;
+    }
+    await interaction.reply({
+      embeds: [new EmbedBuilder()
+        .setColor(COLORS.success)
+        .setTitle('Invite rewards claimed')
+        .setDescription(`You received 🪙 **${result.amount.toLocaleString()} coins**.\nNew balance: **${result.balance.toLocaleString()}**`)]
     });
   }
 
@@ -406,6 +605,64 @@ class CommunityService {
     });
   }
 
+  async warnMember(interaction) {
+    if (!this.isStaff(interaction)) return this.staffOnly(interaction);
+    const target = interaction.options.getUser('user', true);
+    const reason = interaction.options.getString('reason', true);
+    if (target.bot || target.id === interaction.user.id) {
+      await interaction.reply({ content: 'Choose another non-bot member.', flags: MessageFlags.Ephemeral });
+      return;
+    }
+    const warning = this.store.addWarning(target.id, interaction.user.id, reason);
+    const total = this.store.warningsFor(target.id).length;
+    await target.send(`You received a warning in **${interaction.guild.name}**.\nReason: ${reason}\nWarning ID: ${warning.id.slice(0, 8)}`).catch(() => {});
+    const logChannel = await this.resolveTextChannel(this.config.communityLogChannelId, interaction.channel);
+    if (logChannel) {
+      await logChannel.send({
+        embeds: [new EmbedBuilder()
+          .setColor(COLORS.warning)
+          .setTitle('Member warning')
+          .addFields(
+            { name: 'Member', value: `<@${target.id}>`, inline: true },
+            { name: 'Moderator', value: `<@${interaction.user.id}>`, inline: true },
+            { name: 'Reason', value: truncate(reason) },
+            { name: 'Warning count', value: String(total), inline: true }
+          )
+          .setFooter({ text: `Warning ${warning.id.slice(0, 8)}` })
+          .setTimestamp()]
+      });
+    }
+    await interaction.reply({ content: `Warning recorded for ${target}. They now have **${total}** warning(s).`, flags: MessageFlags.Ephemeral });
+  }
+
+  async showWarnings(interaction) {
+    const target = interaction.options.getUser('user') || interaction.user;
+    if (target.id !== interaction.user.id && !this.isStaff(interaction)) {
+      await interaction.reply({ content: 'Only staff can view another member’s warnings.', flags: MessageFlags.Ephemeral });
+      return;
+    }
+    const warnings = this.store.warningsFor(target.id);
+    const description = warnings.length > 0
+      ? warnings.slice(-10).reverse().map((warning, index) =>
+        `**${warnings.length - index}.** ${truncate(warning.reason, 160)}\n<t:${Math.floor(warning.createdAt / 1000)}:R> • ID \`${warning.id.slice(0, 8)}\``
+      ).join('\n\n')
+      : 'No warnings recorded.';
+    await interaction.reply({
+      flags: MessageFlags.Ephemeral,
+      embeds: [new EmbedBuilder()
+        .setColor(warnings.length ? COLORS.warning : COLORS.success)
+        .setAuthor({ name: `${target.username} • ${warnings.length} warning(s)`, iconURL: target.displayAvatarURL() })
+        .setDescription(description)]
+    });
+  }
+
+  async clearWarnings(interaction) {
+    if (!this.isStaff(interaction)) return this.staffOnly(interaction);
+    const target = interaction.options.getUser('user', true);
+    const count = this.store.clearWarnings(target.id);
+    await interaction.reply({ content: `Cleared **${count}** warning(s) for ${target}.`, flags: MessageFlags.Ephemeral });
+  }
+
   async handleButton(interaction) {
     const [, resource, action, id] = interaction.customId.split(':');
     if (resource === 'ticket' && action === 'close') return this.closeTicket(interaction, id);
@@ -441,7 +698,15 @@ class CommunityService {
         .setFooter({ text: `Ticket ${ticket.id.slice(0, 8)} • Closed by ${interaction.user.tag}` })],
       components: []
     });
-    await interaction.editReply({ content: 'Ticket closed and archived. Staff can keep or remove this channel.' });
+    const deleteSeconds = Math.max(1, Math.round(this.config.ticketDeleteDelayMs / 1000));
+    await interaction.editReply({ content: `Ticket closed. This channel will be deleted automatically in ${deleteSeconds} seconds.` });
+    const channel = interaction.channel;
+    const deleteTimer = setTimeout(() => {
+      channel.delete('Closed Valax ticket expired').catch(error => {
+        console.error(`Unable to delete closed ticket ${ticketId}: ${error.message}`);
+      });
+    }, this.config.ticketDeleteDelayMs);
+    deleteTimer.unref?.();
     await this.updatePresence();
   }
 
@@ -530,4 +795,4 @@ class CommunityService {
   }
 }
 
-module.exports = { CommunityService, cleanChannelName, formatDuration, truncate };
+module.exports = { CommunityService, INVITE_MILESTONES, cleanChannelName, formatDuration, truncate };

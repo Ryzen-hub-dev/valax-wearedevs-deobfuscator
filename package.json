@@ -32,6 +32,8 @@
     "serve": "node scripts/serve.js",
     "start": "node bin/valax-recover.js",
     "discord:start": "node apps/discord-bot/src/index.js",
+    "discord:supervise": "node scripts/discord-supervisor.js",
+    "discord:install-startup": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install-discord-startup.ps1",
     "discord:register": "node apps/discord-bot/src/register-commands.js",
     "discord:setup": "node apps/discord-bot/src/setup-guild.js",
     "test:discord-gateway": "node tests/unit/discord-gateway.test.js"

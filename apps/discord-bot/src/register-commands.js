@@ -38,6 +38,29 @@ const communityCommands = [
     .setDescription('Show the richest Valax community members')
     .setDMPermission(false),
   new SlashCommandBuilder()
+    .setName('level')
+    .setDescription('View a member\'s Valax activity level')
+    .setDMPermission(false)
+    .addUserOption(option => option.setName('user').setDescription('Member to view')),
+  new SlashCommandBuilder()
+    .setName('counting-status')
+    .setDescription('Show the current community counting streak')
+    .setDMPermission(false),
+  new SlashCommandBuilder()
+    .setName('count')
+    .setDescription('Submit the next community counting number')
+    .setDMPermission(false)
+    .addIntegerOption(option => option.setName('number').setDescription('The next number').setRequired(true).setMinValue(1)),
+  new SlashCommandBuilder()
+    .setName('invites')
+    .setDescription('View invite progress and reward milestones')
+    .setDMPermission(false)
+    .addUserOption(option => option.setName('user').setDescription('Member to view')),
+  new SlashCommandBuilder()
+    .setName('invite-claim')
+    .setDescription('Claim all earned invite milestone rewards')
+    .setDMPermission(false),
+  new SlashCommandBuilder()
     .setName('ticket')
     .setDescription('Open a private support ticket')
     .setDMPermission(false),
@@ -62,7 +85,23 @@ const communityCommands = [
   new SlashCommandBuilder()
     .setName('community-status')
     .setDescription('Staff: open the Valax control-center status view')
+    .setDMPermission(false),
+  new SlashCommandBuilder()
+    .setName('warn')
+    .setDescription('Staff: add a private warning to a member')
     .setDMPermission(false)
+    .addUserOption(option => option.setName('user').setDescription('Member to warn').setRequired(true))
+    .addStringOption(option => option.setName('reason').setDescription('Reason for the warning').setRequired(true).setMaxLength(500)),
+  new SlashCommandBuilder()
+    .setName('warnings')
+    .setDescription('View warning history for yourself or a member')
+    .setDMPermission(false)
+    .addUserOption(option => option.setName('user').setDescription('Member to inspect')),
+  new SlashCommandBuilder()
+    .setName('clear-warnings')
+    .setDescription('Staff: clear all warnings for a member')
+    .setDMPermission(false)
+    .addUserOption(option => option.setName('user').setDescription('Member whose warnings should be cleared').setRequired(true))
 ];
 
 const commands = [recoveryCommand, ...communityCommands];

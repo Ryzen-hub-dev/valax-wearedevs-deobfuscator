@@ -5,6 +5,7 @@ const path = require('path');
 const {
   ChannelType,
   Client,
+  EmbedBuilder,
   Events,
   GatewayIntentBits,
   PermissionFlagsBits
@@ -228,6 +229,12 @@ client.once(Events.ClientReady, async () => {
       'Quick drops and community rewards published by Valax staff.',
       'Valax premium reward drops'
     );
+    const countingChannel = await ensureTextChannel(
+      'counting',
+      communityCategory,
+      'Count upward one number at a time. The same member cannot count twice in a row.',
+      'Valax community counting game'
+    );
 
     const ticketsCategory = await ensureCategory('VALAX TICKETS', [
       { id: guild.roles.everyone.id, deny: [PermissionFlagsBits.ViewChannel] },
@@ -281,6 +288,23 @@ client.once(Events.ClientReady, async () => {
       'Operational events and community automation logs.',
       'Valax community logs'
     );
+
+    const hubEmbed = new EmbedBuilder()
+      .setColor(0x7C3AED)
+      .setTitle('✦ Welcome to Valax')
+      .setDescription('Your access is active. Use the commands below for support, rewards, staff applications and community progress.')
+      .addFields(
+        { name: 'Support', value: '`/ticket` private help\n`/1` Lua/Luau recovery\n`/about` server information', inline: true },
+        { name: 'Community', value: '`/daily` coin reward\n`/level` activity level\n`/leaderboard` economy ranking', inline: true },
+        { name: 'Programs', value: '`/apply` staff application\n`/invites` invite milestones\n`/counting-status` counting game', inline: true }
+      )
+      .setFooter({ text: 'VALAX COMMUNITY HUB' });
+    const recentHubMessages = await communityHubChannel.messages.fetch({ limit: 50 }).catch(() => null);
+    const existingHubPanel = recentHubMessages?.find(message =>
+      message.author.id === client.user.id && message.embeds[0]?.footer?.text === 'VALAX COMMUNITY HUB'
+    );
+    if (existingHubPanel) await existingHubPanel.edit({ embeds: [hubEmbed] });
+    else await communityHubChannel.send({ embeds: [hubEmbed] });
 
     let onboardingCategory = guild.channels.cache.find(item =>
       item.type === ChannelType.GuildCategory && item.name === 'Start Here'
@@ -405,6 +429,7 @@ client.once(Events.ClientReady, async () => {
     console.log(`AFK_VOICE_CHANNEL_ID=${afkChannel.id}`);
     console.log(`STAFF_ROLE_ID=${staffRole.id}`);
     console.log(`COMMUNITY_HUB_CHANNEL_ID=${communityHubChannel.id}`);
+    console.log(`COUNTING_CHANNEL_ID=${countingChannel.id}`);
     console.log(`TICKETS_CATEGORY_ID=${ticketsCategory.id}`);
     console.log(`APPLICATIONS_CHANNEL_ID=${applicationsChannel.id}`);
     console.log(`LOA_CHANNEL_ID=${loaChannel.id}`);
@@ -427,6 +452,7 @@ client.once(Events.ClientReady, async () => {
       COMMUNITY_ENABLED: 'true',
       STAFF_ROLE_ID: staffRole.id,
       COMMUNITY_HUB_CHANNEL_ID: communityHubChannel.id,
+      COUNTING_CHANNEL_ID: countingChannel.id,
       TICKETS_CATEGORY_ID: ticketsCategory.id,
       APPLICATIONS_CHANNEL_ID: applicationsChannel.id,
       LOA_CHANNEL_ID: loaChannel.id,

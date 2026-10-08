@@ -55,6 +55,9 @@ class CommunityDashboard {
         pendingLeaves: store.leaves.pending,
         economyUsers: store.economyUsers,
         dropsClaimed: store.dropsClaimed,
+        creditedInvites: store.creditedInvites,
+        countingCurrent: store.counting.current,
+        countingHighScore: store.counting.highScore,
         systemErrors: store.systemErrors
       },
       activity: store.activity.map(item => ({
