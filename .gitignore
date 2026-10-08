@@ -50,3 +50,4 @@ audit/rebase-push-result.json
 audit/remote-history-analysis.json
 audit/github-*.json
 
+.vercel/

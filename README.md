@@ -82,6 +82,19 @@ node scripts/build-blind-corpus.js
 - [Security & Isolation Model](docs/security.md)
 - [Report Schema Specification](docs/report-schema.md)
 - [CLI Reference Guide](docs/cli.md)
+- [Vercel + Discord 部署说明](docs/discord-vercel-setup.zh-CN.md)
+
+## Discord `/1` Bot
+
+The Discord Gateway bot supports a direct HTTPS link, a Discord attachment, or pasted Lua/Luau source. Access to the locked `deobfuscate` channel is synchronized from the member's custom status, and non-administrators have a 20-minute command cooldown.
+
+```bash
+npm run discord:setup
+npm run discord:register
+npm run discord:start
+```
+
+See the Chinese deployment guide above for required Discord intents, permissions, Vercel variables, and the always-on bot hosting requirement.
 
 ---
 

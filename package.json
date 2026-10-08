@@ -5,7 +5,8 @@
   "main": "packages/core/src/index.js",
   "type": "commonjs",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "bin": {
     "valax-recover": "./bin/valax-recover.js",
@@ -28,7 +29,11 @@
     "lint": "node scripts/lint.js",
     "build": "node scripts/build.js",
     "serve": "node scripts/serve.js",
-    "start": "node bin/valax-recover.js"
+    "start": "node bin/valax-recover.js",
+    "discord:start": "node apps/discord-bot/src/index.js",
+    "discord:register": "node apps/discord-bot/src/register-commands.js",
+    "discord:setup": "node apps/discord-bot/src/setup-guild.js",
+    "test:discord-gateway": "node tests/unit/discord-gateway.test.js"
   },
   "engines": {
     "node": ">=16.0.0"
