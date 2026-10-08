@@ -7,6 +7,7 @@ const {
   hostedFallbackStages
 } = require('../../apps/discord-bot/src/worker-client');
 const { readBoolean } = require('../../apps/discord-bot/src/config');
+const { privateVoiceName, shouldOnboard } = require('../../apps/discord-bot/src/voice-service');
 
 function run() {
   assert.strictEqual(hasSupportStatus({
@@ -56,6 +57,20 @@ function run() {
   assert.strictEqual(classifyWorkerExit(1, 'unexpected crash').code, 'WORKER_INVALID_RESPONSE');
   assert.deepStrictEqual(hostedFallbackStages('WORKER_TIMEOUT'), ['L3', 'L2']);
   assert.deepStrictEqual(hostedFallbackStages('WORKER_UNAVAILABLE'), ['L5', 'L3', 'L2']);
+
+  const onboardingMember = {
+    id: '1234567890',
+    user: { bot: false, username: 'New User!' },
+    permissions: { has: () => false },
+    roles: { cache: { has: () => false } }
+  };
+  assert.strictEqual(shouldOnboard(onboardingMember, 'verified'), true);
+  assert.strictEqual(privateVoiceName(onboardingMember), 'welcome-new-user-7890');
+  assert.strictEqual(shouldOnboard({ ...onboardingMember, user: { bot: true } }, 'verified'), false);
+  assert.strictEqual(
+    shouldOnboard({ ...onboardingMember, roles: { cache: { has: () => true } } }, 'verified'),
+    false
+  );
 
   console.log('Discord gateway access tests passed.');
 }

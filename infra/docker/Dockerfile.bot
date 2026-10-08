@@ -6,9 +6,9 @@ COPY native ./native
 RUN cmake -S native -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF && \
     cmake --build build --config Release --parallel
 
-FROM node:20-alpine
+FROM node:22-alpine
 
-RUN apk add --no-cache lua5.1 lua5.1-libs
+RUN apk add --no-cache ffmpeg lua5.1 lua5.1-libs
 WORKDIR /app
 
 COPY . .

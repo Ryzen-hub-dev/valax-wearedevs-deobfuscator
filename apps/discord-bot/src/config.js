@@ -1,3 +1,5 @@
+const path = require('path');
+
 const REQUIRED_KEYS = [
   'DISCORD_BOT_TOKEN',
   'DISCORD_CLIENT_ID',
@@ -34,6 +36,12 @@ function loadConfig(env = process.env) {
     apiUrl: env.VALAX_API_URL.replace(/\/+$/, ''),
     apiSecret: env.INTERNAL_BOT_SERVICE_SECRET,
     localRecovery: readBoolean(env.LOCAL_RECOVERY_ENABLED, true),
+    voiceEnabled: readBoolean(env.VOICE_ENABLED, false),
+    verifiedRoleId: env.VERIFIED_ROLE_ID || '',
+    onboardingCategoryId: env.ONBOARDING_CATEGORY_ID || '',
+    afkVoiceChannelId: env.AFK_VOICE_CHANNEL_ID || '',
+    onboardingAudioPath: env.ONBOARDING_AUDIO_PATH || path.resolve(__dirname, '../assets/onboarding.mp3'),
+    radioStreamUrl: env.RADIO_STREAM_URL || 'http://streaming.exclusive.radio/er/billyeilish/icecast.audio',
     workerTimeoutMs: readPositiveInt(env.WORKER_TIMEOUT_SECONDS, 30) * 1000,
     workerMemoryMb: readPositiveInt(env.WORKER_MEMORY_MB, 3072),
     cooldownMs: readPositiveInt(env.COOLDOWN_SECONDS, 1200) * 1000,

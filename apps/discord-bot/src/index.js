@@ -12,6 +12,7 @@ const { loadConfig } = require('./config');
 const { CooldownStore, formatRemaining, hasSupportStatus } = require('./access');
 const { fetchSource } = require('./safe-fetch');
 const { hostedFallbackStages, recoverInWorker } = require('./worker-client');
+const { VoiceService } = require('./voice-service');
 
 const config = loadConfig();
 const cooldowns = new CooldownStore(config.cooldownMs);
@@ -20,9 +21,11 @@ const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.GuildPresences
+    GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildVoiceStates
   ]
 });
+const voiceService = new VoiceService(client, config);
 
 function isAdministrator(interaction) {
   return interaction.memberPermissions?.has(PermissionFlagsBits.Administrator) || false;
@@ -178,12 +181,24 @@ client.once(Events.ClientReady, async readyClient => {
   } catch (error) {
     console.error(`Initial presence reconciliation failed: ${error.message}`);
   }
+
+  try {
+    await voiceService.start(guild);
+  } catch (error) {
+    console.error(`Discord voice service failed to start: ${error.message}`);
+  }
 });
 
 client.on(Events.PresenceUpdate, async (_oldPresence, newPresence) => {
   if (newPresence.guild?.id !== config.guildId) return;
   const member = newPresence.member || await newPresence.guild.members.fetch(newPresence.userId).catch(() => null);
   if (member) await syncSupporterRole(member, newPresence);
+});
+
+client.on(Events.GuildMemberAdd, member => voiceService.handleMemberAdd(member));
+client.on(Events.GuildMemberRemove, member => voiceService.handleMemberRemove(member));
+client.on(Events.VoiceStateUpdate, (oldState, newState) => {
+  voiceService.handleVoiceStateUpdate(oldState, newState);
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -247,8 +262,14 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 process.on('unhandledRejection', error => console.error('Unhandled rejection:', error));
-process.on('SIGTERM', () => client.destroy());
-process.on('SIGINT', () => client.destroy());
+process.on('SIGTERM', () => {
+  voiceService.stop();
+  client.destroy();
+});
+process.on('SIGINT', () => {
+  voiceService.stop();
+  client.destroy();
+});
 
 client.login(config.token);
 
