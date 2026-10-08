@@ -104,6 +104,9 @@ jobs:
   phase2-container-runtime-gate:
     name: Phase 2 Linux Container Runtime Security & Redis Gate
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     services:
       redis:
         image: redis:7-alpine
@@ -184,6 +187,22 @@ jobs:
           audit/container-e2e.log
           audit/redis-multi-process.json
           audit/phase2-final-acceptance-matrix.json
+
+    - name: 9. Sign in to GitHub Container Registry
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: 10. Publish Discord Bot image
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        docker tag valax-discord-bot:phase2-test ghcr.io/ryzen-hub-dev/valax-discord-bot:latest
+        docker tag valax-discord-bot:phase2-test ghcr.io/ryzen-hub-dev/valax-discord-bot:${{ github.sha }}
+        docker push ghcr.io/ryzen-hub-dev/valax-discord-bot:latest
+        docker push ghcr.io/ryzen-hub-dev/valax-discord-bot:${{ github.sha }}
 
   phase3-product-boundary-gate:
     name: Phase 3 Round 2 — Discord OAuth2, Session Security, Bot Adapter & MongoDB Gate
@@ -306,4 +325,3 @@ jobs:
         path: |
           audit/phase3-*.json
           audit/phase3-*.log
-
