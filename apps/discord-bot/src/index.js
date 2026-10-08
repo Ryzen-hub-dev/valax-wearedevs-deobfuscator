@@ -73,7 +73,7 @@ async function resolveInput(interaction) {
   return { source: pasted, filename: 'pasted-script.lua' };
 }
 
-async function recoverViaApi(input) {
+async function recoverViaApi(input, stage = 'L5') {
   const response = await fetch(`${config.apiUrl}/api/recovery`, {
     method: 'POST',
     signal: AbortSignal.timeout(300_000),
@@ -81,7 +81,7 @@ async function recoverViaApi(input) {
       'Authorization': `Bearer ${config.apiSecret}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ source: input.source, filename: input.filename, stage: 'L5' })
+    body: JSON.stringify({ source: input.source, filename: input.filename, stage })
   });
 
   const rawBody = await response.text();
@@ -108,9 +108,39 @@ async function recoverSource(input) {
   try {
     return await recoverInWorker(input, config);
   } catch (error) {
-    if (error.code !== 'WORKER_UNAVAILABLE') throw error;
-    console.error(`Local recovery worker unavailable, using hosted API: ${error.message}`);
-    return recoverViaApi(input);
+    const fallbackCodes = new Set([
+      'WORKER_UNAVAILABLE',
+      'WORKER_RESOURCE_LIMIT',
+      'WORKER_TIMEOUT',
+      'WORKER_INVALID_RESPONSE',
+      'WORKER_OUTPUT_LIMIT'
+    ]);
+    if (!fallbackCodes.has(error.code)) throw error;
+
+    const fallbackStage = error.code === 'WORKER_UNAVAILABLE' ? 'L5' : 'L4';
+    console.error(
+      `Local recovery failed (${error.code}); using hosted ${fallbackStage}: ${error.message}`
+    );
+    const result = await recoverViaApi(input, fallbackStage);
+    const report = result.report && typeof result.report === 'object' ? result.report : {};
+    const warnings = Array.isArray(report.warnings) ? report.warnings : [];
+    return {
+      ...result,
+      report: {
+        ...report,
+        warnings: [
+          ...warnings,
+          `Local L5 recovery failed (${error.code}); hosted recovery continued at ${fallbackStage}.`
+        ],
+        execution: {
+          ...(report.execution || {}),
+          requestedStage: 'L5',
+          executedStage: report.execution?.executedStage || fallbackStage,
+          fallbackStage,
+          localFailureCode: error.code
+        }
+      }
+    };
   }
 }
 

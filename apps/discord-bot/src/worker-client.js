@@ -5,7 +5,7 @@ const { spawn } = require('child_process');
 const WORKER_ENTRY = path.resolve(__dirname, '../../../packages/worker/src/index.js');
 const MAX_WORKER_RESPONSE_BYTES = 8 * 1024 * 1024;
 
-function buildWorkerRequest(input, config) {
+function buildWorkerRequest(input, config, requestedStage = 'L5') {
   const sourceBytes = Buffer.byteLength(input.source, 'utf8');
   return {
     schemaVersion: '1',
@@ -17,7 +17,7 @@ function buildWorkerRequest(input, config) {
       sha256: crypto.createHash('sha256').update(input.source, 'utf8').digest('hex')
     },
     options: {
-      requestedStage: 'L5',
+      requestedStage,
       semanticValidation: true
     },
     limits: {
@@ -28,8 +28,27 @@ function buildWorkerRequest(input, config) {
   };
 }
 
-function recoverInWorker(input, config) {
-  const request = buildWorkerRequest(input, config);
+function classifyWorkerExit(code, stderr = '') {
+  if (
+    code === 134 ||
+    /heap out of memory|allocation failed|ineffective mark-compacts/i.test(stderr)
+  ) {
+    const error = new Error('Local recovery exceeded its isolated memory budget.');
+    error.code = 'WORKER_RESOURCE_LIMIT';
+    return error;
+  }
+
+  const error = new Error(
+    code === null
+      ? 'Recovery worker was terminated by its resource limit.'
+      : `Recovery worker exited without a valid response (exit ${code}).`
+  );
+  error.code = 'WORKER_INVALID_RESPONSE';
+  return error;
+}
+
+function recoverInWorker(input, config, requestedStage = 'L5') {
+  const request = buildWorkerRequest(input, config, requestedStage);
 
   return new Promise((resolve, reject) => {
     const child = spawn(
@@ -51,7 +70,7 @@ function recoverInWorker(input, config) {
     };
 
     const timer = setTimeout(() => {
-      child.kill();
+      child.kill('SIGKILL');
       const error = new Error(`Recovery worker exceeded ${config.workerTimeoutMs / 1000} seconds.`);
       error.code = 'WORKER_TIMEOUT';
       finish(error);
@@ -65,7 +84,7 @@ function recoverInWorker(input, config) {
     child.stdout.on('data', chunk => {
       responseBytes += chunk.length;
       if (responseBytes > MAX_WORKER_RESPONSE_BYTES) {
-        child.kill();
+        child.kill('SIGKILL');
         const error = new Error('Recovery worker response exceeded the safe output limit.');
         error.code = 'WORKER_OUTPUT_LIMIT';
         finish(error);
@@ -84,13 +103,12 @@ function recoverInWorker(input, config) {
       try {
         response = JSON.parse(stdout);
       } catch {
-        const error = new Error(
-          code === null
-            ? 'Recovery worker was terminated by its resource limit.'
-            : `Recovery worker exited without a valid response (exit ${code}).`
-        );
-        error.code = 'WORKER_INVALID_RESPONSE';
-        if (stderr) console.error('Recovery worker stderr:', stderr);
+        const error = classifyWorkerExit(code, stderr);
+        if (error.code === 'WORKER_RESOURCE_LIMIT') {
+          console.error(`Recovery worker hit its memory limit (exit ${code}).`);
+        } else if (stderr) {
+          console.error('Recovery worker stderr:', stderr);
+        }
         finish(error);
         return;
       }
@@ -119,4 +137,4 @@ function recoverInWorker(input, config) {
   });
 }
 
-module.exports = { buildWorkerRequest, recoverInWorker };
+module.exports = { buildWorkerRequest, classifyWorkerExit, recoverInWorker };

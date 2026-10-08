@@ -1,7 +1,7 @@
 const assert = require('assert');
 const { CooldownStore, formatRemaining, hasSupportStatus } = require('../../apps/discord-bot/src/access');
 const { isPrivateIp } = require('../../apps/discord-bot/src/safe-fetch');
-const { buildWorkerRequest } = require('../../apps/discord-bot/src/worker-client');
+const { buildWorkerRequest, classifyWorkerExit } = require('../../apps/discord-bot/src/worker-client');
 const { readBoolean } = require('../../apps/discord-bot/src/config');
 
 function run() {
@@ -35,12 +35,21 @@ function run() {
 
   const workerRequest = buildWorkerRequest(
     { source: 'print(1)', filename: 'test.lua' },
-    { workerTimeoutMs: 300_000, maxSourceBytes: 2_000_000 }
+    { workerTimeoutMs: 90_000, maxSourceBytes: 2_000_000 },
+    'L4'
   );
   assert.strictEqual(workerRequest.schemaVersion, '1');
   assert.strictEqual(workerRequest.input.bytes, 8);
   assert.strictEqual(workerRequest.input.sha256.length, 64);
-  assert.strictEqual(workerRequest.limits.timeoutMs, 300_000);
+  assert.strictEqual(workerRequest.options.requestedStage, 'L4');
+  assert.strictEqual(workerRequest.limits.timeoutMs, 90_000);
+
+  assert.strictEqual(classifyWorkerExit(134, '').code, 'WORKER_RESOURCE_LIMIT');
+  assert.strictEqual(
+    classifyWorkerExit(1, 'FATAL ERROR: Allocation failed - JavaScript heap out of memory').code,
+    'WORKER_RESOURCE_LIMIT'
+  );
+  assert.strictEqual(classifyWorkerExit(1, 'unexpected crash').code, 'WORKER_INVALID_RESPONSE');
 
   console.log('Discord gateway access tests passed.');
 }
