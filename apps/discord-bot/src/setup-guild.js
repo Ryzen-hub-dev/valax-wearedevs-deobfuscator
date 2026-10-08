@@ -157,6 +157,131 @@ client.once(Events.ClientReady, async () => {
       });
     }
 
+    let staffRole = guild.roles.cache.find(item => item.name === 'Valax Staff');
+    if (!staffRole) {
+      staffRole = await guild.roles.create({
+        name: 'Valax Staff',
+        color: 0xA78BFA,
+        hoist: true,
+        mentionable: false,
+        reason: 'Valax community staff role'
+      });
+    }
+
+    async function ensureCategory(name, overwrites, reason) {
+      let category = guild.channels.cache.find(item =>
+        item.type === ChannelType.GuildCategory && item.name.toLowerCase() === name.toLowerCase()
+      );
+      if (!category) {
+        category = await guild.channels.create({
+          name,
+          type: ChannelType.GuildCategory,
+          permissionOverwrites: overwrites,
+          reason
+        });
+      } else {
+        await category.permissionOverwrites.set(overwrites, reason);
+      }
+      return category;
+    }
+
+    async function ensureTextChannel(name, parent, topic, reason) {
+      let textChannel = guild.channels.cache.find(item =>
+        item.type === ChannelType.GuildText && item.name === name
+      );
+      if (!textChannel) {
+        textChannel = await guild.channels.create({
+          name,
+          type: ChannelType.GuildText,
+          parent: parent.id,
+          topic,
+          reason
+        });
+      } else {
+        await textChannel.edit({ parent: parent.id, topic, reason });
+      }
+      return textChannel;
+    }
+
+    const communityCategory = await ensureCategory('VALAX COMMUNITY', [
+      { id: guild.roles.everyone.id, deny: [PermissionFlagsBits.ViewChannel] },
+      { id: verifiedRole.id, allow: [PermissionFlagsBits.ViewChannel] },
+      {
+        id: client.user.id,
+        allow: [
+          PermissionFlagsBits.ViewChannel,
+          PermissionFlagsBits.SendMessages,
+          PermissionFlagsBits.ReadMessageHistory,
+          PermissionFlagsBits.ManageChannels
+        ]
+      }
+    ], 'Valax premium community category');
+    const communityHubChannel = await ensureTextChannel(
+      'community-hub',
+      communityCategory,
+      'Valax server information, economy, applications and support commands.',
+      'Valax premium community hub'
+    );
+    const giveawayChannel = await ensureTextChannel(
+      'giveaways',
+      communityCategory,
+      'Quick drops and community rewards published by Valax staff.',
+      'Valax premium reward drops'
+    );
+
+    const ticketsCategory = await ensureCategory('VALAX TICKETS', [
+      { id: guild.roles.everyone.id, deny: [PermissionFlagsBits.ViewChannel] },
+      { id: staffRole.id, allow: [PermissionFlagsBits.ViewChannel] },
+      {
+        id: client.user.id,
+        allow: [
+          PermissionFlagsBits.ViewChannel,
+          PermissionFlagsBits.SendMessages,
+          PermissionFlagsBits.ReadMessageHistory,
+          PermissionFlagsBits.ManageChannels
+        ]
+      }
+    ], 'Valax private support tickets');
+
+    const operationsCategory = await ensureCategory('VALAX OPERATIONS', [
+      { id: guild.roles.everyone.id, deny: [PermissionFlagsBits.ViewChannel] },
+      {
+        id: staffRole.id,
+        allow: [
+          PermissionFlagsBits.ViewChannel,
+          PermissionFlagsBits.SendMessages,
+          PermissionFlagsBits.ReadMessageHistory
+        ]
+      },
+      {
+        id: client.user.id,
+        allow: [
+          PermissionFlagsBits.ViewChannel,
+          PermissionFlagsBits.SendMessages,
+          PermissionFlagsBits.ReadMessageHistory,
+          PermissionFlagsBits.ManageChannels
+        ]
+      }
+    ], 'Valax private staff operations');
+    const applicationsChannel = await ensureTextChannel(
+      'staff-applications',
+      operationsCategory,
+      'Private staff application review queue.',
+      'Valax application review queue'
+    );
+    const loaChannel = await ensureTextChannel(
+      'leave-requests',
+      operationsCategory,
+      'Private leave-of-absence review queue.',
+      'Valax leave request queue'
+    );
+    const communityLogChannel = await ensureTextChannel(
+      'community-logs',
+      operationsCategory,
+      'Operational events and community automation logs.',
+      'Valax community logs'
+    );
+
     let onboardingCategory = guild.channels.cache.find(item =>
       item.type === ChannelType.GuildCategory && item.name === 'Start Here'
     );
@@ -278,6 +403,13 @@ client.once(Events.ClientReady, async () => {
     console.log(`VERIFIED_ROLE_ID=${verifiedRole.id}`);
     console.log(`ONBOARDING_CATEGORY_ID=${onboardingCategory.id}`);
     console.log(`AFK_VOICE_CHANNEL_ID=${afkChannel.id}`);
+    console.log(`STAFF_ROLE_ID=${staffRole.id}`);
+    console.log(`COMMUNITY_HUB_CHANNEL_ID=${communityHubChannel.id}`);
+    console.log(`TICKETS_CATEGORY_ID=${ticketsCategory.id}`);
+    console.log(`APPLICATIONS_CHANNEL_ID=${applicationsChannel.id}`);
+    console.log(`LOA_CHANNEL_ID=${loaChannel.id}`);
+    console.log(`GIVEAWAY_CHANNEL_ID=${giveawayChannel.id}`);
+    console.log(`COMMUNITY_LOG_CHANNEL_ID=${communityLogChannel.id}`);
     console.log(`Backfilled ${backfilledMembers} existing members before gating ${gatedChannels.length} channels.`);
     if (skippedChannels.length > 0) {
       console.log(`Preserved inaccessible/admin channels: ${skippedChannels.join(', ')}`);
@@ -291,7 +423,15 @@ client.once(Events.ClientReady, async () => {
       VERIFIED_ROLE_ID: verifiedRole.id,
       ONBOARDING_CATEGORY_ID: onboardingCategory.id,
       AFK_VOICE_CHANNEL_ID: afkChannel.id,
-      RADIO_STREAM_URL: 'http://streaming.exclusive.radio/er/billyeilish/icecast.audio'
+      RADIO_STREAM_URL: 'http://streaming.exclusive.radio/er/billyeilish/icecast.audio',
+      COMMUNITY_ENABLED: 'true',
+      STAFF_ROLE_ID: staffRole.id,
+      COMMUNITY_HUB_CHANNEL_ID: communityHubChannel.id,
+      TICKETS_CATEGORY_ID: ticketsCategory.id,
+      APPLICATIONS_CHANNEL_ID: applicationsChannel.id,
+      LOA_CHANNEL_ID: loaChannel.id,
+      GIVEAWAY_CHANNEL_ID: giveawayChannel.id,
+      COMMUNITY_LOG_CHANNEL_ID: communityLogChannel.id
     });
     console.log('Saved the role and channel IDs to .env.bot.local.');
   } catch (error) {

@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b0c14">
+  <title>Valax Control Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0b0c14;
+      --panel: #121420;
+      --panel-2: #171a28;
+      --line: rgba(218, 221, 255, .1);
+      --text: #f4f2ff;
+      --muted: #9197aa;
+      --violet: #a78bfa;
+      --blue: #7dd3fc;
+      --mint: #6ee7b7;
+      --amber: #fcd34d;
+      --danger: #fb7185;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 82% 9%, rgba(125, 211, 252, .09), transparent 28rem),
+        radial-gradient(circle at 8% 68%, rgba(167, 139, 250, .08), transparent 32rem),
+        var(--ink);
+      color: var(--text);
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .22;
+      background-image: linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: linear-gradient(to bottom, #000, transparent 88%);
+    }
+
+    button, a { font: inherit; }
+    a { color: inherit; }
+    .shell { width: min(1440px, 100%); margin: 0 auto; padding: 24px; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 56px;
+      margin-bottom: 38px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 13px; }
+    .mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      aspect-ratio: 1;
+      border: 1px solid rgba(167, 139, 250, .35);
+      border-radius: 12px;
+      background: linear-gradient(145deg, rgba(167,139,250,.19), rgba(125,211,252,.04));
+      box-shadow: inset 0 0 18px rgba(167, 139, 250, .1);
+      color: var(--violet);
+      font: 500 18px "IBM Plex Mono", monospace;
+    }
+
+    .brand strong { display: block; font-size: 15px; letter-spacing: .03em; }
+    .brand span { display: block; margin-top: 2px; color: var(--muted); font: 11px "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .live { display: flex; align-items: center; gap: 8px; color: var(--muted); font: 12px "IBM Plex Mono", monospace; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 4px rgba(252,211,77,.08); }
+    .live.online .live-dot { background: var(--mint); box-shadow: 0 0 0 4px rgba(110,231,183,.08), 0 0 16px rgba(110,231,183,.45); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(290px, .5fr);
+      gap: 38px;
+      align-items: end;
+      padding: 4px 0 34px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow { color: var(--violet); font: 500 11px "IBM Plex Mono", monospace; letter-spacing: .18em; text-transform: uppercase; }
+    h1 { max-width: 820px; margin: 13px 0 10px; font-size: clamp(42px, 7vw, 94px); line-height: .94; letter-spacing: -.065em; font-weight: 600; }
+    h1 span { color: transparent; -webkit-text-stroke: 1px rgba(244,242,255,.43); }
+    .lead { max-width: 660px; color: var(--muted); font-size: 16px; line-height: 1.7; }
+
+    .signal {
+      position: relative;
+      min-height: 142px;
+      padding: 20px 20px 18px 56px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(18, 20, 32, .68);
+      overflow: hidden;
+    }
+
+    .signal::before {
+      content: "";
+      position: absolute;
+      left: 21px;
+      top: 20px;
+      bottom: 20px;
+      width: 12px;
+      border-left: 1px solid rgba(167,139,250,.4);
+      border-right: 1px solid rgba(125,211,252,.26);
+      background: repeating-linear-gradient(to bottom, transparent 0 6px, rgba(110,231,183,.9) 6px 8px, transparent 8px 13px);
+      filter: drop-shadow(0 0 8px rgba(110,231,183,.4));
+      animation: stream 3s linear infinite;
+    }
+
+    @keyframes stream { to { background-position-y: 65px; } }
+    .signal small { color: var(--muted); font: 10px "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .signal strong { display: block; margin: 11px 0 7px; font-size: 28px; letter-spacing: -.04em; }
+    .signal p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .layout { display: grid; grid-template-columns: 1.55fr .75fr; gap: 20px; padding: 20px 0 60px; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .card {
+      position: relative;
+      min-height: 156px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(23,26,40,.9), rgba(18,20,32,.72));
+      overflow: hidden;
+      transition: border-color .22s ease, transform .22s ease;
+    }
+    .card:hover { transform: translateY(-2px); border-color: rgba(167,139,250,.26); }
+    .card::after { content: attr(data-code); position: absolute; right: 14px; top: 12px; color: rgba(145,151,170,.32); font: 10px "IBM Plex Mono", monospace; }
+    .card-label { color: var(--muted); font-size: 12px; }
+    .metric { margin: 18px 0 6px; font-size: clamp(30px, 4vw, 48px); line-height: 1; letter-spacing: -.055em; }
+    .metric.mint { color: var(--mint); }
+    .metric.violet { color: var(--violet); }
+    .metric.blue { color: var(--blue); }
+    .detail { color: var(--muted); font: 11px/1.5 "IBM Plex Mono", monospace; }
+
+    .wide { grid-column: span 2; }
+    .health { display: flex; gap: 14px; align-items: center; margin-top: 19px; }
+    .health-ring { display: grid; place-items: center; width: 60px; height: 60px; border-radius: 50%; background: conic-gradient(var(--mint) 0 92%, rgba(255,255,255,.08) 92%); }
+    .health-ring::before { content: ""; width: 48px; height: 48px; border-radius: 50%; background: var(--panel); }
+    .health-copy strong { display: block; font-size: 18px; }
+    .health-copy span { color: var(--muted); font: 11px "IBM Plex Mono", monospace; }
+
+    .rail {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(18,20,32,.7);
+      overflow: hidden;
+    }
+    .rail-head { display: flex; justify-content: space-between; align-items: center; padding: 17px 18px; border-bottom: 1px solid var(--line); }
+    .rail-head strong { font-size: 14px; }
+    .rail-head span { color: var(--muted); font: 10px "IBM Plex Mono", monospace; }
+    .feed { min-height: 310px; max-height: 492px; overflow: auto; }
+    .event { display: grid; grid-template-columns: 8px 1fr; gap: 13px; padding: 15px 18px; border-bottom: 1px solid rgba(218,221,255,.055); }
+    .event-dot { width: 6px; height: 6px; margin-top: 5px; border-radius: 50%; background: var(--violet); }
+    .event p { margin: 0 0 6px; font-size: 12px; line-height: 1.45; }
+    .event time { color: var(--muted); font: 10px "IBM Plex Mono", monospace; }
+    .empty { padding: 42px 22px; color: var(--muted); text-align: center; line-height: 1.6; }
+    .footer { display: flex; justify-content: space-between; gap: 20px; padding-top: 18px; color: var(--muted); font: 10px "IBM Plex Mono", monospace; }
+    .error { color: var(--danger); }
+
+    @media (max-width: 940px) {
+      .hero, .layout { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 580px) {
+      .shell { padding: 18px; }
+      .topbar { margin-bottom: 22px; }
+      .grid { grid-template-columns: 1fr; }
+      .wide { grid-column: auto; }
+      h1 { font-size: 52px; }
+      .hero { gap: 24px; }
+      .footer { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="mark">V</div><div><strong>VALAX CONTROL</strong><span>Community operations</span></div></div>
+      <div class="live" id="live"><span class="live-dot"></span><span id="live-label">Connecting to worker</span></div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Discord community / live system</div>
+        <h1>One server.<br><span>Zero blind spots.</span></h1>
+        <p class="lead">A live operational view of member access, private support, staff review queues and the Valax reward system.</p>
+      </div>
+      <div class="signal">
+        <small>Gateway signal</small>
+        <strong id="server-name">Valax</strong>
+        <p><span id="online">0</span> online from <span id="members">0</span> members</p>
+      </div>
+    </section>
+
+    <section class="layout">
+      <div class="grid">
+        <article class="card" data-code="SUP-01"><div class="card-label">Open support tickets</div><div class="metric mint" id="tickets-open">0</div><div class="detail"><span id="tickets-closed">0</span> resolved in total</div></article>
+        <article class="card" data-code="REV-02"><div class="card-label">Applications waiting</div><div class="metric violet" id="applications">0</div><div class="detail"><span id="applications-reviewed">0</span> reviewed</div></article>
+        <article class="card" data-code="LOA-03"><div class="card-label">Leave requests</div><div class="metric blue" id="leaves">0</div><div class="detail">Staff queue awaiting action</div></article>
+        <article class="card wide" data-code="SYS-04"><div class="card-label">Gateway health</div><div class="health"><div class="health-ring"></div><div class="health-copy"><strong id="health-copy">Checking services</strong><span><span id="latency">0</span> ms · <span id="uptime">0m</span> uptime · <span id="memory">0</span> MB</span></div></div></article>
+        <article class="card" data-code="ECO-05"><div class="card-label">Economy members</div><div class="metric" id="economy">0</div><div class="detail"><span id="drops">0</span> drops claimed</div></article>
+        <article class="card" data-code="SRV-06"><div class="card-label">Community structure</div><div class="metric" id="channels">0</div><div class="detail">channels · <span id="roles">0</span> roles · <span id="boosts">0</span> boosts</div></article>
+        <article class="card wide" data-code="ERR-07"><div class="card-label">System exceptions</div><div class="metric" id="errors">0</div><div class="detail" id="error-copy">No unresolved worker exceptions recorded.</div></article>
+      </div>
+
+      <aside class="rail">
+        <div class="rail-head"><strong>Activity stream</strong><span>LIVE / 45 SEC</span></div>
+        <div class="feed" id="feed"><div class="empty">Waiting for the first worker snapshot.</div></div>
+      </aside>
+    </section>
+
+    <footer class="footer"><span>VALAXSCRUB.SHOP · PRIVATE OPERATIONS</span><span id="refreshed">Not connected</span></footer>
+  </main>
+
+  <script>
+    const query = new URLSearchParams(location.search);
+    const endpoint = query.get('api') || (location.port === '3080' ? '/api/community-status' : '');
+    const $ = id => document.getElementById(id);
+    const set = (id, value) => { $(id).textContent = value; };
+    const duration = seconds => {
+      const days = Math.floor(seconds / 86400);
+      const hours = Math.floor((seconds % 86400) / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      return days ? `${days}d ${hours}h` : hours ? `${hours}h ${minutes}m` : `${minutes}m`;
+    };
+    const relative = value => {
+      const seconds = Math.max(0, Math.round((Date.now() - new Date(value).getTime()) / 1000));
+      if (seconds < 60) return `${seconds}s ago`;
+      if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+      return `${Math.floor(seconds / 3600)}h ago`;
+    };
+
+    function render(data) {
+      set('server-name', data.community.name);
+      set('online', data.community.online.toLocaleString());
+      set('members', data.community.members.toLocaleString());
+      set('tickets-open', data.operations.openTickets);
+      set('tickets-closed', data.operations.closedTickets);
+      set('applications', data.operations.pendingApplications);
+      set('applications-reviewed', data.operations.reviewedApplications);
+      set('leaves', data.operations.pendingLeaves);
+      set('latency', data.bot.latencyMs);
+      set('uptime', duration(data.bot.uptimeSeconds));
+      set('memory', data.bot.memoryMb);
+      set('economy', data.operations.economyUsers);
+      set('drops', data.operations.dropsClaimed);
+      set('channels', data.community.channels);
+      set('roles', data.community.roles);
+      set('boosts', data.community.boosts);
+      set('errors', data.operations.systemErrors);
+      set('error-copy', data.operations.systemErrors ? 'Review the bot runtime logs for recorded failures.' : 'No worker exceptions recorded.');
+      set('health-copy', data.bot.status === 'online' ? 'All systems operational' : 'Worker starting');
+      set('refreshed', `Updated ${new Date(data.generatedAt).toLocaleTimeString()}`);
+      $('live').classList.toggle('online', data.bot.status === 'online');
+      set('live-label', data.bot.status === 'online' ? 'Gateway online' : 'Gateway starting');
+      const feed = $('feed');
+      feed.innerHTML = '';
+      if (!data.activity.length) {
+        feed.innerHTML = '<div class="empty">No operations yet. New tickets, reviews and rewards will appear here.</div>';
+      } else {
+        for (const event of data.activity) {
+          const item = document.createElement('div');
+          item.className = 'event';
+          const dot = document.createElement('span');
+          dot.className = 'event-dot';
+          const content = document.createElement('div');
+          const text = document.createElement('p');
+          text.textContent = event.text;
+          const time = document.createElement('time');
+          time.textContent = `${event.type.toUpperCase()} · ${relative(event.createdAt)}`;
+          content.append(text, time);
+          item.append(dot, content);
+          feed.append(item);
+        }
+      }
+    }
+
+    async function refresh() {
+      if (!endpoint) {
+        $('live').classList.remove('online');
+        $('live').classList.add('error');
+        set('live-label', 'Worker endpoint not connected');
+        set('health-copy', 'Dashboard ready for worker');
+        set('refreshed', 'Add ?api=https://your-bot-host to connect');
+        return;
+      }
+      try {
+        const response = await fetch(endpoint, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        render(await response.json());
+      } catch (error) {
+        $('live').classList.remove('online');
+        $('live').classList.add('error');
+        set('live-label', 'Worker unreachable');
+        set('health-copy', 'Connection interrupted');
+        set('refreshed', `Last attempt ${new Date().toLocaleTimeString()}`);
+      }
+    }
+
+    refresh();
+    setInterval(refresh, 45000);
+  </script>
+</body>
+</html>

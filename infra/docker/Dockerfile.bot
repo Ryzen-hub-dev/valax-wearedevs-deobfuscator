@@ -20,5 +20,7 @@ RUN npm ci --omit=dev && \
 ENV NODE_ENV=production
 ENV VALAX_NATIVE_ENGINE_PATH=/usr/local/bin/valax-native
 
+EXPOSE 3080
+
 USER node:node
 CMD ["npm", "run", "discord:start"]

@@ -47,6 +47,9 @@ class WebServer {
     if (pathname === '/dashboard') {
       return this._serveFile(res, path.join(PUBLIC_DIR, 'dashboard.html'), 'text/html');
     }
+    if (pathname === '/community' || pathname === '/community.html') {
+      return this._serveFile(res, path.resolve(__dirname, '../../../public/community.html'), 'text/html');
+    }
     if (pathname === '/recover') {
       return this._serveFile(res, path.join(PUBLIC_DIR, 'recover.html'), 'text/html');
     }

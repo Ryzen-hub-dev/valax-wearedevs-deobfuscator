@@ -13,6 +13,9 @@ const { CooldownStore, formatRemaining, hasSupportStatus } = require('./access')
 const { fetchSource } = require('./safe-fetch');
 const { hostedFallbackStages, recoverInWorker } = require('./worker-client');
 const { VoiceService } = require('./voice-service');
+const { CommunityStore } = require('./community-store');
+const { CommunityService } = require('./community-service');
+const { CommunityDashboard } = require('./community-dashboard');
 
 const config = loadConfig();
 const cooldowns = new CooldownStore(config.cooldownMs);
@@ -26,6 +29,9 @@ const client = new Client({
   ]
 });
 const voiceService = new VoiceService(client, config);
+const communityStore = new CommunityStore(config.communityDataPath);
+const communityService = new CommunityService(client, config, communityStore);
+const communityDashboard = new CommunityDashboard(client, config, communityStore);
 
 function isAdministrator(interaction) {
   return interaction.memberPermissions?.has(PermissionFlagsBits.Administrator) || false;
@@ -187,6 +193,14 @@ client.once(Events.ClientReady, async readyClient => {
   } catch (error) {
     console.error(`Discord voice service failed to start: ${error.message}`);
   }
+
+  try {
+    await communityService.start(guild);
+    await communityDashboard.start(guild);
+  } catch (error) {
+    communityStore.recordSystemError();
+    console.error(`Discord community service failed to start: ${error.message}`);
+  }
 });
 
 client.on(Events.PresenceUpdate, async (_oldPresence, newPresence) => {
@@ -202,6 +216,16 @@ client.on(Events.VoiceStateUpdate, (oldState, newState) => {
 });
 
 client.on(Events.InteractionCreate, async interaction => {
+  try {
+    if (await communityService.handleInteraction(interaction)) return;
+  } catch (error) {
+    communityStore.recordSystemError();
+    console.error(`Community interaction failed: ${error.stack || error.message}`);
+    const response = { content: 'That community action failed. Staff have been notified in the control-center health counter.', flags: MessageFlags.Ephemeral };
+    if (interaction.deferred || interaction.replied) await interaction.editReply({ content: response.content }).catch(() => {});
+    else await interaction.reply(response).catch(() => {});
+    return;
+  }
   if (!interaction.isChatInputCommand() || interaction.commandName !== '1') return;
   const admin = isAdministrator(interaction);
 
@@ -263,10 +287,14 @@ client.on(Events.InteractionCreate, async interaction => {
 
 process.on('unhandledRejection', error => console.error('Unhandled rejection:', error));
 process.on('SIGTERM', () => {
+  communityDashboard.stop();
+  communityService.stop();
   voiceService.stop();
   client.destroy();
 });
 process.on('SIGINT', () => {
+  communityDashboard.stop();
+  communityService.stop();
   voiceService.stop();
   client.destroy();
 });

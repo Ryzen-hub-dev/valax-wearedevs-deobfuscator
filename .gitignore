@@ -13,6 +13,7 @@ tmp/
 temp/
 scratch/
 tests/temp/
+apps/discord-bot/data/
 
 # Logs and Archives
 *.log

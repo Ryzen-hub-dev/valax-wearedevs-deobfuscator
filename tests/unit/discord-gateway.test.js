@@ -1,4 +1,7 @@
 const assert = require('assert');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 const { CooldownStore, formatRemaining, hasSupportStatus } = require('../../apps/discord-bot/src/access');
 const { isPrivateIp } = require('../../apps/discord-bot/src/safe-fetch');
 const {
@@ -8,6 +11,8 @@ const {
 } = require('../../apps/discord-bot/src/worker-client');
 const { readBoolean } = require('../../apps/discord-bot/src/config');
 const { privateVoiceName, shouldOnboard } = require('../../apps/discord-bot/src/voice-service');
+const { CommunityStore } = require('../../apps/discord-bot/src/community-store');
+const { cleanChannelName, formatDuration } = require('../../apps/discord-bot/src/community-service');
 
 function run() {
   assert.strictEqual(hasSupportStatus({
@@ -71,6 +76,42 @@ function run() {
     shouldOnboard({ ...onboardingMember, roles: { cache: { has: () => true } } }, 'verified'),
     false
   );
+
+  const temporaryDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'valax-community-'));
+  try {
+    let communityNow = 1_000_000;
+    const communityStore = new CommunityStore(path.join(temporaryDirectory, 'community.json'), {
+      now: () => communityNow
+    });
+    const daily = communityStore.claimDaily('member-1', { amount: 150, cooldownMs: 86_400_000 });
+    assert.strictEqual(daily.ok, true);
+    assert.strictEqual(communityStore.balance('member-1').coins, 150);
+    const dailyAgain = communityStore.claimDaily('member-1', { amount: 150, cooldownMs: 86_400_000 });
+    assert.strictEqual(dailyAgain.ok, false);
+    communityStore.addCoins('member-2', 500, 'test reward');
+    assert.strictEqual(communityStore.leaderboard(2)[0].userId, 'member-2');
+
+    const ticket = communityStore.createTicket('member-1', 'channel-1');
+    assert.strictEqual(ticket.created, true);
+    assert.strictEqual(communityStore.createTicket('member-1', 'channel-2').created, false);
+    communityStore.closeTicket(ticket.ticket.id, 'staff-1');
+    assert.strictEqual(communityStore.snapshot().tickets.closed, 1);
+
+    const drop = communityStore.createDrop('staff-1', 'Premium key', 'giveaways');
+    assert.strictEqual(communityStore.claimDrop(drop.id, 'member-1').winnerId, 'member-1');
+    assert.strictEqual(communityStore.claimDrop(drop.id, 'member-2'), null);
+    assert.strictEqual(communityStore.balance('member-1').coins, 400);
+
+    communityNow += 86_400_000;
+    assert.strictEqual(communityStore.claimDaily('member-1').ok, true);
+    const reloaded = new CommunityStore(path.join(temporaryDirectory, 'community.json'));
+    assert.strictEqual(reloaded.snapshot().dropsClaimed, 1);
+    assert.strictEqual(reloaded.snapshot().tickets.closed, 1);
+  } finally {
+    fs.rmSync(temporaryDirectory, { recursive: true, force: true });
+  }
+  assert.strictEqual(cleanChannelName('Néw User!!'), 'new-user');
+  assert.strictEqual(formatDuration(3_661_000), '1h 2m');
 
   console.log('Discord gateway access tests passed.');
 }
