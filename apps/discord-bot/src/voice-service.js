@@ -160,6 +160,9 @@ class VoiceService {
 
     const results = await Promise.allSettled(tokens.map(async (token, index) => {
       const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
+      client.on('error', error => {
+        console.error(`Onboarding helper ${index + 1} Discord client error: ${error.message}`);
+      });
       let readyTimer;
       const ready = new Promise((resolve, reject) => {
         readyTimer = setTimeout(() => reject(new Error('Helper login timed out.')), 30_000);
@@ -362,6 +365,9 @@ class VoiceService {
         selfDeaf: true,
         selfMute: false
       });
+      connection.on('error', error => {
+        console.error(`Voice onboarding connection error for ${memberId}: ${error.message}`);
+      });
       await entersState(connection, VoiceConnectionStatus.Ready, 20_000);
       subscription = connection.subscribe(player);
       await delay(ONBOARDING_JOIN_SETTLE_MS);
@@ -444,6 +450,13 @@ class VoiceService {
   monitorConnection(connection) {
     if (this.monitoredConnections.has(connection)) return;
     this.monitoredConnections.add(connection);
+    connection.on('error', error => {
+      console.error(`AFK radio voice connection error: ${error.message}`);
+      if (this.stopped || this.mode !== 'radio') return;
+      this.mode = 'idle';
+      if (connection.state.status !== VoiceConnectionStatus.Destroyed) connection.destroy();
+      this.scheduleRadioRetry();
+    });
     connection.on('stateChange', (_oldState, newState) => {
       if (newState.status === VoiceConnectionStatus.Disconnected && this.mode === 'radio') {
         console.error('AFK radio voice connection disconnected; reconnecting.');

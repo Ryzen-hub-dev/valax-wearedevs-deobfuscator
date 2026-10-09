@@ -34,6 +34,10 @@ const communityStore = new CommunityStore(config.communityDataPath);
 const communityService = new CommunityService(client, config, communityStore);
 const communityDashboard = new CommunityDashboard(client, config, communityStore);
 
+client.on('error', error => {
+  console.error(`Discord client error: ${error.message}`);
+});
+
 function isAdministrator(interaction) {
   return interaction.memberPermissions?.has(PermissionFlagsBits.Administrator) || false;
 }

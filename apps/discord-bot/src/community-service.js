@@ -1,5 +1,8 @@
+const fs = require('fs');
+const path = require('path');
 const {
   ActionRowBuilder,
+  AttachmentBuilder,
   ButtonBuilder,
   ButtonStyle,
   ChannelType,
@@ -52,6 +55,39 @@ function truncate(value, max = 1000) {
   return text.length > max ? `${text.slice(0, max - 1)}…` : text;
 }
 
+function formatTicketTranscript({ guild, channel, ticket, closedBy, messages }) {
+  const lines = [
+    'VALAX SUPPORT TICKET TRANSCRIPT',
+    `Ticket: ${ticket.id}`,
+    `Server: ${guild.name} (${guild.id})`,
+    `Channel: #${channel.name} (${channel.id})`,
+    `Opened by: ${ticket.userId}`,
+    `Closed by: ${closedBy.tag} (${closedBy.id})`,
+    `Opened at: ${new Date(ticket.createdAt).toISOString()}`,
+    `Closed at: ${new Date().toISOString()}`,
+    `Messages: ${messages.length}`,
+    '='.repeat(72)
+  ];
+  for (const message of messages) {
+    const content = message.content || '(no text)';
+    lines.push(`[${new Date(message.createdTimestamp).toISOString()}] ${message.author.tag} (${message.author.id})`);
+    lines.push(content);
+    for (const attachment of message.attachments.values()) {
+      lines.push(`[attachment] ${attachment.name || 'file'}: ${attachment.url}`);
+    }
+    for (const embed of message.embeds) {
+      if (embed.title) lines.push(`[embed title] ${embed.title}`);
+      if (embed.description) lines.push(`[embed] ${embed.description}`);
+    }
+    lines.push('');
+  }
+  return `${lines.join('\n')}\n`;
+}
+
+function ticketLink(guildId, channelId) {
+  return `https://discord.com/channels/${guildId}/${channelId}`;
+}
+
 class CommunityService {
   constructor(client, config, store) {
     this.client = client;
@@ -67,6 +103,9 @@ class CommunityService {
     if (!this.config.communityEnabled) return;
     this.guild = guild;
     await this.reconcileClosedTickets();
+    await this.ensureTicketPanel().catch(error => {
+      console.error(`Unable to publish the Valax ticket panel: ${error.message}`);
+    });
     await this.refreshInviteSnapshot();
     await this.updatePresence();
     this.presenceTimer = setInterval(() => {
@@ -102,6 +141,47 @@ class CommunityService {
     if (interaction.memberPermissions?.has(PermissionFlagsBits.Administrator) ||
         interaction.memberPermissions?.has(PermissionFlagsBits.ManageGuild)) return true;
     return Boolean(this.config.staffRoleId && interaction.member?.roles?.cache?.has(this.config.staffRoleId));
+  }
+
+  isStaffMember(member) {
+    return Boolean(member && (
+      member.permissions?.has(PermissionFlagsBits.Administrator) ||
+      member.permissions?.has(PermissionFlagsBits.ManageGuild) ||
+      (this.config.staffRoleId && member.roles?.cache?.has(this.config.staffRoleId))
+    ));
+  }
+
+  ticketPanelPayload() {
+    return {
+      embeds: [new EmbedBuilder()
+        .setColor(COLORS.primary)
+        .setTitle('Valax Support Center')
+        .setDescription('Need private help? Open a ticket below. Only you, Valax staff, and the Valax bot can see the ticket channel.')
+        .addFields(
+          { name: 'Private', value: 'Messages and uploaded files stay inside your ticket.', inline: true },
+          { name: 'Saved', value: 'A transcript is archived automatically when the ticket closes.', inline: true }
+        )
+        .setFooter({ text: 'VALAX TICKET PANEL' })],
+      components: [new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId('community:ticket:open')
+          .setLabel('Open a ticket')
+          .setEmoji('🎫')
+          .setStyle(ButtonStyle.Primary)
+      )]
+    };
+  }
+
+  async ensureTicketPanel() {
+    if (!this.config.ticketPanelChannelId) return;
+    const channel = await this.resolveTextChannel(this.config.ticketPanelChannelId, null);
+    if (!channel) throw new Error(`Support channel ${this.config.ticketPanelChannelId} is unavailable.`);
+    const recent = await channel.messages.fetch({ limit: 50 });
+    const existing = recent.find(message =>
+      message.author.id === this.client.user.id && message.embeds[0]?.footer?.text === 'VALAX TICKET PANEL'
+    );
+    if (existing) await existing.edit(this.ticketPanelPayload());
+    else await channel.send(this.ticketPanelPayload());
   }
 
   async handleInteraction(interaction) {
@@ -279,7 +359,19 @@ class CommunityService {
   }
 
   async handleMessage(message) {
-    if (!this.config.communityEnabled || message.guildId !== this.config.guildId || message.author.bot) return;
+    if (!this.config.communityEnabled || message.guildId !== this.config.guildId) return;
+
+    if (message.channelId === this.config.channelId) {
+      if (message.author.id === this.client.user.id) return;
+      if (message.author.bot || !this.isStaffMember(message.member)) {
+        await message.delete().catch(error => {
+          console.error(`Unable to keep the deobfuscate channel command-only: ${error.message}`);
+        });
+        return;
+      }
+    }
+
+    if (message.author.bot) return;
 
     if (this.config.messageContentEnabled && this.config.countingChannelId && message.channelId === this.config.countingChannelId) {
       const content = message.content.trim();
@@ -458,6 +550,12 @@ class CommunityService {
         components: [row]
       });
       await interaction.editReply({ content: `Your private ticket is ready: ${channel}.` });
+      await interaction.user.send(
+        `Your Valax support ticket is ready: ${ticketLink(guild.id, channel.id)}\nTicket ID: ${ticket.id.slice(0, 8)}`
+      ).catch(() => {});
+      await this.notifyTicketStaff(
+        `A new Valax support ticket was opened by ${interaction.user.tag} (${interaction.user.id}).\n${ticketLink(guild.id, channel.id)}`
+      );
       await this.updatePresence();
     } catch (error) {
       if (channel) await channel.delete('Ticket setup failed').catch(() => {});
@@ -665,6 +763,7 @@ class CommunityService {
 
   async handleButton(interaction) {
     const [, resource, action, id] = interaction.customId.split(':');
+    if (resource === 'ticket' && action === 'open') return this.openTicket(interaction);
     if (resource === 'ticket' && action === 'close') return this.closeTicket(interaction, id);
     if (resource === 'application' && ['approve', 'reject'].includes(action)) {
       return this.reviewApplication(interaction, id, action === 'approve' ? 'approved' : 'rejected');
@@ -687,7 +786,20 @@ class CommunityService {
       return;
     }
     await interaction.deferReply({ flags: MessageFlags.Ephemeral });
-    this.store.closeTicket(ticketId, interaction.user.id);
+    let archive;
+    try {
+      archive = await this.archiveTicket(ticket, interaction.channel, interaction.user);
+    } catch (error) {
+      console.error(`Unable to archive ticket ${ticketId}: ${error.message}`);
+      await interaction.editReply({
+        content: 'The ticket was not closed because its transcript could not be saved. Please try again or contact an administrator.'
+      });
+      return;
+    }
+    this.store.closeTicket(ticketId, interaction.user.id, {
+      transcriptFile: archive.fileName,
+      messageCount: archive.messageCount
+    });
     await interaction.channel.permissionOverwrites.edit(ticket.userId, { SendMessages: false }, {
       reason: `Ticket closed by ${interaction.user.id}`
     });
@@ -698,6 +810,23 @@ class CommunityService {
         .setFooter({ text: `Ticket ${ticket.id.slice(0, 8)} • Closed by ${interaction.user.tag}` })],
       components: []
     });
+    const owner = await this.client.users.fetch(ticket.userId).catch(() => null);
+    if (owner) {
+      await owner.send(
+        `Your Valax support ticket ${ticket.id.slice(0, 8)} was closed by ${interaction.user.tag}. Its chat record has been saved for the staff team.`
+      ).catch(() => {});
+    }
+    await this.notifyTicketStaff(
+      `Valax ticket ${ticket.id.slice(0, 8)} for <@${ticket.userId}> was closed by ${interaction.user.tag}.`,
+      archive
+    );
+    const logChannel = await this.resolveTextChannel(this.config.communityLogChannelId, null);
+    if (logChannel) {
+      await logChannel.send({
+        content: `Ticket **${ticket.id.slice(0, 8)}** closed by <@${interaction.user.id}> • owner <@${ticket.userId}> • ${archive.messageCount} messages`,
+        files: [new AttachmentBuilder(Buffer.from(archive.text, 'utf8'), { name: archive.fileName })]
+      }).catch(error => console.error(`Unable to upload ticket transcript to the staff log: ${error.message}`));
+    }
     const deleteSeconds = Math.max(1, Math.round(this.config.ticketDeleteDelayMs / 1000));
     await interaction.editReply({ content: `Ticket closed. This channel will be deleted automatically in ${deleteSeconds} seconds.` });
     const channel = interaction.channel;
@@ -708,6 +837,47 @@ class CommunityService {
     }, this.config.ticketDeleteDelayMs);
     deleteTimer.unref?.();
     await this.updatePresence();
+  }
+
+  async fetchTicketMessages(channel) {
+    const messages = [];
+    let before;
+    while (true) {
+      const batch = await channel.messages.fetch({ limit: 100, ...(before ? { before } : {}) });
+      if (batch.size === 0) break;
+      const page = Array.from(batch.values());
+      messages.push(...page);
+      before = page[page.length - 1].id;
+      if (batch.size < 100) break;
+    }
+    return messages.sort((left, right) => left.createdTimestamp - right.createdTimestamp);
+  }
+
+  async archiveTicket(ticket, channel, closedBy) {
+    const messages = await this.fetchTicketMessages(channel);
+    const text = formatTicketTranscript({ guild: channel.guild, channel, ticket, closedBy, messages });
+    const fileName = `ticket-${ticket.id}.txt`;
+    await fs.promises.mkdir(this.config.ticketTranscriptDirectory, { recursive: true });
+    await fs.promises.writeFile(path.join(this.config.ticketTranscriptDirectory, fileName), text, {
+      encoding: 'utf8',
+      mode: 0o600
+    });
+    return { text, fileName, messageCount: messages.length };
+  }
+
+  async notifyTicketStaff(content, archive = null) {
+    await this.guild.members.fetch().catch(() => null);
+    const staff = this.guild.members.cache.filter(member => !member.user.bot && this.isStaffMember(member));
+    let delivered = 0;
+    for (const member of staff.values()) {
+      const payload = { content };
+      if (archive) {
+        payload.files = [new AttachmentBuilder(Buffer.from(archive.text, 'utf8'), { name: archive.fileName })];
+      }
+      const sent = await member.send(payload).then(() => true).catch(() => false);
+      if (sent) delivered += 1;
+    }
+    return delivered;
   }
 
   async reviewApplication(interaction, applicationId, status) {
@@ -795,4 +965,12 @@ class CommunityService {
   }
 }
 
-module.exports = { CommunityService, INVITE_MILESTONES, cleanChannelName, formatDuration, truncate };
+module.exports = {
+  CommunityService,
+  INVITE_MILESTONES,
+  cleanChannelName,
+  formatDuration,
+  formatTicketTranscript,
+  ticketLink,
+  truncate
+};

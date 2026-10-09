@@ -12,7 +12,13 @@ const {
 const { readBoolean, readTokenList } = require('../../apps/discord-bot/src/config');
 const { VoiceService, privateVoiceName, shouldOnboard } = require('../../apps/discord-bot/src/voice-service');
 const { CommunityStore, levelForXp } = require('../../apps/discord-bot/src/community-store');
-const { INVITE_MILESTONES, cleanChannelName, formatDuration } = require('../../apps/discord-bot/src/community-service');
+const {
+  INVITE_MILESTONES,
+  cleanChannelName,
+  formatDuration,
+  formatTicketTranscript,
+  ticketLink
+} = require('../../apps/discord-bot/src/community-service');
 
 async function run() {
   assert.strictEqual(hasSupportStatus({
@@ -95,8 +101,16 @@ async function run() {
     const ticket = communityStore.createTicket('member-1', 'channel-1');
     assert.strictEqual(ticket.created, true);
     assert.strictEqual(communityStore.createTicket('member-1', 'channel-2').created, false);
-    communityStore.closeTicket(ticket.ticket.id, 'staff-1');
+    communityStore.closeTicket(ticket.ticket.id, 'staff-1', {
+      transcriptFile: `ticket-${ticket.ticket.id}.txt`,
+      messageCount: 3
+    });
     assert.strictEqual(communityStore.snapshot().tickets.closed, 1);
+    assert.strictEqual(communityStore.state.tickets[ticket.ticket.id].messageCount, 3);
+    assert.strictEqual(
+      communityStore.state.tickets[ticket.ticket.id].transcriptFile,
+      `ticket-${ticket.ticket.id}.txt`
+    );
 
     const drop = communityStore.createDrop('staff-1', 'Premium key', 'giveaways');
     assert.strictEqual(communityStore.claimDrop(drop.id, 'member-1').winnerId, 'member-1');
@@ -136,6 +150,23 @@ async function run() {
   }
   assert.strictEqual(cleanChannelName('Néw User!!'), 'new-user');
   assert.strictEqual(formatDuration(3_661_000), '1h 2m');
+  assert.strictEqual(ticketLink('guild-1', 'channel-1'), 'https://discord.com/channels/guild-1/channel-1');
+  const transcript = formatTicketTranscript({
+    guild: { id: 'guild-1', name: 'Valax' },
+    channel: { id: 'channel-1', name: 'ticket-member' },
+    ticket: { id: 'ticket-1', userId: 'member-1', createdAt: 1_000 },
+    closedBy: { id: 'staff-1', tag: 'Staff#0001' },
+    messages: [{
+      content: 'Please help',
+      createdTimestamp: 2_000,
+      author: { id: 'member-1', tag: 'Member#0001' },
+      attachments: new Map([['a1', { name: 'sample.lua', url: 'https://cdn.example/sample.lua' }]]),
+      embeds: []
+    }]
+  });
+  assert.match(transcript, /VALAX SUPPORT TICKET TRANSCRIPT/);
+  assert.match(transcript, /Please help/);
+  assert.match(transcript, /sample\.lua/);
 
   const queueService = Object.create(VoiceService.prototype);
   queueService.helperWorkers = [{ id: 'h1', busy: false }, { id: 'h2', busy: false }];

@@ -266,12 +266,14 @@ class CommunityStore {
     return { created: true, ticket };
   }
 
-  closeTicket(ticketId, closedBy) {
+  closeTicket(ticketId, closedBy, archive = {}) {
     const ticket = this.state.tickets[ticketId];
     if (!ticket || ticket.status !== 'open') return null;
     ticket.status = 'closed';
     ticket.closedAt = this.now();
     ticket.closedBy = closedBy;
+    ticket.transcriptFile = archive.transcriptFile || null;
+    ticket.messageCount = Number.isSafeInteger(archive.messageCount) ? archive.messageCount : 0;
     this.state.stats.ticketsClosed += 1;
     this.recordActivity('ticket', 'A support ticket was closed.');
     this.save();
