@@ -93,6 +93,7 @@ class VoiceService {
     this.activePlayers = new Map();
     this.pendingOnboarding = [];
     this.helperWorkers = [];
+    this.helperPoolConfigured = false;
     this.queue = Promise.resolve();
     this.mode = 'idle';
     this.stopped = false;
@@ -153,6 +154,7 @@ class VoiceService {
 
   async startHelperWorkers() {
     const tokens = (this.config.onboardingHelperTokens || []).filter(token => token !== this.config.token);
+    this.helperPoolConfigured = tokens.length > 0;
     if (tokens.length === 0) {
       console.log('No onboarding helper bots configured; voice onboarding will temporarily move the main bot out of AFK.');
       return;
@@ -190,6 +192,9 @@ class VoiceService {
       else console.error(`Onboarding helper failed to start: ${result.reason.message}`);
     }
     console.log(`Onboarding helper pool ready with ${this.helperWorkers.length}/${tokens.length} bots.`);
+    if (this.helperWorkers.length === 0) {
+      console.error('AFK protection is active; onboarding will wait until a valid helper bot is configured.');
+    }
   }
 
   async grantHelperAccess(channel, worker) {
@@ -299,7 +304,7 @@ class VoiceService {
     if (newState.channelId !== expectedChannelId || this.activeMembers.has(newState.id)) return;
 
     this.activeMembers.add(newState.id);
-    if (this.helperWorkers.length > 0) {
+    if (this.helperPoolConfigured) {
       this.pendingOnboarding.push({ memberId: newState.id, channelId: expectedChannelId });
       this.pumpHelperQueue();
       return;
