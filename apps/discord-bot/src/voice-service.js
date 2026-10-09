@@ -15,7 +15,14 @@ const {
   getVoiceConnection,
   joinVoiceChannel
 } = require('@discordjs/voice');
-const { ChannelType, OverwriteType, PermissionFlagsBits } = require('discord.js');
+const {
+  ChannelType,
+  Client,
+  Events,
+  GatewayIntentBits,
+  OverwriteType,
+  PermissionFlagsBits
+} = require('discord.js');
 
 const ONBOARDING_JOIN_SETTLE_MS = 1_500;
 const ONBOARDING_PLAY_TIMEOUT_MS = 600_000;
@@ -83,6 +90,9 @@ class VoiceService {
     this.guild = null;
     this.privateChannels = new Map();
     this.activeMembers = new Set();
+    this.activePlayers = new Map();
+    this.pendingOnboarding = [];
+    this.helperWorkers = [];
     this.queue = Promise.resolve();
     this.mode = 'idle';
     this.stopped = false;
@@ -130,6 +140,7 @@ class VoiceService {
       throw new Error('Discord voice onboarding IDs are invalid; run npm run discord:setup again.');
     }
 
+    await this.startHelperWorkers();
     await this.reconcilePrivateChannels();
     await this.startRadio();
     this.cleanupTimer = setInterval(() => {
@@ -138,6 +149,56 @@ class VoiceService {
       });
     }, 10 * 60 * 1000);
     this.cleanupTimer.unref?.();
+  }
+
+  async startHelperWorkers() {
+    const tokens = (this.config.onboardingHelperTokens || []).filter(token => token !== this.config.token);
+    if (tokens.length === 0) {
+      console.log('No onboarding helper bots configured; voice onboarding will temporarily move the main bot out of AFK.');
+      return;
+    }
+
+    const results = await Promise.allSettled(tokens.map(async (token, index) => {
+      const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
+      let readyTimer;
+      const ready = new Promise((resolve, reject) => {
+        readyTimer = setTimeout(() => reject(new Error('Helper login timed out.')), 30_000);
+        client.once(Events.ClientReady, () => {
+          clearTimeout(readyTimer);
+          resolve();
+        });
+      });
+      try {
+        await client.login(token);
+        await ready;
+        const guild = client.guilds.cache.get(this.config.guildId);
+        if (!guild) throw new Error('Helper bot has not been invited to the configured server.');
+        console.log(`Onboarding helper ${index + 1} ready as ${client.user.tag}.`);
+        return { client, guild, busy: false };
+      } catch (error) {
+        clearTimeout(readyTimer);
+        client.destroy();
+        throw error;
+      }
+    }));
+
+    for (const result of results) {
+      if (result.status === 'fulfilled') this.helperWorkers.push(result.value);
+      else console.error(`Onboarding helper failed to start: ${result.reason.message}`);
+    }
+    console.log(`Onboarding helper pool ready with ${this.helperWorkers.length}/${tokens.length} bots.`);
+  }
+
+  async grantHelperAccess(channel, worker) {
+    await channel.permissionOverwrites.edit(
+      worker.client.user.id,
+      {
+        ViewChannel: true,
+        Connect: true,
+        Speak: true
+      },
+      { reason: 'Allow Valax onboarding helper bot' }
+    );
   }
 
   async reconcilePrivateChannels() {
@@ -174,7 +235,7 @@ class VoiceService {
       name: privateVoiceName(member),
       type: ChannelType.GuildVoice,
       parent: this.config.onboardingCategoryId,
-      userLimit: 1,
+      userLimit: 2,
       permissionOverwrites: [
         {
           id: this.guild.roles.everyone.id,
@@ -227,9 +288,19 @@ class VoiceService {
   handleVoiceStateUpdate(oldState, newState) {
     if (!this.enabled || newState.member?.user?.bot || oldState.channelId === newState.channelId) return;
     const expectedChannelId = this.privateChannels.get(newState.id);
-    if (!expectedChannelId || newState.channelId !== expectedChannelId || this.activeMembers.has(newState.id)) return;
+    if (!expectedChannelId) return;
+    if (oldState.channelId === expectedChannelId && newState.channelId !== expectedChannelId) {
+      this.activePlayers.get(newState.id)?.stop(true);
+      return;
+    }
+    if (newState.channelId !== expectedChannelId || this.activeMembers.has(newState.id)) return;
 
     this.activeMembers.add(newState.id);
+    if (this.helperWorkers.length > 0) {
+      this.pendingOnboarding.push({ memberId: newState.id, channelId: expectedChannelId });
+      this.pumpHelperQueue();
+      return;
+    }
     this.queue = this.queue.then(async () => {
       try {
         await this.runOnboarding(newState.id, expectedChannelId);
@@ -241,30 +312,56 @@ class VoiceService {
     });
   }
 
-  async runOnboarding(memberId, channelId) {
+  pumpHelperQueue() {
+    let worker = this.helperWorkers.find(candidate => !candidate.busy);
+    while (worker && this.pendingOnboarding.length > 0) {
+      const assignedWorker = worker;
+      const job = this.pendingOnboarding.shift();
+      assignedWorker.busy = true;
+      this.runOnboarding(job.memberId, job.channelId, assignedWorker)
+        .catch(error => {
+          console.error(`Voice onboarding failed for ${job.memberId}: ${error.message}`);
+        })
+        .finally(() => {
+          assignedWorker.busy = false;
+          this.activeMembers.delete(job.memberId);
+          this.pumpHelperQueue();
+        });
+      worker = this.helperWorkers.find(candidate => !candidate.busy);
+    }
+  }
+
+  async runOnboarding(memberId, channelId, helperWorker = null) {
     const member = await this.guild.members.fetch(memberId);
     const channel = await this.guild.channels.fetch(channelId);
     if (!channel || !shouldOnboard(member, this.config.verifiedRoleId)) return;
     if (member.voice.channelId !== channel.id) return;
 
-    this.mode = 'onboarding';
-    clearTimeout(this.radioRetryTimer);
-    this.radioRetryTimer = null;
-    this.radioPlayer.stop(true);
-    const connection = joinVoiceChannel({
-      channelId: channel.id,
-      guildId: this.guild.id,
-      adapterCreator: this.guild.voiceAdapterCreator,
-      selfDeaf: true,
-      selfMute: false
-    });
-
     const player = createAudioPlayer({ behaviors: { noSubscriber: NoSubscriberBehavior.Stop } });
     player.on('error', error => {
       console.error(`Voice onboarding playback error for ${memberId}: ${error.message}`);
     });
+    let connection;
     let subscription;
     try {
+      if (!helperWorker) {
+        this.mode = 'onboarding';
+        clearTimeout(this.radioRetryTimer);
+        this.radioRetryTimer = null;
+        this.radioPlayer.stop(true);
+      } else {
+        await this.grantHelperAccess(channel, helperWorker);
+      }
+      const voiceGuild = helperWorker?.guild || this.guild;
+      const group = helperWorker ? `onboarding-${helperWorker.client.user.id}` : undefined;
+      connection = joinVoiceChannel({
+        channelId: channel.id,
+        guildId: this.guild.id,
+        adapterCreator: voiceGuild.voiceAdapterCreator,
+        ...(group ? { group } : {}),
+        selfDeaf: true,
+        selfMute: false
+      });
       await entersState(connection, VoiceConnectionStatus.Ready, 20_000);
       subscription = connection.subscribe(player);
       await delay(ONBOARDING_JOIN_SETTLE_MS);
@@ -273,6 +370,7 @@ class VoiceService {
       }
 
       const resource = createOnboardingResource(this.config.onboardingAudioPath);
+      this.activePlayers.set(memberId, player);
       player.play(resource);
       await entersState(player, AudioPlayerStatus.Playing, 15_000);
       const playbackStartedAt = Date.now();
@@ -294,10 +392,19 @@ class VoiceService {
       this.privateChannels.delete(member.id);
       console.log(`Voice onboarding completed for ${member.id} after ${playbackMs}ms.`);
     } finally {
+      this.activePlayers.delete(memberId);
       subscription?.unsubscribe();
       player.stop(true);
-      this.mode = 'idle';
-      await this.startRadio();
+      if (helperWorker) {
+        if (connection && connection.state.status !== VoiceConnectionStatus.Destroyed) connection.destroy();
+        await channel.permissionOverwrites.delete(
+          helperWorker.client.user.id,
+          'Release Valax onboarding helper bot'
+        ).catch(() => {});
+      } else {
+        this.mode = 'idle';
+        await this.startRadio();
+      }
     }
   }
 
@@ -367,6 +474,14 @@ class VoiceService {
     this.radioPlayer.stop(true);
     const connection = this.guild ? getVoiceConnection(this.guild.id) : null;
     if (connection) connection.destroy();
+    for (const worker of this.helperWorkers) {
+      const helperConnection = this.guild
+        ? getVoiceConnection(this.guild.id, `onboarding-${worker.client.user.id}`)
+        : null;
+      if (helperConnection) helperConnection.destroy();
+      worker.client.destroy();
+    }
+    this.helperWorkers = [];
   }
 }
 

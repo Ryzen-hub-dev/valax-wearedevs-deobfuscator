@@ -20,6 +20,10 @@ function readBoolean(value, fallback) {
   return !['0', 'false', 'no', 'off'].includes(String(value).trim().toLowerCase());
 }
 
+function readTokenList(value) {
+  return [...new Set(String(value || '').split(/[\s,;]+/).map(token => token.trim()).filter(Boolean))];
+}
+
 function loadConfig(env = process.env) {
   const missing = REQUIRED_KEYS.filter(key => !env[key]);
   if (missing.length > 0) {
@@ -41,6 +45,7 @@ function loadConfig(env = process.env) {
     onboardingCategoryId: env.ONBOARDING_CATEGORY_ID || '',
     afkVoiceChannelId: env.AFK_VOICE_CHANNEL_ID || '',
     onboardingAudioPath: env.ONBOARDING_AUDIO_PATH || path.resolve(__dirname, '../assets/onboarding.ogg'),
+    onboardingHelperTokens: readTokenList(env.ONBOARDING_HELPER_BOT_TOKENS),
     radioStreamUrl: env.RADIO_STREAM_URL || 'http://streaming.exclusive.radio/er/billyeilish/icecast.audio',
     communityEnabled: readBoolean(env.COMMUNITY_ENABLED, true),
     communityDataPath: env.COMMUNITY_DATA_PATH || path.resolve(__dirname, '../data/community.json'),
@@ -67,4 +72,4 @@ function loadConfig(env = process.env) {
   };
 }
 
-module.exports = { loadConfig, readBoolean, readPositiveInt, REQUIRED_KEYS };
+module.exports = { loadConfig, readBoolean, readPositiveInt, readTokenList, REQUIRED_KEYS };

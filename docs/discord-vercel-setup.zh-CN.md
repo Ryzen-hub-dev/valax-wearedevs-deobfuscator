@@ -38,6 +38,20 @@ Vercel 单次请求和响应的硬限制为 4.5 MB，因此默认输入限制为
 6. 使用生成的链接把 bot 邀请进服务器。
 7. 在服务器角色列表中，将 bot 的角色移动到 `Valax Supporter` 角色上方，否则 bot 无法自动加/删角色。
 
+### AFK 电台与并发新人语音
+
+同一个 Discord bot 身份在同一服务器只能占用一个语音频道。若主 bot 要永久留在 AFK，同时为多名新人分别播放介绍音频，需要创建多个独立的 helper bot Application：
+
+1. 每个 helper 都在 Developer Portal 建立独立 Bot，并通过 `bot` OAuth2 scope 邀请到同一服务器；helper 不需要特权 Intent。
+2. helper 只需 `View Channels`、`Connect`、`Speak` 权限；不要授予 Administrator。
+3. 将不同 helper 的 token 只保存在 Bot 主机的环境变量中，以逗号分隔：
+
+```text
+ONBOARDING_HELPER_BOT_TOKENS=<helper-1-token>,<helper-2-token>,<helper-3-token>
+```
+
+主 bot 会一直播放 AFK 电台；每个 helper 同时服务一名新人，多出的新人自动排队。三个 helper 就支持三名新人同时播放。不要使用普通用户账号或 self-bot 充当 helper。
+
 ## 3. 初始化 Discord 频道和角色
 
 先设置：
@@ -78,6 +92,7 @@ MAX_SOURCE_BYTES=2000000
 LOCAL_RECOVERY_ENABLED=true
 WORKER_TIMEOUT_SECONDS=300
 WORKER_MEMORY_MB=3072
+ONBOARDING_HELPER_BOT_TOKENS=
 ```
 
 ## 5. 注册命令并启动

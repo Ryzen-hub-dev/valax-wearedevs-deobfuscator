@@ -9,12 +9,12 @@ const {
   classifyWorkerExit,
   hostedFallbackStages
 } = require('../../apps/discord-bot/src/worker-client');
-const { readBoolean } = require('../../apps/discord-bot/src/config');
-const { privateVoiceName, shouldOnboard } = require('../../apps/discord-bot/src/voice-service');
+const { readBoolean, readTokenList } = require('../../apps/discord-bot/src/config');
+const { VoiceService, privateVoiceName, shouldOnboard } = require('../../apps/discord-bot/src/voice-service');
 const { CommunityStore, levelForXp } = require('../../apps/discord-bot/src/community-store');
 const { INVITE_MILESTONES, cleanChannelName, formatDuration } = require('../../apps/discord-bot/src/community-service');
 
-function run() {
+async function run() {
   assert.strictEqual(hasSupportStatus({
     activities: [{ type: 4, state: 'Support ValaxScrub.Shop', name: 'Custom Status' }]
   }, 'support valaxscrub.shop'), true);
@@ -42,6 +42,7 @@ function run() {
   assert.strictEqual(readBoolean(undefined, true), true);
   assert.strictEqual(readBoolean('false', true), false);
   assert.strictEqual(readBoolean('yes', false), true);
+  assert.deepStrictEqual(readTokenList('token-a, token-b;token-a'), ['token-a', 'token-b']);
 
   const workerRequest = buildWorkerRequest(
     { source: 'print(1)', filename: 'test.lua' },
@@ -136,8 +137,35 @@ function run() {
   assert.strictEqual(cleanChannelName('Néw User!!'), 'new-user');
   assert.strictEqual(formatDuration(3_661_000), '1h 2m');
 
+  const queueService = Object.create(VoiceService.prototype);
+  queueService.helperWorkers = [{ id: 'h1', busy: false }, { id: 'h2', busy: false }];
+  queueService.pendingOnboarding = [
+    { memberId: 'm1', channelId: 'c1' },
+    { memberId: 'm2', channelId: 'c2' },
+    { memberId: 'm3', channelId: 'c3' }
+  ];
+  queueService.activeMembers = new Set(['m1', 'm2', 'm3']);
+  const started = [];
+  const finish = [];
+  queueService.runOnboarding = (memberId, _channelId, worker) => new Promise(resolve => {
+    started.push(`${memberId}:${worker.id}`);
+    finish.push(resolve);
+  });
+  queueService.pumpHelperQueue();
+  assert.deepStrictEqual(started, ['m1:h1', 'm2:h2']);
+  assert.strictEqual(queueService.pendingOnboarding.length, 1);
+  finish.shift()();
+  await new Promise(resolve => setImmediate(resolve));
+  assert.deepStrictEqual(started, ['m1:h1', 'm2:h2', 'm3:h1']);
+  while (finish.length > 0) finish.shift()();
+  await new Promise(resolve => setImmediate(resolve));
+  assert.strictEqual(queueService.activeMembers.size, 0);
+
   console.log('Discord gateway access tests passed.');
 }
 
-if (require.main === module) run();
+if (require.main === module) run().catch(error => {
+  console.error(error);
+  process.exitCode = 1;
+});
 module.exports = { run };
